@@ -1,0 +1,323 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Home | BotForge
+{% endblock %}
+
+{% block internal_css %}
+<!-- Bootstrap Icons CDN for clean visual graphics -->
+
+
+<style>
+    body {
+        background-color: #fbfbfd;
+    }
+
+    /* Hero Section Styling */
+    .hero-section {
+        background: radial-gradient(circle at top right, #e7f1ff 0%, #ffffff 70%);
+        padding: 5rem 0 4rem 0;
+        border-bottom: 1px solid #f0f0f2;
+    }
+
+    .company-badge {
+        background-color: rgba(13, 110, 253, 0.08);
+        color: #0d6efd;
+        font-weight: 600;
+        padding: 0.5rem 1.25rem;
+        border-radius: 50px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .hero-title {
+        font-size: 3rem;
+        font-weight: 800;
+        letter-spacing: -1px;
+        color: #1e293b;
+    }
+
+    /* Core Product Cards */
+    .feature-card {
+        border: none;
+        border-radius: 20px;
+        background: #ffffff;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.05) !important;
+    }
+
+    .icon-box {
+        width: 56px;
+        height: 56px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 14px;
+        font-size: 1.5rem;
+        margin-bottom: 1.25rem;
+    }
+
+    /* CTA Section */
+    .cta-banner {
+        background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+        border-radius: 24px;
+        color: #ffffff;
+        padding: 3.5rem 2rem;
+    }
+    /* Custom Tracking and Typography Alignment */
+.tracking-tight {
+    letter-spacing: -0.8px;
+}
+
+/* Premium Demo Interactive Cards */
+.demo-card {
+    border: 1px solid rgba(226, 232, 240, 0.8) !important;
+    border-radius: 24px !important;
+    background: #ffffff;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.01);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.demo-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 35px rgba(15, 23, 42, 0.05) !important;
+    border-color: rgba(13, 110, 253, 0.15) !important;
+}
+
+/* Modern Rounded Icon Badges */
+.icon-badge-shape {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 18px;
+    font-size: 1.65rem;
+}
+
+.demo-card-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.demo-card-text {
+    color: #64748b;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 0;
+}
+
+/* Fluid Button Animations */
+.btn-demo-action {
+    padding: 0.75rem 1rem !important;
+    font-weight: 600;
+    border-radius: 12px !important;
+    border: none !important;
+    transition: all 0.2s ease !important;
+}
+
+.btn-demo-action:hover {
+    transform: translateY(-1px);
+    filter: brightness(0.95);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+</style>
+
+{% endblock %}
+
+{% block content %}
+<!-- Welcome Hero Panel -->
+<section class="hero-section">
+    
+    <div class="container text-center">
+        <div class="mb-3">
+            <span class="company-badge small">
+                <i class="bi bi-building"></i> Workspace: {{ company.company_name }}
+            </span>
+        </div>
+        <h1 class="hero-title mb-3">
+            Forge Your AI Automations
+        </h1>
+        <p class="text-muted mx-auto lead" style="max-width: 600px;">
+            Welcome to your central control hub. Build, configure, and orchestrate automated bots to revolutionize your business workflows.
+        </p>
+        <div class="d-flex justify-content-center gap-3 mt-4">
+            <a href="#" class="btn btn-primary btn-lg px-4 rounded-3 fw-bold">
+                <i class="bi bi-plus-lg me-1"></i> Build a Bot
+            </a>
+            <a href="#" class="btn btn-outline-secondary btn-lg px-4 rounded-3">
+                Documentation
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Main Functional Areas -->
+<section class="container my-5 py-3">
+    <div class="text-center mb-5">
+        <h2 class="fw-bold text-dark">Where would you like to start?</h2>
+        <p class="text-muted">Jump straight into managing your automation ecosystems.</p>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+        <!-- Feature 1 -->
+        <div class="col-12 col-md-4">
+            <div class="card shadow-sm h-100 p-4 feature-card">
+                <div class="card-body p-0">
+                    <div class="icon-box bg-primary-subtle text-primary">
+                        <i class="bi bi-robot"></i>
+                    </div>
+                    <h4 class="fw-bold text-dark mb-2">Bot Factory</h4>
+                    <p class="text-muted small">Deploy, write scripts, or tweak parameters for your live AI system agents.</p>
+                    <a href="#" class="text-decoration-none fw-semibold small stretched-link">
+                        Open Workspace <i class="bi bi-arrow-right ms-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="col-12 col-md-4">
+            <div class="card shadow-sm h-100 p-4 feature-card">
+                <div class="card-body p-0">
+                    <div class="icon-box bg-success-subtle text-success">
+                        <i class="bi bi-cpu"></i>
+                    </div>
+                    <h4 class="fw-bold text-dark mb-2">Integrations</h4>
+                    <p class="text-muted small">Connect BotForge natively to Slack, webhooks, databases, and third-party APIs.</p>
+                    <a href="#" class="text-decoration-none fw-semibold small text-success stretched-link">
+                        Manage Connections <i class="bi bi-arrow-right ms-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="col-12 col-md-4">
+            <div class="card shadow-sm h-100 p-4 feature-card">
+                <div class="card-body p-0">
+                    <div class="icon-box bg-warning-subtle text-warning">
+                        <i class="bi bi-bar-chart"></i>
+                    </div>
+                    <h4 class="fw-bold text-dark mb-2">Live Analytics</h4>
+                    <p class="text-muted small">Track process status loads, success run rates, and daily credit logs.</p>
+                    <a href="#" class="text-decoration-none fw-semibold small text-warning stretched-link">
+                        View Metrics <i class="bi bi-arrow-right ms-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer Banner Callout -->
+<section class="container mb-5 mt-5">
+    <div class="cta-banner shadow text-center position-relative overflow-hidden">
+        <h2 class="fw-bold mb-2">Need a custom AI setup?</h2>
+        <p class="mx-auto mb-4 opacity-75" style="max-width: 500px;">
+            Explore pre-configured logic setups tailored perfectly for operations matching {{ company.company_name }}.
+        </p>
+        <button class="btn btn-light text-primary fw-bold px-4 py-2 rounded-3">
+            Browse Blueprints
+        </button>
+    </div>
+</section>
+<section id="demo-bots" class="container my-5 py-4">
+
+    <!-- Section Header layout with clean spacing -->
+    <div class="text-center mb-5">
+        <h2 class="fw-bold text-dark display-6 tracking-tight mb-2">
+            Explore Live Demo Bots
+        </h2>
+        <p class="text-muted mx-auto" style="max-width: 580px;">
+            Test drive our pre-trained contextual models right out of the box to experience the core raw power of BotForge logic processing.
+        </p>
+    </div>
+
+    <div class="row g-4">
+
+        <!-- Customer Support Bot -->
+        <div class="col-12 col-md-4">
+            <div class="card h-100 demo-card">
+                <div class="card-body d-flex flex-column justify-content-between p-4 p-lg-5">
+                    <div>
+                        <div class="icon-badge-shape bg-primary-subtle text-primary mb-4">
+                            <i class="bi bi-headset"></i>
+                        </div>
+                        <h4 class="demo-card-title mb-2">
+                            Customer Support Bot
+                        </h4>
+                        <p class="demo-card-text">
+                            Handles dynamic client troubleshooting queues, pulls instant real-time order tracking statuses, and auto-triages tickets.
+                        </p>
+                    </div>
+                    <a
+    href="{% url 'school_demo_bot' %}"
+    class="btn btn-demo-action btn-primary w-100 mt-4 d-flex align-items-center justify-content-center"
+>
+    Try Now
+    <i class="bi bi-arrow-right small ms-1"></i>
+</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- HR Assistant -->
+        <div class="col-12 col-md-4">
+            <div class="card h-100 demo-card">
+                <div class="card-body d-flex flex-column justify-content-between p-4 p-lg-5">
+                    <div>
+                        <div class="icon-badge-shape bg-success-subtle text-success mb-4">
+                            <i class="bi bi-people"></i>
+                        </div>
+                        <h4 class="demo-card-title mb-2">
+                            HR Assistant
+                        </h4>
+                        <p class="demo-card-text">
+                            Answers complex internal corporate leave structures, provides immediate compliance answers, and handles automated employee onboarding templates.
+                        </p>
+                    </div>
+                    <button class="btn btn-demo-action btn-success w-100 mt-4">
+                        Try Live Demo <i class="bi bi-arrow-right small ms-1"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sales Bot -->
+        <div class="col-12 col-md-4">
+            <div class="card h-100 demo-card">
+                <div class="card-body d-flex flex-column justify-content-between p-4 p-lg-5">
+                    <div>
+                        <div class="icon-badge-shape bg-warning-subtle text-warning mb-4">
+                            <i class="bi bi-graph-up-arrow"></i>
+                        </div>
+                        <h4 class="demo-card-title mb-2">
+                            Sales Assistant
+                        </h4>
+                        <p class="demo-card-text">
+                            Qualifies cold commercial leads, natively suggests matching software product SKUs, and books discovery calls dynamically.
+                        </p>
+                    </div>
+                    <button class="btn btn-demo-action btn-warning w-100 mt-4 text-dark fw-bold">
+                        Try Live Demo <i class="bi bi-arrow-right small ms-1"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+{% endblock %}
+
+{% block internal_js %}
+<script>
+    console.log("BotForge Landing Portal Initialized Successfully.");
+</script>
+{% endblock %}

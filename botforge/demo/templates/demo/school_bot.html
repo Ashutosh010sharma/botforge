@@ -1,0 +1,413 @@
+{% extends 'base.html' %}
+
+{% block title %}
+School Assistant | AI Workspace
+{% endblock %}
+
+{% block internal_css %}
+<!-- Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<style>
+    body {
+        background-color: #f8fafc;
+        color: #1e293b;
+    }
+
+    /* Hero Background View Layout */
+    .school-hero {
+       
+        min-height: calc(100vh - 140px);
+        display: flex;
+        align-items: center;
+    }
+
+    /* Feature Presentation Right-Hand Panel Card */
+    .feature-card {
+        border: 1px solid rgba(226, 232, 240, 0.8) !important;
+        border-radius: 24px !important;
+        background: #ffffff !important;
+        box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.04) !important;
+    }
+
+    .feature-item-row {
+        padding: 0.75rem 1rem;
+        background-color: #f8fafc;
+        border-radius: 12px;
+        border: 1px solid #e2e8f0;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 0.75rem;
+    }
+
+    /* Fixed Floating Launcher Button Trigger */
+    .ai-float-btn {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 60px;
+        height: 60px;
+        border-radius: 50% !important;
+        z-index: 999;
+        background-color: #0d6efd !important;
+        color: #ffffff !important;
+        border: none !important;
+        box-shadow: 0 12px 24px -6px rgba(13, 110, 253, 0.5) !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+    }
+
+    .ai-float-btn:hover {
+        transform: scale(1.08) translateY(-2px);
+        box-shadow: 0 16px 28px -4px rgba(13, 110, 253, 0.6) !important;
+    }
+
+    /* Fixed Floating Compact Chat Container Window */
+  .chat-container {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 380px;
+    
+    /* 1. Controlled viewport height */
+    height: 80vh;        
+    max-height: 500px;   
+    
+    /* 2. Forces structural layout to align from top to bottom */
+    display: none; /* Controlled by your JS fadeIn/fadeOut */
+    flex-direction: column; 
+
+    background: #ffffff;
+    border-radius: 24px;
+    overflow: hidden;
+    z-index: 1000;
+    border: 1px solid rgba(226, 232, 240, 0.9);
+    box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.15) !important;
+    animation: chatSlideIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+    @keyframes chatSlideIn {
+        from { opacity: 0; transform: translateY(24px) scale(0.95); }
+        to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* Window Top Navigation Strip Component */
+    .chat-header {
+        padding: 1rem 1.25rem;
+        background: #ffffff !important;
+        color: #0f172a !important;
+        border-bottom: 1px solid #f1f5f9;
+    }
+
+    .avatar-indicator-shape {
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        font-size: 1.1rem;
+    }
+
+    /* Active Internal Stream Container Scroll Window */
+   .chat-body {
+    /* 3. This tells the body to dynamically scale to fill the gap */
+    flex: 1; 
+    overflow-y: auto;
+    padding: 1.25rem;
+    background: #f8fafc;
+    scroll-behavior: smooth;
+}
+    .chat-body::-webkit-scrollbar {
+        width: 4px;
+    }
+    .chat-body::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 10px;
+    }
+
+    /* Modern Dynamic Text Bubble Styles */
+    .bot-msg {
+        background: #ffffff;
+        color: #334155;
+        padding: 0.8rem 1rem;
+        border-radius: 4px 16px 16px 16px;
+        margin-bottom: 1rem;
+        font-size: 0.92rem;
+        line-height: 1.5;
+        max-width: 85%;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.015);
+        border: 1px solid #e2e8f0;
+        text-align: left; /* Forces alignment balance for injected raw values */
+    }
+
+    .user-msg {
+        background: #0d6efd;
+        color: #ffffff;
+        padding: 0.8rem 1rem;
+        border-radius: 16px 16px 4px 16px;
+        margin-bottom: 1rem;
+        font-size: 0.92rem;
+        line-height: 1.5;
+        max-width: 85%;
+        margin-left: auto;
+        box-shadow: 0 4px 10px rgba(13, 110, 253, 0.15);
+        text-align: left; /* Keeps bubble content readable while floating right */
+    }
+
+    /* Interactive Interface Quick Suggestion Badges */
+    .chip-suggestion {
+        background-color: #f1f5f9 !important;
+        color: #475569 !important;
+        border: 1px solid #e2e8f0 !important;
+        padding: 0.4rem 0.65rem !important;
+        font-weight: 500 !important;
+        font-size: 0.75rem !important;
+        border-radius: 30px !important;
+        cursor: pointer;
+        display: inline-block;
+        transition: all 0.2s ease;
+    }
+
+    .chip-suggestion:hover {
+        background-color: #e2e8f0 !important;
+        color: #0f172a !important;
+        transform: translateY(-1px);
+    }
+
+    /* Bottom Text Entry Panel Deck */
+    .chat-footer {
+        padding: 1rem 1.25rem;
+        border-top: 1px solid #f1f5f9;
+        background: #ffffff;
+    }
+
+    .chat-input-deck {
+        background-color: #f1f5f9;
+        border-radius: 14px;
+        padding: 0.3rem;
+        border: 1px solid transparent;
+        transition: all 0.2s ease;
+    }
+
+    .chat-input-deck:focus-within {
+        border-color: #86b7fe;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
+        background-color: #ffffff;
+    }
+
+    .chat-input-field {
+        background: transparent !important;
+        font-size: 0.92rem;
+    }
+
+    .btn-send-message {
+        background-color: #0d6efd !important;
+        color: #ffffff !important;
+        border-radius: 10px !important;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+    }
+
+    .btn-send-message:hover {
+        background-color: #0b5ed7 !important;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    <!-- BACKGROUND DISPLAY PANEL -->
+    <section class="school-hero">
+        <div class="row align-items-center w-100 m-0 g-5">
+            
+            <!-- Left Narrative Column -->
+            <div class="col-12 col-md-7">
+                <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2 rounded-pill fw-semibold mb-3">
+                    Workspace Hub Ready
+                </span>
+                <h1 class="display-5 fw-bold text-dark tracking-tight mb-3">
+                    School Assistant AI
+                </h1>
+                <p class="text-muted lead mb-4">
+                    Our context-trained virtual service module runs quietly to guide visitors, parents, and prospective student candidates through dynamic operational queries instantly.
+                </p>
+                <div class="mt-4">
+                    <button class="btn btn-primary px-4 py-2.5 fw-semibold shadow-sm" style="border-radius: 12px;" onclick="openChat()">
+                        <i class="bi bi-chat-text-fill me-2"></i> Ask AI Assistant
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right Parameters Card Column -->
+            <div class="col-12 col-md-5">
+                <div class="card feature-card p-4">
+                    <h5 class="fw-bold text-dark mb-3">
+                        Trained Knowledge Base
+                    </h5>
+                    <p class="text-muted small mb-4">The active background dataset profile supports queries targeting these explicit domains:</p>
+                    
+                    <div class="feature-item-row shadow-sm">
+                        <i class="bi bi-file-earmark-text-fill text-primary fs-5"></i>
+                        <span class="small fw-semibold text-secondary">Admission criteria & deadlines</span>
+                    </div>
+                    
+                    <div class="feature-item-row shadow-sm">
+                        <i class="bi bi-currency-dollar text-success fs-5"></i>
+                        <span class="small fw-semibold text-secondary">Tuition configurations & breakdowns</span>
+                    </div>
+                    
+                    <div class="feature-item-row shadow-sm">
+                        <i class="bi bi-clock-fill text-warning fs-5"></i>
+                        <span class="small fw-semibold text-secondary">Institutional schedules & holiday periods</span>
+                    </div>
+                    
+                    <div class="feature-item-row shadow-sm">
+                        <i class="bi bi-telephone-inbound-fill text-info fs-5"></i>
+                        <span class="small fw-semibold text-secondary">Contact directories & office desks</span>
+                    </div>
+                    
+                    <div class="feature-item-row shadow-sm">
+                        <i class="bi bi-person-badge-fill text-danger fs-5"></i>
+                        <span class="small fw-semibold text-secondary">Administrative administration information</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</div>
+
+<!-- FLOATING ACTION BUTTON (TRIGGER) -->
+<button class="btn ai-float-btn shadow" onclick="openChat()">
+    <i class="bi bi-robot fs-3"></i>
+</button>
+
+<!-- ACTIVE CHAT WIDGET INTERFACE -->
+<div class="chat-container" id="chatContainer">
+    
+    <!-- Header Component -->
+    <div class="chat-header d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center gap-3">
+            <div class="avatar-indicator-shape bg-primary bg-opacity-10 text-primary">
+                <i class="bi bi-mortarboard-fill"></i>
+            </div>
+            <div>
+                <h6 class="mb-0 fw-bold text-dark" style="font-size: 0.95rem;">School Assistant</h6>
+                <small class="text-success d-flex align-items-center gap-1" style="font-size: 0.72rem; font-weight: 500;">
+                    <span class="spinner-grow spinner-grow-sm text-success" role="status" style="width: 5px; height: 5px;"></span>
+                    Online & Active
+                </small>
+            </div>
+        </div>
+        <button class="btn-close small shadow-none border-0" onclick="closeChat()" style="font-size: 0.75rem;" aria-label="Close"></button>
+    </div>
+
+    <!-- Scroll Message Screen Frame Area -->
+    <div class="chat-body d-flex flex-column" id="chat-box">
+        <div class="bot-msg shadow-sm">
+            <p class="mb-2 fw-bold text-dark">Hello there! 👋</p>
+            <p class="mb-3">I can help you navigate school information instantly. What are you looking to explore today?</p>
+            
+            <!-- Context selection chip triggers -->
+            <div class="d-flex flex-wrap gap-1 mt-2">
+                <span class="badge chip-suggestion" onclick="fillAndSend('Admissions')">📚 Admissions</span>
+                <span class="badge chip-suggestion" onclick="fillAndSend('Tuition Fees')">💰 Fees</span>
+                <span class="badge chip-suggestion" onclick="fillAndSend('School Timings')">🕒 Timings</span>
+                <span class="badge chip-suggestion" onclick="fillAndSend('Contact Desk')">📞 Contact</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Text Entry Panel Panel -->
+    <div class="chat-footer">
+        <div class="input-group chat-input-deck">
+            <input
+                type="text"
+                id="message-input"
+                class="form-control chat-input-field border-0 shadow-none"
+                placeholder="Ask a question..."
+                autocomplete="off"
+                onkeypress="handleKeyPress(event)"
+            >
+            <button class="btn btn-send-message p-0" onclick="sendMessage()">
+                <i class="bi bi-send-fill fs-6"></i>
+            </button>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block internal_js %}
+<!-- Interaction Helpers (Chip selection population & return triggers) -->
+<script>
+function handleKeyPress(event) {
+    if (event.key === 'Enter') {
+        sendMessage();
+    }
+}
+
+function fillAndSend(text) {
+    $("#message-input").val(text);
+    sendMessage();
+}
+</script>
+
+<!-- ORIGINAL APPLICATION SCRIPT LOGIC (UNTOUCHED) -->
+<script>
+function openChat(){
+    // Fades in and assigns 'flex' instead of standard block layout
+    $("#chatContainer").fadeIn(function() {
+        $(this).css("display", "flex");
+    });
+    $(".ai-float-btn").hide();
+}
+
+function closeChat(){
+    $("#chatContainer").fadeOut();
+    $(".ai-float-btn").show();
+}
+
+function sendMessage(){
+    let message=$("#message-input").val();
+    if(!message){
+        return;
+    }
+    $("#chat-box").append(
+        `
+        <div class='user-msg'>
+            ${message}
+        </div>
+        `
+    );
+
+    $.ajax({
+        url:"{% url 'school_chat_api' %}",
+        type:"GET",
+        data:{
+            message:message
+        },
+        success:function(response){
+            $("#chat-box").append(
+                `
+                <div class='bot-msg'>
+                    ${response.response}
+                </div>
+                `
+            );
+            $("#chat-box").scrollTop(
+                $("#chat-box")[0].scrollHeight
+            );
+        }
+    });
+
+    $("#message-input").val("");
+}
+</script>
+{% endblock %}

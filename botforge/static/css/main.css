@@ -1,0 +1,44 @@
+/* Global styles */
+
+body{
+    background-color:#f8f9fa;
+}
+html{
+    scroll-behavior:smooth;
+}
+
+.page-container{
+    padding-top:30px;
+}
+
+.required{
+    color:red;
+}
+
+.cursor-pointer{
+    cursor:pointer;
+}
+.page-container{
+    min-height:80vh;
+}
+
+.navbar-brand{
+    font-size:24px;
+}
+
+.footer-link{
+    color:#adb5bd;
+    text-decoration:none;
+}
+
+.footer-link:hover{
+    color:white;
+}
+
+.nav-link{
+    margin-right:10px;
+}
+
+.btn{
+    border-radius:8px;
+}

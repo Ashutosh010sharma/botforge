@@ -1,0 +1,156 @@
+{% extends 'base.html' %} 
+
+{% block title %} 
+Register | BotForge 
+{% endblock %}
+
+{% block internal_css %}
+body {
+    background-color: #f8f9fa;
+}
+
+.auth-container {
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 500px; /* Slightly wider than login to accommodate longer forms comfortably */
+    border: none;
+    border-radius: 16px;
+    background: #ffffff;
+}
+
+
+
+.auth-header h2 {
+    font-weight: 700;
+    color: #212529;
+    letter-spacing: -0.5px;
+}
+
+/* Styles all inputs globally within the card (both raw HTML inputs and Django's form fields) */
+.auth-card input,
+.auth-card p input {
+    display: block;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 10px;
+    margin-top: 0.25rem;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.auth-card input:focus,
+.auth-card p input:focus {
+    color: #212529;
+    background-color: #fff;
+    border-color: #86b7fe;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* Cleans up spacing if Django renders help text or errors inside <p> tags */
+.auth-card form p {
+    margin-bottom: 1.25rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #6c757d;
+}
+
+.auth-card form .helptext {
+    display: block;
+    font-size: 0.8rem;
+    color: #6c757d;
+    font-weight: 400;
+    margin-top: 0.25rem;
+}
+
+.btn-register {
+    padding: 0.75rem 1rem;
+    font-weight: 600;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+}
+
+.btn-register:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(13, 110, 253, 0.2);
+}
+
+.alert-custom {
+    border-radius: 10px;
+    border: none;
+    font-size: 0.9rem;
+}
+{% endblock %}
+
+{% block content %}
+<div class="auth-container px-3 my-4">
+    <div class="card shadow-lg auth-card">
+        <div class="card-body p-4 p-sm-5">
+            
+            <div class="auth-header text-center mb-4">
+               
+                <h2>Create an account</h2>
+                <p class="text-muted small">
+                    Get started with your custom AI automation workspace
+                </p>
+            </div>
+
+            
+
+            <form method="POST">
+                {% csrf_token %}
+
+                <!-- Custom Fields nicely integrated with standard styles -->
+                <div class="mb-3">
+                    <label class="form-label small fw-semibold text-secondary mb-0">Company Name</label>
+                    <input
+                        type="text"
+                        name="company_name"
+                        placeholder="e.g. Acme Corp"
+                        required
+                    />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label small fw-semibold text-secondary mb-0">Website URL</label>
+                    <input 
+                        type="url" 
+                        name="website_url" 
+                        placeholder="https://example.com" 
+                        required 
+                    />
+                </div>
+
+                <!-- Django Dynamic Form Fields (Username, Email, Passwords, etc.) -->
+                <div class="django-form-fields">
+                    {{ form.as_p }}
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-register w-100 mt-2 mb-3">
+                    Get Started
+                </button>
+            </form>
+
+            <div class="text-center mt-4">
+                <span class="text-muted small">Already have an account?</span>
+                <a href="{% url 'login' %}" class="text-decoration-none small fw-semibold ms-1">
+                    Sign in instead
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

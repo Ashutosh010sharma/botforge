@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Login | BotForge
+{% endblock %}
+
+{% block internal_css %}
+body {
+    background-color: #f8f9fa;
+}
+
+.auth-container {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 440px;
+    border: none;
+    border-radius: 16px;
+    background: #ffffff;
+}
+
+
+.auth-header h2 {
+    font-weight: 700;
+    color: #212529;
+    letter-spacing: -0.5px;
+}
+
+/* Enhancing Django's raw form inputs to look good with Bootstrap */
+.auth-card input[type="text"],
+.auth-card input[type="password"] {
+    display: block;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    appearance: none;
+    border-radius: 10px;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.auth-card input:focus {
+    color: #212529;
+    background-color: #fff;
+    border-color: #86b7fe;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.btn-login {
+    padding: 0.75rem 1rem;
+    font-weight: 600;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+}
+
+.btn-login:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(13, 110, 253, 0.2);
+}
+
+.alert-custom {
+    border-radius: 10px;
+    border: none;
+    font-size: 0.9rem;
+}
+{% endblock %}
+
+{% block content %}
+<div class="auth-container px-3">
+    <div class="card shadow-lg auth-card">
+        <div class="card-body p-4 p-sm-5">
+            
+            <div class="auth-header text-center mb-4">
+               
+                <h2>Welcome back</h2>
+                <p class="text-muted small">
+                    Enter your credentials to access your dashboard
+                </p>
+            </div>
+
+           
+
+            <form method="POST">
+                {% csrf_token %}
+                
+                <div class="mb-3">
+                    <label class="form-label small fw-semibold text-secondary">Username</label>
+                    {{ form.username }}
+                </div>
+
+                <div class="mb-4">
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                        <label class="form-label small fw-semibold text-secondary mb-0">Password</label>
+                        <!-- Optional feature link if you set up password reset later -->
+                        <!-- <a href="#" class="text-decoration-none small text-muted">Forgot?</a> -->
+                    </div>
+                    {{ form.password }}
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-login w-100 mb-3">
+                    Sign In
+                </button>
+            </form>
+
+            <div class="text-center mt-4">
+                <span class="text-muted small">Don't have an account?</span>
+                <a href="{% url 'register' %}" class="text-decoration-none small fw-semibold ms-1">
+                    Create one here
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
