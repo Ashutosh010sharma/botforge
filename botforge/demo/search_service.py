@@ -27,21 +27,29 @@ def cosine_similarity(
 
 
 def find_best_chunks(
+
     question,
+
+    chunk_model,
+
     top_k=3,
-    min_score=0.70
+
+    min_score=0.60
 ):
 
+
     question_embedding=generate_embedding(
+
         question
     )
 
+
     results=[]
 
-    chunks=SchoolKnowledgeChunk.objects.exclude(
+
+    chunks=chunk_model.objects.exclude(
 
         embedding__isnull=True
-
     )
 
 
@@ -50,18 +58,23 @@ def find_best_chunks(
         score=cosine_similarity(
 
             question_embedding,
+
             chunk.embedding
         )
 
 
         if score >= min_score:
 
-            results.append({
+            results.append(
 
-                "chunk":chunk,
+                {
 
-                "score":score
-            })
+                    "chunk":chunk,
+
+                    "score":score
+                }
+
+            )
 
 
     results=sorted(

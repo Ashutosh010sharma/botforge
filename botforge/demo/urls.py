@@ -4,5 +4,9 @@ from .views import *
 urlpatterns=[
 
     path('school/',school_demo_bot,name='school_demo_bot'),
-    path('school/chat/',school_chat_api, name='school_chat_api')
+    path('healthcare/',healthcare_demo_bot,name='healthcare_demo_bot'),
+    path('ecommerce/',ecommerce_demo_bot,name='ecommerce_demo_bot'),
+    path('chat/<str:bot_type>/',chatbot_api,name='chatbot_api')
+    
+   
 ]

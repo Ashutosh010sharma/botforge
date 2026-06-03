@@ -74,58 +74,62 @@ Home | BotForge
     letter-spacing: -0.8px;
 }
 
-/* Premium Demo Interactive Cards */
+/* Card Container Base styling */
 .demo-card {
-    border: 1px solid rgba(226, 232, 240, 0.8) !important;
-    border-radius: 24px !important;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 16px;
     background: #ffffff;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.01);
-    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
 }
 
+/* Hover effects for a premium feel */
 .demo-card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 20px 35px rgba(15, 23, 42, 0.05) !important;
-    border-color: rgba(13, 110, 253, 0.15) !important;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
 }
 
-/* Modern Rounded Icon Badges */
+/* Rounded square container for icons */
 .icon-badge-shape {
-    width: 60px;
-    height: 60px;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    border-radius: 18px;
-    font-size: 1.65rem;
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    font-size: 1.5rem;
 }
 
+/* Text Typography updates */
 .demo-card-title {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: #0f172a;
+    font-weight: 600;
+    color: #1e293b; /* Dark slate */
+    letter-spacing: -0.01em;
 }
 
 .demo-card-text {
-    color: #64748b;
     font-size: 0.95rem;
+    color: #64748b; /* Soft muted gray */
     line-height: 1.6;
-    margin-bottom: 0;
 }
 
-/* Fluid Button Animations */
+/* Button interactive upgrades */
 .btn-demo-action {
-    padding: 0.75rem 1rem !important;
-    font-weight: 600;
-    border-radius: 12px !important;
-    border: none !important;
-    transition: all 0.2s ease !important;
+    font-weight: 500;
+    padding: 0.75rem 1.5rem;
+    border-radius: 10px;
+    border: none;
+    transition: all 0.2s ease;
 }
 
-.btn-demo-action:hover {
-    transform: translateY(-1px);
-    filter: brightness(0.95);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+/* Smooth arrow nudge animation on button hover */
+.btn-demo-action i {
+    transition: transform 0.2s ease;
+}
+
+.btn-demo-action:hover i {
+    transform: translateX(4px);
 }
 </style>
 
@@ -148,7 +152,7 @@ Home | BotForge
             Welcome to your central control hub. Build, configure, and orchestrate automated bots to revolutionize your business workflows.
         </p>
         <div class="d-flex justify-content-center gap-3 mt-4">
-            <a href="#" class="btn btn-primary btn-lg px-4 rounded-3 fw-bold">
+            <a href="{% url 'bot_list' %}" class="btn btn-primary btn-lg px-4 rounded-3 fw-bold">
                 <i class="bi bi-plus-lg me-1"></i> Build a Bot
             </a>
             <a href="#" class="btn btn-outline-secondary btn-lg px-4 rounded-3">
@@ -240,79 +244,72 @@ Home | BotForge
         </p>
     </div>
 
-    <div class="row g-4">
+   <div class="row g-4">
 
-        <!-- Customer Support Bot -->
-        <div class="col-12 col-md-4">
-            <div class="card h-100 demo-card">
-                <div class="card-body d-flex flex-column justify-content-between p-4 p-lg-5">
-                    <div>
-                        <div class="icon-badge-shape bg-primary-subtle text-primary mb-4">
-                            <i class="bi bi-headset"></i>
-                        </div>
-                        <h4 class="demo-card-title mb-2">
-                            Customer Support Bot
-                        </h4>
-                        <p class="demo-card-text">
-                            Handles dynamic client troubleshooting queues, pulls instant real-time order tracking statuses, and auto-triages tickets.
-                        </p>
+    <!-- School Assistant Bot -->
+    <div class="col-12 col-md-4">
+        <div class="card h-100 demo-card">
+            <div class="card-body d-flex flex-column justify-content-between p-4 p-lg-5">
+                <div>
+                    <div class="icon-badge-shape bg-primary-subtle text-primary mb-4">
+                        <i class="bi bi-mortarboard"></i>
                     </div>
-                    <a
-    href="{% url 'school_demo_bot' %}"
-    class="btn btn-demo-action btn-primary w-100 mt-4 d-flex align-items-center justify-content-center"
->
-    Try Now
-    <i class="bi bi-arrow-right small ms-1"></i>
-</a>
+                    <h4 class="demo-card-title mb-3">School Assistant Bot</h4>
+                    <p class="demo-card-text mb-0">
+                        Answers admission queries, school timings, fee details, facilities, transport information, and student-related questions instantly.
+                    </p>
                 </div>
+                <a href="{% url 'school_demo_bot' %}" class="btn btn-demo-action btn-primary w-100 mt-4 d-flex align-items-center justify-content-center">
+                    Try Now
+                    <i class="bi bi-arrow-right small ms-1"></i>
+                </a>
             </div>
         </div>
-
-        <!-- HR Assistant -->
-        <div class="col-12 col-md-4">
-            <div class="card h-100 demo-card">
-                <div class="card-body d-flex flex-column justify-content-between p-4 p-lg-5">
-                    <div>
-                        <div class="icon-badge-shape bg-success-subtle text-success mb-4">
-                            <i class="bi bi-people"></i>
-                        </div>
-                        <h4 class="demo-card-title mb-2">
-                            HR Assistant
-                        </h4>
-                        <p class="demo-card-text">
-                            Answers complex internal corporate leave structures, provides immediate compliance answers, and handles automated employee onboarding templates.
-                        </p>
-                    </div>
-                    <button class="btn btn-demo-action btn-success w-100 mt-4">
-                        Try Live Demo <i class="bi bi-arrow-right small ms-1"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Sales Bot -->
-        <div class="col-12 col-md-4">
-            <div class="card h-100 demo-card">
-                <div class="card-body d-flex flex-column justify-content-between p-4 p-lg-5">
-                    <div>
-                        <div class="icon-badge-shape bg-warning-subtle text-warning mb-4">
-                            <i class="bi bi-graph-up-arrow"></i>
-                        </div>
-                        <h4 class="demo-card-title mb-2">
-                            Sales Assistant
-                        </h4>
-                        <p class="demo-card-text">
-                            Qualifies cold commercial leads, natively suggests matching software product SKUs, and books discovery calls dynamically.
-                        </p>
-                    </div>
-                    <button class="btn btn-demo-action btn-warning w-100 mt-4 text-dark fw-bold">
-                        Try Live Demo <i class="bi bi-arrow-right small ms-1"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-
     </div>
+
+    <!-- Healthcare Assistant -->
+    <div class="col-12 col-md-4">
+        <div class="card h-100 demo-card">
+            <div class="card-body d-flex flex-column justify-content-between p-4 p-lg-5">
+                <div>
+                    <div class="icon-badge-shape bg-danger-subtle text-danger mb-4">
+                        <i class="bi bi-hospital"></i>
+                    </div>
+                    <h4 class="demo-card-title mb-3">Healthcare Assistant Bot</h4>
+                    <p class="demo-card-text mb-0">
+                        Provides appointment details, doctor availability, departments, medical services, and patient support information instantly.
+                    </p>
+                </div>
+                <a href="{% url 'healthcare_demo_bot' %}" class="btn btn-demo-action btn-danger w-100 mt-4 d-flex align-items-center justify-content-center">
+                    Try Now
+                    <i class="bi bi-arrow-right small ms-1"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- E-Commerce Support Bot -->
+    <div class="col-12 col-md-4">
+        <div class="card h-100 demo-card">
+            <div class="card-body d-flex flex-column justify-content-between p-4 p-lg-5">
+                <div>
+                    <div class="icon-badge-shape bg-success-subtle text-success mb-4">
+                        <i class="bi bi-cart3"></i>
+                    </div>
+                    <h4 class="demo-card-title mb-3">E-Commerce Support Bot</h4>
+                    <p class="demo-card-text mb-0">
+                        Helps customers with order tracking, returns, payment issues, shipping updates, and product assistance.
+                    </p>
+                </div>
+                <a href="{% url 'ecommerce_demo_bot' %}" class="btn btn-demo-action btn-success w-100 mt-4 d-flex align-items-center justify-content-center">
+                    Try Now
+                    <i class="bi bi-arrow-right small ms-1"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>
 </section>
 {% endblock %}
 

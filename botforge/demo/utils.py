@@ -1,6 +1,6 @@
 def create_chunks(
     text,
-    chunk_size=300
+    chunk_size=100
 ):
 
     chunks=[]

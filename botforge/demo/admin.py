@@ -24,3 +24,17 @@ class SchoolKnowledgeAdmin(
 admin.site.register(
     SchoolKnowledgeChunk
 )
+admin.site.register(
+    HealthcareKnowledge
+)
+
+admin.site.register(
+    HealthcareKnowledgeChunk
+)
+admin.site.register(
+    EcommerceKnowledge
+)
+
+admin.site.register(
+    EcommerceKnowledgeChunk
+)

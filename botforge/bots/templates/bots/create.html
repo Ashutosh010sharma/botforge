@@ -1,0 +1,192 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Create AI Assistant | Workspace Builder
+{% endblock %}
+
+{% block internal_css %}
+<style>
+    body {
+        background-color: #f8fafc;
+        color: #1e293b;
+    }
+
+    /* Page Heading Custom Typography */
+    .form-title {
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        color: #0f172a;
+    }
+
+    /* Centralized Form Card container block */
+    .form-config-card {
+        border: 1px solid rgba(0, 0, 0, 0.06) !important;
+        border-radius: 20px !important;
+        background: #ffffff;
+        box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.03) !important;
+    }
+
+    /* Balanced form spacing updates */
+    .form-label {
+        font-weight: 600;
+        font-size: 0.88rem;
+        color: #334155;
+        margin-bottom: 0.5rem;
+    }
+
+    /* Input configurations */
+    .form-control, .form-select {
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 0.65rem 1rem;
+        font-size: 0.95rem;
+        color: #1e293b;
+        background-color: #f8fafc;
+        transition: all 0.2s ease;
+    }
+
+    .form-control:focus, .form-select:focus {
+        background-color: #ffffff;
+        border-color: #86b7fe;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.12);
+    }
+
+    .form-control::placeholder {
+        color: #94a3b8;
+        font-size: 0.9rem;
+    }
+
+    /* Action submit layout buttons updates */
+    .btn-submit-action {
+        font-weight: 600;
+        padding: 0.75rem 1.5rem;
+        border-radius: 12px;
+        transition: all 0.2s ease;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-8">
+
+            <div class="mb-4">
+               
+                <h2 class="form-title mb-1">Configure New Assistant</h2>
+                <p class="text-muted small">Initialize structural configurations and operational behaviors for your context pipeline agent profile.</p>
+            </div>
+
+            <div class="card form-config-card p-4 p-md-5">
+                <form id="createBotForm">
+                    {% csrf_token %}
+
+                    <div class="mb-4">
+                        <label class="form-label d-flex align-items-center gap-2">
+                            <i class="bi bi-tag-fill text-muted"></i> Assistant Label / Name
+                        </label>
+                        <input
+                            type="text"
+                            name="name"
+                            class="form-control"
+                            placeholder="e.g., Nexus Retail Guide, Admissions Frontline Desk"
+                            required
+                        >
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label d-flex align-items-center gap-2">
+                            <i class="bi bi-grid-1x2-fill text-muted"></i> Training Module / Domain Type
+                        </label>
+                        <select name="bot_type" class="form-select" required>
+                            <option value="" disabled selected hidden>Select deployment framework...</option>
+                            <option value="school">📊 School / Academic Administration</option>
+                            <option value="healthcare">🩺 Healthcare / Patient Support</option>
+                            <option value="ecommerce">🛍️ E-Commerce / Merchant Retail</option>
+                            <option value="custom">⚙️ Custom / Enterprise Profile</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label d-flex align-items-center gap-2">
+                            <i class="bi bi-file-earmark-text-fill text-muted"></i> Operational Scope Description
+                        </label>
+                        <textarea
+                            name="description"
+                            class="form-control"
+                            rows="3"
+                            placeholder="Briefly define what dataset limits or business objectives this virtual assistant handles..."
+                        ></textarea>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label d-flex align-items-center gap-2">
+                            <i class="bi bi-chat-quote-fill text-muted"></i> Initial Welcome String Greeting
+                        </label>
+                        <textarea
+                            name="welcome_message"
+                            class="form-control"
+                            rows="3"
+                            placeholder="Injected when a user launches the floating modal chat view window container..."
+                        >Hello! How can I help you today?</textarea>
+                    </div>
+
+                    <div class="d-flex align-items-center justify-content-end gap-2 pt-3 border-top border-light">
+                      
+                        <button type="submit" class="btn btn-primary btn-submit-action px-4 py-2.5 shadow-sm">
+                            <i class="bi bi-cpu-fill me-1"></i> Build AI Assistant
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block internal_js %}
+
+
+<script>
+$(document).ready(function(){
+    $("#createBotForm").on("submit", function(e){
+        e.preventDefault();
+
+        $.ajax({
+            url: "{% url 'bot_create' %}",
+            type: "POST",
+            data: $(this).serialize(),
+            success: function(response){
+                Swal.fire({
+                    icon: "success",
+                    title: "🤖 Bot Created!",
+                    text: "Your AI assistant is ready for training.",
+                    confirmButtonText: "Manage Bot",
+                    confirmButtonColor: "#0d6efd",
+                    background: "#ffffff"
+                }).then((result) => {
+                    if(result.isConfirmed){
+                        window.location.href = "{% url 'bot_list' %}";
+                    }
+                });
+            },
+            error: function(xhr){
+                let message = "Unable to create your AI bot.";
+                if(xhr.responseJSON && xhr.responseJSON.message){
+                    message = xhr.responseJSON.message;
+                }
+
+                Swal.fire({
+                    icon: "error",
+                    title: "⚠️ Bot Creation Failed",
+                    text: message,
+                    confirmButtonColor: "#dc3545"
+                });
+            }
+        });
+    });
+});
+</script>
+{% endblock %}
