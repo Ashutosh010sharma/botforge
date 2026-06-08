@@ -140,11 +140,13 @@ Home | BotForge
 <section class="hero-section">
     
     <div class="container text-center">
+        {% if company %}
         <div class="mb-3">
             <span class="company-badge small">
-                <i class="bi bi-building"></i> Workspace: {{ company.company_name }}
+                <i class="bi bi-building"></i>   Workspace: {{ company.name }}
             </span>
         </div>
+         {% endif %}
         <h1 class="hero-title mb-3">
             Forge Your AI Automations
         </h1>

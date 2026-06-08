@@ -29,7 +29,8 @@ def find_best_chunks(chatbot,question,top_k=5):
     )
 
     chunks=WebsiteChunk.objects.filter(
-        chatbot=chatbot
+        chatbot=chatbot,
+        is_deleted=False
     )
 
     results=[]

@@ -16,6 +16,11 @@ urlpatterns = [
     path("test-chat/<int:bot_id>/",views.test_chat_api,name="test_chat_api"),
     path("save-widget-settings/<int:bot_id>/",views.save_widget_settings,name="save_widget_settings"),
     path("install-bot/<int:bot_id>/",views.install_bot,name="install_bot"),
-    path("widget/chat/<uuid:widget_key>/",views.widget_chat_api,name="widget_chat_api")
+    path("widget/chat/<uuid:widget_key>/",views.widget_chat_api,name="widget_chat_api"),
+    path("widget/config/<uuid:widget_key>/",views.widget_config,name="widget_config"),
+    path("conversation/<int:session_id>/",views.conversation_detail_ajax,name="conversation_detail_ajax"),
+    path("clear-chat-history/<int:bot_id>/",views.clear_chat_history,name="clear_chat_history"),
+    path("delete-knowledge-base/<int:bot_id>/",views.delete_knowledge_base,name="delete_knowledge_base"),
+    path("delete-chatbot/<int:bot_id>/",views.delete_chatbot,name="delete_chatbot"),
 
 ]

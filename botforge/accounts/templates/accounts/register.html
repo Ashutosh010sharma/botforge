@@ -112,7 +112,7 @@ body {
             <form method="POST">
                 {% csrf_token %}
 
-                <!-- Custom Fields nicely integrated with standard styles -->
+                {% comment %} <!-- Custom Fields nicely integrated with standard styles -->
                 <div class="mb-3">
                     <label class="form-label small fw-semibold text-secondary mb-0">Company Name</label>
                     <input
@@ -131,7 +131,7 @@ body {
                         placeholder="https://example.com" 
                         required 
                     />
-                </div>
+                </div> {% endcomment %}
 
                 <!-- Django Dynamic Form Fields (Username, Email, Passwords, etc.) -->
                 <div class="django-form-fields">

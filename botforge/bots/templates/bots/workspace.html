@@ -231,8 +231,8 @@ Dashboard | {{ bot.name }}
             </div>
 
             <div class="d-flex gap-4 text-start text-md-end" style="font-size: 0.85rem;">
-                <div><span class="text-muted d-block small uppercase mb-0.5">Created On</span><span class="text-white fw-bold">{{ bot.created_at|date:"d M Y"|default:"04 Jun 2026" }}</span></div>
-                <div><span class="text-muted d-block small uppercase mb-0.5">Bot Type</span><span class="text-warning fw-bold">Website Chatbot</span></div>
+                <div><span class="text-white d-block small uppercase mb-0.5">Created On</span><span class="text-white fw-bold">{{ bot.created_at|date:"d M Y"|default:"04 Jun 2026" }}</span></div>
+                <div><span class="text-white d-block small uppercase mb-0.5">Bot Type</span><span class="text-warning fw-bold">Website Chatbot</span></div>
             </div>
         </div>
 
@@ -241,10 +241,10 @@ Dashboard | {{ bot.name }}
         <div class="d-flex flex-wrap gap-2">
             <button class="btn btn-primary btn-cyber-pill shadow" id="trainBotBtn"><i class="bi bi-lightning-charge-fill"></i> Train Bot</button>
             <button class="btn btn-dark btn-cyber-pill border border-secondary border-opacity-25 text-warning" id="recrawlBtn"><i class="bi bi-arrow-clockwise"></i> Crawl Website Again</button>
-            <button class="btn btn-dark btn-cyber-pill border border-secondary border-opacity-25 text-success" data-bs-toggle="tab" data-bs-target="#tab-knowledge"><i class="bi bi-plus-circle-fill"></i> Add Knowledge</button>
+            {% comment %} <button class="btn btn-dark btn-cyber-pill border border-secondary border-opacity-25 text-success" data-bs-toggle="tab" data-bs-target="#tab-knowledge"><i class="bi bi-plus-circle-fill"></i> Add Knowledge</button>
             <button class="btn btn-dark btn-cyber-pill border border-secondary border-opacity-25 text-info" data-bs-toggle="tab" data-bs-target="#tab-dashboard"><i class="bi bi-terminal-fill"></i> Test Chat</button>
-            <button class="btn btn-dark btn-cyber-pill border border-secondary border-opacity-25 text-white" data-bs-toggle="tab" data-bs-target="#tab-deployment"><i class="bi bi-code-square"></i> Embed Widget</button>
-            <button class="btn btn-outline-secondary btn-cyber-pill border-opacity-50 ms-auto text-light" data-bs-toggle="tab" data-bs-target="#tab-settings"><i class="bi bi-sliders"></i> Settings</button>
+            <button class="btn btn-dark btn-cyber-pill border border-secondary border-opacity-25 text-white" data-bs-toggle="tab" data-bs-target="#tab-deployment"><i class="bi bi-code-square"></i> Embed Widget</button> {% endcomment %}
+            {% comment %} <button class="btn btn-outline-secondary btn-cyber-pill border-opacity-50 ms-auto text-light" data-bs-toggle="tab" data-bs-target="#tab-settings"><i class="bi bi-sliders"></i> Settings</button> {% endcomment %}
         </div>
     </div>
 
@@ -287,52 +287,107 @@ Dashboard | {{ bot.name }}
     <div class="tab-content" id="workspaceTabsContent">
         
         <div class="tab-pane fade show active" id="tab-dashboard" role="tabpanel">
-           <div class="row row-cols-2 row-cols-sm-3 row-cols-lg-6 g-3 mb-4">
-                <!-- Card 1 -->
-                <div class="col">
-                    <div class="card metric-card-styled bg-card-dark p-3 shadow-sm text-center">
-                        <h3>1</h3>
-                        <small class="text-secondary-muted">Pages Scanned</small>
+           <div class="row g-4 mb-4">
+
+                <div class="col-md-3">
+                    <div class="card premium-profile-header h-100">
+                        <div class="card-body text-center">
+
+                            <div class="mb-3">
+                                <i class="bi bi-chat-dots-fill fs-2 text-primary"></i>
+                            </div>
+
+                            <h2 class="fw-bold text-white mb-1">
+                                {{ conversations_count }}
+                            </h2>
+
+                            <h6 class="text-white mb-1">
+                                Conversations
+                            </h6>
+
+                            <small class="text-secondary">
+                                Total chat sessions
+                            </small>
+
+                        </div>
                     </div>
                 </div>
-                <!-- Card 2 -->
-                <div class="col">
-                    <div class="card metric-card-styled bg-card-dark p-3 shadow-sm text-center">
-                        <h3>0</h3>
-                        <small class="text-secondary-muted">Knowledge Items</small>
+
+                <div class="col-md-3">
+                    <div class="card premium-profile-header h-100">
+                        <div class="card-body text-center">
+
+                            <div class="mb-3">
+                                <i class="bi bi-chat-left-text-fill fs-2 text-success"></i>
+                            </div>
+
+                            <h2 class="fw-bold text-white mb-1">
+                                {{ messages_count }}
+                            </h2>
+
+                            <h6 class="text-white mb-1">
+                                Messages
+                            </h6>
+
+                            <small class="text-secondary">
+                                User & bot messages
+                            </small>
+
+                        </div>
                     </div>
                 </div>
-                <!-- Card 3 -->
-                <div class="col">
-                    <div class="card metric-card-styled bg-card-dark p-3 shadow-sm text-center">
-                        <h3>5</h3>
-                        <small class="text-secondary-muted">Vector Chunks</small>
+
+                <div class="col-md-3">
+                    <div class="card premium-profile-header h-100">
+                        <div class="card-body text-center">
+
+                            <div class="mb-3">
+                                <i class="bi bi-globe2 fs-2 text-info"></i>
+                            </div>
+
+                            <h2 class="fw-bold text-white mb-1">
+                                {{ pages_count }}
+                            </h2>
+
+                            <h6 class="text-white mb-1">
+                                Website Pages
+                            </h6>
+
+                            <small class="text-secondary">
+                                Active crawled pages
+                            </small>
+
+                        </div>
                     </div>
                 </div>
-                <!-- Card 4 -->
-                <div class="col">
-                    <div class="card metric-card-styled bg-card-dark p-3 shadow-sm text-center">
-                        <h3>0</h3>
-                        <small class="text-secondary-muted">Total Chats</small>
+
+                <div class="col-md-3">
+                    <div class="card premium-profile-header h-100">
+                        <div class="card-body text-center">
+
+                            <div class="mb-3">
+                                <i class="bi bi-database-fill fs-2 text-warning"></i>
+                            </div>
+
+                            <h2 class="fw-bold text-white mb-1">
+                                {{ knowledge_count }}
+                            </h2>
+
+                            <h6 class="text-white mb-1">
+                                Knowledge Records
+                            </h6>
+
+                            <small class="text-secondary">
+                                Manual knowledge entries
+                            </small>
+
+                        </div>
                     </div>
                 </div>
-                <!-- Card 5 -->
-                <div class="col">
-                    <div class="card metric-card-styled bg-card-dark p-3 shadow-sm text-center">
-                        <h3>0</h3>
-                        <small class="text-secondary-muted">Unique Visitors</small>
-                    </div>
-                </div>
-                <!-- Card 6 -->
-                <div class="col">
-                    <div class="card metric-card-styled bg-card-dark p-3 shadow-sm text-center">
-                        <h3>0</h3>
-                        <small class="text-secondary-muted">Widget Installs</small>
-                    </div>
-                </div>
+
             </div>
 
-            <div class="row g-4">
+            <div class="row g-4 mb-4">
                 <div class="col-12 col-lg-4">
                     <div class="card premium-profile-header p-4 h-100">
                         <h5 class="fw-bold text-white mb-3">Bot Status</h5>
@@ -395,6 +450,54 @@ Dashboard | {{ bot.name }}
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <div class="row g-4">
+
+                <div class="col-lg-6">
+
+                    <div class="card premium-profile-header p-4">
+
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+
+                            <h5 class="fw-bold text-white mb-0">
+                                Conversation Trend
+                            </h5>
+
+                            <span class="badge bg-primary">
+                                Last 7 Days
+                            </span>
+
+                        </div>
+
+                        <div id="conversationTrendChart"></div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-lg-6">
+
+                    <div class="card premium-profile-header p-4">
+
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+
+                            <h5 class="fw-bold text-white mb-0">
+                                Message Trend
+                            </h5>
+
+                            <span class="badge bg-success">
+                                Last 7 Days
+                            </span>
+
+                        </div>
+
+                        <div id="messageTrendChart"></div>
+
+                    </div>
+
+                </div>
+
             </div>
         </div>
 
@@ -659,7 +762,7 @@ Dashboard | {{ bot.name }}
                     class="form-control code-terminal-wrapper"
                     rows="4"
                     readonly
-                ><script src="https://botforge.ai/widget.js" data-widget-key="{{ bot.widget_key }}"></script></textarea>
+                ><script src="{{ request.scheme }}://{{ request.get_host }}/static/widget/widget.js" data-widget-key="{{ bot.widget_key }}"></script></textarea>
 
                 <button
                     class="btn btn-sm btn-light position-absolute border-0 shadow px-3 py-1.5"
@@ -706,39 +809,152 @@ Dashboard | {{ bot.name }}
         </div>
 
         <div class="tab-pane fade" id="tab-logs" role="tabpanel">
-            <div class="card premium-profile-header p-4">
-                <h5 class="fw-bold text-white mb-3">Chat History</h5>
-                <div class="table-responsive">
-                    <table class="table cyber-table align-middle mb-0">
-                        <thead>
-                            <tr>
-                                <th>Session ID</th>
-                                <th>User Message</th>
-                                <th>Time</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="text-center">
-                                <td colspan="3" class="py-5 text-muted small">No chat history available yet.</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+
+    <div class="card premium-profile-header p-4">
+
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="fw-bold text-white mb-0">
+                Chat History
+            </h5>
+
+            <span class="badge bg-primary">
+                {{ conversations_count }} Sessions
+            </span>
         </div>
 
+        <div class="table-responsive">
+
+           <table class="table cyber-table align-middle mb-0">
+    <thead>
+        <tr>
+            <th style="padding-left: 1.25rem;">Chat ID</th>
+            <th>Total Messages</th>
+            <th>Time Started</th>
+            <th>Last Active</th>
+            <th width="100" class="text-end" style="padding-right: 1.25rem;">Action</th>
+        </tr>
+    </thead>
+    <tbody class="small fw-medium">
+        {% for session in sessions %}
+        <tr>
+            <td style="padding-left: 1.25rem; font-family: monospace; color: #0f172a;">
+                {{ session.session_id|truncatechars:18 }}
+            </td>
+
+            <td>
+                <span class="badge px-2.5 py-1" style="background-color: color-mix(in srgb, var(--bf-primary, #20c997) 12%, transparent); color: var(--bf-primary, #20c997); border: 1px solid color-mix(in srgb, var(--bf-primary, #20c997) 20%, transparent); font-weight: 600;">
+                    {{ session.messages.count }} Messages
+                </span>
+            </td>
+
+            <td class="text-muted">
+                {{ session.created_at|date:"d M Y H:i" }}
+            </td>
+
+            <td class="text-muted">
+                {% with last_message=session.messages.last %}
+                    {% if last_message %}
+                        {{ last_message.created_at|timesince }} ago
+                    {% else %}
+                        No activity
+                    {% endif %}
+                {% endwith %}
+            </td>
+
+            <td class="text-end" style="padding-right: 1.25rem;">
+                <button type="button" 
+                        class="btn btn-sm viewChatBtn" 
+                        data-url="{% url 'conversation_detail_ajax' session.id %}"
+                        style="background: #ffffff; border: 1px solid #cbd5e1; color: #475569; border-radius: 8px; width: 34px; height: 34px; display: inline-flex; align-items: center; justify-content: center; transition: all 0.15s ease;">
+                    <i class="bi bi-eye-fill" style="font-size: 0.9rem;"></i>
+                </button>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5" class="text-center py-5 text-muted small">
+                <i class="bi bi-chat-square-dots d-block mb-2" style="font-size: 1.5rem; color: #94a3b8;"></i>
+                No chat history available yet.
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+        </div>
+
+    </div>
+
+</div>
+
         <div class="tab-pane fade" id="tab-settings" role="tabpanel">
-            <div class="card  p-4 border-danger">
-                <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-4">
-                    <div>
-                        <h5 class="fw-bold text-danger mb-1"><i class="bi bi-exclamation-octagon-fill me-1"></i> Permanent Actions</h5>
-                        <p class="text-muted small mb-0">Permanently clears this model context instantiation, dropping related structural vector matrix storage files and disconnecting client embed nodes.</p>
-                    </div>
-                    <button class="btn btn-danger px-1 py-1 fw-bold shadow-sm" style="border-radius: 12px;">
-                        <i class="bi bi-trash3-fill me-1"></i> Delete Bot
-                    </button>
-                </div>
+            <div class="card premium-profile-header" style="background-color: #ffffff; border: 1px solid #fca5a5 !important; border-radius: 16px; box-shadow: 0 10px 25px rgba(239, 68, 68, 0.03);">
+
+    <div class="p-4">
+
+        <div class="mb-4">
+            <h5 class="fw-bold mb-1" style="color: #dc3545;">
+                Danger Zone
+            </h5>
+            <p class="text-muted small mb-0">
+                Be careful. These actions delete your data permanently and cannot be undone.
+            </p>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center py-3" style="border-bottom: 1px solid #f1f5f9;">
+            <div>
+                <h6 class="mb-1" style="color: #0f172a; font-weight: 600; font-size: 0.95rem;">
+                    Delete All Chat Logs
+                </h6>
+                <small class="text-muted">
+                    Erase the history of all conversations with this bot.
+                </small>
             </div>
+            <button type="button"
+                class="btn btn-sm"
+                id="clearChatsBtn"
+                style="background: #ffffff; border: 1px solid #f59e0b; color: #d97706; font-weight: 600; border-radius: 8px; padding: 6px 14px; transition: all 0.15s ease;">
+                Clear Chats
+            </button>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center py-3" style="border-bottom: 1px solid #f1f5f9;">
+            <div>
+                <h6 class="mb-1" style="color: #0f172a; font-weight: 600; font-size: 0.95rem;">
+                    Delete Saved Memory
+                </h6>
+                <small class="text-muted">
+                    Remove all the website text and pages this bot has learned.
+                </small>
+            </div>
+            <button type="button"
+                class="btn btn-sm"
+                id="deleteKnowledgeBtn"
+                style="background: #ffffff; border: 1px solid #ef4444; color: #dc3545; font-weight: 600; border-radius: 8px; padding: 6px 14px; transition: all 0.15s ease;">
+                Delete Memory
+            </button>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center py-3">
+            <div>
+                <h6 class="mb-1" style="color: #0f172a; font-weight: 600; font-size: 0.95rem;">
+                    Delete Bot Entirely
+                </h6>
+                <small class="text-muted">
+                    Completely remove this bot, its settings, and all data.
+                </small>
+            </div>
+            <button type="button"
+                class="btn btn-sm text-white"
+                id="deleteBotBtn"
+                style="background: #dc3545; border: none; font-weight: 600; border-radius: 8px; padding: 8px 16px; box-shadow: 0 4px 12px rgba(220, 53, 69, 0.2); transition: all 0.15s ease;">
+                Delete Bot
+            </button>
+        </div>
+
+    </div>
+
+</div>
         </div>
 
     </div>
@@ -859,9 +1075,44 @@ Dashboard | {{ bot.name }}
 
 </div>
 
+{% comment %} chat conversation modal {% endcomment %}
+<div class="modal fade" id="chatLogModal" tabindex="-1">
+
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+
+        <div class="modal-content bg-dark border-secondary">
+
+            <div class="modal-header border-secondary">
+
+                <h5 class="modal-title text-white">
+                    Conversation Details
+                </h5>
+
+                <button
+                    type="button"
+                    class="btn-close btn-close-white"
+                    data-bs-dismiss="modal">
+                </button>
+
+            </div>
+
+            <div
+                class="modal-body"
+                id="chatLogBody"
+                style="max-height:600px;overflow-y:auto;">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
 {% endblock %}
 
 {% block internal_js %}
+
 
 <script>
 
@@ -1628,5 +1879,335 @@ $("#themeColorPicker").on("input",function(){
     });
 
 });
+</script>
+
+<script>
+
+$(document).on("click",".viewChatBtn",function(){
+
+    let url=$(this).data("url");
+
+    $.ajax({
+
+        url:url,
+
+        type:"GET",
+
+        beforeSend:function(){
+
+            $("#chatLogBody").html(`
+                <div class="text-center py-5">
+                    <div class="spinner-border text-primary"></div>
+                </div>
+            `);
+
+            $("#chatLogModal").modal("show");
+
+        },
+
+        success:function(response){
+
+            let html="";
+
+            response.messages.forEach(function(msg){
+
+                if(msg.sender==="user"){
+
+                    html+=`
+                    <div class="d-flex justify-content-end mb-3">
+                        <div class="chat-bubble-user py-1 px-1" style="max-width:75%; font-size:12px">
+                            ${msg.message}
+                            <div class="small opacity-75" style="font-size:8px">
+                                ${msg.time}
+                            </div>
+                        </div>
+                    </div>`;
+                }
+
+                else{
+
+                    html+=`
+                        <div class="d-flex justify-content-start mb-3">
+                            <div class="chat-bubble-ai py-1 px-1" style="max-width:75%; font-size:12px">
+                                ${msg.message}
+                                <div class="small opacity-75" style="font-size:8px">
+                                    ${msg.time}
+                                </div>
+                            </div>
+                        </div>`;
+                }
+
+            });
+
+            $("#chatLogBody").html(html);
+
+        },
+
+        error:function(){
+
+            $("#chatLogBody").html(`
+                <div class="text-center text-danger py-5">
+                    Failed to load conversation.
+                </div>
+            `);
+
+        }
+
+    });
+
+});
+
+</script>
+<script>
+$("#clearChatsBtn").click(function(){
+
+    Swal.fire({
+
+        title:"Clear Chat History?",
+        text:"All conversations will be moved to trash.",
+        icon:"warning",
+        showCancelButton:true,
+        confirmButtonColor:"#f59e0b"
+
+    }).then((result)=>{
+
+        if(result.isConfirmed){
+
+            $.ajax({
+
+                url:"{% url 'clear_chat_history' bot.id %}",
+
+                type:"POST",
+
+                data:{
+                    csrfmiddlewaretoken:"{{ csrf_token }}"
+                },
+
+                success:function(response){
+
+                    Swal.fire({
+
+                        icon:"success",
+
+                        title:"Success",
+
+                        text:response.message
+
+                    }).then(()=>{
+                        location.reload();
+                    });
+
+                }
+
+            });
+
+        }
+
+    });
+
+});
+</script>
+<script>
+$("#deleteKnowledgeBtn").click(function(){
+
+    Swal.fire({
+
+        title:"Delete Knowledge Base?",
+
+        text:"All knowledge records will be moved to trash.",
+
+        icon:"warning",
+
+        showCancelButton:true,
+
+        confirmButtonColor:"#dc3545"
+
+    }).then((result)=>{
+
+        if(result.isConfirmed){
+
+            $.ajax({
+
+                url:"{% url 'delete_knowledge_base' bot.id %}",
+
+                type:"POST",
+
+                data:{
+                    csrfmiddlewaretoken:"{{ csrf_token }}"
+                },
+
+                success:function(response){
+
+                    Swal.fire({
+
+                        icon:"success",
+
+                        title:"Success",
+
+                        text:response.message
+
+                    }).then(()=>{
+                        location.reload();
+                    });
+
+                }
+
+            });
+
+        }
+
+    });
+
+});
+</script>
+<script>
+$("#deleteBotBtn").click(function(){
+
+    Swal.fire({
+
+        title:"Delete Chatbot?",
+
+        text:"The chatbot will be moved to trash.",
+
+        icon:"warning",
+
+        showCancelButton:true,
+
+        confirmButtonColor:"#dc3545"
+
+    }).then((result)=>{
+
+        if(result.isConfirmed){
+
+            $.ajax({
+
+                url:"{% url 'delete_chatbot' bot.id %}",
+
+                type:"POST",
+
+                data:{
+                    csrfmiddlewaretoken:"{{ csrf_token }}"
+                },
+
+                success:function(response){
+
+                    Swal.fire({
+
+                        icon:"success",
+
+                        title:"Success",
+
+                        text:response.message
+
+                    }).then(()=>{
+
+                        window.location.href="/bots/";
+
+                    });
+
+                }
+
+            });
+
+        }
+
+    });
+
+});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/12.2.0/highcharts.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script>
+
+var options={
+
+    series:[{
+        name:'Conversations',
+        data:{{ conversation_chart_data|safe }}
+    }],
+
+    chart:{
+        type:'area',
+        height:350,
+        toolbar:{
+            show:false
+        },
+        background:'transparent'
+    },
+
+    dataLabels:{
+        enabled:false
+    },
+
+    stroke:{
+        curve:'smooth',
+        width:3
+    },
+
+    xaxis:{
+        categories:{{ conversation_chart_categories|safe }}
+    },
+
+    yaxis:{
+        labels:{
+            formatter:function(value){
+                return Math.round(value);
+            }
+        }
+    },
+
+    tooltip:{
+        theme:'dark'
+    }
+
+};
+
+var chart=new ApexCharts(
+    document.querySelector("#conversationTrendChart"),
+    options
+);
+
+chart.render();
+
+</script>
+<script>
+
+var messageOptions={
+
+    series:[{
+        name:'Messages',
+        data:{{ message_chart_data|safe }}
+    }],
+
+    chart:{
+        type:'area',
+        height:350,
+        toolbar:{
+            show:false
+        }
+    },
+
+    dataLabels:{
+        enabled:false
+    },
+
+    stroke:{
+        curve:'smooth',
+        width:3
+    },
+
+    xaxis:{
+        categories:{{ message_chart_categories|safe }}
+    }
+
+};
+
+var messageChart=new ApexCharts(
+    document.querySelector("#messageTrendChart"),
+    messageOptions
+);
+
+messageChart.render();
+
 </script>
 {% endblock %}

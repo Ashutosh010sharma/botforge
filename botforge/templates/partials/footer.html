@@ -53,7 +53,7 @@
                     <li>
 
                         <a
-                            href="/demo/"
+                            href="{% if user.is_authenticated %}{% url 'dashboard' %}#demo-bots{% else %}{% url 'login' %}?next={% url 'dashboard' %}#demo-bots{% endif %}"
                             class="footer-link"
                         >
                             Demo Bots
@@ -108,7 +108,7 @@
 
         <div class="text-center">
 
-            © 2026 BotForge | All Rights Reserved
+             © {% now "Y" %} BotForge | All Rights Reserved
 
         </div>
 

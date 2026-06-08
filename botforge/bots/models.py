@@ -131,6 +131,14 @@ class Chatbot(models.Model):
         max_length=30,
         default="bottom-right"
     )
+    is_deleted=models.BooleanField(
+        default=False
+    )
+
+    deleted_at=models.DateTimeField(
+        null=True,
+        blank=True
+    )
     
     
 
@@ -166,6 +174,14 @@ class WebsitePage(models.Model):
 
     updated_at = models.DateTimeField(
         auto_now=True
+    )
+    is_deleted=models.BooleanField(
+    default=False
+    )
+
+    deleted_at=models.DateTimeField(
+        null=True,
+        blank=True
     )
 
     def __str__(self):
@@ -215,6 +231,14 @@ class WebsiteChunk(models.Model):
         null=True,
         blank=True
     )
+    is_deleted=models.BooleanField(
+        default=False
+    )
+
+    deleted_at=models.DateTimeField(
+        null=True,
+        blank=True
+    )
 
     def __str__(self):
         return self.title or self.source_type
@@ -248,3 +272,62 @@ class BotKnowledge(models.Model):
         null=True,
         blank=True
     )
+    
+class ChatSession(models.Model):
+
+    chatbot=models.ForeignKey(
+        Chatbot,
+        on_delete=models.CASCADE,
+        related_name="chat_sessions"
+    )
+
+    session_id=models.CharField(
+        max_length=100,
+        db_index=True
+    )
+
+    created_at=models.DateTimeField(
+        auto_now_add=True
+    )
+
+    updated_at=models.DateTimeField(
+        auto_now=True
+    )
+    is_deleted=models.BooleanField(
+        default=False
+    )
+
+    deleted_at=models.DateTimeField(
+        null=True,
+        blank=True
+    )
+
+    def __str__(self):
+        return self.session_id
+    
+class ChatMessage(models.Model):
+
+    SENDER_CHOICES=[
+        ("user","User"),
+        ("bot","Bot")
+    ]
+
+    session=models.ForeignKey(
+        ChatSession,
+        on_delete=models.CASCADE,
+        related_name="messages"
+    )
+
+    sender=models.CharField(
+        max_length=10,
+        choices=SENDER_CHOICES
+    )
+
+    message=models.TextField()
+
+    created_at=models.DateTimeField(
+        auto_now_add=True
+    )
+
+    def __str__(self):
+        return f"{self.sender}"

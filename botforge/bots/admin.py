@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Chatbot,WebsitePage,WebsiteChunk,BotKnowledge
+from .models import Chatbot,WebsitePage,WebsiteChunk,BotKnowledge,ChatMessage,ChatSession
 
 
 admin.site.register(
@@ -15,4 +15,10 @@ admin.site.register(
 )
 admin.site.register(
     BotKnowledge
+)
+admin.site.register(
+    ChatSession
+)
+admin.site.register(
+    ChatMessage
 )

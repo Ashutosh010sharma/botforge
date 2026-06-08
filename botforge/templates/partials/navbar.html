@@ -29,7 +29,7 @@
 
             <ul class="navbar-nav me-auto">
 
-                <li class="nav-item">
+                {% comment %} <li class="nav-item">
 
                     <a
                         class="nav-link"
@@ -38,24 +38,15 @@
                         Home
                     </a>
 
-                </li>
+                </li> {% endcomment %}
+
+               
 
                 <li class="nav-item">
 
                     <a
                         class="nav-link"
-                        href="/pricing/"
-                    >
-                        Pricing
-                    </a>
-
-                </li>
-
-                <li class="nav-item">
-
-                    <a
-                        class="nav-link"
-                        href="/demo/"
+                        href="{% if user.is_authenticated %}{% url 'dashboard' %}#demo-bots{% else %}{% url 'login' %}?next={% url 'dashboard' %}#demo-bots{% endif %}"
                     >
                         Demo Bots
                     </a>
@@ -66,6 +57,16 @@
                     My Bots
                 </a>
             </li>
+             <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="/pricing/"
+                    >
+                        Pricing
+                    </a>
+
+                </li>
 
             </ul>
 

@@ -128,17 +128,38 @@ My Assistants | AI Workspace Dashboard
                                 </span>
                             {% endif %}
 
-                            {% if bot.is_active %}
-                                <div class="d-flex align-items-center gap-1.5 px-2.5 py-1 bg-success bg-opacity-10 text-success rounded-pill fw-semibold" style="font-size: 0.7rem; letter-spacing: 0.03em; text-transform: uppercase;">
-                                    <span class="spinner-grow spinner-grow-sm text-success" role="status" style="width: 5px; height: 5px;"></span>
-                                    Live
-                                </div>
-                            {% else %}
-                                <div class="d-flex align-items-center gap-1.5 px-2.5 py-1 bg-secondary bg-opacity-10 text-secondary rounded-pill fw-semibold" style="font-size: 0.7rem; letter-spacing: 0.03em; text-transform: uppercase;">
-                                    <span class="d-inline-block bg-secondary rounded-circle" style="width: 5px; height: 5px;"></span>
-                                    Paused
-                                </div>
-                            {% endif %}
+                            {% if bot.is_active and bot.is_installed %}
+
+                            <!-- Live Status Pill (Dynamic Branding Primary Color with Mix Opacity) -->
+                            <div class="d-flex align-items-center gap-2 px-3 py-1 rounded-pill"
+                                style="font-size: 0.8rem; font-weight: 600; background-color: color-mix(in srgb, var(--bf-primary, #20c997) 12%, transparent); color: var(--bf-primary, #20c997); border: 1px solid color-mix(in srgb, var(--bf-primary, #20c997) 20%, transparent); width: fit-content;">
+                                <span class="spinner-grow" 
+                                    role="status" 
+                                    style="width: 6px; height: 6px; color: var(--bf-primary, #20c997);"></span>
+                                Live
+                            </div>
+
+                        {% elif bot.is_active and not bot.is_installed %}
+
+                            <!-- Ready Status Pill (Soft Amber Warning Hue) -->
+                            <div class="d-flex align-items-center gap-2 px-3 py-1 rounded-pill"
+                                style="font-size: 0.8rem; font-weight: 600; background-color: #fef3c7; color: #d97706; border: 1px solid #fde68a; width: fit-content;">
+                                <span class="d-inline-block rounded-circle" 
+                                    style="width: 6px; height: 6px; background-color: #d97706;"></span>
+                                Ready
+                            </div>
+
+                        {% else %}
+
+                            <!-- Paused Status Pill (Neutral Gray Muted Tone) -->
+                            <div class="d-flex align-items-center gap-2 px-3 py-1 rounded-pill"
+                                style="font-size: 0.8rem; font-weight: 600; background-color: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; width: fit-content;">
+                                <span class="d-inline-block rounded-circle" 
+                                    style="width: 6px; height: 6px; background-color: #64748b;"></span>
+                                Paused
+                            </div>
+
+                        {% endif %}
                         </div>
 
                         <h4 class="fw-bold mb-2 text-dark tracking-tight" style="font-size: 1.2rem;">{{ bot.name }}</h4>
@@ -166,9 +187,7 @@ My Assistants | AI Workspace Dashboard
                         </div>
 
                         <div class="d-flex align-items-center gap-1.5">
-                            <a href="#" class="btn btn-icon-settings d-flex align-items-center justify-content-center border border-light-subtle text-secondary" style="width: 38px; height: 38px; border-radius: 10px; background-color: #ffffff; transition: all 0.2s;" onmouseenter="this.style.backgroundColor='#f1f5f9'; this.style.color='#0f172a'" onmouseleave="this.style.backgroundColor='#ffffff'; this.style.color='#64748b'" title="Configure Settings">
-                                <i class="bi bi-gear-fill" style="font-size: 0.9rem;"></i>
-                            </a>
+                            
                             
                             {% if bot.bot_type|lower == 'school' or bot.bot_type|lower == 'education' %}
                                 <a href="{% url 'school_demo_bot' %}" class="btn btn-primary d-inline-flex align-items-center gap-1 px-3 py-2 fw-semibold" style="border-radius: 10px; font-size: 0.85rem; box-shadow: 0 4px 12px rgba(13, 110, 253, 0.15);">

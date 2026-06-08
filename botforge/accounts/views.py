@@ -40,15 +40,15 @@ def register_view(request):
                     user.save()
 
 
-                    Company.objects.create(
-                        user=user,
-                        company_name=request.POST.get(
-                            "company_name"
-                        ),
-                        website_url=request.POST.get(
-                            "website_url"
-                        )
-                    )
+                    # Company.objects.create(
+                    #     user=user,
+                    #     company_name=request.POST.get(
+                    #         "company_name"
+                    #     ),
+                    #     website_url=request.POST.get(
+                    #         "website_url"
+                    #     )
+                    # )
 
                     login(
                         request,
@@ -146,41 +146,24 @@ def login_view(request):
 @login_required
 def dashboard(request):
 
-    try:
+    company = Company.objects.filter(
+        user=request.user,
+        
+    ).first()
 
-        company = request.user.company
+    context = {
 
-        context = {
-            "company": company
-        }
+        "company": company
 
-        return render(
-            request,
-            "accounts/dashboard.html",
-            context
-        )
+    }
 
-    except Company.DoesNotExist:
+    return render(
 
-        messages.error(
-            request,
-            "Company profile not found."
-        )
+        request,
+        "accounts/dashboard.html",
+        context
 
-        return redirect(
-            "login"
-        )
-
-    except Exception as e:
-
-        messages.error(
-            request,
-            f"Error: {str(e)}"
-        )
-
-        return redirect(
-            "login"
-        )
+    )
 
 def logout_view(request):
 

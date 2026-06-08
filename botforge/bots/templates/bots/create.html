@@ -71,91 +71,103 @@ Create AI Assistant | Workspace Builder
     <div class="row justify-content-center">
         <div class="col-12 col-lg-8">
 
+    <!-- Simple, Friendly Form Header -->
+    <div class="mb-4">
+        <h2 class="fw-bold mb-1" style="color: #0f172a; font-size: 1.75rem; letter-spacing: -0.02em;">Create Your New Bot</h2>
+        <p class="text-muted small">Set up your chatbot's basic details and choose how it should act with your visitors.</p>
+    </div>
+
+    <!-- Premium Card Container -->
+    <div class="card p-4 p-md-5" style="background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 20px; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.03);">
+        <form id="createBotForm">
+            {% csrf_token %}
+
+            <!-- Input 1: Bot Name (REQUIRED) -->
             <div class="mb-4">
-               
-                <h2 class="form-title mb-1">Configure New Assistant</h2>
-                <p class="text-muted small">Initialize structural configurations and operational behaviors for your context pipeline agent profile.</p>
+                <label class="form-label d-flex align-items-center gap-2 fw-semibold" style="color: #334155; font-size: 0.9rem;">
+                    <i class="bi bi-tag" style="color: var(--bf-primary, #20c997);"></i> 
+                    <span>Bot Name <span style="color: #ef4444; margin-left: 2px;">*</span></span>
+                </label>
+                <input
+                    type="text"
+                    name="name"
+                    class="form-control"
+                    placeholder="e.g., Customer Support Bot, School Assistant"
+                    style="border-radius: 10px; padding: 12px 14px; border: 1px solid #cbd5e1; font-size: 0.9rem;"
+                    required
+                >
             </div>
 
-            <div class="card form-config-card p-4 p-md-5">
-                <form id="createBotForm">
-                    {% csrf_token %}
-
-                    <div class="mb-4">
-                        <label class="form-label d-flex align-items-center gap-2">
-                            <i class="bi bi-tag-fill text-muted"></i> Assistant Label / Name
-                        </label>
-                        <input
-                            type="text"
-                            name="name"
-                            class="form-control"
-                            placeholder="e.g., Nexus Retail Guide, Admissions Frontline Desk"
-                            required
-                        >
-                    </div>
-                    <div class="mb-4">
-
-                        <label class="form-label">
-                            Website URL
-                        </label>
-
-                        <input
-                            type="url"
-                            name="website_url"
-                            class="form-control"
-                            placeholder="https://yourwebsite.com"
-                        >
-
-                    </div>
-
-                    <div class="mb-4">
-                        <label class="form-label d-flex align-items-center gap-2">
-                            <i class="bi bi-grid-1x2-fill text-muted"></i> Training Module / Domain Type
-                        </label>
-                        <select name="bot_type" class="form-select" required>
-                            <option value="" disabled selected hidden>Select deployment framework...</option>
-                            <option value="school">📊 School / Academic Administration</option>
-                            <option value="healthcare">🩺 Healthcare / Patient Support</option>
-                            <option value="ecommerce">🛍️ E-Commerce / Merchant Retail</option>
-                            <option value="custom">⚙️ Custom / Enterprise Profile</option>
-                        </select>
-                    </div>
-
-                    <div class="mb-4">
-                        <label class="form-label d-flex align-items-center gap-2">
-                            <i class="bi bi-file-earmark-text-fill text-muted"></i> Operational Scope Description
-                        </label>
-                        <textarea
-                            name="description"
-                            class="form-control"
-                            rows="3"
-                            placeholder="Briefly define what dataset limits or business objectives this virtual assistant handles..."
-                        ></textarea>
-                    </div>
-
-                    <div class="mb-4">
-                        <label class="form-label d-flex align-items-center gap-2">
-                            <i class="bi bi-chat-quote-fill text-muted"></i> Initial Welcome String Greeting
-                        </label>
-                        <textarea
-                            name="welcome_message"
-                            class="form-control"
-                            rows="3"
-                            placeholder="Injected when a user launches the floating modal chat view window container..."
-                        >Hello! How can I help you today?</textarea>
-                    </div>
-
-                    <div class="d-flex align-items-center justify-content-end gap-2 pt-3 border-top border-light">
-                      
-                        <button type="submit" class="btn btn-primary btn-submit-action px-4 py-2.5 shadow-sm">
-                            <i class="bi bi-cpu-fill me-1"></i> Build AI Assistant
-                        </button>
-                    </div>
-
-                </form>
+            <!-- Input 2: Website URL (OPTIONAL) -->
+            <div class="mb-4">
+                <label class="form-label d-flex align-items-center gap-2 fw-semibold" style="color: #334155; font-size: 0.9rem;">
+                    <i class="bi bi-globe" style="color: var(--bf-primary, #20c997);"></i> Website Link<span style="color: #ef4444; margin-left: 2px;">*</span>
+                </label>
+                <input
+                    type="url"
+                    name="website_url"
+                    class="form-control"
+                    placeholder="https://yourwebsite.com"
+                    style="border-radius: 10px; padding: 12px 14px; border: 1px solid #cbd5e1; font-size: 0.9rem;"
+                    required
+                >
             </div>
 
-        </div>
+            <!-- Input 3: Bot Type Category Select (REQUIRED) -->
+            <div class="mb-4">
+                <label class="form-label d-flex align-items-center gap-2 fw-semibold" style="color: #334155; font-size: 0.9rem;">
+                    <i class="bi bi-grid" style="color: var(--bf-primary, #20c997);"></i> 
+                    <span>What is this bot for? <span style="color: #ef4444; margin-left: 2px;">*</span></span>
+                </label>
+                <select name="bot_type" class="form-select" style="border-radius: 10px; padding: 12px 14px; border: 1px solid #cbd5e1; font-size: 0.9rem;" required>
+                    <option value="" disabled selected hidden>Choose a category...</option>
+                    <option value="school">📊 School & Education</option>
+                    <option value="healthcare">🩺 Healthcare & Clinic Support</option>
+                    <option value="ecommerce">🛍️ Online Shop & Retail</option>
+                    <option value="custom">⚙️ Other / Custom Business</option>
+                </select>
+            </div>
+
+            <!-- Input 4: Bot Description (OPTIONAL) -->
+            <div class="mb-4">
+                <label class="form-label d-flex align-items-center gap-2 fw-semibold" style="color: #334155; font-size: 0.9rem;">
+                    <i class="bi bi-file-earmark-text" style="color: var(--bf-primary, #20c997);"></i> What should this bot do?
+                </label>
+                <textarea
+                    name="description"
+                    class="form-control"
+                    rows="3"
+                    placeholder="Briefly describe your bot's job (e.g., 'Answer questions about our product prices and shipping times.')"
+                    style="border-radius: 10px; padding: 12px 14px; border: 1px solid #cbd5e1; font-size: 0.9rem;"
+                ></textarea>
+            </div>
+
+            <!-- Input 5: Welcome Message (OPTIONAL) -->
+            <div class="mb-4">
+                <label class="form-label d-flex align-items-center gap-2 fw-semibold" style="color: #334155; font-size: 0.9rem;">
+                    <i class="bi bi-chat-quote" style="color: var(--bf-primary, #20c997);"></i> Greeting Message
+                </label>
+                <textarea
+                    name="welcome_message"
+                    class="form-control"
+                    rows="3"
+                    placeholder="The very first message your users see when they open the chat window."
+                    style="border-radius: 10px; padding: 12px 14px; border: 1px solid #cbd5e1; font-size: 0.9rem;"
+                >Hello! How can I help you today?</textarea>
+            </div>
+
+            <!-- Submit Action Bar -->
+            <div class="d-flex align-items-center justify-content-end gap-2 pt-3" style="border-top: 1px solid #f1f5f9;">
+                <button type="submit" class="btn btn-primary text-white px-4 py-2.5 shadow-sm fw-semibold" 
+                        style="background: var(--bf-primary, #20c997); border: none; border-radius: 10px; font-size: 0.9rem; transition: background-color 0.15s ease;">
+                    <i class="bi bi-plus-lg me-1"></i> Create Bot
+                </button>
+            </div>
+
+        </form>
+    </div>
+
+</div>
     </div>
 </div>
 {% endblock %}
