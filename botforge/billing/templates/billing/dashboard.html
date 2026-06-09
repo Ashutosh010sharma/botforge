@@ -1,0 +1,264 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Billing & Subscription | AI Workspace
+{% endblock %}
+
+{% block internal_css %}
+<style>
+    /* Clean Dashboard Card Architecture */
+    .billing-card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 20px;
+        box-shadow: 0 4px 12px rgba(15, 23, 42, 0.01);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    
+    .billing-card:hover {
+        box-shadow: 0 10px 25px rgba(15, 23, 42, 0.04);
+    }
+
+    /* Active Pulse Status Indicator */
+    .status-pulse {
+        width: 8px;
+        height: 8px;
+        background-color: #10b981;
+        border-radius: 50%;
+        display: inline-block;
+        position: relative;
+    }
+    .status-pulse::after {
+        content: '';
+        position: absolute;
+        width: 100%; height: 100%;
+        top: 0; left: 0;
+        background-color: #10b981;
+        border-radius: 50%;
+        animation: statusPulseRing 2s infinite ease-in-out;
+    }
+    @keyframes statusPulseRing {
+        0% { transform: scale(1); opacity: 0.75; }
+        100% { transform: scale(3); opacity: 0; }
+    }
+
+    /* Custom Minimalistic Progress Bars */
+    .progress {
+        background-color: #f1f5f9;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    .progress-bar {
+        border-radius: 8px;
+        transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Icon Accent Containers */
+    .metric-icon-box {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.15rem;
+    }
+
+    /* Custom Button Overrides */
+    .btn-upgrade {
+        background-color: var(--bf-primary, #20c997);
+        color: #ffffff !important;
+        border: none;
+        border-radius: 12px;
+        padding: 10px 20px;
+        font-weight: 600;
+        transition: all 0.2s ease;
+    }
+    .btn-upgrade:hover {
+        background-color: color-mix(in srgb, var(--bf-primary, #20c997) 85%, #000000);
+        box-shadow: 0 4px 12px rgba(32, 201, 151, 0.2);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4" style="max-width: 1300px;">
+
+    <!-- Dashboard Top Action Header Area -->
+    <div class="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center gap-3 mb-4 pb-2">
+        <div>
+            <h2 class="fw-bold mb-1" style="color: #0f172a; letter-spacing: -0.02em;">Billing Dashboard</h2>
+            <p class="text-muted mb-0" style="font-size: 0.95rem;">Monitor your subscription parameters and system usage logs dynamically.</p>
+        </div>
+        <a href="{% url 'pricing' %}" class="btn btn-upgrade d-inline-flex align-items-center gap-2 shadow-sm">
+            <i class="bi bi-arrow-up-circle" style="font-size: 1rem;"></i>
+            <span>Upgrade Plan</span>
+        </a>
+    </div>
+
+    <!-- Layout Section: Current Active Plan Overview -->
+    <div class="card billing-card border-0 p-2 mb-4">
+        <div class="card-body p-4">
+            <div class="row align-items-center g-3">
+                <div class="col-12 col-md-8">
+                    <span class="text-uppercase fw-bold tracking-wider mb-2 d-block" style="font-size: 0.72rem; color: #64748b; letter-spacing: 0.05em;">
+                        Current Operational Tier
+                    </span>
+                    <h3 class="fw-bold mb-2" style="color: #0f172a; font-size: 1.65rem;">
+                        {{ subscription.plan.name }}
+                    </h3>
+                    <div class="fw-semibold" style="color: #475569; font-size: 1.05rem;">
+                        ₹{{ subscription.plan.monthly_price }} <span class="text-muted fw-normal" style="font-size: 0.88rem;">/ month</span>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4 text-md-end">
+                    <span class="d-inline-flex align-items-center gap-2 px-3 py-1.5 rounded-pill fw-semibold" 
+                          style="background-color: #ecfdf5; color: #065f46; font-size: 0.85rem; border: 1px solid #a7f3d0;">
+                        <span class="status-pulse"></span>
+                        Active Subscription
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Layout Section: Key Top Usage Numeric Summary Blocks -->
+    <div class="row g-4 mb-4">
+        <!-- Bots Summary -->
+        <div class="col-12 col-md-4">
+            <div class="card billing-card border-0 h-100">
+                <div class="card-body p-4 d-flex align-items-center gap-3">
+                    <div class="metric-icon-box" style="background-color: #eff6ff; color: #2563eb;">
+                        <i class="bi bi-robot"></i>
+                    </div>
+                    <div>
+                        <span class="text-uppercase fw-bold text-muted" style="font-size: 0.72rem; letter-spacing: 0.03em;">Bots Active</span>
+                        <h3 class="fw-bold m-0 mt-1" style="color: #0f172a; font-size: 1.45rem;">
+                            {{ bots_used }} <span class="text-muted fw-normal" style="font-size: 1rem;">/ {{ subscription.plan.max_bots }}</span>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Pages Summary -->
+        <div class="col-12 col-md-4">
+            <div class="card billing-card border-0 h-100">
+                <div class="card-body p-4 d-flex align-items-center gap-3">
+                    <div class="metric-icon-box" style="background-color: #ecfdf5; color: #059669;">
+                        <i class="bi bi-file-earmark-text"></i>
+                    </div>
+                    <div>
+                        <span class="text-uppercase fw-bold text-muted" style="font-size: 0.72rem; letter-spacing: 0.03em;">Pages Indexed</span>
+                        <h3 class="fw-bold m-0 mt-1" style="color: #0f172a; font-size: 1.45rem;">
+                            {{ pages_used }} <span class="text-muted fw-normal" style="font-size: 1rem;">/ {{ subscription.plan.max_pages }}</span>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Messages Summary -->
+        <div class="col-12 col-md-4">
+            <div class="card billing-card border-0 h-100">
+                <div class="card-body p-4 d-flex align-items-center gap-3">
+                    <div class="metric-icon-box" style="background-color: #fdf2f8; color: #db2777;">
+                        <i class="bi bi-chat-left-dots"></i>
+                    </div>
+                    <div>
+                        <span class="text-uppercase fw-bold text-muted" style="font-size: 0.72rem; letter-spacing: 0.03em;">Messages Processed</span>
+                        <h3 class="fw-bold m-0 mt-1" style="color: #0f172a; font-size: 1.45rem;">
+                            {{ messages_used }} <span class="text-muted fw-normal" style="font-size: 1rem;">/ {{ subscription.plan.max_messages }}</span>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Layout Section: Dynamic Resource Allocations Grid Base -->
+    <div class="row g-4">
+        
+        <!-- Detailed Usage Overviews (Progress Trackers) -->
+        <div class="col-12 col-lg-7 col-xl-8">
+            <div class="card billing-card border-0 h-100">
+                <div class="card-body p-4 p-md-5">
+                    <h5 class="fw-bold mb-4" style="color: #0f172a; font-size: 1.1rem;">Resource Allocations</h5>
+                    
+                    <!-- Progress Item: Bots -->
+                    <div class="mb-4">
+                        <div class="d-flex justify-content-between align-items-center mb-2" style="font-size: 0.9rem; font-weight: 500;">
+                            <span style="color: #334155;">Active Chatbots</span>
+                            <span class="fw-bold" style="color: #2563eb;">{{ bots_percentage }}%</span>
+                        </div>
+                        <div class="progress" style="height: 8px;">
+                            <div class="progress-bar bg-primary" role="progressbar" style="width: {{ bots_percentage }}%;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Progress Item: Pages -->
+                    <div class="mb-4">
+                        <div class="d-flex justify-content-between align-items-center mb-2" style="font-size: 0.9rem; font-weight: 500;">
+                            <span style="color: #334155;">Scanned Site Directory Pages</span>
+                            <span class="fw-bold" style="color: #059669;">{{ pages_percentage }}%</span>
+                        </div>
+                        <div class="progress" style="height: 8px;">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: {{ pages_percentage }}%;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Progress Item: Messages -->
+                    <div class="mb-0">
+                        <div class="d-flex justify-content-between align-items-center mb-2" style="font-size: 0.9rem; font-weight: 500;">
+                            <span style="color: #334155;">Inbound Message Pipeline</span>
+                            <span class="fw-bold" style="color: #db2777;">{{ messages_percentage }}%</span>
+                        </div>
+                        <div class="progress" style="height: 8px;">
+                            <div class="progress-bar bg-info" role="progressbar" style="width: {{ messages_percentage }}%; background-color: #db2777 !important;"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Tier Included Features Card -->
+        <div class="col-12 col-lg-5 col-xl-4">
+            <div class="card billing-card border-0 h-100">
+                <div class="card-body p-4 p-md-5">
+                    <h5 class="fw-bold mb-4" style="color: #0f172a; font-size: 1.1rem;">Included Features</h5>
+                    
+                    <ul class="list-group list-group-flush" style="font-size: 0.92rem;">
+                        <li class="list-group-item d-flex justify-content-between align-items-center px-0 py-2.5" style="border-color: #f1f5f9;">
+                            <span class="text-muted">Max Active Bots</span>
+                            <span class="badge bg-slate fw-bold text-dark" style="background-color: #f1f5f9;">{{ subscription.plan.max_bots }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center px-0 py-2.5" style="border-color: #f1f5f9;">
+                            <span class="text-muted">Max Allowed Pages</span>
+                            <span class="badge bg-slate fw-bold text-dark" style="background-color: #f1f5f9;">{{ subscription.plan.max_pages }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center px-0 py-2.5" style="border-color: #f1f5f9;">
+                            <span class="text-muted">Monthly Message Cap</span>
+                            <span class="badge bg-slate fw-bold text-dark" style="background-color: #f1f5f9;">{{ subscription.plan.max_messages }}</span>
+                        </li>
+                        <li class="list-group-item px-0 py-2.5 d-flex align-items-center gap-2" style="border-color: #f1f5f9; color: #334155;">
+                            <i class="bi bi-check2-circle text-success" style="font-size: 1.05rem;"></i>
+                            <span>Comprehensive AI Model Access</span>
+                        </li>
+                        <li class="list-group-item px-0 py-2.5 d-flex align-items-center gap-2" style="border: none; color: #334155;">
+                            <i class="bi bi-check2-circle text-success" style="font-size: 1.05rem;"></i>
+                            <span>Production Script Injection Widget</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}
+
+{% block internal_js %}
+<script>
+    // System ready hooks can expand here for metrics polling if required
+</script>
+{% endblock %}

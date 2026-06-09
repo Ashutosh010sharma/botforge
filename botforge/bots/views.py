@@ -15,6 +15,7 @@ from datetime import timedelta
 from django.utils import timezone
 import json
 from accounts.models import Company
+from billing.models import Subscription
 
 
 # Create your views here.
@@ -45,10 +46,72 @@ def bot_list(request):
     )
 
 
-@login_required
 def bot_create(request):
 
     try:
+
+        company = Company.objects.filter(
+            user=request.user,
+            is_active=True
+        ).first()
+
+        if not company:
+
+           return JsonResponse({
+
+                "status": False,
+
+                "code": "COMPANY_REQUIRED",
+
+                "message":
+                "Please setup your company before creating a bot."
+
+            })
+
+        subscription = Subscription.objects.filter(
+
+            company=company,
+
+            is_active=True
+
+        ).select_related(
+            "plan"
+        ).first()
+
+        if not subscription:
+
+           return JsonResponse({
+
+                "status": False,
+
+                "code": "PLAN_REQUIRED",
+
+                "message":
+                "Please select a plan before creating a bot."
+
+            })
+
+        current_bots = Chatbot.objects.filter(
+
+            company=company,
+
+            is_deleted=False
+
+        ).count()
+
+        if current_bots >= subscription.plan.max_bots:
+
+           return JsonResponse({
+
+                "status": False,
+
+                "code": "BOT_LIMIT",
+
+                "message":
+                f"Your {subscription.plan.name} plan allows only "
+                f"{subscription.plan.max_bots} bot(s). Please upgrade your plan."
+
+            })
 
         if request.method == "POST":
 
@@ -56,12 +119,13 @@ def bot_create(request):
 
                 Chatbot.objects.create(
 
-                    company=request.user.company,
+                    company=company,
 
                     name=request.POST.get(
                         "name"
                     ),
-                     website_url=request.POST.get(
+
+                    website_url=request.POST.get(
                         "website_url"
                     ),
 
@@ -76,6 +140,7 @@ def bot_create(request):
                     welcome_message=request.POST.get(
                         "welcome_message"
                     )
+
                 )
 
             return JsonResponse({
@@ -84,6 +149,7 @@ def bot_create(request):
 
                 "message":
                 "Bot created successfully."
+
             })
 
         return render(
@@ -91,6 +157,7 @@ def bot_create(request):
             request,
 
             "bots/create.html"
+
         )
 
     except Exception as e:
@@ -100,6 +167,7 @@ def bot_create(request):
             "status": False,
 
             "message": str(e)
+
         }, status=400)
         
 @login_required

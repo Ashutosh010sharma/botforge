@@ -86,9 +86,16 @@ My Assistants | AI Workspace Dashboard
             <h2 class="dashboard-title mb-1">My Virtual Assistants</h2>
             <p class="text-muted small mb-0">Deploy, manage, and configure your active context-trained workspace instances.</p>
         </div>
-        <a href="{% url 'bot_create' %}" class="btn btn-primary d-flex align-items-center gap-2 px-4 py-2.5 fw-semibold shadow-sm" style="border-radius: 12px;">
-            <i class="bi bi-plus-lg fs-5"></i> Create Bot
-        </a>
+        <a href="javascript:void(0)"
+   id="createBotBtn"
+   class="btn btn-primary d-flex align-items-center gap-2 px-4 py-2.5 fw-semibold shadow-sm"
+   style="border-radius: 12px;">
+
+    <i class="bi bi-plus-lg fs-5"></i>
+
+    Create Bot
+
+</a>
     </div>
 
    <div class="row g-4">
@@ -189,15 +196,11 @@ My Assistants | AI Workspace Dashboard
                         <div class="d-flex align-items-center gap-1.5">
                             
                             
-                            {% if bot.bot_type|lower == 'school' or bot.bot_type|lower == 'education' %}
-                                <a href="{% url 'school_demo_bot' %}" class="btn btn-primary d-inline-flex align-items-center gap-1 px-3 py-2 fw-semibold" style="border-radius: 10px; font-size: 0.85rem; box-shadow: 0 4px 12px rgba(13, 110, 253, 0.15);">
-                                    Workspace <i class="bi bi-arrow-right-short fs-5"></i>
-                                </a>
-                            {% else %}
+                           
                                 <a href="{% url 'bot_workspace' bot.id %}" class="btn btn-dark d-inline-flex align-items-center gap-1 px-2 py-1 fw-semibold" style="border-radius: 10px; font-size: 0.85rem;">
                                     Workspace <i class="bi bi-arrow-right-short fs-5"></i>
                                 </a>
-                            {% endif %}
+                         
                         </div>
 
                     </div>
@@ -226,6 +229,98 @@ My Assistants | AI Workspace Dashboard
 
 {% block internal_js %}
 <script>
-    // Component animations or filter initializers can be attached here
+
+$("#createBotBtn").click(function(){
+
+    $.ajax({
+
+        url: "{% url 'bot_create' %}",
+
+        type: "GET",
+
+        success: function(response){
+
+            if(response.status === false){
+
+                let redirectUrl = "";
+
+                if(response.code === "COMPANY_REQUIRED"){
+
+                    redirectUrl =
+                    "{% url 'company_setup' %}";
+
+                }
+
+                if(response.code === "PLAN_REQUIRED"){
+
+                    redirectUrl =
+                    "{% url 'pricing' %}";
+
+                }
+
+                if(response.code === "BOT_LIMIT"){
+
+                    redirectUrl =
+                    "{% url 'pricing' %}";
+                }
+
+                Swal.fire({
+
+                    icon: "warning",
+
+                    title: "Action Required",
+
+                    text: response.message,
+
+                    showCancelButton: true,
+
+                    confirmButtonText: "Continue",
+
+                    cancelButtonText: "Cancel"
+
+                }).then((result)=>{
+
+                    if(
+                        result.isConfirmed &&
+                        redirectUrl
+                    ){
+
+                        window.location.href =
+                        redirectUrl;
+
+                    }
+
+                });
+
+                return;
+            }
+
+            window.location.href =
+            "{% url 'bot_create' %}";
+
+        },
+
+        error: function(xhr){
+
+            let response =
+            xhr.responseJSON;
+
+            Swal.fire({
+
+                icon: "error",
+
+                title: "Error",
+
+                text: response?.message ||
+                "Something went wrong."
+
+            });
+
+        }
+
+    });
+
+});
+
 </script>
 {% endblock %}

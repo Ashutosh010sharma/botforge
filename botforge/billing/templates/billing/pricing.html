@@ -1,0 +1,438 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Pricing Plans - BotForge
+{% endblock %}
+
+{% block internal_css %}
+<style>
+    /* Premium Smooth Transition Presets */
+    :root {
+        --card-bg-hover: linear-gradient(135deg, #ffffff 0%, color-mix(in srgb, var(--bf-primary, #20c997) 4%, #ffffff) 100%);
+    }
+
+    .pricing-card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 24px;
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+        transition: 
+            transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+            border-color 0.4s ease,
+            box-shadow 0.4s ease,
+            background 0.4s ease;
+    }
+
+    /* Elegant Hover Interactions */
+    .pricing-card:hover {
+        transform: translateY(-8px);
+        border-color: var(--bf-primary, #20c997);
+        background: var(--card-bg-hover);
+        box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
+    }
+
+    /* Subtle Background Glow Ring Effect on Hover */
+    .pricing-card::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: radial-gradient(800px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(32, 201, 151, 0.06), transparent 40%);
+        z-index: -1;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+    }
+    .pricing-card:hover::before {
+        opacity: 1;
+    }
+
+    /* Scaling Header Badges */
+    .plan-badge {
+        font-size: 0.75rem;
+        font-weight: 700;
+        padding: 4px 12px;
+        border-radius: 20px;
+        background: #f1f5f9;
+        color: #475569;
+        transition: all 0.3s ease;
+    }
+    .pricing-card:hover .plan-badge {
+        background: var(--bf-primary, #20c997);
+        color: #ffffff;
+        transform: scale(1.05);
+    }
+
+    /* Check Icons Animation Bump */
+    .feature-icon-wrapper {
+        width: 24px;
+        height: 24px;
+        background-color: color-mix(in srgb, var(--bf-primary, #20c997) 10%, transparent);
+        color: var(--bf-primary, #20c997);
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .pricing-card:hover .feature-icon-wrapper {
+        transform: scale(1.15) rotate(5deg);
+    }
+
+    /* Premium Dynamic Action Button styling */
+    .btn-pricing-action {
+        background-color: #0f172a;
+        color: #ffffff !important;
+        border: none;
+        border-radius: 14px;
+        padding: 14px 24px;
+        font-weight: 600;
+        font-size: 0.95rem;
+        transition: all 0.3s ease;
+    }
+    .pricing-card:hover .btn-pricing-action {
+        background-color: var(--bf-primary, #20c997);
+        box-shadow: 0 8px 20px rgba(32, 201, 151, 0.3);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+
+    <!-- Simple, Clean Section Header -->
+    <div class="text-center mb-5 max-w-xl mx-auto">
+        <h1 class="fw-bold mb-2" style="color: #0f172a; font-size: 2.5rem; letter-spacing: -0.03em;">
+            Simple, Fair Pricing
+        </h1>
+        <p class="text-muted" style="font-size: 1.05rem;">
+            Choose the perfect container capacity for your business scale.
+        </p>
+    </div>
+
+    <!-- Responsive Pricing Grid Row -->
+    <div class="row g-4 justify-content-center align-items-stretch">
+        {% for plan in plans %}
+        <div class="col-12 col-md-6 col-lg-4 d-flex">
+            <div class="card pricing-card w-100 p-4 p-xl-5 d-flex flex-column justify-content-between">
+                
+                <div>
+                    <!-- Card Top Layout Info Badge row -->
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <h3 class="fw-bold m-0" style="color: #0f172a; font-size: 1.35rem;">
+                            {{ plan.name }}
+                        </h3>
+                        {% if subscription and subscription.plan.id == plan.id %}
+
+                        <span class="badge bg-success">
+                            Current Plan
+                        </span>
+
+                        {% else %}
+
+                        <span class="plan-badge">
+                            Available
+                        </span>
+
+                        {% endif %}
+                    </div>
+
+                    <!-- Price Counter -->
+                    <div class="d-flex align-items-baseline mb-2">
+                        <span class="fw-bold" style="color: #0f172a; font-size: 3rem; letter-spacing: -0.03em;">
+                            ₹{{ plan.monthly_price }}
+                        </span>
+                        <span class="text-muted ms-2" style="font-size: 0.95rem; font-weight: 500;">
+                            / month
+                        </span>
+                    </div>
+
+                    <hr style="border-top: 1px dashed #e2e8f0; margin: 24px 0;">
+
+                    <!-- Checked Features Loop Layout Area -->
+                    <ul class="list-unstyled d-flex flex-column gap-3 mb-5" style="font-size: 0.95rem; color: #475569;">
+                        
+                        <li class="d-flex align-items-center gap-3">
+                            <span class="feature-icon-wrapper">
+                                <i class="bi bi-check-lg" style="font-size: 0.8rem; stroke-width: 2;"></i>
+                            </span>
+                            <span><strong>{{ plan.max_bots }}</strong> Active AI Chatbots</span>
+                        </li>
+
+                        <li class="d-flex align-items-center gap-3">
+                            <span class="feature-icon-wrapper">
+                                <i class="bi bi-check-lg" style="font-size: 0.8rem; stroke-width: 2;"></i>
+                            </span>
+                            <span><strong>{{ plan.max_pages }}</strong> Scanned Website Pages</span>
+                        </li>
+
+                        <li class="d-flex align-items-center gap-3">
+                            <span class="feature-icon-wrapper">
+                                <i class="bi bi-check-lg" style="font-size: 0.8rem; stroke-width: 2;"></i>
+                            </span>
+                            <span><strong>{{ plan.max_messages }}</strong> Messages Included</span>
+                        </li>
+
+                        <li class="d-flex align-items-center gap-3">
+                            <span class="feature-icon-wrapper">
+                                <i class="bi bi-check-lg" style="font-size: 0.8rem; stroke-width: 2;"></i>
+                            </span>
+                            <span class="text-muted">Instant Script Widget Embed</span>
+                        </li>
+
+                    </ul>
+                </div>
+
+                <!-- Submit Selection Button Layout Link -->
+                <div>
+
+  {% if not request.user.is_authenticated %}
+
+    <a href="{% url 'login' %}?next={{ request.path }}"
+   class="btn btn-pricing-action w-100">
+
+    Get Started
+
+</a>
+
+{% elif subscription %}
+
+    {% if subscription.plan.id == plan.id %}
+
+        <div class="d-flex gap-2">
+
+    <button
+        class="btn btn-success flex-grow-1"
+        disabled>
+
+        Current Plan
+
+    </button>
+
+    <a href="{% url 'billing_dashboard' %}"
+       class="btn btn-outline-primary">
+
+       <i class="bi bi-speedometer2"></i>
+
+    </a>
+
+</div>
+
+    {% elif plan.monthly_price > subscription.plan.monthly_price %}
+
+        <button
+            class="btn btn-pricing-action w-100 choosePlanBtn"
+            data-plan-id="{{ plan.id }}"
+            data-plan-name="{{ plan.name }}">
+
+            Upgrade Plan
+
+        </button>
+
+    {% else %}
+
+        <button
+            class="btn btn-outline-secondary w-100 choosePlanBtn"
+            data-plan-id="{{ plan.id }}"
+            data-plan-name="{{ plan.name }}">
+
+            Downgrade Plan
+
+        </button>
+
+    {% endif %}
+
+{% else %}
+
+    <button
+        class="btn btn-pricing-action w-100 choosePlanBtn"
+        data-plan-id="{{ plan.id }}"
+        data-plan-name="{{ plan.name }}">
+
+        Choose Plan
+
+    </button>
+
+{% endif %}
+
+</div>
+
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+{% endblock %}
+
+{% block internal_js %}
+<script>
+// Dynamic Hover Spot Tracking for Luxury Background Radial Light Effects
+document.querySelectorAll('.pricing-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
+    });
+});
+
+</script>
+<script>
+
+$(document).on(
+
+    "click",
+
+    ".choosePlanBtn",
+
+    function(){
+
+        let planId = $(this).data(
+            "plan-id"
+        );
+
+        let planName = $(this).data(
+            "plan-name"
+        );
+
+        Swal.fire({
+
+            title: "Select Plan?",
+
+            text:
+            "Do you want to activate the " +
+            planName +
+            " plan?",
+
+            icon: "question",
+
+            showCancelButton: true,
+
+            confirmButtonText: "Continue",
+
+            cancelButtonText: "Cancel"
+
+        }).then((result)=>{
+
+            if(!result.isConfirmed){
+
+                return;
+
+            }
+
+            $.ajax({
+
+                url:
+                "{% url 'select_plan' %}",
+
+                type: "POST",
+
+                headers: {
+
+                    "X-CSRFToken":
+                    "{{ csrf_token }}"
+
+                },
+
+                data: {
+
+                    plan_id: planId
+
+                },
+
+                success: function(response){
+
+                    if(response.status){
+
+                        Swal.fire({
+
+                            icon: "success",
+
+                            title: "Success",
+
+                            text:
+                            response.message
+
+                        }).then(()=>{
+
+                            location.reload();
+
+                        });
+
+                        return;
+                    }
+
+                    let redirectUrl = "";
+
+                    if(
+                        response.code ===
+                        "COMPANY_REQUIRED"
+                    ){
+
+                        redirectUrl =
+                        "{% url 'company_setup' %}";
+                    }
+
+                    Swal.fire({
+
+                        icon: "warning",
+
+                        title: "Action Required",
+
+                        text:
+                        response.message,
+
+                        showCancelButton: !!redirectUrl,
+
+                        confirmButtonText:
+                        redirectUrl
+                        ? "Continue"
+                        : "OK"
+
+                    }).then((result)=>{
+
+                        if(
+
+                            result.isConfirmed &&
+
+                            redirectUrl
+
+                        ){
+
+                            window.location.href =
+                            redirectUrl;
+
+                        }
+
+                    });
+
+                },
+
+                error: function(){
+
+                    Swal.fire({
+
+                        icon: "error",
+
+                        title: "Error",
+
+                        text:
+                        "Something went wrong."
+
+                    });
+
+                }
+
+            });
+
+        });
+
+    }
+
+);
+
+</script>
+{% endblock %}

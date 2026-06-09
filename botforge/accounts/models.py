@@ -29,7 +29,8 @@ class Company(models.Model):
         null=True
     )
 
-    logo_url = models.URLField(
+    logo=models.ImageField(
+        upload_to="company_logos/",
         blank=True,
         null=True
     )

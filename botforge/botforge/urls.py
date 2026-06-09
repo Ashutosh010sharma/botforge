@@ -22,5 +22,7 @@ urlpatterns = [
     path('accounts/',include('accounts.urls')),
     path('demo/',include('demo.urls')),
     path('',include('core.urls')),
-    path('bots/',include('bots.urls'))
+    path('bots/',include('bots.urls')),
+    path("billing/",include("billing.urls")
+),
 ]

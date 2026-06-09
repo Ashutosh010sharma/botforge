@@ -1,0 +1,221 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Configure Workspace | BotForge
+{% endblock %}
+
+{% block internal_css %}
+<style>
+    /* Premium Setup Form Styling Configuration */
+    .setup-card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 24px;
+        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.02);
+    }
+
+    .form-label {
+        font-weight: 600;
+        color: #334155;
+        font-size: 0.88rem;
+        margin-bottom: 6px;
+    }
+
+    /* Customized Modern Input Borders */
+    .form-control, .form-select {
+        border-radius: 12px;
+        border: 1px solid #cbd5e1;
+        padding: 10px 16px;
+        font-size: 0.95rem;
+        color: #0f172a;
+        background-color: #f8fafc;
+        transition: all 0.2s ease;
+    }
+
+    .form-control:focus, .form-select:focus {
+        background-color: #ffffff;
+        border-color: var(--bf-primary, #20c997);
+        box-shadow: 0 0 0 4px color-mix(in srgb, var(--bf-primary, #20c997) 15%, transparent);
+        outline: 0;
+    }
+
+    /* Interactive Dropzone Layer for Logos */
+    .custom-file-dropzone {
+        border: 2px dashed #cbd5e1;
+        border-radius: 14px;
+        padding: 20px;
+        text-align: center;
+        background-color: #f8fafc;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .custom-file-dropzone:hover {
+        border-color: var(--bf-primary, #20c997);
+        background-color: color-mix(in srgb, var(--bf-primary, #20c997) 2%, #ffffff);
+    }
+
+    /* Primary Form Action Button styling */
+    .btn-submit-workspace {
+        background-color: var(--bf-primary, #20c997);
+        color: #ffffff !important;
+        border: none;
+        border-radius: 12px;
+        padding: 12px 28px;
+        font-weight: 600;
+        transition: all 0.2s ease;
+    }
+
+    .btn-submit-workspace:hover {
+        background-color: color-mix(in srgb, var(--bf-primary, #20c997) 85%, #000000);
+        box-shadow: 0 4px 12px rgba(32, 201, 151, 0.2);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-9">
+
+            <!-- Back navigation context helper links -->
+            <div class="mb-4">
+                <a href="{% url 'dashboard' %}" class="text-decoration-none text-muted small d-inline-flex align-items-center gap-1 fw-medium">
+                    <i class="bi bi-arrow-left"></i> Back to Dashboard
+                </a>
+            </div>
+
+            <!-- Main Setup Container Card -->
+            <div class="card setup-card border-0 overflow-hidden">
+                <div class="card-body p-4 p-md-5">
+                    
+                    <!-- Header Segment -->
+                    <div class="mb-5">
+                        <div class="d-inline-flex align-items-center justify-content-center mb-3" 
+                             style="width: 48px; height: 48px; background-color: color-mix(in srgb, var(--bf-primary, #20c997) 10%, transparent); color: var(--bf-primary, #20c997); border-radius: 14px;">
+                            <i class="bi bi-building" style="font-size: 1.4rem;"></i>
+                        </div>
+                        <h2 class="fw-bold m-0" style="color: #0f172a; font-size: 1.75rem; letter-spacing: -0.02em;">
+                            Company Configuration
+                        </h2>
+                        <p class="text-muted m-0 mt-1" style="font-size: 0.95rem;">
+                            Provide your company details to anchor your AI assistant's context models.
+                        </p>
+                    </div>
+
+                    <!-- Dynamic Form Wrapper -->
+                    <form id="companySetupForm" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        <!-- Balanced Row 1: Two Columns -->
+                        <div class="row g-4 mb-4">
+                            <div class="col-12 col-md-6">
+                                <label class="form-label">Company Name <span class="text-danger">*</span></label>
+                                <input type="text" name="company_name" class="form-control" placeholder="e.g., Acme Corp" required>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <label class="form-label">Website URL <span class="text-danger">*</span></label>
+                                <input type="url" name="website_url" class="form-control" placeholder="https://example.com" required>
+                            </div>
+                        </div>
+
+                        <!-- Balanced Row 2: Two Columns -->
+                        <div class="row g-4 mb-4">
+                            <div class="col-12 col-md-6">
+                                <label class="form-label">Industry Sector</label>
+                                <input type="text" name="industry" class="form-control" placeholder="e.g., E-Commerce, Logistics">
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <label class="form-label">Headquarters Location</label>
+                                <input type="text" name="location" class="form-control" placeholder="e.g., Bangalore, India">
+                            </div>
+                        </div>
+
+                        <!-- Full Width File Dropzone Layout Area -->
+                        {% comment %} <div class="mb-4">
+                            <label class="form-label">Company Logo</label>
+                            <div class="custom-file-dropzone" onclick="document.getElementById('logoInput').click()">
+                                <i class="bi bi-cloud-arrow-up text-muted mb-2 d-block" style="font-size: 1.75rem; color: var(--bf-primary, #20c997) !important;"></i>
+                                <span class="d-block fw-semibold text-secondary small mb-1" id="dropzoneText">Click to upload brand asset</span>
+                                <span class="text-muted extra-small d-block" style="font-size: 0.75rem;">PNG, JPG up to 2MB</span>
+                                <input type="file" id="logoInput" name="logo" class="d-none" accept="image/*" onchange="updateFileName(this)">
+                            </div>
+                        </div> {% endcomment %}
+
+                        <!-- Textarea Field Block -->
+                        <div class="mb-5">
+                            <label class="form-label">Company Description / Context Foundation</label>
+                            <textarea name="description" rows="4" class="form-control" placeholder="Briefly summarize your core services or catalog profiles. This baseline summary directly empowers your custom bot interactions..."></textarea>
+                        </div>
+
+                        <!-- Submit Call-To-Action Operations Row -->
+                        <div class="d-flex align-items-center justify-content-end gap-3 pt-3 border-top" style="border-color: #e2e8f0 !important;">
+                            <button type="submit" class="btn btn-submit-workspace d-inline-flex align-items-center gap-2 shadow-sm">
+                                <span>Save & Initialize Workspace</span>
+                                <i class="bi bi-arrow-right-short" style="font-size: 1.2rem;"></i>
+                            </button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block internal_js %}
+<script>
+// Toggle UI feedback for the logo file selection box container
+function updateFileName(input) {
+    const filenameLabel = document.getElementById('dropzoneText');
+    if (input.files && input.files.length > 0) {
+        filenameLabel.textContent = `Selected Asset: ${input.files[0].name}`;
+        filenameLabel.style.color = 'var(--bf-primary, #20c997)';
+    } else {
+        filenameLabel.textContent = "Click to upload brand asset";
+        filenameLabel.style.color = '#64748b';
+    }
+}
+
+// Intercept submission pipeline to bind asynchronous loading status animations
+$("#companySetupForm").submit(function(e){
+    e.preventDefault();
+    let formData = new FormData(this);
+    let $submitBtn = $(this).find('button[type="submit"]');
+    
+    $submitBtn.prop('disabled', true).html('<span class="spinner-border spinner-border-sm me-2"></span>Saving Workspace...');
+
+    $.ajax({
+        url: "",
+        type: "POST",
+        data: formData,
+        processData: false,
+        contentType: false,
+        headers: { "X-CSRFToken": "{{ csrf_token }}" },
+        success: function(response){
+            if(response.status){
+                Swal.fire({
+                    icon: "success",
+                    title: "Workspace Initialized",
+                    text: response.message,
+                    confirmButtonText: "Go to Dashboard",
+                    confirmButtonColor: "#20c997"
+                }).then(() => {
+                    window.location.href = "{% url 'dashboard' %}";
+                });
+            } else {
+                $submitBtn.prop('disabled', false).html('<span>Save & Initialize Workspace</span> <i class="bi bi-arrow-right-short" style="font-size: 1.2rem;"></i>');
+                Swal.fire({ icon: "error", title: "Configuration Failed", text: response.message });
+            }
+        },
+        error: function(xhr){
+            $submitBtn.prop('disabled', false).html('<span>Save & Initialize Workspace</span> <i class="bi bi-arrow-right-short" style="font-size: 1.2rem;"></i>');
+            Swal.fire({ icon: "error", title: "System Error", text: "Something went wrong while initializing metadata templates." });
+        }
+    });
+});
+</script>
+{% endblock %}

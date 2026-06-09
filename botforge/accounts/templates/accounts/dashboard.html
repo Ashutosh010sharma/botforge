@@ -140,13 +140,59 @@ Home | BotForge
 <section class="hero-section">
     
     <div class="container text-center">
-        {% if company %}
-        <div class="mb-3">
-            <span class="company-badge small">
-                <i class="bi bi-building"></i>   Workspace: {{ company.name }}
-            </span>
+  {% if company %}
+    <!-- Active Premium Company Profile Badge / Banner Sub-Header -->
+    <div class="mb-4">
+        <span class="d-inline-flex align-items-center gap-2 px-3 py-1.5 rounded-pill fw-semibold shadow-sm" 
+              style="background-color: #ffffff; color: #0f172a; font-size: 0.85rem; border: 1px solid #e2e8f0;">
+            <i class="bi bi-building-check" style="color: var(--bf-primary, #20c997); font-size: 1rem;"></i>
+            Connected Workspace: <strong class="ms-1" style="color: var(--bf-primary, #20c997);">{{ company.company_name }}</strong>
+        </span>
+    </div>
+{% else %}
+    <!-- Modern Premium Setup Banner Component -->
+    <div class="position-relative overflow-hidden p-3 mb-3 d-flex flex-column flex-lg-row align-items-lg-center justify-content-between gap-4" 
+         style="background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%); border: 1px solid #e2e8f0; border-radius: 24px; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.03);">
+        
+        <!-- Luxury Dot-Grid Background Element Styling -->
+        <div class="position-absolute opacity-10" style="top: 0; right: 0; width: 150px; height: 100%; background-image: radial-gradient(#0f172a 1.5px, transparent 1.5px); background-size: 12px 12px; pointer-events: none;"></div>
+
+        <!-- Left Context Layout: Phrasing & Progress Tracker -->
+        <div class="d-flex align-items-start gap-3 position-relative" style="z-index: 1;">
+            {% comment %} <div class="d-inline-flex align-items-center justify-content-center flex-shrink-0" 
+                 style="width: 48px; height: 48px; background-color: color-mix(in srgb, var(--bf-primary, #20c997) 10%, transparent); color: var(--bf-primary, #20c997); border-radius: 14px;">
+                <i class="bi bi-sliders" style="font-size: 1.3rem;"></i>
+            </div> {% endcomment %}
+            
+            <div>
+                <!-- Step tracker status badge link -->
+                <span class="badge mb-2 px-2.5 py-1 text-uppercase fw-bold" 
+                      style="font-size: 0.7rem; background-color: #fef3c7; color: #d97706; letter-spacing: 0.05em; border-radius: 6px;">
+                    Step 1 of 2: Foundation
+                </span>
+                
+                <h4 class="fw-bold mb-1" style="color: #0f172a; font-size: 1.35rem; letter-spacing: -0.02em;">
+                    Create your chatbot by adding company details
+                </h4>
+                
+                <p class="text-muted m-0 small" style="font-size: 0.9rem; max-w-xl: 550px;">
+                    Before building an AI assistant, tell us a bit about your business. This helps your bot learn your goals and answer customer questions correctly.
+                </p>
+            </div>
         </div>
-         {% endif %}
+
+        <!-- Right Side Call-To-Action Layout Event Button link -->
+        <div class="flex-shrink-0 position-relative" style="z-index: 1;">
+            <a href="{% url 'company_setup' %}" 
+               class="btn d-inline-flex align-items-center gap-2 fw-semibold px-4 py-2.5 text-white shadow" 
+               style="background-color: var(--bf-primary, #20c997); border: none; border-radius: 12px; font-size: 0.95rem; transition: all 0.2s ease;">
+                <span>Start Setup</span>
+                <i class="bi bi-arrow-right" style="font-size: 1rem;"></i>
+            </a>
+        </div>
+
+    </div>
+{% endif %}
         <h1 class="hero-title mb-3">
             Forge Your AI Automations
         </h1>

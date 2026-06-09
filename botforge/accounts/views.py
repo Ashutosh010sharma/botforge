@@ -4,10 +4,14 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db import transaction
-
+from django.http import JsonResponse
 from .forms import CompanyRegisterForm
 from .models import Company
 from django.contrib.auth import logout
+from billing.models import (
+    Plan,
+    Subscription
+)
 
 
 def register_view(request):
@@ -147,20 +151,37 @@ def login_view(request):
 def dashboard(request):
 
     company = Company.objects.filter(
-        user=request.user,
-        
+        user=request.user
     ).first()
+
+    subscription = None
+
+    if company:
+
+        subscription = Subscription.objects.filter(
+
+            company=company,
+
+            is_active=True
+
+        ).select_related(
+            "plan"
+        ).first()
 
     context = {
 
-        "company": company
+        "company": company,
+
+        "subscription": subscription
 
     }
 
     return render(
 
         request,
+
         "accounts/dashboard.html",
+
         context
 
     )
@@ -186,3 +207,146 @@ def logout_view(request):
     return redirect(
         "login"
     )
+    
+@login_required
+
+def company_setup(request):
+
+    try:
+
+        company = Company.objects.filter(
+            user=request.user
+        ).first()
+
+        if company:
+
+            return JsonResponse({
+
+                "status": False,
+
+                "message": "Company already exists."
+
+            })
+
+        if request.method == "POST":
+
+            # logo_name = None
+
+            # if request.FILES.get("logo"):
+
+            #     logo = request.FILES.get(
+            #         "logo"
+            #     )
+
+            #     import time
+            #     import os
+
+            #     extension = os.path.splitext(
+            #         logo.name
+            #     )[1]
+
+            #     logo_name = (
+            #         f"company_{int(time.time())}"
+            #         f"{extension}"
+            #     )
+
+            #     upload_path = os.path.join(
+            #         "media",
+            #         "company_logos",
+            #         logo_name
+            #     )
+
+            #     os.makedirs(
+            #         os.path.dirname(
+            #             upload_path
+            #         ),
+            #         exist_ok=True
+            #     )
+
+            #     with open(
+            #         upload_path,
+            #         "wb+"
+            #     ) as destination:
+
+            #         for chunk in logo.chunks():
+
+            #             destination.write(
+            #                 chunk
+            #             )
+
+            company = Company.objects.create(
+
+                user=request.user,
+
+                company_name=request.POST.get(
+                    "company_name"
+                ),
+
+                website_url=request.POST.get(
+                    "website_url"
+                ),
+
+                industry=request.POST.get(
+                    "industry"
+                ),
+
+                location=request.POST.get(
+                    "location"
+                ),
+
+                description=request.POST.get(
+                    "description"
+                )
+
+                # logo_url=logo_name
+
+            )
+
+            free_plan = Plan.objects.filter(
+                slug="free",
+                is_active=True
+            ).first()
+
+            if free_plan:
+
+                Subscription.objects.get_or_create(
+
+                    company=company,
+
+                    defaults={
+
+                        "plan": free_plan,
+
+                        "is_active": True
+
+                    }
+
+                )
+
+            return JsonResponse({
+
+                "status": True,
+
+                "message": (
+                    "Company created successfully."
+                )
+
+            })
+
+        return render(
+
+            request,
+
+            "accounts/company_setup.html"
+
+        )
+
+    except Exception as e:
+
+        return JsonResponse({
+
+            "status": False,
+
+            "message": str(e)
+
+        })
