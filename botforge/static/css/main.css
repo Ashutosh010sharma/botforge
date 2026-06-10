@@ -1,7 +1,37 @@
 /* Global styles */
+ @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap');
+
+    /* ── Design Tokens ─────────────────────────────────────────────
+       Background: #c1e7a7cb  (sage green, semi-transparent)
+       Dark surface: #1a3a2a  (deep forest)
+       Card bg:     #ffffffee (warm white, slightly transparent)
+       Accent:      #2d6a4f  (emerald)
+       Accent-lite: #52b788  (mid green)
+       Text-dark:   #0f2418  (near-black green)
+       Text-muted:  #4a7c5e  (muted forest)
+    ───────────────────────────────────────────────────────────────── */
+
+    :root {
+        --forest:       #1a3a2a;
+        --forest-deep:  #0f2418;
+        --emerald:      #2d6a4f;
+        --mint:         #52b788;
+        --card-bg:      rgba(255, 255, 255, 0.88);
+        --card-border:  rgba(45, 106, 79, 0.14);
+        --text-dark:    #0f2418;
+        --text-muted:   #4a7c5e;
+        --white:        #ffffff;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+
 
 body{
     background-color:#c1e7a7cb;
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    color: var(--text-dark);
 }
 html{
     scroll-behavior:smooth;

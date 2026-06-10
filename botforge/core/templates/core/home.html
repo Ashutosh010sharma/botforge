@@ -1,208 +1,1025 @@
 {% extends 'base.html' %}
 
 {% block title %}
-BotForge | Build AI Chatbots For Your Business
+BotForge - Build AI Assistants Trained On Your Business Knowledge
 {% endblock %}
 
 {% block internal_css %}
-<!-- Bootstrap Icons CDN for clean visual graphics -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
 <style>
-    body {
-        background-color: #fbfbfd;
-        color: #1e293b;
+   
+    /* ── Typography ──────────────────────────────────────────────── */
+    .sora { font-family: 'Sora', sans-serif; }
+
+    /* ── Eyebrow Labels ──────────────────────────────────────────── */
+    .eyebrow {
+        display: inline-block;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+        color: var(--emerald);
+        background: rgba(45,106,79,0.1);
+        border: 1px solid rgba(45,106,79,0.22);
+        border-radius: 100px;
+        padding: 5px 14px;
+        margin-bottom: 18px;
+    }
+    .eyebrow.light {
+        color: var(--mint);
+        background: rgba(82,183,136,0.12);
+        border-color: rgba(82,183,136,0.25);
     }
 
-    /* Elegant Radial-Gradient Hero Background */
-    .hero-container {
-        background: radial-gradient(circle at 80% 20%, rgba(13, 110, 253, 0.08) 0%, rgba(255, 255, 255, 0) 50%),
-                    radial-gradient(circle at 10% 80%, rgba(111, 66, 193, 0.06) 0%, rgba(255, 255, 255, 0) 50%);
-        padding: 6rem 0 5rem 0;
+    /* ── Section shared ──────────────────────────────────────────── */
+    .sec-title {
+        font-family: 'Sora', sans-serif;
+        font-size: clamp(1.75rem, 3vw, 2.45rem);
+        font-weight: 800;
+        letter-spacing: -0.035em;
+        line-height: 1.15;
+        color: var(--text-dark);
+        margin-bottom: 12px;
+    }
+    .sec-title.light { color: #fff; }
+    .sec-sub {
+        font-size: 1rem;
+        color: var(--text-muted);
+        font-weight: 500;
+        line-height: 1.6;
+    }
+    .sec-sub.light { color: rgba(255,255,255,0.55); }
+
+    /* ── Wave SVG dividers ───────────────────────────────────────── */
+    .wave { line-height: 0; overflow: hidden; display: block; }
+    .wave svg { display: block; width: 100%; }
+
+    /* ══════════════════════════════════════════════════════════════
+       HERO
+    ══════════════════════════════════════════════════════════════ */
+    .hero {
+        padding: 80px 0 56px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* soft white spotlight so headline reads over the green bg */
+    .hero::before {
+        content: '';
+        position: absolute;
+        top: -100px; left: 50%;
+        transform: translateX(-50%);
+        width: 820px; height: 620px;
+        background: radial-gradient(ellipse at center,
+            rgba(255,255,255,0.55) 0%,
+            transparent 68%);
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    .hero > .container { position: relative; z-index: 1; }
+
+    .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        background: var(--forest);
+        color: var(--mint);
+        border: 1px solid rgba(82,183,136,0.25);
+        border-radius: 100px;
+        padding: 6px 16px;
+        font-size: 0.78rem;
+        font-weight: 600;
+        letter-spacing: 0.03em;
+        margin-bottom: 30px;
     }
 
     .hero-title {
-        font-size: 3.5rem;
+        font-family: 'Sora', sans-serif;
+        font-size: clamp(2.4rem, 5.5vw, 4rem);
         font-weight: 800;
-        letter-spacing: -1.5px;
-        line-height: 1.15;
-        background: linear-gradient(135deg, #0f172a 30%, #2563eb 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+        line-height: 1.08;
+        letter-spacing: -0.045em;
+        color: var(--forest-deep);
+        max-width: 820px;
+        margin: 0 auto 24px;
     }
 
-    .hero-lead {
-        font-size: 1.25rem;
-        color: #64748b;
-        max-width: 650px;
-        margin: 0 auto;
+    /* The signature element: "Business Knowledge" in a forest-green
+       filled pill — one bold visual anchor in an otherwise airy hero */
+    .hero-title .pill-accent {
+        display: inline-block;
+        background: var(--forest);
+        color: var(--mint);
+        padding: 4px 20px 8px;
+        border-radius: 14px;
+        line-height: 1.2;
     }
 
-    /* Premium Button Interactive States */
-    .btn-premium-primary {
-        background-color: #0d6efd;
-        color: #ffffff;
-        font-weight: 600;
-        padding: 0.85rem 2rem;
-        border-radius: 12px;
+    .hero-sub {
+        font-size: 1.1rem;
+        line-height: 1.7;
+        color: var(--text-muted);
+        font-weight: 500;
+        max-width: 580px;
+        margin: 0 auto 40px;
+    }
+
+    /* ── Hero Buttons ────────────────────────────────────────────── */
+    .btn-forest {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--forest);
+        color: #fff !important;
+        font-family: 'Sora', sans-serif;
+        font-weight: 700;
+        font-size: 0.9rem;
+        padding: 13px 26px;
+        border-radius: 10px;
         border: none;
-        transition: all 0.25s ease;
+        text-decoration: none;
+        box-shadow: 0 6px 24px rgba(15,36,24,0.25);
+        transition: all 0.22s ease;
+        letter-spacing: 0.01em;
     }
-    .btn-premium-primary:hover {
-        background-color: #0b5ed7;
-        color: #ffffff;
+    .btn-forest:hover {
+        background: var(--forest-deep);
         transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(13, 110, 253, 0.25);
+        box-shadow: 0 10px 32px rgba(15,36,24,0.32);
+        color: #fff !important;
     }
 
-    .btn-premium-outline {
-        color: #1e293b;
-        background-color: transparent;
+    .btn-ghost {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(255,255,255,0.85);
+        backdrop-filter: blur(6px);
+        color: var(--forest) !important;
+        font-family: 'Sora', sans-serif;
+        font-weight: 700;
+        font-size: 0.9rem;
+        padding: 13px 26px;
+        border-radius: 10px;
+        border: 1.5px solid rgba(45,106,79,0.2);
+        text-decoration: none;
+        transition: all 0.22s ease;
+    }
+    .btn-ghost:hover {
+        background: #fff;
+        border-color: var(--emerald);
+        transform: translateY(-2px);
+        color: var(--forest) !important;
+    }
+
+    /* ── Stats Bar ───────────────────────────────────────────────── */
+    .stats-bar {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0;
+        margin-top: 60px;
+        background: rgba(255,255,255,0.88);
+        border: 1px solid rgba(45,106,79,0.12);
+        border-radius: 18px;
+        max-width: 720px;
+        margin-left: auto;
+        margin-right: auto;
+        overflow: hidden;
+        box-shadow: 0 8px 40px rgba(15,36,24,0.08);
+    }
+    .stat-cell {
+        flex: 1;
+        min-width: 140px;
+        padding: 22px 16px;
+        text-align: center;
+        border-right: 1px solid rgba(45,106,79,0.09);
+    }
+    .stat-cell:last-child { border-right: none; }
+    .stat-val {
+        font-family: 'Sora', sans-serif;
+        font-size: 1.75rem;
+        font-weight: 800;
+        color: var(--emerald);
+        line-height: 1;
+        letter-spacing: -0.04em;
+        margin-bottom: 4px;
+    }
+    .stat-lbl {
+        font-size: 0.7rem;
         font-weight: 600;
-        padding: 0.85rem 2rem;
-        border-radius: 12px;
-        border: 2px solid #e2e8f0;
-        transition: all 0.25s ease;
-    }
-    .btn-premium-outline:hover {
-        background-color: #f8fafc;
-        border-color: #cbd5e1;
-        color: #0f172a;
-        transform: translateY(-2px);
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
     }
 
-    /* Sleek Modern Feature Cards */
-    .feature-card {
-        border: 1px solid rgba(226, 232, 240, 0.8);
-        border-radius: 24px;
-        background: #ffffff;
-        padding: 2.5rem 2rem;
+    /* ══════════════════════════════════════════════════════════════
+       FEATURES
+    ══════════════════════════════════════════════════════════════ */
+    .features-sec {
+        padding: 80px 0;
+    }
+
+    .feat-card {
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        border-radius: 20px;
+        padding: 30px 26px;
         height: 100%;
-        transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+        transition: transform 0.28s cubic-bezier(0.16,1,0.3,1),
+                    box-shadow 0.28s ease,
+                    border-color 0.28s ease;
+        position: relative;
+        overflow: hidden;
     }
-
-    .feature-card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 20px 40px rgba(15, 23, 42, 0.06) !important;
-        border-color: rgba(13, 110, 253, 0.2);
+    .feat-card::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--emerald), var(--mint));
+        opacity: 0;
+        transition: opacity 0.28s;
     }
+    .feat-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 20px 50px rgba(15,36,24,0.1);
+        border-color: rgba(45,106,79,0.28);
+    }
+    .feat-card:hover::before { opacity: 1; }
 
-    /* Icon Graphic Wrapper Shapes */
-    .icon-shape-wrapper {
-        width: 56px;
-        height: 56px;
+    .feat-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 13px;
+        background: rgba(45,106,79,0.1);
+        border: 1px solid rgba(45,106,79,0.18);
         display: flex;
         align-items: center;
         justify-content: center;
-        border-radius: 16px;
-        font-size: 1.5rem;
-        margin-bottom: 1.5rem;
+        font-size: 1.2rem;
+        color: var(--emerald);
+        margin-bottom: 20px;
+        transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1),
+                    background 0.3s;
     }
-
-    .card-title-text {
-        font-size: 1.35rem;
+    .feat-card:hover .feat-icon {
+        transform: scale(1.1) rotate(-5deg);
+        background: rgba(45,106,79,0.18);
+    }
+    .feat-title {
+        font-family: 'Sora', sans-serif;
+        font-size: 1rem;
         font-weight: 700;
-        color: #0f172a;
-        letter-spacing: -0.3px;
+        color: var(--text-dark);
+        margin-bottom: 8px;
+    }
+    .feat-desc {
+        font-size: 0.86rem;
+        line-height: 1.65;
+        color: var(--text-muted);
+        margin: 0;
     }
 
-    .card-description-text {
-        color: #64748b;
-        font-size: 0.975rem;
+    /* ══════════════════════════════════════════════════════════════
+       HOW IT WORKS  — dark forest band
+    ══════════════════════════════════════════════════════════════ */
+    .how-sec {
+        background: var(--forest);
+        padding: 80px 0;
+        position: relative;
+        overflow: hidden;
+    }
+    .how-sec::before {
+        content: '';
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%,-50%);
+        width: 700px; height: 500px;
+        background: radial-gradient(ellipse,
+            rgba(82,183,136,0.07) 0%, transparent 65%);
+        pointer-events: none;
+    }
+
+    .step-card {
+        background: rgba(255,255,255,0.04);
+        border: 1px solid rgba(82,183,136,0.12);
+        border-radius: 18px;
+        padding: 34px 22px;
+        text-align: center;
+        height: 100%;
+        transition: background 0.25s, border-color 0.25s;
+    }
+    .step-card:hover {
+        background: rgba(82,183,136,0.07);
+        border-color: rgba(82,183,136,0.25);
+    }
+    .step-num {
+        font-family: 'Sora', sans-serif;
+        font-size: 2.6rem;
+        font-weight: 800;
+        color: rgba(82,183,136,0.13);
+        letter-spacing: -0.06em;
+        line-height: 1;
+        margin-bottom: 10px;
+    }
+    .step-icon-wrap {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: rgba(82,183,136,0.1);
+        border: 1.5px solid rgba(82,183,136,0.25);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--mint);
+        font-size: 1.05rem;
+        margin-bottom: 18px;
+    }
+    .step-title {
+        font-family: 'Sora', sans-serif;
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 8px;
+    }
+    .step-desc {
+        font-size: 0.83rem;
         line-height: 1.6;
-        margin-bottom: 0;
+        color: rgba(255,255,255,0.42);
+        margin: 0;
+    }
+
+    /* dashed connector between steps */
+    .steps-row { position: relative; }
+    @media (min-width: 992px) {
+        .steps-row::after {
+            content: '';
+            position: absolute;
+            top: 58px;
+            left: calc(12.5% + 30px);
+            right: calc(12.5% + 30px);
+            height: 1px;
+            border-top: 1.5px dashed rgba(82,183,136,0.2);
+            pointer-events: none;
+        }
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       BENEFITS + ANALYTICS MOCK
+    ══════════════════════════════════════════════════════════════ */
+    .benefits-sec { padding: 80px 0; }
+
+    .benefit-row-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        padding: 18px 16px;
+        border-radius: 14px;
+        background: rgba(255,255,255,0.7);
+        border: 1px solid rgba(45,106,79,0.1);
+        transition: background 0.2s, border-color 0.2s, transform 0.2s;
+    }
+    .benefit-row-item:hover {
+        background: rgba(255,255,255,0.95);
+        border-color: rgba(45,106,79,0.22);
+        transform: translateX(4px);
+    }
+    .ben-icon {
+        width: 38px; height: 38px;
+        border-radius: 10px;
+        background: var(--forest);
+        display: flex; align-items: center; justify-content: center;
+        color: var(--mint);
+        font-size: 0.95rem;
+        flex-shrink: 0;
+    }
+    .ben-title {
+        font-family: 'Sora', sans-serif;
+        font-weight: 700;
+        font-size: 0.9rem;
+        color: var(--text-dark);
+        margin-bottom: 3px;
+    }
+    .ben-desc {
+        font-size: 0.81rem;
+        line-height: 1.55;
+        color: var(--text-muted);
+        margin: 0;
+    }
+
+    /* Analytics mock panel */
+    .analytics-panel {
+        background: var(--forest);
+        border-radius: 22px;
+        padding: 28px 26px;
+        border: 1px solid rgba(82,183,136,0.15);
+        box-shadow: 0 24px 60px rgba(15,36,24,0.18);
+        position: relative;
+        overflow: hidden;
+    }
+    .analytics-panel::after {
+        content: '';
+        position: absolute;
+        bottom: -80px; right: -80px;
+        width: 250px; height: 250px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(82,183,136,0.08), transparent 65%);
+        pointer-events: none;
+    }
+    .panel-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 26px;
+        padding-bottom: 18px;
+        border-bottom: 1px solid rgba(82,183,136,0.1);
+    }
+    .panel-dot {
+        width: 8px; height: 8px;
+        border-radius: 50%;
+        background: var(--mint);
+        box-shadow: 0 0 8px var(--mint);
+        display: inline-block;
+        margin-right: 9px;
+    }
+    .panel-title {
+        font-family: 'Sora', sans-serif;
+        font-size: 0.88rem;
+        font-weight: 700;
+        color: #fff;
+    }
+    .panel-badge {
+        font-size: 0.7rem;
+        font-family: monospace;
+        color: var(--mint);
+        background: rgba(82,183,136,0.1);
+        border: 1px solid rgba(82,183,136,0.18);
+        border-radius: 6px;
+        padding: 3px 9px;
+    }
+    .metric-row { margin-bottom: 18px; }
+    .metric-head {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 7px;
+    }
+    .metric-lbl { font-size: 0.78rem; color: rgba(255,255,255,0.42); font-weight: 500; }
+    .metric-val { font-family: 'Sora', sans-serif; font-size: 0.8rem; font-weight: 700; color: var(--mint); }
+    .metric-track {
+        height: 5px;
+        background: rgba(255,255,255,0.07);
+        border-radius: 100px;
+        overflow: hidden;
+    }
+    .metric-fill {
+        height: 100%;
+        border-radius: 100px;
+        background: linear-gradient(90deg, rgba(82,183,136,0.5), var(--mint));
+    }
+    .terminal {
+        background: rgba(82,183,136,0.06);
+        border: 1px solid rgba(82,183,136,0.12);
+        border-radius: 10px;
+        padding: 13px 15px;
+        font-family: 'Courier New', monospace;
+        font-size: 0.75rem;
+        color: rgba(82,183,136,0.7);
+        margin-top: 18px;
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       CHECKLIST  — dark forest band
+    ══════════════════════════════════════════════════════════════ */
+    .checklist-sec {
+        background: var(--forest-deep);
+        padding: 80px 0;
+        position: relative;
+        overflow: hidden;
+    }
+    .checklist-sec::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(rgba(82,183,136,0.05) 1px, transparent 1px);
+        background-size: 22px 22px;
+        pointer-events: none;
+    }
+    .check-item {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        padding: 14px 18px;
+        border-radius: 11px;
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.06);
+        font-size: 0.88rem;
+        color: rgba(255,255,255,0.7);
+        font-weight: 500;
+        transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+    .check-item:hover {
+        background: rgba(82,183,136,0.07);
+        border-color: rgba(82,183,136,0.2);
+        color: #fff;
+    }
+    .check-item i { color: var(--mint); flex-shrink: 0; }
+
+    /* ══════════════════════════════════════════════════════════════
+       FAQ
+    ══════════════════════════════════════════════════════════════ */
+    .faq-sec { padding: 80px 0; }
+
+    .faq-item {
+        background: rgba(255,255,255,0.82) !important;
+        border: 1px solid rgba(45,106,79,0.12) !important;
+        border-radius: 14px !important;
+        margin-bottom: 10px;
+        overflow: hidden;
+    }
+    .faq-btn {
+        font-family: 'Sora', sans-serif;
+        font-weight: 700;
+        font-size: 0.92rem;
+        color: var(--text-dark) !important;
+        background: transparent !important;
+        padding: 18px 22px;
+        box-shadow: none !important;
+    }
+    .faq-btn:not(.collapsed) {
+        color: var(--emerald) !important;
+        border-bottom: 1px solid rgba(45,106,79,0.1);
+    }
+    .faq-body {
+        padding: 16px 22px !important;
+        font-size: 0.87rem;
+        line-height: 1.7;
+        color: var(--text-muted);
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       CTA
+    ══════════════════════════════════════════════════════════════ */
+    .cta-sec { padding: 56px 0 80px; }
+    .cta-box {
+        background: var(--forest);
+        border-radius: 26px;
+        padding: 60px 48px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(82,183,136,0.15);
+        box-shadow: 0 24px 70px rgba(15,36,24,0.18);
+    }
+    .cta-box::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(rgba(82,183,136,0.06) 1px, transparent 1px);
+        background-size: 20px 20px;
+        pointer-events: none;
+    }
+    .cta-box::after {
+        content: '';
+        position: absolute;
+        bottom: -120px; left: 50%;
+        transform: translateX(-50%);
+        width: 500px; height: 400px;
+        background: radial-gradient(ellipse, rgba(82,183,136,0.1), transparent 65%);
+        pointer-events: none;
+    }
+    .cta-inner { position: relative; z-index: 1; }
+    .cta-title {
+        font-family: 'Sora', sans-serif;
+        font-size: clamp(2rem, 4vw, 2.9rem);
+        font-weight: 800;
+        letter-spacing: -0.04em;
+        line-height: 1.12;
+        background: linear-gradient(135deg, #fff 40%, var(--mint) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 14px;
+    }
+    .cta-sub {
+        color: rgba(255,255,255,0.45);
+        font-size: 0.97rem;
+        line-height: 1.65;
+        max-width: 480px;
+        margin: 0 auto 34px;
+    }
+    .btn-mint {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--mint);
+        color: var(--forest-deep) !important;
+        font-family: 'Sora', sans-serif;
+        font-weight: 700;
+        font-size: 0.9rem;
+        padding: 13px 26px;
+        border-radius: 10px;
+        border: none;
+        text-decoration: none;
+        box-shadow: 0 0 28px rgba(82,183,136,0.3);
+        transition: all 0.22s ease;
+    }
+    .btn-mint:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 0 44px rgba(82,183,136,0.45);
+        color: var(--forest-deep) !important;
+    }
+    .btn-ghost-light {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(255,255,255,0.07);
+        color: #fff !important;
+        font-family: 'Sora', sans-serif;
+        font-weight: 700;
+        font-size: 0.9rem;
+        padding: 13px 26px;
+        border-radius: 10px;
+        border: 1px solid rgba(255,255,255,0.14);
+        text-decoration: none;
+        transition: all 0.22s ease;
+    }
+    .btn-ghost-light:hover {
+        background: rgba(255,255,255,0.13);
+        border-color: rgba(255,255,255,0.28);
+        color: #fff !important;
+        transform: translateY(-2px);
+    }
+
+    /* ── Responsive tweaks ───────────────────────────────────────── */
+    @media (max-width: 575px) {
+        .hero { padding: 60px 0 44px; }
+        .stat-cell { padding: 16px 10px; }
+        .stat-val { font-size: 1.4rem; }
+        .cta-box { padding: 40px 22px; }
     }
 </style>
 {% endblock %}
 
 {% block content %}
 
+<!-- ══════════════════════════════════════════════════════
+     HERO
+══════════════════════════════════════════════════════ -->
+<section class="hero">
+    <div class="container px-4">
 
+        <div class="hero-badge">
+            <i class="bi bi-stars"></i>
+            Meet the Future of Contextual Helpdesks
+        </div>
 
-<!-- Hero Showcase Block -->
-<header class="hero-container">
-    <div class="container text-center px-4">
-        <h1 class="hero-title mx-auto" style="max-width: 850px;">
-            Build AI Chatbots For Your Business
+        <h1 class="hero-title sora">
+            Build AI Assistants Trained On Your
+            <span class="pill-accent">Business Knowledge</span>
         </h1>
-        
-        <p class="hero-lead mt-4">
-            Train context-aware custom ChatGPT agents with your live website URLs, product PDFs, and text documentation archives in seconds.
+
+        <p class="hero-sub">
+            Create, train, deploy, and manage intelligent AI chatbots using your website content and custom knowledge — live in seconds.
         </p>
+
+        <div class="d-flex flex-column flex-sm-row justify-content-center gap-3">
+            <a href="{% if user.is_authenticated %}{% url 'dashboard' %}{% else %}{% url 'register' %}{% endif %}"
+               class="btn-forest">
+                Get Started Free
+                <i class="bi bi-arrow-right-short" style="font-size:1.3rem;"></i>
+            </a>
+            <a href="{% if user.is_authenticated %}{% url 'dashboard' %}#demo-bots{% else %}{% url 'login' %}?next={% url 'dashboard' %}#demo-bots{% endif %}"
+               class="btn-ghost">
+                <i class="bi bi-play-circle"></i>
+                Try Demo Bot
+            </a>
+        </div>
+
+        <!-- Stats bar -->
         
-        <div class="d-flex flex-column flex-sm-row justify-content-center gap-3 mt-4 pt-2">
+    </div>
+</section>
 
-    <a href="{% if user.is_authenticated %}{% url 'dashboard' %}{% else %}{% url 'register' %}{% endif %}"
-        class="btn btn-premium-primary btn-lg d-inline-flex align-items-center justify-content-center gap-2">
-        Get Started Free
-        <i class="bi bi-arrow-right"></i>
-    </a>
+<!-- ══════════════════════════════════════════════════════
+     FEATURES
+══════════════════════════════════════════════════════ -->
+<section class="features-sec">
+    <div class="container px-4">
+        <div class="text-center mb-5">
+            <div class="eyebrow">Core Capabilities</div>
+            <h2 class="sec-title">Engineered to Learn Your Context</h2>
+            <p class="sec-sub">Sync custom rules and live platform knowledge seamlessly.</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-12 col-sm-6 col-lg-3">
+                <div class="feat-card">
+                    <div class="feat-icon"><i class="bi bi-globe2"></i></div>
+                    <h3 class="feat-title">Website Training</h3>
+                    <p class="feat-desc">Point your URLs. Our spiders automatically crawl every page to build localized contextual logic foundations.</p>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-3">
+                <div class="feat-card">
+                    <div class="feat-icon"><i class="bi bi-pencil-square"></i></div>
+                    <h3 class="feat-title">Manual Knowledge</h3>
+                    <p class="feat-desc">Type custom Q&amp;A pairs directly inside the dashboard — update anytime, instantly reflected in your bot.</p>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-3">
+                <div class="feat-card">
+                    <div class="feat-icon"><i class="bi bi-layers"></i></div>
+                    <h3 class="feat-title">Multi-Bot Core</h3>
+                    <p class="feat-desc">Run separate assistants for different teams. Unique variants for staff or customer-facing pipelines.</p>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-3">
+                <div class="feat-card">
+                    <div class="feat-icon"><i class="bi bi-code-slash"></i></div>
+                    <h3 class="feat-title">Website Widget</h3>
+                    <p class="feat-desc">Inject a live floating chat interface onto any site via a single script tag. Zero configuration required.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-
-    <a href="{% if user.is_authenticated %}{% url 'dashboard' %}#demo-bots{% else %}{% url 'login' %}?next={% url 'dashboard' %}#demo-bots{% endif %}"
-        class="btn btn-premium-outline btn-lg d-inline-flex align-items-center justify-content-center gap-2">
-        <i class="bi bi-play-circle text-primary"></i>
-        Try Demo Bot
-    </a>
-
+<!-- ══════════════════════════════════════════════════════
+     HOW IT WORKS
+══════════════════════════════════════════════════════ -->
+<div class="wave">
+    <svg viewBox="0 0 1440 48" preserveAspectRatio="none" height="48">
+        <path d="M0,24 C360,56 1080,-8 1440,24 L1440,48 L0,48 Z" fill="#1a3a2a"/>
+    </svg>
 </div>
+
+<section class="how-sec">
+    <div class="container px-4 position-relative" style="z-index:1;">
+        <div class="text-center mb-5">
+            <div class="eyebrow light">Process</div>
+            <h2 class="sec-title light">From Knowledge Base to Live Deployment</h2>
+            <p class="sec-sub light">Four steps from zero to a deployed AI assistant.</p>
+        </div>
+        <div class="row g-4 steps-row">
+            <div class="col-12 col-sm-6 col-lg-3">
+                <div class="step-card">
+                    <div class="step-num">01</div>
+                    <div class="step-icon-wrap"><i class="bi bi-plus-lg"></i></div>
+                    <h4 class="step-title">Create Your Bot</h4>
+                    <p class="step-desc">Initialize a dedicated container and customize the window styling to match your brand.</p>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-3">
+                <div class="step-card">
+                    <div class="step-num">02</div>
+                    <div class="step-icon-wrap"><i class="bi bi-database"></i></div>
+                    <h4 class="step-title">Provide Ground Truth</h4>
+                    <p class="step-desc">Connect domain URLs or manually enter your knowledge base into the workspace.</p>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-3">
+                <div class="step-card">
+                    <div class="step-num">03</div>
+                    <div class="step-icon-wrap"><i class="bi bi-cpu"></i></div>
+                    <h4 class="step-title">Train the Agent</h4>
+                    <p class="step-desc">Run the embedding engine. Your bot maps content paths and builds vector indexes in seconds.</p>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-3">
+                <div class="step-card">
+                    <div class="step-num">04</div>
+                    <div class="step-icon-wrap"><i class="bi bi-rocket-takeoff"></i></div>
+                    <h4 class="step-title">Deploy Widget</h4>
+                    <p class="step-desc">Copy one script tag and paste anywhere. Live support loads instantly on any site.</p>
+                </div>
+            </div>
+        </div>
     </div>
-</header>
+</section>
 
-<!-- Main Visual Core Value Features Row -->
-<main class="container my-5 pb-5">
-    <div class="row g-4 pt-2">
-        
-        <!-- Value Feature Card 1 -->
-        <div class="col-12 col-md-4">
-            <article class="card shadow-sm feature-card">
-                <div class="icon-shape-wrapper bg-primary-subtle text-primary">
-                    <i class="bi bi-globe2"></i>
-                </div>
-                <h3 class="card-title-text mb-2">
-                    Train with Website
-                </h3>
-                <p class="card-description-text">
-                    Incorporate your live business URLs or knowledge bases. Our scraper crawls your domain instantly to shape deep context logic.
+<div class="wave">
+    <svg viewBox="0 0 1440 48" preserveAspectRatio="none" height="48">
+        <path d="M0,24 C360,-8 1080,56 1440,24 L1440,0 L0,0 Z" fill="#1a3a2a"/>
+    </svg>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     BENEFITS + ANALYTICS MOCK
+══════════════════════════════════════════════════════ -->
+<section class="benefits-sec">
+    <div class="container px-4">
+        <div class="row align-items-center g-5">
+            <div class="col-12 col-lg-6">
+                <div class="eyebrow">Scale Smartly</div>
+                <h2 class="sec-title">Deliver Instant Answers Without the Support Overhead</h2>
+                <p style="color:var(--text-muted); font-size:0.97rem; line-height:1.7; font-weight:500; margin-bottom:28px;">
+                    Self-learning bots handle core tickets natively before any escalation — day or night.
                 </p>
-            </article>
-        </div>
-
-        <!-- Value Feature Card 2 -->
-        <div class="col-12 col-md-4">
-            <article class="card shadow-sm feature-card">
-                <div class="icon-shape-wrapper bg-success-subtle text-success">
-                    <i class="bi bi-file-earmark-arrow-up"></i>
+                <div class="row g-3">
+                    <div class="col-12 col-sm-6">
+                        <div class="benefit-row-item">
+                            <div class="ben-icon"><i class="bi bi-clock-fill"></i></div>
+                            <div>
+                                <div class="ben-title">24/7 Automation</div>
+                                <p class="ben-desc">Verified answers without queue timeouts, around the clock.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                        <div class="benefit-row-item">
+                            <div class="ben-icon"><i class="bi bi-pencil-square"></i></div>
+                            <div>
+                                <div class="ben-title">Instant Adjustments</div>
+                                <p class="ben-desc">Modify bot rules anytime to match live operational changes.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                        <div class="benefit-row-item">
+                            <div class="ben-icon"><i class="bi bi-lightning-charge-fill"></i></div>
+                            <div>
+                                <div class="ben-title">Zero Lag Times</div>
+                                <p class="ben-desc">Parse integrated records instantly — responses under 300ms.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                        <div class="benefit-row-item">
+                            <div class="ben-icon"><i class="bi bi-graph-up-arrow"></i></div>
+                            <div>
+                                <div class="ben-title">Elastic Capacity</div>
+                                <p class="ben-desc">Thousands of parallel threads handled simultaneously.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <h3 class="card-title-text mb-2">
-                    Upload Documents
-                </h3>
-                <p class="card-description-text">
-                    Drop internal operational files, PDFs, CSV structures, or manuals directly into your bot storage to anchor answers reliably.
-                </p>
-            </article>
-        </div>
+            </div>
 
-        <!-- Value Feature Card 3 -->
-        <div class="col-12 col-md-4">
-            <article class="card shadow-sm feature-card">
-                <div class="icon-shape-wrapper bg-purple bg-opacity-10 text-purple" style="color: #6f42c1; background-color: rgba(111, 66, 193, 0.1);">
-                    <i class="bi bi-graph-up-arrow"></i>
+            <div class="col-12 col-lg-6">
+                <div class="analytics-panel">
+                    <div class="panel-header">
+                        <div>
+                            <span class="panel-dot"></span>
+                            <span class="panel-title">Live Conversational Streams</span>
+                        </div>
+                        <span class="panel-badge">Pipeline Active</span>
+                    </div>
+                    <div class="metric-row">
+                        <div class="metric-head">
+                            <span class="metric-lbl">Resolved Core Threads</span>
+                            <span class="metric-val">94.2%</span>
+                        </div>
+                        <div class="metric-track"><div class="metric-fill" style="width:94.2%;"></div></div>
+                    </div>
+                    <div class="metric-row">
+                        <div class="metric-head">
+                            <span class="metric-lbl">Knowledge Token Precision</span>
+                            <span class="metric-val">99.1%</span>
+                        </div>
+                        <div class="metric-track"><div class="metric-fill" style="width:99.1%;"></div></div>
+                    </div>
+                    <div class="metric-row" style="margin-bottom:0;">
+                        <div class="metric-head">
+                            <span class="metric-lbl">Active User Threads (live)</span>
+                            <span class="metric-val">1,284</span>
+                        </div>
+                        <div class="metric-track"><div class="metric-fill" style="width:72%;"></div></div>
+                    </div>
+                    <div class="terminal">
+                        <i class="bi bi-terminal me-2" style="opacity:.6;"></i>
+                        [System] Scraped 254 links. Manual queries ingested. Ready.
+                    </div>
                 </div>
-                <h3 class="card-title-text mb-2">
-                    Live Analytics
-                </h3>
-                <p class="card-description-text">
-                    Review automated conversational transcripts, track daily usage metrics, target error anomalies, and optimize client responses.
-                </p>
-            </article>
+            </div>
         </div>
-
     </div>
-</main>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     CHECKLIST
+══════════════════════════════════════════════════════ -->
+<div class="wave">
+    <svg viewBox="0 0 1440 48" preserveAspectRatio="none" height="48">
+        <path d="M0,24 C360,56 1080,-8 1440,24 L1440,48 L0,48 Z" fill="#0f2418"/>
+    </svg>
+</div>
+
+<section class="checklist-sec">
+    <div class="container px-4 position-relative" style="z-index:1;">
+        <div class="text-center mb-5">
+            <div class="eyebrow light">Full Feature Suite</div>
+            <h2 class="sec-title light">Everything You Need to Automate Customer Context</h2>
+        </div>
+        <div class="row g-3 row-cols-1 row-cols-sm-2 row-cols-lg-3">
+            <div class="col"><div class="check-item"><i class="bi bi-check-circle-fill"></i>Website Training Crawler</div></div>
+            <div class="col"><div class="check-item"><i class="bi bi-check-circle-fill"></i>Manual Data Entry Suite</div></div>
+            <div class="col"><div class="check-item"><i class="bi bi-check-circle-fill"></i>Knowledge Management Desk</div></div>
+            <div class="col"><div class="check-item"><i class="bi bi-check-circle-fill"></i>Multi-Bot Workspace Splits</div></div>
+            <div class="col"><div class="check-item"><i class="bi bi-check-circle-fill"></i>Live Conversational Analytics</div></div>
+            <div class="col"><div class="check-item"><i class="bi bi-check-circle-fill"></i>Usage Metric Analytics Tracking</div></div>
+            <div class="col"><div class="check-item"><i class="bi bi-check-circle-fill"></i>Subscription Workspace Engine</div></div>
+            <div class="col"><div class="check-item"><i class="bi bi-check-circle-fill"></i>Script Embedded Floating UI</div></div>
+            <div class="col"><div class="check-item"><i class="bi bi-check-circle-fill"></i>Real-time Custom Rule Overrides</div></div>
+        </div>
+    </div>
+</section>
+
+<div class="wave">
+    <svg viewBox="0 0 1440 48" preserveAspectRatio="none" height="48">
+        <path d="M0,24 C360,-8 1080,56 1440,24 L1440,0 L0,0 Z" fill="#0f2418"/>
+    </svg>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     FAQ
+══════════════════════════════════════════════════════ -->
+<section class="faq-sec">
+    <div class="container px-4 mx-auto" style="max-width:740px;">
+        <div class="text-center mb-5">
+            <div class="eyebrow">FAQ</div>
+            <h2 class="sec-title">Frequently Asked Questions</h2>
+        </div>
+        <div class="accordion accordion-flush" id="faqAccordion">
+            <div class="accordion-item faq-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button faq-btn collapsed" type="button"
+                            data-bs-toggle="collapse" data-bs-target="#faq1">
+                        How does website training work?
+                    </button>
+                </h2>
+                <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body faq-body">Provide your landing URL. Our indexing module parses every relative asset path automatically to build vector embeddings your bot uses to answer questions.</div>
+                </div>
+            </div>
+            <div class="accordion-item faq-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button faq-btn collapsed" type="button"
+                            data-bs-toggle="collapse" data-bs-target="#faq2">
+                        Can I add custom data without website URLs?
+                    </button>
+                </h2>
+                <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body faq-body">Yes. Enter data patterns, update system queries, or change custom instructions directly inside the control workspace at any time.</div>
+                </div>
+            </div>
+            <div class="accordion-item faq-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button faq-btn collapsed" type="button"
+                            data-bs-toggle="collapse" data-bs-target="#faq3">
+                        How many bots can I initialize?
+                    </button>
+                </h2>
+                <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body faq-body">Limits scale with your plan. Starter configurations include a single production environment; advanced workspaces unlock parallel bot variations.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     CTA
+══════════════════════════════════════════════════════ -->
+<section class="cta-sec">
+    <div class="container px-4">
+        <div class="cta-box">
+            <div class="cta-inner">
+                <div class="eyebrow light" style="margin-bottom:22px;">Get Started Today</div>
+                <h2 class="cta-title">Ready To Build Your First AI Assistant?</h2>
+                <p class="cta-sub">Create your account and launch a contextual assistant widget in minutes — no credit card required.</p>
+                <div class="d-flex flex-column flex-sm-row justify-content-center gap-3">
+                    <a href="{% url 'register' %}" class="btn-mint">
+                        Get Started Free
+                        <i class="bi bi-arrow-right-short" style="font-size:1.3rem;"></i>
+                    </a>
+                    <a href="{% if user.is_authenticated %}{% url 'dashboard' %}#demo-bots{% else %}{% url 'login' %}?next={% url 'dashboard' %}#demo-bots{% endif %}"
+                       class="btn-ghost-light">
+                        <i class="bi bi-play-circle"></i>
+                        Try Live Demo
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 {% endblock %}
 
 {% block internal_js %}
-
+<script>
+// Cursor-tracked radial glow on feature cards
+document.querySelectorAll('.feat-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+        const r = card.getBoundingClientRect();
+        const x = ((e.clientX - r.left) / r.width) * 100;
+        const y = ((e.clientY - r.top) / r.height) * 100;
+        card.style.background =
+            `radial-gradient(circle at ${x}% ${y}%, rgba(45,106,79,0.07) 0%, rgba(255,255,255,0.88) 55%)`;
+    });
+    card.addEventListener('mouseleave', () => {
+        card.style.background = '';
+    });
+});
+</script>
 {% endblock %}

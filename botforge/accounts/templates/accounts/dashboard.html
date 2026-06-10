@@ -5,364 +5,501 @@ Home | BotForge
 {% endblock %}
 
 {% block internal_css %}
-<!-- Bootstrap Icons CDN for clean visual graphics -->
-
-
 <style>
-    body {
-        background-color: #fbfbfd;
-    }
+  
 
-    /* Hero Section Styling */
+    /* ── HERO ─────────────────────────────────────────────────────── */
     .hero-section {
-        background: radial-gradient(circle at top right, #e7f1ff 0%, #ffffff 70%);
-        padding: 5rem 0 4rem 0;
-        border-bottom: 1px solid #f0f0f2;
+        padding: 56px 0 52px;
+        position: relative;
+        overflow: hidden;
+        border-bottom: 1px solid rgba(45,106,79,0.12);
+    }
+    /* white bloom so text reads over green body */
+    .hero-section::before {
+        content: '';
+        position: absolute;
+        top: -80px; left: 50%;
+        transform: translateX(-50%);
+        width: 900px; height: 600px;
+        background: radial-gradient(ellipse at center,
+            rgba(255,255,255,0.6) 0%, transparent 68%);
+        pointer-events: none;
+        z-index: 0;
+    }
+    .hero-section > .container { position: relative; z-index: 1; }
+
+    .hero-title {
+        font-family: 'Sora', sans-serif;
+        font-size: clamp(2.1rem, 4.5vw, 3.2rem);
+        font-weight: 800;
+        letter-spacing: -0.04em;
+        line-height: 1.1;
+        color: var(--forest-deep);
+        margin-bottom: 16px;
     }
 
-    .company-badge {
-        background-color: rgba(13, 110, 253, 0.08);
-        color: #0d6efd;
-        font-weight: 600;
-        padding: 0.5rem 1.25rem;
-        border-radius: 50px;
+    /* ── Company / Setup Banner ──────────────────────────────────── */
+    .workspace-badge {
         display: inline-flex;
         align-items: center;
         gap: 8px;
+        background: rgba(255,255,255,0.92);
+        border: 1px solid rgba(45,106,79,0.18);
+        border-radius: 100px;
+        padding: 7px 18px;
+        font-size: 0.83rem;
+        font-weight: 600;
+        color: var(--text);
+        box-shadow: 0 2px 12px rgba(15,36,24,0.07);
+        margin-bottom: 28px;
+    }
+    .workspace-badge .ws-dot {
+        width: 8px; height: 8px;
+        border-radius: 50%;
+        background: var(--mint);
+        box-shadow: 0 0 6px var(--mint);
+        flex-shrink: 0;
+    }
+    .workspace-badge .ws-name {
+        color: var(--emerald);
+        font-weight: 700;
     }
 
-    .hero-title {
-        font-size: 3rem;
-        font-weight: 800;
-        letter-spacing: -1px;
-        color: #1e293b;
-    }
-
-    /* Core Product Cards */
-    .feature-card {
-        border: none;
+    .setup-banner {
+        background: rgba(255,255,255,0.88);
+        border: 1px solid rgba(45,106,79,0.14);
         border-radius: 20px;
-        background: #ffffff;
-        transition: transform 0.25s ease, box-shadow 0.25s ease;
+        padding: 22px 26px;
+        margin-bottom: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        flex-wrap: wrap;
+        box-shadow: 0 6px 30px rgba(15,36,24,0.07);
+        position: relative;
+        overflow: hidden;
+        text-align: left;
+    }
+    /* dot-grid accent */
+    .setup-banner::after {
+        content: '';
+        position: absolute;
+        top: 0; right: 0;
+        width: 160px; height: 100%;
+        background-image: radial-gradient(rgba(45,106,79,0.12) 1.5px, transparent 1.5px);
+        background-size: 12px 12px;
+        pointer-events: none;
+    }
+    .setup-step-badge {
+        display: inline-block;
+        font-size: 0.67rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        background: #fef3c7;
+        color: #d97706;
+        border-radius: 6px;
+        padding: 3px 10px;
+        margin-bottom: 8px;
+    }
+    .setup-title {
+        font-family: 'Sora', sans-serif;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--text);
+        margin-bottom: 4px;
+        letter-spacing: -0.02em;
+    }
+    .setup-sub {
+        font-size: 0.85rem;
+        color: var(--muted);
+        margin: 0;
+        line-height: 1.55;
+    }
+    .btn-setup {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        background: var(--forest);
+        color: #fff !important;
+        font-family: 'Sora', sans-serif;
+        font-weight: 700;
+        font-size: 0.88rem;
+        padding: 11px 22px;
+        border-radius: 11px;
+        border: none;
+        text-decoration: none;
+        white-space: nowrap;
+        flex-shrink: 0;
+        box-shadow: 0 4px 18px rgba(15,36,24,0.2);
+        transition: all 0.2s ease;
+        position: relative;
+        z-index: 1;
+    }
+    .btn-setup:hover {
+        background: var(--forest-deep);
+        transform: translateY(-1px);
+        box-shadow: 0 6px 24px rgba(15,36,24,0.28);
+        color: #fff !important;
     }
 
-    .feature-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.05) !important;
+    /* ── Hero action buttons ─────────────────────────────────────── */
+    .btn-forest {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        background: var(--forest);
+        color: #fff !important;
+        font-family: 'Sora', sans-serif;
+        font-weight: 700;
+        font-size: 0.92rem;
+        padding: 13px 26px;
+        border-radius: 11px;
+        border: none;
+        text-decoration: none;
+        box-shadow: 0 6px 22px rgba(15,36,24,0.22);
+        transition: all 0.2s ease;
+    }
+    .btn-forest:hover {
+        background: var(--forest-deep);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 30px rgba(15,36,24,0.3);
+        color: #fff !important;
+    }
+    .btn-ghost {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        background: rgba(255,255,255,0.82);
+        backdrop-filter: blur(6px);
+        color: var(--forest) !important;
+        font-family: 'Sora', sans-serif;
+        font-weight: 700;
+        font-size: 0.92rem;
+        padding: 13px 26px;
+        border-radius: 11px;
+        border: 1.5px solid rgba(45,106,79,0.22);
+        text-decoration: none;
+        transition: all 0.2s ease;
+    }
+    .btn-ghost:hover {
+        background: #fff;
+        border-color: var(--emerald);
+        transform: translateY(-2px);
+        color: var(--forest) !important;
     }
 
-    .icon-box {
-        width: 56px;
-        height: 56px;
+    /* ── DEMO BOTS SECTION ───────────────────────────────────────── */
+    .demo-section {
+        padding: 72px 0 80px;
+    }
+    .sec-eyebrow {
+        display: inline-block;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+        color: var(--emerald);
+        background: rgba(45,106,79,0.09);
+        border: 1px solid rgba(45,106,79,0.2);
+        border-radius: 100px;
+        padding: 4px 13px;
+        margin-bottom: 14px;
+    }
+    .sec-title {
+        font-family: 'Sora', sans-serif;
+        font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+        font-weight: 800;
+        letter-spacing: -0.035em;
+        color: var(--text);
+        margin-bottom: 10px;
+    }
+    .sec-sub {
+        font-size: 0.97rem;
+        color: var(--muted);
+        line-height: 1.65;
+    }
+
+    /* Demo cards */
+    .demo-card {
+        background: var(--card);
+        border: 1px solid var(--card-border);
+        border-radius: 20px;
+        overflow: hidden;
+        height: 100%;
+        transition: transform 0.28s cubic-bezier(0.16,1,0.3,1),
+                    box-shadow 0.28s ease,
+                    border-color 0.28s ease;
+        position: relative;
+    }
+    /* colored top bar — set per card via data attr */
+    .demo-card::before {
+        content: '';
+        display: block;
+        height: 4px;
+        width: 100%;
+    }
+    .demo-card.card-blue::before  { background: linear-gradient(90deg, #3b82f6, #60a5fa); }
+    .demo-card.card-red::before   { background: linear-gradient(90deg, #ef4444, #f87171); }
+    .demo-card.card-green::before { background: linear-gradient(90deg, var(--emerald), var(--mint)); }
+
+    .demo-card:hover {
+        transform: translateY(-7px);
+        box-shadow: 0 22px 50px rgba(15,36,24,0.1);
+        border-color: rgba(45,106,79,0.28);
+    }
+
+    .demo-card .card-body {
+        padding: 28px 26px 26px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: calc(100% - 4px); /* minus the top bar */
+    }
+
+    .demo-icon-wrap {
+        width: 52px; height: 52px;
+        border-radius: 14px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.4rem;
+        margin-bottom: 20px;
+        transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .demo-card:hover .demo-icon-wrap {
+        transform: scale(1.1) rotate(-5deg);
+    }
+
+    .demo-card-title {
+        font-family: 'Sora', sans-serif;
+        font-weight: 700;
+        font-size: 1.05rem;
+        color: var(--text);
+        letter-spacing: -0.02em;
+        margin-bottom: 8px;
+    }
+    .demo-card-text {
+        font-size: 0.87rem;
+        color: var(--muted);
+        line-height: 1.65;
+        margin: 0;
+    }
+
+    /* Demo action buttons */
+    .btn-demo {
         display: flex;
         align-items: center;
         justify-content: center;
-        border-radius: 14px;
-        font-size: 1.5rem;
-        margin-bottom: 1.25rem;
+        gap: 7px;
+        font-family: 'Sora', sans-serif;
+        font-weight: 700;
+        font-size: 0.88rem;
+        padding: 12px 20px;
+        border-radius: 11px;
+        border: none;
+        text-decoration: none;
+        margin-top: 22px;
+        width: 100%;
+        transition: all 0.2s ease;
+    }
+    .btn-demo i { transition: transform 0.2s ease; }
+    .btn-demo:hover i { transform: translateX(4px); }
+
+    .btn-demo.blue {
+        background: rgba(59,130,246,0.1);
+        color: #1d4ed8 !important;
+        border: 1px solid rgba(59,130,246,0.2);
+    }
+    .btn-demo.blue:hover {
+        background: #3b82f6;
+        color: #fff !important;
+        border-color: #3b82f6;
+    }
+    .btn-demo.red {
+        background: rgba(239,68,68,0.09);
+        color: #b91c1c !important;
+        border: 1px solid rgba(239,68,68,0.18);
+    }
+    .btn-demo.red:hover {
+        background: #ef4444;
+        color: #fff !important;
+        border-color: #ef4444;
+    }
+    .btn-demo.green {
+        background: rgba(45,106,79,0.09);
+        color: var(--emerald) !important;
+        border: 1px solid rgba(45,106,79,0.2);
+    }
+    .btn-demo.green:hover {
+        background: var(--emerald);
+        color: #fff !important;
+        border-color: var(--emerald);
     }
 
-    /* CTA Section */
-    .cta-banner {
-        background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
-        border-radius: 24px;
-        color: #ffffff;
-        padding: 3.5rem 2rem;
+    /* ── Responsive ──────────────────────────────────────────────── */
+    @media (max-width: 575px) {
+        .setup-banner { flex-direction: column; align-items: flex-start; }
+        .hero-section { padding: 44px 0 40px; }
     }
-    /* Custom Tracking and Typography Alignment */
-.tracking-tight {
-    letter-spacing: -0.8px;
-}
-
-/* Card Container Base styling */
-.demo-card {
-    border: 1px solid rgba(0, 0, 0, 0.06);
-    border-radius: 16px;
-    background: #ffffff;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    overflow: hidden;
-}
-
-/* Hover effects for a premium feel */
-.demo-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
-}
-
-/* Rounded square container for icons */
-.icon-badge-shape {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 56px;
-    height: 56px;
-    border-radius: 12px;
-    font-size: 1.5rem;
-}
-
-/* Text Typography updates */
-.demo-card-title {
-    font-weight: 600;
-    color: #1e293b; /* Dark slate */
-    letter-spacing: -0.01em;
-}
-
-.demo-card-text {
-    font-size: 0.95rem;
-    color: #64748b; /* Soft muted gray */
-    line-height: 1.6;
-}
-
-/* Button interactive upgrades */
-.btn-demo-action {
-    font-weight: 500;
-    padding: 0.75rem 1.5rem;
-    border-radius: 10px;
-    border: none;
-    transition: all 0.2s ease;
-}
-
-/* Smooth arrow nudge animation on button hover */
-.btn-demo-action i {
-    transition: transform 0.2s ease;
-}
-
-.btn-demo-action:hover i {
-    transform: translateX(4px);
-}
 </style>
-
 {% endblock %}
 
 {% block content %}
-<!-- Welcome Hero Panel -->
-<section class="hero-section">
-    
-    <div class="container text-center">
-  {% if company %}
-    <!-- Active Premium Company Profile Badge / Banner Sub-Header -->
-    <div class="mb-4">
-        <span class="d-inline-flex align-items-center gap-2 px-3 py-1.5 rounded-pill fw-semibold shadow-sm" 
-              style="background-color: #ffffff; color: #0f172a; font-size: 0.85rem; border: 1px solid #e2e8f0;">
-            <i class="bi bi-building-check" style="color: var(--bf-primary, #20c997); font-size: 1rem;"></i>
-            Connected Workspace: <strong class="ms-1" style="color: var(--bf-primary, #20c997);">{{ company.company_name }}</strong>
-        </span>
-    </div>
-{% else %}
-    <!-- Modern Premium Setup Banner Component -->
-    <div class="position-relative overflow-hidden p-3 mb-3 d-flex flex-column flex-lg-row align-items-lg-center justify-content-between gap-4" 
-         style="background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%); border: 1px solid #e2e8f0; border-radius: 24px; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.03);">
-        
-        <!-- Luxury Dot-Grid Background Element Styling -->
-        <div class="position-absolute opacity-10" style="top: 0; right: 0; width: 150px; height: 100%; background-image: radial-gradient(#0f172a 1.5px, transparent 1.5px); background-size: 12px 12px; pointer-events: none;"></div>
 
-        <!-- Left Context Layout: Phrasing & Progress Tracker -->
-        <div class="d-flex align-items-start gap-3 position-relative" style="z-index: 1;">
-            {% comment %} <div class="d-inline-flex align-items-center justify-content-center flex-shrink-0" 
-                 style="width: 48px; height: 48px; background-color: color-mix(in srgb, var(--bf-primary, #20c997) 10%, transparent); color: var(--bf-primary, #20c997); border-radius: 14px;">
-                <i class="bi bi-sliders" style="font-size: 1.3rem;"></i>
-            </div> {% endcomment %}
-            
-            <div>
-                <!-- Step tracker status badge link -->
-                <span class="badge mb-2 px-2.5 py-1 text-uppercase fw-bold" 
-                      style="font-size: 0.7rem; background-color: #fef3c7; color: #d97706; letter-spacing: 0.05em; border-radius: 6px;">
-                    Step 1 of 2: Foundation
+<!-- ══════════════════════════════════════════════════
+     HERO
+══════════════════════════════════════════════════ -->
+<section class="hero-section mt-4">
+    <div class="container px-4 text-center">
+
+        {% if company %}
+            <!-- Connected workspace badge -->
+            <div class="mb-4">
+                <span class="workspace-badge">
+                    <span class="ws-dot"></span>
+                    Connected Workspace:
+                    <span class="ws-name">{{ company.company_name }}</span>
                 </span>
-                
-                <h4 class="fw-bold mb-1" style="color: #0f172a; font-size: 1.35rem; letter-spacing: -0.02em;">
-                    Create your chatbot by adding company details
-                </h4>
-                
-                <p class="text-muted m-0 small" style="font-size: 0.9rem; max-w-xl: 550px;">
-                    Before building an AI assistant, tell us a bit about your business. This helps your bot learn your goals and answer customer questions correctly.
-                </p>
             </div>
-        </div>
+        {% else %}
+            <!-- Setup prompt banner -->
+            <div class="setup-banner mx-auto mb-4" style="max-width: 780px;">
+                <div style="position:relative; z-index:1;">
+                    <span class="setup-step-badge">Step 1 of 2 — Foundation</span>
+                    <h4 class="setup-title">Create your chatbot by adding company details</h4>
+                    <p class="setup-sub">
+                        Before building an AI assistant, tell us a bit about your business. This helps your bot learn your goals and answer customer questions correctly.
+                    </p>
+                </div>
+                <a href="{% url 'company_setup' %}" class="btn-setup">
+                    Start Setup
+                    <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+        {% endif %}
 
-        <!-- Right Side Call-To-Action Layout Event Button link -->
-        <div class="flex-shrink-0 position-relative" style="z-index: 1;">
-            <a href="{% url 'company_setup' %}" 
-               class="btn d-inline-flex align-items-center gap-2 fw-semibold px-4 py-2.5 text-white shadow" 
-               style="background-color: var(--bf-primary, #20c997); border: none; border-radius: 12px; font-size: 0.95rem; transition: all 0.2s ease;">
-                <span>Start Setup</span>
-                <i class="bi bi-arrow-right" style="font-size: 1rem;"></i>
-            </a>
-        </div>
-
-    </div>
-{% endif %}
-        <h1 class="hero-title mb-3">
-            Forge Your AI Automations
-        </h1>
-        <p class="text-muted mx-auto lead" style="max-width: 600px;">
+        <h1 class="hero-title">Forge Your AI Automations</h1>
+        <p class="mx-auto mb-5" style="max-width:580px; font-size:1.05rem; line-height:1.7; color:var(--muted); font-weight:500;">
             Welcome to your central control hub. Build, configure, and orchestrate automated bots to revolutionize your business workflows.
         </p>
-        <div class="d-flex justify-content-center gap-3 mt-4">
-            <a href="{% url 'bot_list' %}" class="btn btn-primary btn-lg px-4 rounded-3 fw-bold">
-                <i class="bi bi-plus-lg me-1"></i> Build a Bot
+
+        <div class="d-flex flex-column flex-sm-row justify-content-center gap-3">
+            <a href="{% url 'bot_list' %}" class="btn-forest">
+                <i class="bi bi-plus-lg"></i>
+                Build a Bot
             </a>
-            <a href="#" class="btn btn-outline-secondary btn-lg px-4 rounded-3">
+            <a href="#" class="btn-ghost">
+                <i class="bi bi-book"></i>
                 Documentation
             </a>
         </div>
     </div>
 </section>
 
-<!-- Main Functional Areas -->
-<section class="container my-5 py-3">
-    <div class="text-center mb-5">
-        <h2 class="fw-bold text-dark">Where would you like to start?</h2>
-        <p class="text-muted">Jump straight into managing your automation ecosystems.</p>
-    </div>
+<!-- ══════════════════════════════════════════════════
+     DEMO BOTS
+══════════════════════════════════════════════════ -->
+<section id="demo-bots" class="demo-section">
+    <div class="container px-4">
 
-    <div class="row g-4 justify-content-center">
-        <!-- Feature 1 -->
-        <div class="col-12 col-md-4">
-            <div class="card shadow-sm h-100 p-4 feature-card">
-                <div class="card-body p-0">
-                    <div class="icon-box bg-primary-subtle text-primary">
-                        <i class="bi bi-robot"></i>
-                    </div>
-                    <h4 class="fw-bold text-dark mb-2">Bot Factory</h4>
-                    <p class="text-muted small">Deploy, write scripts, or tweak parameters for your live AI system agents.</p>
-                    <a href="#" class="text-decoration-none fw-semibold small stretched-link">
-                        Open Workspace <i class="bi bi-arrow-right ms-1"></i>
-                    </a>
-                </div>
-            </div>
+        <div class="text-center mb-5">
+            <div class="sec-eyebrow">Live Demos</div>
+            <h2 class="sec-title">Explore Live Demo Bots</h2>
+            <p class="sec-sub mx-auto" style="max-width:560px;">
+                Test drive our pre-trained contextual models right out of the box and experience the raw power of BotForge logic processing.
+            </p>
         </div>
 
-        <!-- Feature 2 -->
-        <div class="col-12 col-md-4">
-            <div class="card shadow-sm h-100 p-4 feature-card">
-                <div class="card-body p-0">
-                    <div class="icon-box bg-success-subtle text-success">
-                        <i class="bi bi-cpu"></i>
-                    </div>
-                    <h4 class="fw-bold text-dark mb-2">Integrations</h4>
-                    <p class="text-muted small">Connect BotForge natively to Slack, webhooks, databases, and third-party APIs.</p>
-                    <a href="#" class="text-decoration-none fw-semibold small text-success stretched-link">
-                        Manage Connections <i class="bi bi-arrow-right ms-1"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
+        <div class="row g-4">
 
-        <!-- Feature 3 -->
-        <div class="col-12 col-md-4">
-            <div class="card shadow-sm h-100 p-4 feature-card">
-                <div class="card-body p-0">
-                    <div class="icon-box bg-warning-subtle text-warning">
-                        <i class="bi bi-bar-chart"></i>
+            <!-- School Bot -->
+            <div class="col-12 col-md-4">
+                <div class="demo-card card-blue">
+                    <div class="card-body">
+                        <div>
+                            <div class="demo-icon-wrap" style="background: rgba(59,130,246,0.1); color: #3b82f6;">
+                                <i class="bi bi-mortarboard"></i>
+                            </div>
+                            <h4 class="demo-card-title">School Assistant Bot</h4>
+                            <p class="demo-card-text">
+                                Answers admission queries, school timings, fee details, facilities, transport information, and student-related questions instantly.
+                            </p>
+                        </div>
+                        <a href="{% url 'school_demo_bot' %}" class="btn-demo blue">
+                            Try Now
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
                     </div>
-                    <h4 class="fw-bold text-dark mb-2">Live Analytics</h4>
-                    <p class="text-muted small">Track process status loads, success run rates, and daily credit logs.</p>
-                    <a href="#" class="text-decoration-none fw-semibold small text-warning stretched-link">
-                        View Metrics <i class="bi bi-arrow-right ms-1"></i>
-                    </a>
                 </div>
             </div>
+
+            <!-- Healthcare Bot -->
+            <div class="col-12 col-md-4">
+                <div class="demo-card card-red">
+                    <div class="card-body">
+                        <div>
+                            <div class="demo-icon-wrap" style="background: rgba(239,68,68,0.09); color: #ef4444;">
+                                <i class="bi bi-hospital"></i>
+                            </div>
+                            <h4 class="demo-card-title">Healthcare Assistant Bot</h4>
+                            <p class="demo-card-text">
+                                Provides appointment details, doctor availability, departments, medical services, and patient support information instantly.
+                            </p>
+                        </div>
+                        <a href="{% url 'healthcare_demo_bot' %}" class="btn-demo red">
+                            Try Now
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- E-Commerce Bot -->
+            <div class="col-12 col-md-4">
+                <div class="demo-card card-green">
+                    <div class="card-body">
+                        <div>
+                            <div class="demo-icon-wrap" style="background: rgba(45,106,79,0.1); color: var(--emerald);">
+                                <i class="bi bi-cart3"></i>
+                            </div>
+                            <h4 class="demo-card-title">E-Commerce Support Bot</h4>
+                            <p class="demo-card-text">
+                                Helps customers with order tracking, returns, payment issues, shipping updates, and product assistance.
+                            </p>
+                        </div>
+                        <a href="{% url 'ecommerce_demo_bot' %}" class="btn-demo green">
+                            Try Now
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </section>
 
-<!-- Footer Banner Callout -->
-<section class="container mb-5 mt-5">
-    <div class="cta-banner shadow text-center position-relative overflow-hidden">
-        <h2 class="fw-bold mb-2">Need a custom AI setup?</h2>
-        <p class="mx-auto mb-4 opacity-75" style="max-width: 500px;">
-            Explore pre-configured logic setups tailored perfectly for operations matching {{ company.company_name }}.
-        </p>
-        <button class="btn btn-light text-primary fw-bold px-4 py-2 rounded-3">
-            Browse Blueprints
-        </button>
-    </div>
-</section>
-<section id="demo-bots" class="container my-5 py-4">
-
-    <!-- Section Header layout with clean spacing -->
-    <div class="text-center mb-5">
-        <h2 class="fw-bold text-dark display-6 tracking-tight mb-2">
-            Explore Live Demo Bots
-        </h2>
-        <p class="text-muted mx-auto" style="max-width: 580px;">
-            Test drive our pre-trained contextual models right out of the box to experience the core raw power of BotForge logic processing.
-        </p>
-    </div>
-
-   <div class="row g-4">
-
-    <!-- School Assistant Bot -->
-    <div class="col-12 col-md-4">
-        <div class="card h-100 demo-card">
-            <div class="card-body d-flex flex-column justify-content-between p-4 p-lg-5">
-                <div>
-                    <div class="icon-badge-shape bg-primary-subtle text-primary mb-4">
-                        <i class="bi bi-mortarboard"></i>
-                    </div>
-                    <h4 class="demo-card-title mb-3">School Assistant Bot</h4>
-                    <p class="demo-card-text mb-0">
-                        Answers admission queries, school timings, fee details, facilities, transport information, and student-related questions instantly.
-                    </p>
-                </div>
-                <a href="{% url 'school_demo_bot' %}" class="btn btn-demo-action btn-primary w-100 mt-4 d-flex align-items-center justify-content-center">
-                    Try Now
-                    <i class="bi bi-arrow-right small ms-1"></i>
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Healthcare Assistant -->
-    <div class="col-12 col-md-4">
-        <div class="card h-100 demo-card">
-            <div class="card-body d-flex flex-column justify-content-between p-4 p-lg-5">
-                <div>
-                    <div class="icon-badge-shape bg-danger-subtle text-danger mb-4">
-                        <i class="bi bi-hospital"></i>
-                    </div>
-                    <h4 class="demo-card-title mb-3">Healthcare Assistant Bot</h4>
-                    <p class="demo-card-text mb-0">
-                        Provides appointment details, doctor availability, departments, medical services, and patient support information instantly.
-                    </p>
-                </div>
-                <a href="{% url 'healthcare_demo_bot' %}" class="btn btn-demo-action btn-danger w-100 mt-4 d-flex align-items-center justify-content-center">
-                    Try Now
-                    <i class="bi bi-arrow-right small ms-1"></i>
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <!-- E-Commerce Support Bot -->
-    <div class="col-12 col-md-4">
-        <div class="card h-100 demo-card">
-            <div class="card-body d-flex flex-column justify-content-between p-4 p-lg-5">
-                <div>
-                    <div class="icon-badge-shape bg-success-subtle text-success mb-4">
-                        <i class="bi bi-cart3"></i>
-                    </div>
-                    <h4 class="demo-card-title mb-3">E-Commerce Support Bot</h4>
-                    <p class="demo-card-text mb-0">
-                        Helps customers with order tracking, returns, payment issues, shipping updates, and product assistance.
-                    </p>
-                </div>
-                <a href="{% url 'ecommerce_demo_bot' %}" class="btn btn-demo-action btn-success w-100 mt-4 d-flex align-items-center justify-content-center">
-                    Try Now
-                    <i class="bi bi-arrow-right small ms-1"></i>
-                </a>
-            </div>
-        </div>
-    </div>
-
-</div>
-</section>
 {% endblock %}
 
 {% block internal_js %}
 <script>
+    // Cursor glow on demo cards
+    document.querySelectorAll('.demo-card').forEach(card => {
+        card.addEventListener('mousemove', e => {
+            const r = card.getBoundingClientRect();
+            const x = ((e.clientX - r.left) / r.width) * 100;
+            const y = ((e.clientY - r.top) / r.height) * 100;
+            card.style.background =
+                `radial-gradient(circle at ${x}% ${y}%, rgba(45,106,79,0.05) 0%, rgba(255,255,255,0.90) 55%)`;
+        });
+        card.addEventListener('mouseleave', () => {
+            card.style.background = '';
+        });
+    });
+
     console.log("BotForge Landing Portal Initialized Successfully.");
 </script>
 {% endblock %}
