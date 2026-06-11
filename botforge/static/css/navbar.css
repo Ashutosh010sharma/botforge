@@ -6,7 +6,7 @@
     transform: translateX(-50%);
     z-index: 1050;
     width: calc(100% - 48px);
-    max-width: 1170px;
+    
 
     background: rgba(1, 67, 30, 0.63);
     backdrop-filter: blur(20px);
