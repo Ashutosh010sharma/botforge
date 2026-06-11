@@ -266,7 +266,7 @@ My Assistants | AI Workspace Dashboard
             <h2 class="dashboard-title">My Virtual Assistants</h2>
             <p class="dashboard-sub mb-0">Deploy, manage, and configure your active context-trained workspace instances.</p>
         </div>
-        <a href="javascript:void(0)" id="createBotBtn">
+        <a href="javascript:void(0)" class="createBotBtn" id="createBotBtn">
             <i class="bi bi-plus-lg"></i>
             Create Bot
         </a>
@@ -367,7 +367,7 @@ My Assistants | AI Workspace Dashboard
                 </div>
                 <h4 class="empty-title">No Active AI Assistants Found</h4>
                 <p class="empty-sub">Get started by building your first context-trained knowledge agent to handle instant user communications.</p>
-                <a href="{% url 'bot_create' %}" class="btn-empty">
+                <a href="javascript:void(0)" class="btn-empty createBotBtn">
                     <i class="bi bi-plus-lg"></i>
                     Build Your First Bot
                 </a>
@@ -382,7 +382,7 @@ My Assistants | AI Workspace Dashboard
 {% block internal_js %}
 <script>
 
-$("#createBotBtn").click(function(){
+$(".createBotBtn").click(function(){
 
     $.ajax({
 
