@@ -1,0 +1,266 @@
+
+   .bf-nav {
+    position: fixed;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1050;
+    width: calc(100% - 48px);
+    max-width: 1170px;
+
+    background: rgba(1, 67, 30, 0.63);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 100px;
+
+    box-shadow:
+        0 8px 32px rgba(0,0,0,0.15),
+        inset 0 1px 0 rgba(255,255,255,0.08);
+
+    transition: all .35s ease;
+}
+
+.bf-nav.scrolled {
+    background: rgba(1, 67, 30, 0.45);
+    backdrop-filter: blur(26px);
+    -webkit-backdrop-filter: blur(26px);
+
+    border-color: rgba(255,255,255,0.08);
+
+    box-shadow:
+        0 10px 40px rgba(0,0,0,0.18),
+        inset 0 1px 0 rgba(255,255,255,0.06);
+}
+ 
+    .bf-nav-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 4px 18px;
+        gap: 12px;
+    }
+ 
+    /* Brand */
+    .bf-brand {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-family: 'Sora', sans-serif;
+        font-size: 1.05rem;
+        font-weight: 800;
+        color: #fff !important;
+        text-decoration: none;
+        letter-spacing: -0.03em;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+    .bf-brand:hover { color: var(--emerald) !important; color: #a7f3d0 !important; }
+    .bf-brand-icon {
+        width: 30px; height: 30px;
+        border-radius: 8px;
+        background: var(--forest);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--mint);
+        font-size: 0.85rem;
+    }
+ 
+    /* Nav links */
+    .bf-links {
+        display: flex;
+        align-items: center;
+        gap: 2px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    .bf-link {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: rgba(255,255,255,0.85) !important;
+        text-decoration: none;
+        padding: 6px 12px;
+        border-radius: 10px;
+        transition: all .25s ease;
+        white-space: nowrap;
+    }
+    .bf-link:hover {
+        background: rgba(16,185,129,0.25);
+        color: #fff !important;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 14px rgba(16,185,129,.25);
+    }
+    .bf-link-active {
+        background: rgba(16, 185, 129, 0.25);
+        color: #ffffff !important;
+        font-weight: 700;
+        box-shadow: 0 4px 14px rgba(16, 185, 129, 0.25);
+    }
+ 
+    /* Right side actions */
+    .bf-actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-shrink: 0;
+    }
+ 
+    .bf-username {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: .82rem;
+    font-weight: 600;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 10px;
+    background: rgba(255,255,255,.10);
+    border: 1px solid rgba(255,255,255,.08);
+}
+ 
+    /* Ghost button */
+    .bf-btn-ghost {
+    display: inline-flex;
+    align-items: center;
+
+    font-size: .82rem;
+    font-weight: 700;
+
+    color: #fff !important;
+
+    background: rgba(255,255,255,.08);
+
+    border: 1px solid rgba(255,255,255,.15);
+
+    border-radius: 10px;
+
+    padding: 6px 14px;
+
+    text-decoration: none;
+
+    transition: all .25s ease;
+}
+
+.bf-btn-ghost:hover {
+    background: rgba(16,185,129,.25);
+    border-color: rgba(16,185,129,.5);
+
+    color: #fff !important;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 4px 14px rgba(16,185,129,.25);
+}
+ 
+    /* Primary button */
+    .bf-btn-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.82rem;
+        font-weight: 700;
+        color: #fff !important;
+        background: var(--forest);
+        border: none;
+        border-radius: 9px;
+        padding: 7px 16px;
+        text-decoration: none;
+        box-shadow: 0 2px 10px rgba(15, 36, 24, 0.2);
+        transition: all 0.18s ease;
+        white-space: nowrap;
+    }
+    .bf-btn-primary:hover {
+    background: #10b981;
+    color: #fff !important;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 6px 18px rgba(16,185,129,.35);
+}
+ 
+    /* Danger button */
+    .bf-btn-danger {
+        display: inline-flex;
+        align-items: center;
+        font-size: 0.82rem;
+        font-weight: 700;
+        color: #fff !important;
+        background: #dc2626;
+        border: none;
+        border-radius: 9px;
+        padding: 7px 14px;
+        text-decoration: none;
+        transition: all 0.18s ease;
+        white-space: nowrap;
+    }
+    .bf-btn-danger:hover {
+    background: #ef4444;
+    color: #fff !important;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 6px 18px rgba(239,68,68,.35);
+}
+ 
+    /* Mobile toggler */
+    .bf-toggler {
+        display: none;
+        background: none;
+        border: 1.5px solid rgba(45,106,79,0.2);
+        border-radius: 8px;
+        padding: 5px 9px;
+        font-size: 1.1rem;
+        color: var(--forest);
+        cursor: pointer;
+        transition: background 0.15s;
+    }
+    .bf-toggler:hover { background: rgba(45,106,79,0.07); }
+ 
+    /* Page offset so content doesn't hide under fixed nav */
+    body { padding-top: 80px; }
+ 
+    /* Mobile */
+    @media (max-width: 991px) {
+        .bf-nav { width: calc(100% - 24px); top: 10px; }
+ 
+        .bf-toggler { display: flex; align-items: center; }
+ 
+        .bf-nav .navbar-collapse {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0; right: 0;
+            background: rgba(1, 67, 30, 0.95);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(45,106,79,0.14);
+            border-radius: 14px;
+            box-shadow: 0 8px 30px rgba(15,36,24,0.12);
+            padding: 12px 16px 16px;
+        }
+        .bf-nav .navbar-collapse {
+            color: white;
+        }
+ 
+        .bf-links {
+            flex-direction: column;
+            align-items: flex-start;
+            width: 100%;
+            gap: 2px;
+            margin-bottom: 10px;
+        }
+        .bf-link { width: 100%; padding: 8px 10px; }
+ 
+        .bf-actions {
+            flex-wrap: wrap;
+            width: 100%;
+            border-top: 1px solid rgba(45,106,79,0.1);
+            padding-top: 10px;
+            gap: 6px;
+        }
+        .bf-username { width: 100%; }
+        .bf-btn-ghost,
+        .bf-btn-primary,
+        .bf-btn-danger { flex: 1; justify-content: center; }
+    }

@@ -5,116 +5,226 @@ Login | BotForge
 {% endblock %}
 
 {% block internal_css %}
+<style>
+    .auth-container {
+        min-height: 80vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px 16px;
+        position: relative;
+    }
 
-.auth-container {
-    min-height: 80vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+    .auth-container::before {
+        content: '';
+        position: fixed;
+        top: 0; left: 50%;
+        transform: translateX(-50%);
+        width: 600px; height: 600px;
+        background: radial-gradient(ellipse at center, rgba(255,255,255,0.5) 0%, transparent 68%);
+        pointer-events: none;
+        z-index: 0;
+    }
 
-.auth-card {
-    width: 100%;
-    max-width: 440px;
-    border: none;
-    border-radius: 16px;
-    background: #ffffff;
-}
+    .auth-card {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        max-width: 360px;
+        background: rgba(255,255,255,0.93);
+        border: 1px solid rgba(45,106,79,0.14);
+        border-radius: 20px;
+        box-shadow: 0 2px 0 rgba(255,255,255,0.8) inset,
+                    0 16px 48px rgba(15,36,24,0.11);
+        overflow: hidden;
+    }
 
+    .auth-card::before {
+        content: '';
+        display: block;
+        height: 4px;
+        background: linear-gradient(90deg, var(--forest), var(--mint));
+    }
 
-.auth-header h2 {
-    font-weight: 700;
-    color: #212529;
-    letter-spacing: -0.5px;
-}
+    .auth-body { padding: 24px 26px 22px; }
 
-/* Enhancing Django's raw form inputs to look good with Bootstrap */
-.auth-card input[type="text"],
-.auth-card input[type="password"] {
-    display: block;
-    width: 100%;
-    padding: 0.75rem 1rem;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #212529;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #ced4da;
-    appearance: none;
-    border-radius: 10px;
-    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-}
+    /* Logo + header */
+    .auth-logo {
+        width: 38px; height: 38px;
+        border-radius: 10px;
+        background: var(--forest);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--mint);
+        font-size: 1.05rem;
+        margin-bottom: 14px;
+        box-shadow: 0 3px 12px rgba(15,36,24,0.18);
+    }
 
-.auth-card input:focus {
-    color: #212529;
-    background-color: #fff;
-    border-color: #86b7fe;
-    outline: 0;
-    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
-}
+    .auth-title {
+        font-family: 'Sora', sans-serif;
+        font-size: 1.25rem;
+        font-weight: 800;
+        letter-spacing: -0.035em;
+        color: var(--text);
+        margin-bottom: 3px;
+    }
+    .auth-sub {
+        font-size: 0.82rem;
+        color: var(--muted);
+        margin-bottom: 20px;
+    }
 
-.btn-login {
-    padding: 0.75rem 1rem;
-    font-weight: 600;
-    border-radius: 10px;
-    transition: all 0.2s ease;
-}
+    /* Labels */
+    .field-label {
+        display: block;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 5px;
+    }
 
-.btn-login:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(13, 110, 253, 0.2);
-}
+    /* Inputs */
+    .auth-card input[type="text"],
+    .auth-card input[type="password"] {
+        display: block;
+        width: 100%;
+        padding: 9px 12px;
+        font-size: 0.88rem;
+        font-weight: 500;
+        color: var(--text);
+        background: rgba(255,255,255,0.9);
+        border: 1.5px solid rgba(45,106,79,0.2);
+        border-radius: 9px;
+        outline: none;
+        appearance: none;
+        transition: border-color 0.18s, box-shadow 0.18s;
+    }
+    .auth-card input[type="text"]:focus,
+    .auth-card input[type="password"]:focus {
+        background: #fff;
+        border-color: var(--emerald);
+        box-shadow: 0 0 0 3px rgba(45,106,79,0.11);
+    }
 
-.alert-custom {
-    border-radius: 10px;
-    border: none;
-    font-size: 0.9rem;
-}
+    .field-group { margin-bottom: 13px; }
+
+    /* Submit */
+    .btn-login {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+        width: 100%;
+        margin-top: 18px;
+        padding: 10px 18px;
+        font-family: 'Sora', sans-serif;
+        font-size: 0.88rem;
+        font-weight: 700;
+        color: #fff;
+        background: var(--forest);
+        border: none;
+        border-radius: 9px;
+        cursor: pointer;
+        box-shadow: 0 3px 14px rgba(15,36,24,0.2);
+        transition: all 0.2s ease;
+    }
+    .btn-login:hover {
+        background: var(--forest-deep);
+        transform: translateY(-1px);
+        box-shadow: 0 6px 20px rgba(15,36,24,0.26);
+    }
+    .btn-login i { font-size: 0.9rem; transition: transform 0.2s; }
+    .btn-login:hover i { transform: translateX(3px); }
+
+    /* Divider */
+    .auth-divider {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 16px 0;
+        font-size: 0.74rem;
+        color: rgba(74,124,94,0.4);
+        font-weight: 500;
+    }
+    .auth-divider::before,
+    .auth-divider::after {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background: rgba(45,106,79,0.11);
+    }
+
+    /* Footer */
+    .auth-footer {
+        text-align: center;
+        font-size: 0.82rem;
+        color: var(--muted);
+    }
+    .auth-footer a {
+        color: var(--emerald);
+        font-weight: 700;
+        text-decoration: none;
+    }
+    .auth-footer a:hover { color: var(--forest); text-decoration: underline; }
+
+    /* Errors */
+    .errorlist { list-style: none; padding: 0; margin: 4px 0 0; }
+    .errorlist li { font-size: 0.76rem; color: #dc2626; font-weight: 500; }
+    .auth-alert {
+        border-radius: 9px;
+        font-size: 0.82rem;
+        border: none;
+        background: rgba(220,38,38,0.07);
+        color: #b91c1c;
+        padding: 8px 12px;
+        margin-bottom: 14px;
+    }
+</style>
 {% endblock %}
 
 {% block content %}
-<div class="auth-container px-3">
-    <div class="card shadow-lg auth-card">
-        <div class="card-body p-4 p-sm-5">
-            
-            <div class="auth-header text-center mb-4">
-               
-                <h2>Welcome back</h2>
-                <p class="text-muted small">
-                    Enter your credentials to access your dashboard
-                </p>
+<div class="auth-container d-flex justify-content-center my-3">
+    <div class="auth-card">
+
+        <div class="auth-body">
+
+            <div class="auth-logo">
+                <i class="bi bi-robot"></i>
             </div>
 
-           
+            <h2 class="auth-title">Welcome back</h2>
+            <p class="auth-sub">Sign in to access your dashboard.</p>
 
-            <form method="POST">
+
+            <form method="POST" novalidate>
                 {% csrf_token %}
-                
-                <div class="mb-3">
-                    <label class="form-label small fw-semibold text-secondary">Username</label>
+
+                <div class="field-group">
+                    <label class="field-label" for="{{ form.username.id_for_label }}">Username</label>
                     {{ form.username }}
+                   
                 </div>
 
-                <div class="mb-4">
-                    <div class="d-flex justify-content-between align-items-center mb-1">
-                        <label class="form-label small fw-semibold text-secondary mb-0">Password</label>
-                        <!-- Optional feature link if you set up password reset later -->
-                        <!-- <a href="#" class="text-decoration-none small text-muted">Forgot?</a> -->
-                    </div>
+                <div class="field-group">
+                    <label class="field-label" for="{{ form.password.id_for_label }}">Password</label>
                     {{ form.password }}
+                   
                 </div>
 
-                <button type="submit" class="btn btn-primary btn-login w-100 mb-3">
-                    Sign In
+                <button type="submit" class="btn-login">
+                    Sign In <i class="bi bi-arrow-right"></i>
                 </button>
             </form>
 
-            <div class="text-center mt-4">
-                <span class="text-muted small">Don't have an account?</span>
-                <a href="{% url 'register' %}" class="text-decoration-none small fw-semibold ms-1">
-                    Create one here
-                </a>
+            <div class="auth-divider">or</div>
+
+            <div class="auth-footer">
+                Don't have an account?
+                <a href="{% url 'register' %}">Create one here</a>
             </div>
 
         </div>

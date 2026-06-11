@@ -1,112 +1,101 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+<nav id="bf-nav" class="navbar navbar-expand-lg bf-nav">
+    <div class="bf-nav-inner w-100">
 
-    <div class="container">
-
-        <a
-            class="navbar-brand fw-bold"
-            href="/"
-        >
+        <a class="bf-brand" href="/">
+            <span class="bf-brand-icon">
+                <i class="bi bi-robot"></i>
+            </span>
             BotForge
         </a>
 
-
-        <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarContent"
-        >
-
-            <span class="navbar-toggler-icon"></span>
-
+        <button class="bf-toggler navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarContent"
+                aria-controls="navbarContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+            <i class="bi bi-list"></i>
         </button>
 
+        <div class="collapse navbar-collapse" id="navbarContent">
 
-        <div
-            class="collapse navbar-collapse"
-            id="navbarContent"
-        >
-
-            <ul class="navbar-nav me-auto">
-
-                {% comment %} <li class="nav-item">
-
-                    <a
-                        class="nav-link"
-                        href="/"
-                    >
-                        Home
-                    </a>
-
-                </li> {% endcomment %}
-
-               
+            <ul class="bf-links navbar-nav">
 
                 <li class="nav-item">
-
-                    <a
-                        class="nav-link"
-                        href="{% if user.is_authenticated %}{% url 'dashboard' %}#demo-bots{% else %}{% url 'login' %}?next={% url 'dashboard' %}#demo-bots{% endif %}"
-                    >
+                    <a class="bf-link nav-link {% if request.resolver_match.url_name == 'dashboard' %}bf-link-active{% endif %}"
+                       href="{% if user.is_authenticated %}{% url 'dashboard' %}#demo-bots{% else %}{% url 'login' %}?next={% url 'dashboard' %}#demo-bots{% endif %}">
                         Demo Bots
                     </a>
-
                 </li>
-                <li class="nav-item">
-                <a class="nav-link" href="{% url 'bot_list' %}">
-                    My Bots
-                </a>
-            </li>
-             <li class="nav-item">
 
-                    <a
-                        class="nav-link"
-                        href="{% url 'pricing' %}"
-                    >
+                <li class="nav-item">
+                    <a class="bf-link nav-link {% if request.resolver_match.url_name == 'bot_list' %}bf-link-active{% endif %}"
+                       href="{% url 'bot_list' %}">
+                        My Bots
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="bf-link nav-link {% if request.resolver_match.url_name == 'pricing' %}bf-link-active{% endif %}"
+                       href="{% url 'pricing' %}">
                         Pricing
                     </a>
-
                 </li>
 
             </ul>
 
+            <div class="d-flex justify-content-end w-100">
+                <div class="bf-actions">
 
-            <div class="d-flex align-items-center gap-2">
+                    {% if user.is_authenticated %}
 
-                {% if user.is_authenticated %}
+                        <span class="bf-username">
+                            <i class="bi bi-person-circle"></i>
+                            {{ user.username }}
+                        </span>
 
-                    <span class="text-light me-2">
+                        <a href="{% url 'dashboard' %}"
+                           class="bf-btn-ghost">
+                            Dashboard
+                        </a>
 
-                        Welcome,
-                        {{ user.username }}
+                        <a href="{% url 'logout' %}"
+                           class="bf-btn-danger">
+                            Logout
+                        </a>
 
-                    </span>
+                    {% else %}
 
-                    <a href="{% url 'dashboard' %}" class="btn btn-outline-light">Dashboard</a>
+                        <a href="{% url 'login' %}"
+                           class="bf-btn-ghost">
+                            Login
+                        </a>
 
-                    <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
-                {% else %}
+                        <a href="{% url 'register' %}"
+                           class="bf-btn-primary">
+                            Get Started
+                        </a>
 
-                    <a
-                        href="{% url 'login' %}"
-                        class="btn btn-outline-light"
-                    >
-                        Login
-                    </a>
+                    {% endif %}
 
-                    <a
-                        href="{% url 'register' %}"
-                        class="btn btn-primary"
-                    >
-                        Get Started
-                    </a>
-
-                {% endif %}
-
+                </div>
             </div>
 
         </div>
 
     </div>
-
 </nav>
+
+<script>
+(function () {
+    const nav = document.getElementById('bf-nav');
+
+    function onScroll() {
+        nav.classList.toggle('scrolled', window.scrollY > 20);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+})();
+</script>

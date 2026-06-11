@@ -1,153 +1,263 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
 
-{% block title %} 
-Register | BotForge 
+{% block title %}
+Register | BotForge
 {% endblock %}
 
 {% block internal_css %}
-body {
-    background-color: #f8f9fa;
-}
+<style>
+    .auth-container {
+        min-height: 80vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 32px 16px;
+        position: relative;
+       
+    }
 
-.auth-container {
-    min-height: 90vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+    .auth-container::before {
+        content: '';
+        position: fixed;
+        top: 0; left: 50%;
+        transform: translateX(-50%);
+        width: 650px; height: 650px;
+        background: radial-gradient(ellipse at center,
+            rgba(255,255,255,0.5) 0%, transparent 68%);
+        pointer-events: none;
+        z-index: 0;
+    }
 
-.auth-card {
-    width: 100%;
-    max-width: 500px; /* Slightly wider than login to accommodate longer forms comfortably */
-    border: none;
-    border-radius: 16px;
-    background: #ffffff;
-}
+    .auth-card {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        max-width: 420px;
+        background: rgba(255,255,255,0.93);
+        border: 1px solid rgba(45,106,79,0.14);
+        border-radius: 20px;
+        box-shadow: 0 2px 0 rgba(255,255,255,0.8) inset,
+                    0 16px 48px rgba(15,36,24,0.11);
+        overflow: hidden;
+    }
 
+    .auth-card::before {
+        content: '';
+        display: block;
+        height: 4px;
+        background: linear-gradient(90deg, var(--forest), var(--mint));
+    }
 
+    .auth-body { padding: 24px 26px 22px; }
 
-.auth-header h2 {
-    font-weight: 700;
-    color: #212529;
-    letter-spacing: -0.5px;
-}
+    /* Logo */
+    .auth-logo {
+        width: 38px; height: 38px;
+        border-radius: 10px;
+        background: var(--forest);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--mint);
+        font-size: 1.05rem;
+        margin-bottom: 14px;
+        box-shadow: 0 3px 12px rgba(15,36,24,0.18);
+    }
 
-/* Styles all inputs globally within the card (both raw HTML inputs and Django's form fields) */
-.auth-card input,
-.auth-card p input {
-    display: block;
-    width: 100%;
-    padding: 0.75rem 1rem;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #212529;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #ced4da;
-    border-radius: 10px;
-    margin-top: 0.25rem;
-    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-}
+    .auth-title {
+        font-family: 'Sora', sans-serif;
+        font-size: 1.25rem;
+        font-weight: 800;
+        letter-spacing: -0.035em;
+        color: var(--text);
+        margin-bottom: 3px;
+    }
+    .auth-sub {
+        font-size: 0.82rem;
+        color: var(--muted);
+        margin-bottom: 20px;
+    }
 
-.auth-card input:focus,
-.auth-card p input:focus {
-    color: #212529;
-    background-color: #fff;
-    border-color: #86b7fe;
-    outline: 0;
-    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
-}
+    /* ── Django's {{ form.as_p }} output styling ─────────────────
+       Django wraps each field in <p> with a <label> then <input>.
+       We target those to make them look like our design system.
+    ─────────────────────────────────────────────────────────────── */
+    .django-form-fields p {
+        margin: 0 0 13px 0;
+    }
 
-/* Cleans up spacing if Django renders help text or errors inside <p> tags */
-.auth-card form p {
-    margin-bottom: 1.25rem;
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: #6c757d;
-}
+    /* Label from Django */
+    .django-form-fields p > label {
+        display: block;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 5px;
+    }
 
-.auth-card form .helptext {
-    display: block;
-    font-size: 0.8rem;
-    color: #6c757d;
-    font-weight: 400;
-    margin-top: 0.25rem;
-}
+    /* All inputs inside the form */
+    .auth-card input[type="text"],
+    .auth-card input[type="email"],
+    .auth-card input[type="password"],
+    .auth-card input[type="url"],
+    .auth-card select,
+    .auth-card textarea {
+        display: block;
+        width: 100%;
+        padding: 9px 12px;
+        font-size: 0.88rem;
+        font-weight: 500;
+        color: var(--text);
+        background: rgba(255,255,255,0.9);
+        border: 1.5px solid rgba(45,106,79,0.2);
+        border-radius: 9px;
+        outline: none;
+        appearance: none;
+        transition: border-color 0.18s, box-shadow 0.18s;
+        font-family: inherit;
+    }
+    .auth-card input:focus,
+    .auth-card select:focus,
+    .auth-card textarea:focus {
+        background: #fff;
+        border-color: var(--emerald);
+        box-shadow: 0 0 0 3px rgba(45,106,79,0.11);
+    }
 
-.btn-register {
-    padding: 0.75rem 1rem;
-    font-weight: 600;
-    border-radius: 10px;
-    transition: all 0.2s ease;
-}
+    /* Django helptext */
+    .django-form-fields .helptext,
+    .django-form-fields p > span.helptext {
+        display: block;
+        font-size: 0.73rem;
+        color: var(--muted);
+        font-weight: 400;
+        margin-top: 4px;
+        line-height: 1.45;
+        opacity: 0.8;
+    }
 
-.btn-register:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(13, 110, 253, 0.2);
-}
+    /* Django field errors */
+    .django-form-fields ul.errorlist {
+        list-style: none;
+        padding: 0;
+        margin: 4px 0 0;
+    }
+    .django-form-fields ul.errorlist li {
+        font-size: 0.76rem;
+        color: #dc2626;
+        font-weight: 500;
+    }
 
-.alert-custom {
-    border-radius: 10px;
-    border: none;
-    font-size: 0.9rem;
-}
+    /* Non-field errors */
+    .auth-alert {
+        border-radius: 9px;
+        font-size: 0.82rem;
+        border: none;
+        background: rgba(220,38,38,0.07);
+        color: #b91c1c;
+        padding: 8px 12px;
+        margin-bottom: 14px;
+    }
+
+    /* Submit button */
+    .btn-register {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+        width: 100%;
+        margin-top: 6px;
+        padding: 10px 18px;
+        font-family: 'Sora', sans-serif;
+        font-size: 0.88rem;
+        font-weight: 700;
+        color: #fff;
+        background: var(--forest);
+        border: none;
+        border-radius: 9px;
+        cursor: pointer;
+        box-shadow: 0 3px 14px rgba(15,36,24,0.2);
+        transition: all 0.2s ease;
+    }
+    .btn-register:hover {
+        background: var(--forest-deep);
+        transform: translateY(-1px);
+        box-shadow: 0 6px 20px rgba(15,36,24,0.26);
+    }
+    .btn-register i { font-size: 0.9rem; transition: transform 0.2s; }
+    .btn-register:hover i { transform: translateX(3px); }
+
+    /* Divider + footer */
+    .auth-divider {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 16px 0;
+        font-size: 0.74rem;
+        color: rgba(74,124,94,0.4);
+        font-weight: 500;
+    }
+    .auth-divider::before,
+    .auth-divider::after {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background: rgba(45,106,79,0.11);
+    }
+
+    .auth-footer {
+        text-align: center;
+        font-size: 0.82rem;
+        color: var(--muted);
+    }
+    .auth-footer a {
+        color: var(--emerald);
+        font-weight: 700;
+        text-decoration: none;
+    }
+    .auth-footer a:hover { color: var(--forest); text-decoration: underline; }
+    
+</style>
 {% endblock %}
 
 {% block content %}
-<div class="auth-container px-3 my-4">
-    <div class="card shadow-lg auth-card">
-        <div class="card-body p-4 p-sm-5">
-            
-            <div class="auth-header text-center mb-4">
-               
-                <h2>Create an account</h2>
-                <p class="text-muted small">
-                    Get started with your custom AI automation workspace
-                </p>
+<div class="auth-container d-flex justify-content-center my-3">
+    <div class="auth-card">
+
+        <div class="auth-body">
+
+            <div class="auth-logo">
+                <i class="bi bi-person-plus"></i>
             </div>
 
-            
+            <h2 class="auth-title">Create an account</h2>
+            <p class="auth-sub">Get started with your AI automation workspace.</p>
 
-            <form method="POST">
+            {% if form.non_field_errors %}
+                <div class="auth-alert">
+                    {% for error in form.non_field_errors %}{{ error }}{% endfor %}
+                </div>
+            {% endif %}
+
+            <form method="POST" novalidate>
                 {% csrf_token %}
 
-                {% comment %} <!-- Custom Fields nicely integrated with standard styles -->
-                <div class="mb-3">
-                    <label class="form-label small fw-semibold text-secondary mb-0">Company Name</label>
-                    <input
-                        type="text"
-                        name="company_name"
-                        placeholder="e.g. Acme Corp"
-                        required
-                    />
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label small fw-semibold text-secondary mb-0">Website URL</label>
-                    <input 
-                        type="url" 
-                        name="website_url" 
-                        placeholder="https://example.com" 
-                        required 
-                    />
-                </div> {% endcomment %}
-
-                <!-- Django Dynamic Form Fields (Username, Email, Passwords, etc.) -->
                 <div class="django-form-fields">
                     {{ form.as_p }}
                 </div>
 
-                <button type="submit" class="btn btn-primary btn-register w-100 mt-2 mb-3">
-                    Get Started
+                <button type="submit" class="btn-register">
+                    Get Started <i class="bi bi-arrow-right"></i>
                 </button>
             </form>
 
-            <div class="text-center mt-4">
-                <span class="text-muted small">Already have an account?</span>
-                <a href="{% url 'login' %}" class="text-decoration-none small fw-semibold ms-1">
-                    Sign in instead
-                </a>
+            <div class="auth-divider">or</div>
+
+            <div class="auth-footer">
+                Already have an account?
+                <a href="{% url 'login' %}">Sign in instead</a>
             </div>
 
         </div>

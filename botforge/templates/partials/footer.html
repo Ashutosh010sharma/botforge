@@ -1,4 +1,4 @@
-<footer class="bg-dark text-light mt-5">
+<footer class="bf-footer mt-5">
 
     <div class="container py-4">
 
@@ -6,9 +6,10 @@
 
             <div class="col-md-4">
 
-                <h5>
-                    BotForge
-                </h5>
+                <h5 class="d-flex align-items-center gap-2">
+                <i class="bi bi-robot"></i>
+                BotForge
+            </h5>
 
                 <p class="text-light-emphasis">
 
@@ -42,7 +43,7 @@
                     <li>
 
                         <a
-                            href="/pricing/"
+                            href="{% url 'pricing' %}"
                             class="footer-link"
                         >
                             Pricing
@@ -77,7 +78,7 @@
                     <li>
 
                         <a
-                            href="/legal/privacy/"
+                            href="#"
                             class="footer-link"
                         >
                             Privacy Policy
@@ -88,7 +89,7 @@
                     <li>
 
                         <a
-                            href="/legal/terms/"
+                            href="#"
                             class="footer-link"
                         >
                             Terms & Conditions
