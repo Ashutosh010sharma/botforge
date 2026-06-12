@@ -6,254 +6,433 @@ Billing & Subscription | AI Workspace
 
 {% block internal_css %}
 <style>
-    /* Clean Dashboard Card Architecture */
-    .billing-card {
-        background: #ffffff;
-        border: 1px solid #e2e8f0;
-        border-radius: 20px;
-        box-shadow: 0 4px 12px rgba(15, 23, 42, 0.01);
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    /* ── Page ────────────────────────────────────────────────── */
+    .billing-page { padding: 48px 0 64px; }
+
+    /* ── Page header ─────────────────────────────────────────── */
+    .billing-title {
+        font-family: 'Sora', sans-serif;
+        font-size: 1.55rem;
+        font-weight: 800;
+        letter-spacing: -0.035em;
+        color: var(--text);
+        margin-bottom: 4px;
     }
-    
-    .billing-card:hover {
-        box-shadow: 0 10px 25px rgba(15, 23, 42, 0.04);
+    .billing-sub {
+        font-size: 0.86rem;
+        color: var(--muted);
+        font-weight: 500;
+    }
+    .btn-upgrade-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        background: var(--forest);
+        color: #fff !important;
+        font-family: 'Sora', sans-serif;
+        font-weight: 700;
+        font-size: 0.86rem;
+        padding: 10px 20px;
+        border-radius: 11px;
+        border: none;
+        text-decoration: none;
+        box-shadow: 0 3px 14px rgba(15,36,24,0.2);
+        transition: all 0.2s ease;
+        white-space: nowrap;
+    }
+    .btn-upgrade-link:hover {
+        background: var(--forest-deep);
+        transform: translateY(-1px);
+        box-shadow: 0 6px 20px rgba(15,36,24,0.26);
+        color: #fff !important;
     }
 
-    /* Active Pulse Status Indicator */
-    .status-pulse {
-        width: 8px;
-        height: 8px;
-        background-color: #10b981;
-        border-radius: 50%;
-        display: inline-block;
+    /* ── Shared card shell ───────────────────────────────────── */
+    .ws-card {
+        background: rgba(255,255,255,0.90);
+        border: 1px solid rgba(45,106,79,0.13);
+        border-radius: 18px;
+        box-shadow: 0 4px 24px rgba(15,36,24,0.05);
+    }
+
+    /* ── Active plan banner ──────────────────────────────────── */
+    .plan-banner {
+        background: var(--forest);
+        border-radius: 18px;
+        padding: 26px 28px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 16px;
+        margin-bottom: 24px;
         position: relative;
+        overflow: hidden;
+    }
+    .plan-banner::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(rgba(82,183,136,0.07) 1px, transparent 1px);
+        background-size: 20px 20px;
+        pointer-events: none;
+    }
+    .plan-banner::after {
+        content: '';
+        position: absolute;
+        right: -60px; top: -60px;
+        width: 220px; height: 220px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(82,183,136,0.1), transparent 65%);
+        pointer-events: none;
+    }
+    .plan-banner > * { position: relative; z-index: 1; }
+
+    .plan-eyebrow {
+        font-size: 0.68rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: rgba(82,183,136,0.7);
+        margin-bottom: 6px;
+    }
+    .plan-name-display {
+        font-family: 'Sora', sans-serif;
+        font-size: 1.6rem;
+        font-weight: 800;
+        letter-spacing: -0.04em;
+        color: #fff;
+        line-height: 1;
+        margin-bottom: 6px;
+    }
+    .plan-price-display {
+        font-family: 'Sora', sans-serif;
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--mint);
+    }
+    .plan-price-display span {
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: rgba(255,255,255,0.45);
+    }
+    .active-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        background: rgba(82,183,136,0.12);
+        border: 1px solid rgba(82,183,136,0.25);
+        border-radius: 100px;
+        padding: 6px 16px;
+        font-size: 0.78rem;
+        font-weight: 700;
+        color: var(--mint);
+    }
+    .status-pulse {
+        width: 7px; height: 7px;
+        border-radius: 50%;
+        background: var(--mint);
+        box-shadow: 0 0 5px var(--mint);
+        position: relative;
+        flex-shrink: 0;
     }
     .status-pulse::after {
         content: '';
         position: absolute;
-        width: 100%; height: 100%;
-        top: 0; left: 0;
-        background-color: #10b981;
+        inset: 0;
         border-radius: 50%;
-        animation: statusPulseRing 2s infinite ease-in-out;
+        background: var(--mint);
+        animation: billingpulse 2s infinite;
     }
-    @keyframes statusPulseRing {
-        0% { transform: scale(1); opacity: 0.75; }
+    @keyframes billingpulse {
+        0% { transform: scale(1); opacity: 0.7; }
         100% { transform: scale(3); opacity: 0; }
     }
 
-    /* Custom Minimalistic Progress Bars */
-    .progress {
-        background-color: #f1f5f9;
-        border-radius: 8px;
-        overflow: hidden;
-    }
-    .progress-bar {
-        border-radius: 8px;
-        transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    /* Icon Accent Containers */
-    .metric-icon-box {
-        width: 40px;
-        height: 40px;
-        border-radius: 10px;
+    /* ── Metric summary cards ────────────────────────────────── */
+    .metric-card {
+        background: rgba(255,255,255,0.90);
+        border: 1px solid rgba(45,106,79,0.12);
+        border-radius: 16px;
+        padding: 20px 20px;
         display: flex;
         align-items: center;
-        justify-content: center;
-        font-size: 1.15rem;
+        gap: 14px;
+        transition: transform 0.22s ease, box-shadow 0.22s ease;
+        height: 100%;
+    }
+    .metric-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 28px rgba(15,36,24,0.08);
+    }
+    .metric-icon {
+        width: 42px; height: 42px;
+        border-radius: 12px;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 1.1rem;
+        flex-shrink: 0;
+    }
+    .metric-eyebrow {
+        font-size: 0.68rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        color: var(--muted);
+        margin-bottom: 3px;
+    }
+    .metric-value {
+        font-family: 'Sora', sans-serif;
+        font-size: 1.4rem;
+        font-weight: 800;
+        letter-spacing: -0.04em;
+        color: var(--text);
+        line-height: 1;
+    }
+    .metric-value .metric-total {
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: var(--muted);
     }
 
-    /* Custom Button Overrides */
-    .btn-upgrade {
-        background-color: var(--bf-primary, #20c997);
-        color: #ffffff !important;
-        border: none;
-        border-radius: 12px;
-        padding: 10px 20px;
-        font-weight: 600;
-        transition: all 0.2s ease;
+    /* ── Progress section ────────────────────────────────────── */
+    .progress-section-title {
+        font-family: 'Sora', sans-serif;
+        font-size: 0.95rem;
+        font-weight: 800;
+        color: var(--text);
+        margin-bottom: 20px;
+        letter-spacing: -0.02em;
     }
-    .btn-upgrade:hover {
-        background-color: color-mix(in srgb, var(--bf-primary, #20c997) 85%, #000000);
-        box-shadow: 0 4px 12px rgba(32, 201, 151, 0.2);
+    .progress-item { margin-bottom: 20px; }
+    .progress-item:last-child { margin-bottom: 0; }
+    .progress-row-label {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 7px;
+        font-size: 0.83rem;
+        font-weight: 500;
+        color: var(--text);
+    }
+    .progress-pct {
+        font-family: 'Sora', sans-serif;
+        font-size: 0.8rem;
+        font-weight: 700;
+    }
+    .ws-progress-bar {
+        height: 6px;
+        background: rgba(45,106,79,0.1);
+        border-radius: 100px;
+        overflow: hidden;
+    }
+    .ws-progress-fill {
+        height: 100%;
+        border-radius: 100px;
+        transition: width 0.6s cubic-bezier(0.4,0,0.2,1);
+    }
+    .fill-indigo  { background: linear-gradient(90deg, #4338ca, #818cf8); }
+    .fill-emerald { background: linear-gradient(90deg, var(--emerald), var(--mint)); }
+    .fill-rose    { background: linear-gradient(90deg, #b91c1c, #f87171); }
+
+    /* ── Features list ───────────────────────────────────────── */
+    .feature-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    .feature-list li {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 11px 0;
+        border-bottom: 1px solid rgba(45,106,79,0.07);
+        font-size: 0.84rem;
+    }
+    .feature-list li:last-child { border-bottom: none; padding-bottom: 0; }
+    .feature-list .feat-key { color: var(--muted); font-weight: 500; }
+    .feature-list .feat-val {
+        font-family: 'Sora', sans-serif;
+        font-weight: 700;
+        font-size: 0.82rem;
+        background: rgba(45,106,79,0.08);
+        color: var(--emerald);
+        border: 1px solid rgba(45,106,79,0.16);
+        border-radius: 7px;
+        padding: 2px 10px;
+    }
+    .feat-check-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--text);
+        font-weight: 500;
+        padding: 10px 0;
+        border-bottom: 1px solid rgba(45,106,79,0.07);
+        font-size: 0.84rem;
+    }
+    .feat-check-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .feat-check-icon {
+        width: 20px; height: 20px;
+        border-radius: 50%;
+        background: rgba(45,106,79,0.09);
+        color: var(--emerald);
+        display: inline-flex; align-items: center; justify-content: center;
+        font-size: 0.68rem;
+        flex-shrink: 0;
     }
 </style>
 {% endblock %}
 
 {% block content %}
-<div class="container-fluid py-4" style="max-width: 1300px;">
+<div class="billing-page">
+<div class="container px-4" style="max-width:1200px;">
 
-    <!-- Dashboard Top Action Header Area -->
-    <div class="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center gap-3 mb-4 pb-2">
+    <!-- Page header -->
+    <div class="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center gap-3 mb-4 flex-wrap">
         <div>
-            <h2 class="fw-bold mb-1" style="color: #0f172a; letter-spacing: -0.02em;">Billing Dashboard</h2>
-            <p class="text-muted mb-0" style="font-size: 0.95rem;">Monitor your subscription parameters and system usage logs dynamically.</p>
+            <h2 class="billing-title">Billing Dashboard</h2>
+            <p class="billing-sub mb-0">Monitor your subscription and usage in real time.</p>
         </div>
-        <a href="{% url 'pricing' %}" class="btn btn-upgrade d-inline-flex align-items-center gap-2 shadow-sm">
-            <i class="bi bi-arrow-up-circle" style="font-size: 1rem;"></i>
-            <span>Upgrade Plan</span>
+        <a href="{% url 'pricing' %}" class="btn-upgrade-link">
+            <i class="bi bi-arrow-up-circle"></i> Upgrade Plan
         </a>
     </div>
 
-    <!-- Layout Section: Current Active Plan Overview -->
-    <div class="card billing-card border-0 p-2 mb-4">
-        <div class="card-body p-4">
-            <div class="row align-items-center g-3">
-                <div class="col-12 col-md-8">
-                    <span class="text-uppercase fw-bold tracking-wider mb-2 d-block" style="font-size: 0.72rem; color: #64748b; letter-spacing: 0.05em;">
-                        Current Operational Tier
-                    </span>
-                    <h3 class="fw-bold mb-2" style="color: #0f172a; font-size: 1.65rem;">
-                        {{ subscription.plan.name }}
-                    </h3>
-                    <div class="fw-semibold" style="color: #475569; font-size: 1.05rem;">
-                        ₹{{ subscription.plan.monthly_price }} <span class="text-muted fw-normal" style="font-size: 0.88rem;">/ month</span>
-                    </div>
-                </div>
-                <div class="col-12 col-md-4 text-md-end">
-                    <span class="d-inline-flex align-items-center gap-2 px-3 py-1.5 rounded-pill fw-semibold" 
-                          style="background-color: #ecfdf5; color: #065f46; font-size: 0.85rem; border: 1px solid #a7f3d0;">
-                        <span class="status-pulse"></span>
-                        Active Subscription
-                    </span>
-                </div>
+    <!-- Active plan banner -->
+    <div class="plan-banner mb-4">
+        <div>
+            <div class="plan-eyebrow">Current Subscription</div>
+            <div class="plan-name-display">{{ subscription.plan.name }}</div>
+            <div class="plan-price-display">
+                ₹{{ subscription.plan.monthly_price }}
+                <span>/ month</span>
             </div>
+        </div>
+        <div class="active-pill">
+            <span class="status-pulse"></span>
+            Active Subscription
         </div>
     </div>
 
-    <!-- Layout Section: Key Top Usage Numeric Summary Blocks -->
-    <div class="row g-4 mb-4">
-        <!-- Bots Summary -->
+    <!-- Metric cards -->
+    <div class="row g-3 mb-4">
         <div class="col-12 col-md-4">
-            <div class="card billing-card border-0 h-100">
-                <div class="card-body p-4 d-flex align-items-center gap-3">
-                    <div class="metric-icon-box" style="background-color: #eff6ff; color: #2563eb;">
-                        <i class="bi bi-robot"></i>
-                    </div>
-                    <div>
-                        <span class="text-uppercase fw-bold text-muted" style="font-size: 0.72rem; letter-spacing: 0.03em;">Bots Active</span>
-                        <h3 class="fw-bold m-0 mt-1" style="color: #0f172a; font-size: 1.45rem;">
-                            {{ bots_used }} <span class="text-muted fw-normal" style="font-size: 1rem;">/ {{ subscription.plan.max_bots }}</span>
-                        </h3>
+            <div class="metric-card">
+                <div class="metric-icon" style="background:rgba(67,56,202,0.09); color:#4338ca;">
+                    <i class="bi bi-robot"></i>
+                </div>
+                <div>
+                    <div class="metric-eyebrow">Bots Active</div>
+                    <div class="metric-value">
+                        {{ bots_used }}
+                        <span class="metric-total"> / {{ subscription.plan.max_bots }}</span>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Pages Summary -->
         <div class="col-12 col-md-4">
-            <div class="card billing-card border-0 h-100">
-                <div class="card-body p-4 d-flex align-items-center gap-3">
-                    <div class="metric-icon-box" style="background-color: #ecfdf5; color: #059669;">
-                        <i class="bi bi-file-earmark-text"></i>
-                    </div>
-                    <div>
-                        <span class="text-uppercase fw-bold text-muted" style="font-size: 0.72rem; letter-spacing: 0.03em;">Pages Indexed</span>
-                        <h3 class="fw-bold m-0 mt-1" style="color: #0f172a; font-size: 1.45rem;">
-                            {{ pages_used }} <span class="text-muted fw-normal" style="font-size: 1rem;">/ {{ subscription.plan.max_pages }}</span>
-                        </h3>
+            <div class="metric-card">
+                <div class="metric-icon" style="background:rgba(45,106,79,0.09); color:var(--emerald);">
+                    <i class="bi bi-file-earmark-text"></i>
+                </div>
+                <div>
+                    <div class="metric-eyebrow">Pages Indexed</div>
+                    <div class="metric-value">
+                        {{ pages_used }}
+                        <span class="metric-total"> / {{ subscription.plan.max_pages }}</span>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Messages Summary -->
         <div class="col-12 col-md-4">
-            <div class="card billing-card border-0 h-100">
-                <div class="card-body p-4 d-flex align-items-center gap-3">
-                    <div class="metric-icon-box" style="background-color: #fdf2f8; color: #db2777;">
-                        <i class="bi bi-chat-left-dots"></i>
-                    </div>
-                    <div>
-                        <span class="text-uppercase fw-bold text-muted" style="font-size: 0.72rem; letter-spacing: 0.03em;">Messages Processed</span>
-                        <h3 class="fw-bold m-0 mt-1" style="color: #0f172a; font-size: 1.45rem;">
-                            {{ messages_used }} <span class="text-muted fw-normal" style="font-size: 1rem;">/ {{ subscription.plan.max_messages }}</span>
-                        </h3>
+            <div class="metric-card">
+                <div class="metric-icon" style="background:rgba(185,28,28,0.08); color:#b91c1c;">
+                    <i class="bi bi-chat-left-dots"></i>
+                </div>
+                <div>
+                    <div class="metric-eyebrow">Messages Processed</div>
+                    <div class="metric-value">
+                        {{ messages_used }}
+                        <span class="metric-total"> / {{ subscription.plan.max_messages }}</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Layout Section: Dynamic Resource Allocations Grid Base -->
+    <!-- Progress + Features -->
     <div class="row g-4">
-        
-        <!-- Detailed Usage Overviews (Progress Trackers) -->
-        <div class="col-12 col-lg-7 col-xl-8">
-            <div class="card billing-card border-0 h-100">
-                <div class="card-body p-4 p-md-5">
-                    <h5 class="fw-bold mb-4" style="color: #0f172a; font-size: 1.1rem;">Resource Allocations</h5>
-                    
-                    <!-- Progress Item: Bots -->
-                    <div class="mb-4">
-                        <div class="d-flex justify-content-between align-items-center mb-2" style="font-size: 0.9rem; font-weight: 500;">
-                            <span style="color: #334155;">Active Chatbots</span>
-                            <span class="fw-bold" style="color: #2563eb;">{{ bots_percentage }}%</span>
-                        </div>
-                        <div class="progress" style="height: 8px;">
-                            <div class="progress-bar bg-primary" role="progressbar" style="width: {{ bots_percentage }}%;"></div>
-                        </div>
-                    </div>
 
-                    <!-- Progress Item: Pages -->
-                    <div class="mb-4">
-                        <div class="d-flex justify-content-between align-items-center mb-2" style="font-size: 0.9rem; font-weight: 500;">
-                            <span style="color: #334155;">Scanned Site Directory Pages</span>
-                            <span class="fw-bold" style="color: #059669;">{{ pages_percentage }}%</span>
-                        </div>
-                        <div class="progress" style="height: 8px;">
-                            <div class="progress-bar bg-success" role="progressbar" style="width: {{ pages_percentage }}%;"></div>
-                        </div>
-                    </div>
+        <!-- Resource usage -->
+        <div class="col-12 col-lg-7">
+            <div class="ws-card p-4 h-100">
+                <h6 class="progress-section-title">Resource Allocations</h6>
 
-                    <!-- Progress Item: Messages -->
-                    <div class="mb-0">
-                        <div class="d-flex justify-content-between align-items-center mb-2" style="font-size: 0.9rem; font-weight: 500;">
-                            <span style="color: #334155;">Inbound Message Pipeline</span>
-                            <span class="fw-bold" style="color: #db2777;">{{ messages_percentage }}%</span>
-                        </div>
-                        <div class="progress" style="height: 8px;">
-                            <div class="progress-bar bg-info" role="progressbar" style="width: {{ messages_percentage }}%; background-color: #db2777 !important;"></div>
-                        </div>
+                <div class="progress-item">
+                    <div class="progress-row-label">
+                        <span>Active Chatbots</span>
+                        <span class="progress-pct" style="color:#4338ca;">{{ bots_percentage }}%</span>
                     </div>
+                    <div class="ws-progress-bar">
+                        <div class="ws-progress-fill fill-indigo" style="width:{{ bots_percentage }}%;"></div>
+                    </div>
+                </div>
 
+                <div class="progress-item">
+                    <div class="progress-row-label">
+                        <span>Scanned Site Pages</span>
+                        <span class="progress-pct" style="color:var(--emerald);">{{ pages_percentage }}%</span>
+                    </div>
+                    <div class="ws-progress-bar">
+                        <div class="ws-progress-fill fill-emerald" style="width:{{ pages_percentage }}%;"></div>
+                    </div>
+                </div>
+
+                <div class="progress-item">
+                    <div class="progress-row-label">
+                        <span>Message Pipeline</span>
+                        <span class="progress-pct" style="color:#b91c1c;">{{ messages_percentage }}%</span>
+                    </div>
+                    <div class="ws-progress-bar">
+                        <div class="ws-progress-fill fill-rose" style="width:{{ messages_percentage }}%;"></div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Tier Included Features Card -->
-        <div class="col-12 col-lg-5 col-xl-4">
-            <div class="card billing-card border-0 h-100">
-                <div class="card-body p-4 p-md-5">
-                    <h5 class="fw-bold mb-4" style="color: #0f172a; font-size: 1.1rem;">Included Features</h5>
-                    
-                    <ul class="list-group list-group-flush" style="font-size: 0.92rem;">
-                        <li class="list-group-item d-flex justify-content-between align-items-center px-0 py-2.5" style="border-color: #f1f5f9;">
-                            <span class="text-muted">Max Active Bots</span>
-                            <span class="badge bg-slate fw-bold text-dark" style="background-color: #f1f5f9;">{{ subscription.plan.max_bots }}</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center px-0 py-2.5" style="border-color: #f1f5f9;">
-                            <span class="text-muted">Max Allowed Pages</span>
-                            <span class="badge bg-slate fw-bold text-dark" style="background-color: #f1f5f9;">{{ subscription.plan.max_pages }}</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center px-0 py-2.5" style="border-color: #f1f5f9;">
-                            <span class="text-muted">Monthly Message Cap</span>
-                            <span class="badge bg-slate fw-bold text-dark" style="background-color: #f1f5f9;">{{ subscription.plan.max_messages }}</span>
-                        </li>
-                        <li class="list-group-item px-0 py-2.5 d-flex align-items-center gap-2" style="border-color: #f1f5f9; color: #334155;">
-                            <i class="bi bi-check2-circle text-success" style="font-size: 1.05rem;"></i>
-                            <span>Comprehensive AI Model Access</span>
-                        </li>
-                        <li class="list-group-item px-0 py-2.5 d-flex align-items-center gap-2" style="border: none; color: #334155;">
-                            <i class="bi bi-check2-circle text-success" style="font-size: 1.05rem;"></i>
-                            <span>Production Script Injection Widget</span>
-                        </li>
-                    </ul>
+        <!-- Included features -->
+        <div class="col-12 col-lg-5">
+            <div class="ws-card p-4 h-100">
+                <h6 class="progress-section-title">Included in Plan</h6>
+
+                <ul class="feature-list">
+                    <li>
+                        <span class="feat-key">Max Active Bots</span>
+                        <span class="feat-val">{{ subscription.plan.max_bots }}</span>
+                    </li>
+                    <li>
+                        <span class="feat-key">Max Allowed Pages</span>
+                        <span class="feat-val">{{ subscription.plan.max_pages }}</span>
+                    </li>
+                    <li>
+                        <span class="feat-key">Monthly Message Cap</span>
+                        <span class="feat-val">{{ subscription.plan.max_messages }}</span>
+                    </li>
+                </ul>
+
+                <div class="feat-check-item" style="margin-top:8px;">
+                    <span class="feat-check-icon"><i class="bi bi-check-lg"></i></span>
+                    Comprehensive AI Model Access
+                </div>
+                <div class="feat-check-item">
+                    <span class="feat-check-icon"><i class="bi bi-check-lg"></i></span>
+                    Production Script Injection Widget
                 </div>
             </div>
         </div>
 
     </div>
-
+</div>
 </div>
 {% endblock %}
 

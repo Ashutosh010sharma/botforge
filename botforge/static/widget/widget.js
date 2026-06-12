@@ -34,12 +34,50 @@
         botConfig.color
     );
 
+    function getTime(){
+        return new Date().toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"});
+    }
+
    const widget = `
     <!-- Floating Chat Trigger Button -->
     <div id="botforge-widget-btn">
-        <svg id="bf-icon-chat" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-        <svg id="bf-icon-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-    </div>
+
+    <svg id="bf-icon-chat"
+         width="22"
+         height="22"
+         viewBox="0 0 24 24"
+         fill="none"
+         stroke="currentColor"
+         stroke-width="2"
+         stroke-linecap="round"
+         stroke-linejoin="round">
+
+        <path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5L12 3z"/>
+
+        <path d="M19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8L19 16z"/>
+
+        <path d="M5 15l.6 1.4L7 17l-1.4.6L5 19l-.6-1.4L3 17l1.4-.6L5 15z"/>
+
+    </svg>
+
+    <svg id="bf-icon-close"
+         width="20"
+         height="20"
+         viewBox="0 0 24 24"
+         fill="none"
+         stroke="currentColor"
+         stroke-width="2.5"
+         stroke-linecap="round"
+         stroke-linejoin="round"
+         style="display:none;">
+
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+
+    </svg>
+
+</div>
 
     <!-- Chat Box Window -->
     <div id="botforge-chat-window">
@@ -47,10 +85,30 @@
         <!-- Header -->
         <div id="botforge-chat-header">
             <div class="bf-header-profile">
-                <span class="bf-online-dot"></span>
+                <div class="bf-avatar">
+                   <svg width="17"
+         height="17"
+         viewBox="0 0 24 24"
+         fill="none"
+         stroke="currentColor"
+         stroke-width="2"
+         stroke-linecap="round"
+         stroke-linejoin="round">
+
+        <path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5L12 3z"/>
+
+        <path d="M19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8L19 16z"/>
+
+        <path d="M5 15l.6 1.4L7 17l-1.4.6L5 19l-.6-1.4L3 17l1.4-.6L5 15z"/>
+
+    </svg>
+                </div>
                 <div class="bf-header-text">
                     <span class="bf-bot-name">${botConfig.name}</span>
-                    <span class="bf-bot-status">Online</span>
+                    <span class="bf-bot-status">
+                        <span class="bf-online-dot"></span>
+                        Online · Ready to help
+                    </span>
                 </div>
             </div>
         </div>
@@ -58,31 +116,29 @@
         <!-- Scrollable Chat Body Area -->
         <div id="botforge-chat-body">
             <div class="bf-row bf-row-bot">
-                <div class="bf-msg bf-msg-bot">
-                    ${botConfig.welcome_message}
+                <div>
+                    <div class="bf-msg bf-msg-bot">${botConfig.welcome_message}</div>
+                    <span class="bf-time">${getTime()}</span>
                 </div>
             </div>
         </div>
 
         <!-- Interactive Footer with Inputs and Branding -->
-        <div id="botforge-chat-footer" style="display: flex; flex-direction: column; gap: 8px;">
+        <div id="botforge-chat-footer">
             
             <!-- Input Row -->
-            <div style="display: flex; align-items: center; width: 100%; gap: 8px;">
-                <input type="text" id="botforge-message" placeholder="Type your message here..." style="flex-grow: 1;">
+            <div>
+                <input type="text" id="botforge-message" placeholder="Type a message…">
                 <button type="button" id="botforge-send">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
                 </button>
             </div>
 
             <!-- Integrated Minimal Brand Link -->
-            <div style="text-center: center; width: 100%; text-align: center; margin-top: 2px;">
-                <small style="font-size: 11px; color: #64748b; display: inline-flex; align-items: center; gap: 3px; font-family: system-ui, sans-serif;">
-                    <svg width="10" height="10" viewBox="0 0 24 24" fill="#eab308" stroke="#eab308" style="vertical-align: middle;"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
-                    by 
-                    <a href="${baseUrl}" target="_blank" style="color: var(--bf-primary, #20c997); font-weight: 600; text-decoration: none; transition: opacity 0.15s ease;">
-                        BotForge
-                    </a>
+            <div>
+                <small>
+                    <svg width="9" height="9" viewBox="0 0 24 24" fill="#eab308" stroke="#eab308" style="vertical-align:middle;flex-shrink:0;"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                    Powered by&nbsp;<a href="${baseUrl}" target="_blank">BotForge</a>
                 </small>
             </div>
 
@@ -95,23 +151,18 @@
     const btn = document.getElementById("botforge-widget-btn");
     const windowBox = document.getElementById("botforge-chat-window");
 
-    // Left alignment handling override
+    // Position handling
     if(botConfig.position==="bottom-left"){
-
-    btn.style.left="20px";
-    btn.style.right="auto";
-
-    windowBox.style.left="20px";
-    windowBox.style.right="auto";
-
-}else{
-
-    btn.style.right="20px";
-    btn.style.left="auto";
-
-    windowBox.style.right="20px";
-    windowBox.style.left="auto";
-}
+        btn.style.left="24px";
+        btn.style.right="auto";
+        windowBox.style.left="24px";
+        windowBox.style.right="auto";
+    }else{
+        btn.style.right="24px";
+        btn.style.left="auto";
+        windowBox.style.right="24px";
+        windowBox.style.left="auto";
+    }
 
     const chatIcon = document.getElementById("bf-icon-chat");
     const closeIcon = document.getElementById("bf-icon-close");
@@ -125,6 +176,7 @@
             windowBox.style.display = "flex";
             chatIcon.style.display = "none";
             closeIcon.style.display = "block";
+            chatBody.scrollTop = chatBody.scrollHeight;
         }
     });
 
@@ -136,43 +188,59 @@
         const message = input.value.trim();
         if(!message) return;
 
-        // Render user message bubble
+        const t = getTime();
+
+        // User bubble
         chatBody.innerHTML += `
         <div class="bf-row bf-row-user">
-            <div class="bf-msg bf-msg-user">${message}</div>
+            <div>
+                <div class="bf-msg bf-msg-user">${message}</div>
+                <span class="bf-time">${t}</span>
+            </div>
         </div>`;
 
         chatBody.scrollTop = chatBody.scrollHeight;
         input.value = "";
 
+        // Typing indicator
+        const typingId = "bf-typing-" + Date.now();
+        chatBody.innerHTML += `
+        <div class="bf-row bf-row-bot" id="${typingId}">
+            <div class="bf-typing-indicator">
+                <span></span><span></span><span></span>
+            </div>
+        </div>`;
+        chatBody.scrollTop = chatBody.scrollHeight;
+
         try {
             const response = await fetch(apiUrl, {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    message: message,
-                    session_id:sessionId
-                })
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ message: message, session_id: sessionId })
             });
 
             const data = await response.json();
 
-            // Render chatbot response bubble
+            document.getElementById(typingId).remove();
+
             chatBody.innerHTML += `
             <div class="bf-row bf-row-bot">
-                <div class="bf-msg bf-msg-bot">${data.response}</div>
+                <div>
+                    <div class="bf-msg bf-msg-bot">${data.response}</div>
+                    <span class="bf-time">${getTime()}</span>
+                </div>
             </div>`;
 
         } catch(error) {
             console.error(error);
+            document.getElementById(typingId).remove();
 
-            // Render clean error block message
             chatBody.innerHTML += `
             <div class="bf-row bf-row-bot">
-                <div class="bf-msg bf-msg-bot" style="color: #dc3545; border-color: rgba(220, 53, 69, 0.2);">
-                    Something went wrong. Please try again.
+                <div>
+                    <div class="bf-msg bf-msg-bot" style="color:#dc3545;border-color:rgba(220,53,69,0.2);">
+                        Something went wrong. Please try again.
+                    </div>
                 </div>
             </div>`;
         }
@@ -181,7 +249,6 @@
     }
 
     sendBtn.addEventListener("click", sendMessage);
-
     input.addEventListener("keypress", function(e){
         if(e.key === "Enter") sendMessage();
     });

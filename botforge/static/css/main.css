@@ -32,9 +32,14 @@ body{
     font-family: 'Inter', sans-serif;
     -webkit-font-smoothing: antialiased;
     color: var(--text-dark);
+    height: 100%;
 }
 html{
     scroll-behavior:smooth;
+    height: 100%;
+}
+main {
+    flex: 1;
 }
 
 .page-container{

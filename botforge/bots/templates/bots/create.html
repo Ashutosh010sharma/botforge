@@ -6,175 +6,256 @@ Create AI Assistant | Workspace Builder
 
 {% block internal_css %}
 <style>
-    body {
-        background-color: #f8fafc;
-        color: #1e293b;
+    .create-container {
+        min-height: 80vh;
+        display: flex;
+        align-items: center;
+        padding: 32px 16px;
+        position: relative;
+    }
+    .create-container::before {
+        content: '';
+        position: fixed;
+        top: 0; left: 50%;
+        transform: translateX(-50%);
+        width: 600px; height: 600px;
+        background: radial-gradient(ellipse at center, rgba(255,255,255,0.5) 0%, transparent 68%);
+        pointer-events: none;
+        z-index: 0;
     }
 
-    /* Page Heading Custom Typography */
-    .form-title {
-        font-weight: 700;
-        letter-spacing: -0.02em;
-        color: #0f172a;
+    .create-card {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        max-width: 520px;
+        margin: 0 auto;
+        background: rgba(255,255,255,0.92);
+        border: 1px solid rgba(45,106,79,0.13);
+        border-radius: 20px;
+        box-shadow: 0 2px 0 rgba(255,255,255,0.8) inset,
+                    0 16px 48px rgba(15,36,24,0.1);
+        overflow: hidden;
     }
-
-    /* Centralized Form Card container block */
-    .form-config-card {
-        border: 1px solid rgba(0, 0, 0, 0.06) !important;
-        border-radius: 20px !important;
-        background: #ffffff;
-        box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.03) !important;
+    .create-card::before {
+        content: '';
+        display: block;
+        height: 4px;
+        background: linear-gradient(90deg, var(--forest), var(--mint));
     }
+    .create-body { padding: 22px 26px 20px; }
 
-    /* Balanced form spacing updates */
-    .form-label {
-        font-weight: 600;
-        font-size: 0.88rem;
-        color: #334155;
-        margin-bottom: 0.5rem;
-    }
-
-    /* Input configurations */
-    .form-control, .form-select {
-        border: 1px solid #e2e8f0;
-        border-radius: 12px;
-        padding: 0.65rem 1rem;
+    /* Header */
+    .create-icon {
+        width: 36px; height: 36px;
+        border-radius: 10px;
+        background: var(--forest);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--mint);
         font-size: 0.95rem;
-        color: #1e293b;
-        background-color: #f8fafc;
+        margin-bottom: 12px;
+        box-shadow: 0 3px 10px rgba(15,36,24,0.18);
+    }
+    .create-title {
+        font-family: 'Sora', sans-serif;
+        font-size: 1.15rem;
+        font-weight: 800;
+        letter-spacing: -0.035em;
+        color: var(--text);
+        margin-bottom: 2px;
+    }
+    .create-sub {
+        font-size: 0.8rem;
+        color: var(--muted);
+        margin-bottom: 20px;
+    }
+
+    /* Labels */
+    .field-label {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 5px;
+    }
+    .field-label i { color: var(--emerald); font-size: 0.78rem; }
+    .req { color: #ef4444; }
+
+    /* Inputs */
+    .create-card input[type="text"],
+    .create-card input[type="url"],
+    .create-card select,
+    .create-card textarea {
+        display: block;
+        width: 100%;
+        padding: 8px 12px;
+        font-family: 'Inter', sans-serif;
+        font-size: 0.86rem;
+        font-weight: 500;
+        color: var(--text);
+        background: rgba(255,255,255,0.9);
+        border: 1.5px solid rgba(45,106,79,0.18);
+        border-radius: 9px;
+        outline: none;
+        appearance: none;
+        transition: border-color 0.18s, box-shadow 0.18s;
+        resize: none;
+    }
+    .create-card input:focus,
+    .create-card select:focus,
+    .create-card textarea:focus {
+        background: #fff;
+        border-color: var(--emerald);
+        box-shadow: 0 0 0 3px rgba(45,106,79,0.1);
+    }
+    .create-card input::placeholder,
+    .create-card textarea::placeholder { color: rgba(74,124,94,0.38); font-weight: 400; }
+
+    .create-card select {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='%234a7c5e' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 12px center;
+        padding-right: 34px;
+        cursor: pointer;
+    }
+
+    .field-group { margin-bottom: 13px; }
+
+    /* 2-col grid */
+    .field-row-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-bottom: 13px;
+    }
+    @media (max-width: 480px) { .field-row-2 { grid-template-columns: 1fr; } }
+
+    /* Footer */
+    .create-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding-top: 16px;
+        margin-top: 4px;
+        border-top: 1px solid rgba(45,106,79,0.09);
+        flex-wrap: wrap;
+    }
+    .footer-note {
+        font-size: 0.74rem;
+        color: var(--muted);
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+    .btn-create {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: var(--forest);
+        color: #fff;
+        font-family: 'Sora', sans-serif;
+        font-weight: 700;
+        font-size: 0.85rem;
+        padding: 9px 20px;
+        border-radius: 9px;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 3px 12px rgba(15,36,24,0.2);
         transition: all 0.2s ease;
     }
-
-    .form-control:focus, .form-select:focus {
-        background-color: #ffffff;
-        border-color: #86b7fe;
-        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.12);
-    }
-
-    .form-control::placeholder {
-        color: #94a3b8;
-        font-size: 0.9rem;
-    }
-
-    /* Action submit layout buttons updates */
-    .btn-submit-action {
-        font-weight: 600;
-        padding: 0.75rem 1.5rem;
-        border-radius: 12px;
-        transition: all 0.2s ease;
+    .btn-create:hover {
+        background: var(--forest-deep);
+        transform: translateY(-1px);
+        box-shadow: 0 5px 18px rgba(15,36,24,0.26);
     }
 </style>
 {% endblock %}
 
 {% block content %}
-<div class="container py-5">
-    <div class="row justify-content-center">
-        <div class="col-12 col-lg-8">
+<div class="create-container">
+    <div class="container px-3">
+        <div class="create-card">
+            <div class="create-body">
 
-    <!-- Simple, Friendly Form Header -->
-    <div class="mb-4">
-        <h2 class="fw-bold mb-1" style="color: #0f172a; font-size: 1.75rem; letter-spacing: -0.02em;">Create Your New Bot</h2>
-        <p class="text-muted small">Set up your chatbot's basic details and choose how it should act with your visitors.</p>
-    </div>
+                <div class="create-icon"><i class="bi bi-robot"></i></div>
+                <h2 class="create-title">Create Your New Bot</h2>
+                <p class="create-sub">Set up your chatbot's basic details to get started.</p>
 
-    <!-- Premium Card Container -->
-    <div class="card p-4 p-md-5" style="background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 20px; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.03);">
-        <form id="createBotForm">
-            {% csrf_token %}
+                <form id="createBotForm">
+                    {% csrf_token %}
 
-            <!-- Input 1: Bot Name (REQUIRED) -->
-            <div class="mb-4">
-                <label class="form-label d-flex align-items-center gap-2 fw-semibold" style="color: #334155; font-size: 0.9rem;">
-                    <i class="bi bi-tag" style="color: var(--bf-primary, #20c997);"></i> 
-                    <span>Bot Name <span style="color: #ef4444; margin-left: 2px;">*</span></span>
-                </label>
-                <input
-                    type="text"
-                    name="name"
-                    class="form-control"
-                    placeholder="e.g., Customer Support Bot, School Assistant"
-                    style="border-radius: 10px; padding: 12px 14px; border: 1px solid #cbd5e1; font-size: 0.9rem;"
-                    required
-                >
+                    <!-- Name + Category -->
+                    <div class="field-row-2">
+                        <div>
+                            <label class="field-label">
+                                <i class="bi bi-tag"></i> Bot Name <span class="req">*</span>
+                            </label>
+                            <input type="text" name="name" placeholder="e.g. Support Bot" required>
+                        </div>
+                        <div>
+                            <label class="field-label">
+                                <i class="bi bi-grid"></i> Category <span class="req">*</span>
+                            </label>
+                            <select name="bot_type" required>
+                                <option value="" disabled selected hidden>Choose...</option>
+                                <option value="school">📚 School & Education</option>
+                                <option value="healthcare">🩺 Healthcare & Clinic</option>
+                                <option value="ecommerce">🛍️ Online Shop & Retail</option>
+                                <option value="custom">⚙️ Other / Custom</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Website URL -->
+                    <div class="field-group">
+                        <label class="field-label">
+                            <i class="bi bi-globe"></i> Website URL <span class="req">*</span>
+                        </label>
+                        <input type="url" name="website_url" placeholder="https://yourwebsite.com" required>
+                    </div>
+
+                    <!-- Description -->
+                    <div class="field-group">
+                        <label class="field-label">
+                            <i class="bi bi-file-earmark-text"></i> What should this bot do?
+                        </label>
+                        <textarea name="description" rows="2"
+                            placeholder="e.g. Answer questions about prices and shipping."></textarea>
+                    </div>
+
+                    <!-- Welcome message -->
+                    <div class="field-group" style="margin-bottom:0;">
+                        <label class="field-label">
+                            <i class="bi bi-chat-quote"></i> Greeting Message
+                        </label>
+                        <textarea name="welcome_message" rows="2"
+                            placeholder="First message users see.">Hello! How can I help you today?</textarea>
+                    </div>
+
+                    <div class="create-footer">
+                        <span class="footer-note">
+                            <i class="bi bi-info-circle"></i>
+                            Editable anytime from workspace.
+                        </span>
+                        <button type="submit" class="btn-create">
+                            <i class="bi bi-plus-lg"></i> Create Bot
+                        </button>
+                    </div>
+                </form>
             </div>
-
-            <!-- Input 2: Website URL (OPTIONAL) -->
-            <div class="mb-4">
-                <label class="form-label d-flex align-items-center gap-2 fw-semibold" style="color: #334155; font-size: 0.9rem;">
-                    <i class="bi bi-globe" style="color: var(--bf-primary, #20c997);"></i> Website Link<span style="color: #ef4444; margin-left: 2px;">*</span>
-                </label>
-                <input
-                    type="url"
-                    name="website_url"
-                    class="form-control"
-                    placeholder="https://yourwebsite.com"
-                    style="border-radius: 10px; padding: 12px 14px; border: 1px solid #cbd5e1; font-size: 0.9rem;"
-                    required
-                >
-            </div>
-
-            <!-- Input 3: Bot Type Category Select (REQUIRED) -->
-            <div class="mb-4">
-                <label class="form-label d-flex align-items-center gap-2 fw-semibold" style="color: #334155; font-size: 0.9rem;">
-                    <i class="bi bi-grid" style="color: var(--bf-primary, #20c997);"></i> 
-                    <span>What is this bot for? <span style="color: #ef4444; margin-left: 2px;">*</span></span>
-                </label>
-                <select name="bot_type" class="form-select" style="border-radius: 10px; padding: 12px 14px; border: 1px solid #cbd5e1; font-size: 0.9rem;" required>
-                    <option value="" disabled selected hidden>Choose a category...</option>
-                    <option value="school">📊 School & Education</option>
-                    <option value="healthcare">🩺 Healthcare & Clinic Support</option>
-                    <option value="ecommerce">🛍️ Online Shop & Retail</option>
-                    <option value="custom">⚙️ Other / Custom Business</option>
-                </select>
-            </div>
-
-            <!-- Input 4: Bot Description (OPTIONAL) -->
-            <div class="mb-4">
-                <label class="form-label d-flex align-items-center gap-2 fw-semibold" style="color: #334155; font-size: 0.9rem;">
-                    <i class="bi bi-file-earmark-text" style="color: var(--bf-primary, #20c997);"></i> What should this bot do?
-                </label>
-                <textarea
-                    name="description"
-                    class="form-control"
-                    rows="3"
-                    placeholder="Briefly describe your bot's job (e.g., 'Answer questions about our product prices and shipping times.')"
-                    style="border-radius: 10px; padding: 12px 14px; border: 1px solid #cbd5e1; font-size: 0.9rem;"
-                ></textarea>
-            </div>
-
-            <!-- Input 5: Welcome Message (OPTIONAL) -->
-            <div class="mb-4">
-                <label class="form-label d-flex align-items-center gap-2 fw-semibold" style="color: #334155; font-size: 0.9rem;">
-                    <i class="bi bi-chat-quote" style="color: var(--bf-primary, #20c997);"></i> Greeting Message
-                </label>
-                <textarea
-                    name="welcome_message"
-                    class="form-control"
-                    rows="3"
-                    placeholder="The very first message your users see when they open the chat window."
-                    style="border-radius: 10px; padding: 12px 14px; border: 1px solid #cbd5e1; font-size: 0.9rem;"
-                >Hello! How can I help you today?</textarea>
-            </div>
-
-            <!-- Submit Action Bar -->
-            <div class="d-flex align-items-center justify-content-end gap-2 pt-3" style="border-top: 1px solid #f1f5f9;">
-                <button type="submit" class="btn btn-primary text-white px-4 py-2.5 shadow-sm fw-semibold" 
-                        style="background: var(--bf-primary, #20c997); border: none; border-radius: 10px; font-size: 0.9rem; transition: background-color 0.15s ease;">
-                    <i class="bi bi-plus-lg me-1"></i> Create Bot
-                </button>
-            </div>
-
-        </form>
-    </div>
-
-</div>
+        </div>
     </div>
 </div>
 {% endblock %}
 
 {% block internal_js %}
-
-
 <script>
 $(document).ready(function(){
     $("#createBotForm").on("submit", function(e){
