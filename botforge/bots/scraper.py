@@ -5,6 +5,23 @@ from bs4 import Comment
 import re
 from urllib.parse import urljoin
 from urllib.parse import urlparse
+from collections import deque
+
+
+# URLs we don't want to crawl
+
+BLOCKED_KEYWORDS = [
+
+    "login",
+    "register",
+    "signup",
+    "signin",
+    "cart",
+    "checkout",
+    "account",
+    "wp-admin"
+
+]
 
 def fetch_page(url):
 
@@ -253,51 +270,137 @@ def get_internal_links(
     
 def crawl_website(
     website_url,
-    max_pages=20
+    max_pages=100
 ):
 
-    html = fetch_page(
-        website_url
-    )
+    visited = set()
 
-    if not html:
-
-        return []
-
-    links = get_internal_links(
-
-        html,
-
-        website_url
-    )
+    queue = deque()
 
     pages = []
 
-    for link in links[:max_pages]:
+    sitemap_urls = get_sitemap_urls(
+        website_url
+    )
+
+    if sitemap_urls:
+
+        queue.extend(
+            sitemap_urls
+        )
+
+    else:
+
+        queue.append(
+            website_url
+        )
+
+    while queue and len(visited) < max_pages:
+
+        current_url = queue.popleft()
+
+        if current_url in visited:
+
+            continue
+
+        if should_skip_url(
+            current_url
+        ):
+
+            continue
 
         print(
-            f"Crawling: {link}"
+            f"Crawling: {current_url}"
         )
 
-        page_html = fetch_page(
-            link
+        visited.add(
+            current_url
         )
 
-        if not page_html:
+        html = fetch_page(
+            current_url
+        )
+
+        if not html:
 
             continue
 
         data = extract_content(
-            page_html
+            html
         )
 
         pages.append({
 
-            "url": link,
+            "url": current_url,
 
             "title": data["title"],
 
             "content": data["content"]
+
         })
 
+        new_links = get_internal_links(
+
+            html,
+
+            current_url
+
+        )
+
+        for link in new_links:
+
+            if link not in visited:
+
+                queue.append(
+                    link
+                )
+
     return pages
+
+
+
+def get_sitemap_urls(base_url):
+
+    sitemap_url = base_url.rstrip("/") + "/sitemap.xml"
+
+    try:
+
+        response = requests.get(
+            sitemap_url,
+            timeout=10
+        )
+
+        if response.status_code != 200:
+
+            return []
+
+        soup = BeautifulSoup(
+            response.text,
+            "xml"
+        )
+
+        urls = []
+
+        for loc in soup.find_all("loc"):
+
+            urls.append(
+                loc.text.strip()
+            )
+
+        return urls
+
+    except Exception:
+
+        return []
+    
+def should_skip_url(url):
+
+    url = url.lower()
+
+    for keyword in BLOCKED_KEYWORDS:
+
+        if keyword in url:
+
+            return True
+
+    return False
