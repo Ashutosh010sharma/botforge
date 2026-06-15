@@ -22,5 +22,6 @@ urlpatterns = [
     path("clear-chat-history/<int:bot_id>/",views.clear_chat_history,name="clear_chat_history"),
     path("delete-knowledge-base/<int:bot_id>/",views.delete_knowledge_base,name="delete_knowledge_base"),
     path("delete-chatbot/<int:bot_id>/",views.delete_chatbot,name="delete_chatbot"),
+    path("documention",views.documention,name="documention"),
 
 ]

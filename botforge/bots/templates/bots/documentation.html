@@ -1,0 +1,1421 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Documentation | BotForge
+{% endblock %}
+
+{% block internal_css %}
+<style>
+    /* ── Page shell ──────────────────────────────────────────── */
+    .docs-page {
+        width: 100%;
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 24px 16px 60px;
+        box-sizing: border-box;
+    }
+
+    .docs-shell {
+        display: grid;
+        grid-template-columns: 280px minmax(0, 1fr);
+        gap: 24px;
+        align-items: start;
+        width: 100%;
+    }
+
+    @media (max-width: 991px) {
+        .docs-shell {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    /* ── Sidebar ─────────────────────────────────────────────── */
+    .docs-sidebar {
+        background: rgba(255,255,255,0.88);
+        border: 1px solid rgba(45,106,79,0.13);
+        border-radius: 18px;
+        box-shadow: 0 4px 24px rgba(15,36,24,0.05);
+        position: sticky;
+        top: 90px;
+        max-height: calc(100vh - 110px);
+        overflow-y: auto;
+        box-sizing: border-box;
+    }
+
+    @media (max-width: 991px) {
+        .docs-sidebar {
+            position: relative;
+            top: 0;
+            max-height: none;
+        }
+    }
+
+    .docs-sidebar::-webkit-scrollbar { width: 4px; }
+    .docs-sidebar::-webkit-scrollbar-thumb {
+        background: rgba(45,106,79,0.18);
+        border-radius: 10px;
+    }
+
+    .docs-sidebar-header {
+        padding: 18px 18px 14px;
+        border-bottom: 1px solid rgba(45,106,79,0.09);
+    }
+    .docs-logo {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        font-family: 'Sora', sans-serif;
+        font-weight: 800;
+        font-size: 1.02rem;
+        color: var(--text);
+        letter-spacing: -0.03em;
+        margin-bottom: 4px;
+    }
+    .docs-logo-icon {
+        width: 28px; height: 28px;
+        border-radius: 8px;
+        background: var(--forest);
+        display: flex; align-items: center; justify-content: center;
+        color: var(--mint);
+        font-size: 0.8rem;
+        flex-shrink: 0;
+    }
+    .docs-logo-sub {
+        font-size: 0.72rem;
+        color: var(--muted);
+        font-weight: 500;
+        padding-left: 37px;
+    }
+
+    /* search box */
+    .docs-search {
+        margin: 14px 18px 4px;
+        position: relative;
+    }
+    .docs-search input {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 8px 12px 8px 32px;
+        font-size: 0.8rem;
+        border: 1.5px solid rgba(45,106,79,0.15);
+        border-radius: 9px;
+        background: rgba(255,255,255,0.8);
+        color: var(--text);
+        outline: none;
+        transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .docs-search input:focus {
+        border-color: var(--emerald);
+        box-shadow: 0 0 0 3px rgba(45,106,79,0.1);
+        background: #fff;
+    }
+    .docs-search input::placeholder { color: rgba(74,124,94,0.4); }
+    .docs-search i {
+        position: absolute;
+        left: 11px; top: 50%;
+        transform: translateY(-50%);
+        color: var(--muted);
+        font-size: 0.8rem;
+        pointer-events: none;
+    }
+
+    /* chapter list */
+    .docs-chapter-list {
+        list-style: none;
+        margin: 0;
+        padding: 10px 10px 14px;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .docs-chapter-link {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 9px 11px;
+        border-radius: 10px;
+        text-decoration: none;
+        color: var(--muted);
+        font-size: 0.84rem;
+        font-weight: 600;
+        transition: background 0.15s, color 0.15s;
+        cursor: pointer;
+        border: none;
+        background: transparent;
+        width: 100%;
+        box-sizing: border-box;
+        text-align: left;
+    }
+    .docs-chapter-link:hover {
+        background: rgba(45,106,79,0.07);
+        color: var(--text);
+    }
+    .docs-chapter-link.active {
+        background: var(--forest);
+        color: #fff;
+        box-shadow: 0 3px 12px rgba(15,36,24,0.18);
+    }
+
+    .docs-chapter-num {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px; height: 24px;
+        border-radius: 7px;
+        background: rgba(45,106,79,0.08);
+        color: var(--emerald);
+        font-family: 'Sora', sans-serif;
+        font-size: 0.7rem;
+        font-weight: 800;
+        flex-shrink: 0;
+        transition: background 0.15s, color 0.15s;
+    }
+    .docs-chapter-link.active .docs-chapter-num {
+        background: rgba(82,183,136,0.18);
+        color: var(--mint);
+    }
+
+    .docs-chapter-text {
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
+        min-width: 0;
+        flex: 1;
+    }
+    .docs-chapter-title {
+        font-size: 0.84rem;
+        font-weight: 700;
+        line-height: 1.3;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .docs-chapter-desc {
+        font-size: 0.69rem;
+        font-weight: 500;
+        opacity: 0.7;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    /* ── Main content panel ──────────────────────────────────── */
+    .docs-content {
+        min-width: 0;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .docs-panel {
+        background: rgba(255,255,255,0.9);
+        border: 1px solid rgba(45,106,79,0.12);
+        border-radius: 20px;
+        padding: 32px 36px;
+        box-shadow: 0 4px 24px rgba(15,36,24,0.05);
+        min-height: 500px;
+        width: 100%;
+        box-sizing: border-box;
+        overflow-wrap: break-word;
+    }
+    @media (max-width: 575px) {
+        .docs-panel { padding: 22px 18px; }
+    }
+
+    /* chapter header inside panel */
+    .docs-chapter-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--emerald);
+        background: rgba(45,106,79,0.08);
+        border: 1px solid rgba(45,106,79,0.18);
+        border-radius: 100px;
+        padding: 4px 12px;
+        margin-bottom: 16px;
+    }
+    .docs-panel-title {
+        font-family: 'Sora', sans-serif;
+        font-size: 1.6rem;
+        font-weight: 800;
+        letter-spacing: -0.035em;
+        color: var(--text);
+        margin: 0 0 6px;
+    }
+    .docs-panel-sub {
+        font-size: 0.9rem;
+        color: var(--muted);
+        margin: 0 0 24px;
+        padding-bottom: 22px;
+        border-bottom: 1px solid rgba(45,106,79,0.09);
+    }
+
+    /* section heading inside chapter content */
+    .docs-section-title {
+        font-family: 'Sora', sans-serif;
+        font-size: 1.08rem;
+        font-weight: 800;
+        color: var(--text);
+        letter-spacing: -0.02em;
+        margin: 26px 0 12px;
+        display: flex;
+        align-items: center;
+        gap: 9px;
+    }
+    .docs-section-title:first-of-type { margin-top: 0; }
+    .docs-section-icon {
+        width: 30px; height: 30px;
+        border-radius: 8px;
+        background: rgba(45,106,79,0.09);
+        color: var(--emerald);
+        display: flex; align-items: center; justify-content: center;
+        font-size: 0.85rem;
+        flex-shrink: 0;
+    }
+
+    .docs-body-text {
+        font-size: 0.91rem;
+        line-height: 1.75;
+        color: var(--text);
+        margin: 0 0 14px;
+    }
+    .docs-body-text:last-child { margin-bottom: 0; }
+    .docs-body-text strong { color: var(--forest); font-weight: 700; }
+
+    /* placeholder state */
+    .docs-placeholder {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 56px 20px;
+        color: var(--muted);
+    }
+    .docs-placeholder-icon {
+        width: 56px; height: 56px;
+        border-radius: 16px;
+        background: rgba(45,106,79,0.08);
+        border: 1px solid rgba(45,106,79,0.16);
+        display: flex; align-items: center; justify-content: center;
+        color: var(--emerald);
+        font-size: 1.4rem;
+        margin-bottom: 16px;
+    }
+    .docs-placeholder h3 {
+        font-family: 'Sora', sans-serif;
+        font-weight: 800;
+        color: var(--text);
+        font-size: 1.05rem;
+        margin: 0 0 6px;
+    }
+    .docs-placeholder p {
+        font-size: 0.85rem;
+        max-width: 380px;
+        line-height: 1.6;
+        margin: 0;
+    }
+
+    /* ── Lead paragraph ──────────────────────────────────────── */
+    .docs-lead {
+        font-size: 0.98rem;
+        line-height: 1.8;
+        color: var(--text);
+        margin: 0 0 16px;
+    }
+    .docs-lead strong { color: var(--forest); font-weight: 700; }
+
+    /* ── Divider between major sections ─────────────────────── */
+    .docs-divider {
+        border: none;
+        border-top: 1px dashed rgba(45,106,79,0.16);
+        margin: 30px 0;
+    }
+
+    /* ── Bullet list ─────────────────────────────────────────── */
+    .docs-list {
+        list-style: none;
+        margin: 0 0 14px;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+    .docs-list li {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        font-size: 0.9rem;
+        line-height: 1.6;
+        color: var(--text);
+    }
+    .docs-list .li-dot {
+        width: 20px; height: 20px;
+        border-radius: 50%;
+        background: rgba(45,106,79,0.09);
+        color: var(--emerald);
+        display: flex; align-items: center; justify-content: center;
+        font-size: 0.6rem;
+        flex-shrink: 0;
+        margin-top: 2px;
+    }
+
+    /* ── Feature grid cards ──────────────────────────────────── */
+    .docs-feature-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 14px;
+        margin: 16px 0 24px;
+    }
+    .docs-feature-card {
+        background: rgba(255,255,255,0.7);
+        border: 1px solid rgba(45,106,79,0.1);
+        border-radius: 14px;
+        padding: 16px 18px;
+        transition: border-color 0.2s, transform 0.2s, background 0.2s;
+    }
+    .docs-feature-card:hover {
+        border-color: rgba(45,106,79,0.24);
+        background: #fff;
+        transform: translateY(-2px);
+    }
+    .docs-feature-icon {
+        width: 34px; height: 34px;
+        border-radius: 9px;
+        background: rgba(45,106,79,0.09);
+        color: var(--emerald);
+        display: flex; align-items: center; justify-content: center;
+        font-size: 0.95rem;
+        margin-bottom: 10px;
+    }
+    .docs-feature-title {
+        font-family: 'Sora', sans-serif;
+        font-size: 0.92rem;
+        font-weight: 800;
+        color: var(--text);
+        margin: 0 0 5px;
+    }
+    .docs-feature-desc {
+        font-size: 0.82rem;
+        line-height: 1.6;
+        color: var(--muted);
+        margin: 0;
+    }
+
+    /* ── Workflow / pipeline diagram ─────────────────────────── */
+    .docs-workflow {
+        background: var(--forest);
+        border-radius: 16px;
+        padding: 22px 24px;
+        margin: 16px 0 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        position: relative;
+        overflow: hidden;
+    }
+    .docs-workflow::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(rgba(82,183,136,0.06) 1px, transparent 1px);
+        background-size: 18px 18px;
+        pointer-events: none;
+    }
+    .docs-workflow-step {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 0;
+        position: relative;
+        z-index: 1;
+    }
+    .docs-workflow-num {
+        width: 30px; height: 30px;
+        border-radius: 9px;
+        background: rgba(82,183,136,0.12);
+        border: 1px solid rgba(82,183,136,0.25);
+        color: var(--mint);
+        display: flex; align-items: center; justify-content: center;
+        font-family: 'Sora', sans-serif;
+        font-weight: 800;
+        font-size: 0.8rem;
+        flex-shrink: 0;
+    }
+    .docs-workflow-label {
+        font-size: 0.88rem;
+        font-weight: 700;
+        color: #fff;
+    }
+    .docs-workflow-arrow {
+        display: flex;
+        justify-content: center;
+        color: rgba(82,183,136,0.4);
+        font-size: 0.85rem;
+        padding-left: 15px;
+        position: relative;
+        z-index: 1;
+    }
+
+    /* ── Numbered step cards (platform workflow) ─────────────── */
+    .docs-step-card {
+        display: flex;
+        gap: 14px;
+        padding: 16px 0;
+        border-bottom: 1px solid rgba(45,106,79,0.08);
+    }
+    .docs-step-card:last-child { border-bottom: none; }
+    .docs-step-badge {
+        width: 36px; height: 36px;
+        border-radius: 10px;
+        background: rgba(45,106,79,0.09);
+        color: var(--emerald);
+        display: flex; align-items: center; justify-content: center;
+        font-family: 'Sora', sans-serif;
+        font-weight: 800;
+        font-size: 0.95rem;
+        flex-shrink: 0;
+    }
+    .docs-step-content { flex: 1; min-width: 0; }
+    .docs-step-title {
+        font-family: 'Sora', sans-serif;
+        font-size: 0.94rem;
+        font-weight: 800;
+        color: var(--text);
+        margin: 0 0 4px;
+    }
+    .docs-step-desc {
+        font-size: 0.86rem;
+        line-height: 1.65;
+        color: var(--muted);
+        margin: 0;
+    }
+
+    /* ── Tag pills (use cases / supported platforms) ─────────── */
+    .docs-tag-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 14px 0 22px;
+    }
+    .docs-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: var(--emerald);
+        background: rgba(45,106,79,0.07);
+        border: 1px solid rgba(45,106,79,0.16);
+        border-radius: 100px;
+        padding: 5px 13px;
+    }
+    .docs-tag i { font-size: 0.85rem; }
+
+    /* ── Callout box ─────────────────────────────────────────── */
+    .docs-callout {
+        display: flex;
+        gap: 14px;
+        background: rgba(45,106,79,0.05);
+        border: 1px solid rgba(45,106,79,0.14);
+        border-radius: 14px;
+        padding: 16px 18px;
+        margin: 16px 0 24px;
+    }
+    .docs-callout.amber {
+        background: rgba(245,158,11,0.06);
+        border-color: rgba(245,158,11,0.2);
+    }
+    .docs-callout-icon {
+        width: 32px; height: 32px;
+        border-radius: 9px;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 0.9rem;
+        flex-shrink: 0;
+        background: rgba(45,106,79,0.1);
+        color: var(--emerald);
+    }
+    .docs-callout.amber .docs-callout-icon {
+        background: rgba(245,158,11,0.14);
+        color: #d97706;
+    }
+    .docs-callout-text {
+        font-size: 0.86rem;
+        line-height: 1.65;
+        color: var(--text);
+    }
+    .docs-callout-text strong { color: var(--forest); }
+    .docs-callout.amber .docs-callout-text strong { color: #b45309; }
+
+    /* ── Next chapter card ───────────────────────────────────── */
+    .docs-next-card {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        background: var(--forest);
+        border-radius: 16px;
+        padding: 20px 24px;
+        margin-top: 8px;
+        position: relative;
+        overflow: hidden;
+        flex-wrap: wrap;
+    }
+    .docs-next-card::after {
+        content: '';
+        position: absolute;
+        right: -50px; top: -50px;
+        width: 180px; height: 180px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(82,183,136,0.12), transparent 65%);
+        pointer-events: none;
+    }
+    .docs-next-card > * { position: relative; z-index: 1; }
+    .docs-next-eyebrow {
+        font-size: 0.68rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: rgba(82,183,136,0.7);
+        margin-bottom: 4px;
+    }
+    .docs-next-title {
+        font-family: 'Sora', sans-serif;
+        font-size: 1.05rem;
+        font-weight: 800;
+        color: #fff;
+        margin: 0;
+    }
+    .docs-next-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        background: var(--mint);
+        color: var(--forest-deep) !important;
+        font-family: 'Sora', sans-serif;
+        font-weight: 700;
+        font-size: 0.85rem;
+        padding: 9px 18px;
+        border-radius: 10px;
+        border: none;
+        cursor: pointer;
+        transition: all 0.18s ease;
+        white-space: nowrap;
+        text-decoration: none;
+    }
+    .docs-next-btn:hover {
+        background: #3fa876;
+        transform: translateY(-1px);
+        color: var(--forest-deep) !important;
+    }
+
+    /* prev/next nav at bottom of panel */
+    .docs-pagination {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        margin-top: 32px;
+        padding-top: 22px;
+        border-top: 1px solid rgba(45,106,79,0.09);
+    }
+    .docs-nav-btn {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 16px;
+        border-radius: 11px;
+        border: 1.5px solid rgba(45,106,79,0.18);
+        background: rgba(255,255,255,0.8);
+        color: var(--text);
+        font-size: 0.83rem;
+        font-weight: 700;
+        text-decoration: none;
+        cursor: pointer;
+        transition: all 0.18s ease;
+        max-width: 48%;
+        box-sizing: border-box;
+    }
+    .docs-nav-btn:hover {
+        border-color: var(--emerald);
+        background: rgba(45,106,79,0.05);
+    }
+    .docs-nav-btn.disabled {
+        opacity: 0.35;
+        pointer-events: none;
+    }
+    .docs-nav-label {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.3;
+        min-width: 0;
+        overflow: hidden;
+    }
+    .docs-nav-label small {
+        font-size: 0.66rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--muted);
+    }
+    .docs-nav-label span {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="docs-page container py-4">
+<div class="docs-shell">
+
+    <!-- ══ SIDEBAR ═══════════════════════════════════════════ -->
+    <aside class="docs-sidebar">
+
+        <div class="docs-sidebar-header">
+            <div class="docs-logo">
+                <span class="docs-logo-icon"><i class="bi bi-robot"></i></span>
+                BotForge Docs
+            </div>
+            <div class="docs-logo-sub">Documentation & Guides</div>
+        </div>
+
+        <div class="docs-search">
+            <i class="bi bi-search"></i>
+            <input type="text" id="docsSearch" placeholder="Search chapters...">
+        </div>
+
+        <ul class="docs-chapter-list" id="docsChapterList">
+
+            <li class="docs-chapter-item">
+                <button class="docs-chapter-link active" data-chapter="1">
+                    <span class="docs-chapter-num">01</span>
+                    <span class="docs-chapter-text">
+                        <span class="docs-chapter-title">Introduction</span>
+                        <span class="docs-chapter-desc">Overview of BotForge</span>
+                    </span>
+                </button>
+            </li>
+            <li class="docs-chapter-item">
+                <button class="docs-chapter-link" data-chapter="2">
+                    <span class="docs-chapter-num">02</span>
+                    <span class="docs-chapter-text">
+                        <span class="docs-chapter-title">Getting Started</span>
+                        <span class="docs-chapter-desc">Create your account</span>
+                    </span>
+                </button>
+            </li>
+            <li class="docs-chapter-item">
+                <button class="docs-chapter-link" data-chapter="3">
+                    <span class="docs-chapter-num">03</span>
+                    <span class="docs-chapter-text">
+                        <span class="docs-chapter-title">Company Setup</span>
+                        <span class="docs-chapter-desc">Configure your workspace</span>
+                    </span>
+                </button>
+            </li>
+            <li class="docs-chapter-item">
+                <button class="docs-chapter-link" data-chapter="4">
+                    <span class="docs-chapter-num">04</span>
+                    <span class="docs-chapter-text">
+                        <span class="docs-chapter-title">Subscription Plans</span>
+                        <span class="docs-chapter-desc">Choose the right plan</span>
+                    </span>
+                </button>
+            </li>
+            <li class="docs-chapter-item">
+                <button class="docs-chapter-link" data-chapter="5">
+                    <span class="docs-chapter-num">05</span>
+                    <span class="docs-chapter-text">
+                        <span class="docs-chapter-title">Dashboard Overview</span>
+                        <span class="docs-chapter-desc">Understand your workspace</span>
+                    </span>
+                </button>
+            </li>
+            <li class="docs-chapter-item">
+                <button class="docs-chapter-link" data-chapter="6">
+                    <span class="docs-chapter-num">06</span>
+                    <span class="docs-chapter-text">
+                        <span class="docs-chapter-title">Creating Your First Bot</span>
+                        <span class="docs-chapter-desc">Build your AI assistant</span>
+                    </span>
+                </button>
+            </li>
+            <li class="docs-chapter-item">
+                <button class="docs-chapter-link" data-chapter="7">
+                    <span class="docs-chapter-num">07</span>
+                    <span class="docs-chapter-text">
+                        <span class="docs-chapter-title">Bot Workspace</span>
+                        <span class="docs-chapter-desc">Manage your chatbot</span>
+                    </span>
+                </button>
+            </li>
+            <li class="docs-chapter-item">
+                <button class="docs-chapter-link" data-chapter="8">
+                    <span class="docs-chapter-num">08</span>
+                    <span class="docs-chapter-text">
+                        <span class="docs-chapter-title">Knowledge Base</span>
+                        <span class="docs-chapter-desc">Train your bot</span>
+                    </span>
+                </button>
+            </li>
+            <li class="docs-chapter-item">
+                <button class="docs-chapter-link" data-chapter="9">
+                    <span class="docs-chapter-num">09</span>
+                    <span class="docs-chapter-text">
+                        <span class="docs-chapter-title">Website Crawling</span>
+                        <span class="docs-chapter-desc">How BotForge learns</span>
+                    </span>
+                </button>
+            </li>
+            <li class="docs-chapter-item">
+                <button class="docs-chapter-link" data-chapter="10">
+                    <span class="docs-chapter-num">10</span>
+                    <span class="docs-chapter-text">
+                        <span class="docs-chapter-title">AI Training Process</span>
+                        <span class="docs-chapter-desc">How responses are generated</span>
+                    </span>
+                </button>
+            </li>
+            <li class="docs-chapter-item">
+                <button class="docs-chapter-link" data-chapter="11">
+                    <span class="docs-chapter-num">11</span>
+                    <span class="docs-chapter-text">
+                        <span class="docs-chapter-title">Install Bot</span>
+                        <span class="docs-chapter-desc">Add to your website</span>
+                    </span>
+                </button>
+            </li>
+            <li class="docs-chapter-item">
+                <button class="docs-chapter-link" data-chapter="12">
+                    <span class="docs-chapter-num">12</span>
+                    <span class="docs-chapter-text">
+                        <span class="docs-chapter-title">Widget Customization</span>
+                        <span class="docs-chapter-desc">Customize the chat widget</span>
+                    </span>
+                </button>
+            </li>
+            <li class="docs-chapter-item">
+                <button class="docs-chapter-link" data-chapter="13">
+                    <span class="docs-chapter-num">13</span>
+                    <span class="docs-chapter-text">
+                        <span class="docs-chapter-title">Chat Logs</span>
+                        <span class="docs-chapter-desc">Review conversations</span>
+                    </span>
+                </button>
+            </li>
+            <li class="docs-chapter-item">
+                <button class="docs-chapter-link" data-chapter="14">
+                    <span class="docs-chapter-num">14</span>
+                    <span class="docs-chapter-text">
+                        <span class="docs-chapter-title">Billing Dashboard</span>
+                        <span class="docs-chapter-desc">Manage your subscription</span>
+                    </span>
+                </button>
+            </li>
+            <li class="docs-chapter-item">
+                <button class="docs-chapter-link" data-chapter="15">
+                    <span class="docs-chapter-num">15</span>
+                    <span class="docs-chapter-text">
+                        <span class="docs-chapter-title">Support</span>
+                        <span class="docs-chapter-desc">Need help?</span>
+                    </span>
+                </button>
+            </li>
+
+        </ul>
+    </aside>
+
+    <!-- ══ CONTENT PANEL ═════════════════════════════════════ -->
+    <div class="docs-content">
+        <div class="docs-panel" id="docsPanel">
+
+            <!-- ══ CHAPTER 1 ══════════════════════════════════ -->
+            <div class="docs-chapter-content" data-chapter="1">
+                <div class="docs-chapter-eyebrow"><i class="bi bi-book"></i> Chapter 01</div>
+                <h1 class="docs-panel-title">Introduction</h1>
+                <p class="docs-panel-sub">Overview of BotForge</p>
+
+                <p class="docs-lead">
+                    Welcome to <strong>BotForge</strong> &mdash; a platform designed to help businesses create
+                    intelligent AI-powered chatbots trained using their own website content. With BotForge,
+                    you can deploy a customized chatbot on your website without writing complex AI code or
+                    managing machine learning models.
+                </p>
+                <p class="docs-body-text">
+                    Whether you are a startup, a growing business, or an enterprise organization, BotForge
+                    provides a simple workflow that allows you to create, train, deploy, and manage AI
+                    assistants from a single dashboard.
+                </p>
+
+                <hr class="docs-divider">
+
+                <!-- What is BotForge -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-info-circle"></i></span>
+                    What is BotForge?
+                </h2>
+                <p class="docs-body-text">
+                    BotForge is a Software as a Service (SaaS) platform that enables organizations to build
+                    conversational AI assistants using the information already available on their websites.
+                </p>
+                <p class="docs-body-text">
+                    Instead of manually creating hundreds of questions and answers, BotForge automatically
+                    crawls your website, extracts meaningful content, processes the information into an AI
+                    knowledge base, and allows your chatbot to answer visitor questions using that knowledge.
+                </p>
+                <p class="docs-body-text">
+                    The platform focuses on making AI deployment simple while providing complete control over
+                    your chatbot, its training data, installation, and usage.
+                </p>
+
+                <!-- Why Choose BotForge -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-question-circle"></i></span>
+                    Why Choose BotForge?
+                </h2>
+                <p class="docs-body-text">
+                    Modern businesses receive the same customer questions repeatedly:
+                </p>
+                <ul class="docs-list">
+                    <li><span class="li-dot"><i class="bi bi-dot"></i></span>What services do you provide?</li>
+                    <li><span class="li-dot"><i class="bi bi-dot"></i></span>How can customers contact you?</li>
+                    <li><span class="li-dot"><i class="bi bi-dot"></i></span>What are your business hours?</li>
+                    <li><span class="li-dot"><i class="bi bi-dot"></i></span>What products are available?</li>
+                    <li><span class="li-dot"><i class="bi bi-dot"></i></span>Where are you located?</li>
+                    <li><span class="li-dot"><i class="bi bi-dot"></i></span>What pricing plans do you offer?</li>
+                </ul>
+                <p class="docs-body-text">
+                    Instead of requiring a human to answer these questions repeatedly, BotForge allows your
+                    chatbot to answer them instantly using information collected from your own website. The
+                    result is a faster customer experience while reducing support workload.
+                </p>
+
+                <!-- Core Features -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-grid"></i></span>
+                    Core Features
+                </h2>
+                <p class="docs-body-text">
+                    BotForge includes everything required to create and manage business AI assistants.
+                </p>
+                <div class="docs-feature-grid">
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon"><i class="bi bi-robot"></i></div>
+                        <h4 class="docs-feature-title">AI Chatbot Creation</h4>
+                        <p class="docs-feature-desc">Create multiple AI chatbots for different projects or websites directly from your dashboard.</p>
+                    </div>
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon"><i class="bi bi-globe2"></i></div>
+                        <h4 class="docs-feature-title">Website Knowledge Training</h4>
+                        <p class="docs-feature-desc">Train your chatbot by crawling your website automatically. BotForge discovers pages and converts them into searchable AI knowledge.</p>
+                    </div>
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon"><i class="bi bi-diagram-3"></i></div>
+                        <h4 class="docs-feature-title">Smart Website Crawling</h4>
+                        <p class="docs-feature-desc">The crawler follows internal links, discovers additional pages, reads content, and builds a structured knowledge base.</p>
+                    </div>
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon"><i class="bi bi-database-fill-gear"></i></div>
+                        <h4 class="docs-feature-title">Knowledge Management</h4>
+                        <p class="docs-feature-desc">Manage the knowledge used by your chatbot from a dedicated Knowledge Base section inside each bot.</p>
+                    </div>
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon"><i class="bi bi-code-slash"></i></div>
+                        <h4 class="docs-feature-title">Easy Installation</h4>
+                        <p class="docs-feature-desc">Deploy your chatbot by copying a single JavaScript snippet into your website. No server configuration required.</p>
+                    </div>
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon"><i class="bi bi-receipt-cutoff"></i></div>
+                        <h4 class="docs-feature-title">Chat Logs</h4>
+                        <p class="docs-feature-desc">Monitor conversations between visitors and your chatbot to understand questions and improve your content.</p>
+                    </div>
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon"><i class="bi bi-credit-card"></i></div>
+                        <h4 class="docs-feature-title">Billing &amp; Usage</h4>
+                        <p class="docs-feature-desc">Monitor your subscription plan, bot limits, page limits, and usage statistics through the Billing Dashboard.</p>
+                    </div>
+                </div>
+
+                <!-- How BotForge Works -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-gear-wide-connected"></i></span>
+                    How BotForge Works
+                </h2>
+                <p class="docs-body-text">The BotForge workflow follows a simple process.</p>
+
+                <div class="docs-workflow">
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">1</span>
+                        <span class="docs-workflow-label">Create Company</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">2</span>
+                        <span class="docs-workflow-label">Choose Subscription Plan</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">3</span>
+                        <span class="docs-workflow-label">Create Chatbot</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">4</span>
+                        <span class="docs-workflow-label">Train Using Website</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">5</span>
+                        <span class="docs-workflow-label">Generate Knowledge Base</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">6</span>
+                        <span class="docs-workflow-label">Install Widget</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">7</span>
+                        <span class="docs-workflow-label">Visitors Start Chatting</span>
+                    </div>
+                </div>
+
+                <p class="docs-body-text">
+                    Once installed, your chatbot answers visitor questions using the knowledge collected from
+                    your website.
+                </p>
+
+                <!-- Platform Workflow -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-signpost-split"></i></span>
+                    Platform Workflow
+                </h2>
+                <p class="docs-body-text">Every chatbot created in BotForge follows the same lifecycle.</p>
+
+                <div>
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge">1</span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Create Your Workspace</h4>
+                            <p class="docs-step-desc">Begin by creating your company workspace. Your workspace stores your bots, subscription, website information, and AI knowledge.</p>
+                        </div>
+                    </div>
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge">2</span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Select a Subscription</h4>
+                            <p class="docs-step-desc">Choose a subscription plan based on the number of bots and website pages you wish to manage.</p>
+                        </div>
+                    </div>
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge">3</span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Create a Bot</h4>
+                            <p class="docs-step-desc">Create a chatbot by providing basic information such as the bot name, website URL, and welcome message.</p>
+                        </div>
+                    </div>
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge">4</span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Train Your Bot</h4>
+                            <p class="docs-step-desc">BotForge crawls your website and builds an AI knowledge base from the discovered pages.</p>
+                        </div>
+                    </div>
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge">5</span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Install the Widget</h4>
+                            <p class="docs-step-desc">Copy the installation script and paste it into your website. Your chatbot becomes available immediately.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Typical Use Cases -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-buildings"></i></span>
+                    Typical Use Cases
+                </h2>
+                <p class="docs-body-text">BotForge can be used across multiple industries. Examples include:</p>
+                <div class="docs-tag-grid">
+                    <span class="docs-tag"><i class="bi bi-globe"></i>Business websites</span>
+                    <span class="docs-tag"><i class="bi bi-laptop"></i>IT companies</span>
+                    <span class="docs-tag"><i class="bi bi-palette"></i>Digital agencies</span>
+                    <span class="docs-tag"><i class="bi bi-mortarboard"></i>Schools</span>
+                    <span class="docs-tag"><i class="bi bi-bank"></i>Universities</span>
+                    <span class="docs-tag"><i class="bi bi-hospital"></i>Healthcare providers</span>
+                    <span class="docs-tag"><i class="bi bi-briefcase"></i>Law firms</span>
+                    <span class="docs-tag"><i class="bi bi-megaphone"></i>Marketing agencies</span>
+                    <span class="docs-tag"><i class="bi bi-box-seam"></i>Product companies</span>
+                    <span class="docs-tag"><i class="bi bi-cloud"></i>SaaS platforms</span>
+                    <span class="docs-tag"><i class="bi bi-house"></i>Real estate</span>
+                    <span class="docs-tag"><i class="bi bi-cash-coin"></i>Financial services</span>
+                    <span class="docs-tag"><i class="bi bi-people"></i>Consulting firms</span>
+                </div>
+                <p class="docs-body-text">
+                    Any website containing useful information can become a knowledge source for your chatbot.
+                </p>
+
+                <!-- Supported Website Types -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-code-square"></i></span>
+                    Supported Website Types
+                </h2>
+                <p class="docs-body-text">BotForge works with most publicly accessible websites. Examples include:</p>
+                <div class="docs-tag-grid">
+                    <span class="docs-tag"><i class="bi bi-filetype-html"></i>HTML websites</span>
+                    <span class="docs-tag"><i class="bi bi-filetype-php"></i>PHP websites</span>
+                    <span class="docs-tag"><i class="bi bi-wordpress"></i>WordPress</span>
+                    <span class="docs-tag"><i class="bi bi-server"></i>Laravel</span>
+                    <span class="docs-tag"><i class="bi bi-server"></i>Django</span>
+                    <span class="docs-tag"><i class="bi bi-filetype-jsx"></i>React applications</span>
+                    <span class="docs-tag"><i class="bi bi-lightning"></i>Next.js websites</span>
+                    <span class="docs-tag"><i class="bi bi-shop"></i>Shopify stores</span>
+                    <span class="docs-tag"><i class="bi bi-bootstrap"></i>Bootstrap websites</span>
+                </div>
+                <p class="docs-body-text">
+                    As long as the content is publicly available, BotForge can use it during website training.
+                </p>
+
+                <!-- Benefits -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-stars"></i></span>
+                    Benefits of Using BotForge
+                </h2>
+                <p class="docs-body-text">Using BotForge provides several advantages.</p>
+                <ul class="docs-list">
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Reduce repetitive customer support questions.</li>
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Provide instant responses to website visitors.</li>
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Make business information available 24/7.</li>
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Improve visitor engagement.</li>
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Increase lead generation opportunities.</li>
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Deploy AI without machine learning expertise.</li>
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Manage multiple chatbots from one dashboard.</li>
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Monitor usage and conversations easily.</li>
+                </ul>
+
+                <!-- Before You Begin -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-clipboard-check"></i></span>
+                    Before You Begin
+                </h2>
+                <p class="docs-body-text">Before creating your first chatbot, ensure you have:</p>
+
+                <div class="docs-callout amber">
+                    <div class="docs-callout-icon"><i class="bi bi-exclamation-triangle"></i></div>
+                    <div class="docs-callout-text">
+                        <strong>Checklist:</strong> a registered BotForge account, your company workspace
+                        configured, an active subscription plan, and a publicly accessible website. These
+                        requirements allow BotForge to successfully train and deploy your AI chatbot.
+                    </div>
+                </div>
+
+                <!-- What's Next -->
+                <div class="docs-next-card">
+                    <div>
+                        <div class="docs-next-eyebrow">What's Next?</div>
+                        <h4 class="docs-next-title">Chapter 2 &mdash; Getting Started</h4>
+                    </div>
+                    <button class="docs-next-btn" onclick="document.querySelector('.docs-chapter-link[data-chapter=\'2\']').click();">
+                        Continue <i class="bi bi-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- ══ CHAPTER 2 ══════════════════════════════════ -->
+            <div class="docs-chapter-content" data-chapter="2" style="display:none;">
+                <div class="docs-chapter-eyebrow"><i class="bi bi-book"></i> Chapter 02</div>
+                <h1 class="docs-panel-title">Getting Started</h1>
+                <p class="docs-panel-sub">Create your account and begin using BotForge</p>
+
+                <div class="docs-placeholder">
+                    <div class="docs-placeholder-icon"><i class="bi bi-file-text"></i></div>
+                    <h3>Content coming soon</h3>
+                    <p>Sections: Creating an Account, Logging In, Dashboard Overview, First Time User Experience.</p>
+                </div>
+            </div>
+
+            <!-- ══ CHAPTER 3 ══════════════════════════════════ -->
+            <div class="docs-chapter-content" data-chapter="3" style="display:none;">
+                <div class="docs-chapter-eyebrow"><i class="bi bi-book"></i> Chapter 03</div>
+                <h1 class="docs-panel-title">Company Setup</h1>
+                <p class="docs-panel-sub">Configure your workspace</p>
+
+                <div class="docs-placeholder">
+                    <div class="docs-placeholder-icon"><i class="bi bi-file-text"></i></div>
+                    <h3>Content coming soon</h3>
+                    <p>Sections: Why Company Setup is Required, Creating Your Company, Company Information, Website URL, Business Details, Workspace Overview.</p>
+                </div>
+            </div>
+
+            <!-- ══ CHAPTER 4 ══════════════════════════════════ -->
+            <div class="docs-chapter-content" data-chapter="4" style="display:none;">
+                <div class="docs-chapter-eyebrow"><i class="bi bi-book"></i> Chapter 04</div>
+                <h1 class="docs-panel-title">Subscription Plans</h1>
+                <p class="docs-panel-sub">Choose the right plan</p>
+
+                <div class="docs-placeholder">
+                    <div class="docs-placeholder-icon"><i class="bi bi-file-text"></i></div>
+                    <h3>Content coming soon</h3>
+                    <p>Sections: Available Plans, Features Comparison, Plan Limits, Selecting Your First Plan, Upgrading Your Plan, Current Plan.</p>
+                </div>
+            </div>
+
+            <!-- ══ CHAPTER 5 ══════════════════════════════════ -->
+            <div class="docs-chapter-content" data-chapter="5" style="display:none;">
+                <div class="docs-chapter-eyebrow"><i class="bi bi-book"></i> Chapter 05</div>
+                <h1 class="docs-panel-title">Dashboard Overview</h1>
+                <p class="docs-panel-sub">Understand your workspace</p>
+
+                <div class="docs-placeholder">
+                    <div class="docs-placeholder-icon"><i class="bi bi-file-text"></i></div>
+                    <h3>Content coming soon</h3>
+                    <p>Sections: Dashboard Cards, Statistics, Quick Actions, Navigation Menu, Recent Activity, Workspace Overview.</p>
+                </div>
+            </div>
+
+            <!-- ══ CHAPTER 6 ══════════════════════════════════ -->
+            <div class="docs-chapter-content" data-chapter="6" style="display:none;">
+                <div class="docs-chapter-eyebrow"><i class="bi bi-book"></i> Chapter 06</div>
+                <h1 class="docs-panel-title">Creating Your First Bot</h1>
+                <p class="docs-panel-sub">Build your first AI assistant</p>
+
+                <div class="docs-placeholder">
+                    <div class="docs-placeholder-icon"><i class="bi bi-file-text"></i></div>
+                    <h3>Content coming soon</h3>
+                    <p>Sections: Create Bot, Bot Name, Website URL, Welcome Message, Description, Bot Type, Saving the Bot.</p>
+                </div>
+            </div>
+
+            <!-- ══ CHAPTER 7 ══════════════════════════════════ -->
+            <div class="docs-chapter-content" data-chapter="7" style="display:none;">
+                <div class="docs-chapter-eyebrow"><i class="bi bi-book"></i> Chapter 07</div>
+                <h1 class="docs-panel-title">Bot Workspace</h1>
+                <p class="docs-panel-sub">Manage your chatbot</p>
+
+                <div class="docs-placeholder">
+                    <div class="docs-placeholder-icon"><i class="bi bi-file-text"></i></div>
+                    <h3>Content coming soon</h3>
+                    <p>Sections: Workspace Overview, Dashboard Tab, Knowledge Base Tab, Install Bot Tab, Chat Logs Tab, Danger Zone, Managing Your Bot.</p>
+                </div>
+            </div>
+
+            <!-- ══ CHAPTER 8 ══════════════════════════════════ -->
+            <div class="docs-chapter-content" data-chapter="8" style="display:none;">
+                <div class="docs-chapter-eyebrow"><i class="bi bi-book"></i> Chapter 08</div>
+                <h1 class="docs-panel-title">Knowledge Base</h1>
+                <p class="docs-panel-sub">Train your bot using your website</p>
+
+                <div class="docs-placeholder">
+                    <div class="docs-placeholder-icon"><i class="bi bi-file-text"></i></div>
+                    <h3>Content coming soon</h3>
+                    <p>Sections: Website Training, Adding Website URL, Website Crawling, Updating Knowledge, Removing Knowledge, Training Best Practices.</p>
+                </div>
+            </div>
+
+            <!-- ══ CHAPTER 9 ══════════════════════════════════ -->
+            <div class="docs-chapter-content" data-chapter="9" style="display:none;">
+                <div class="docs-chapter-eyebrow"><i class="bi bi-book"></i> Chapter 09</div>
+                <h1 class="docs-panel-title">Website Crawling</h1>
+                <p class="docs-panel-sub">How BotForge learns from your website</p>
+
+                <div class="docs-placeholder">
+                    <div class="docs-placeholder-icon"><i class="bi bi-file-text"></i></div>
+                    <h3>Content coming soon</h3>
+                    <p>Sections: Recursive Crawling, Sitemap Detection, Internal Link Discovery, Supported Websites, Crawl Limits, Content Extraction, Training Pipeline, Content Cleaning.</p>
+                </div>
+            </div>
+
+            <!-- ══ CHAPTER 10 ═════════════════════════════════ -->
+            <div class="docs-chapter-content" data-chapter="10" style="display:none;">
+                <div class="docs-chapter-eyebrow"><i class="bi bi-book"></i> Chapter 10</div>
+                <h1 class="docs-panel-title">AI Training Process</h1>
+                <p class="docs-panel-sub">How BotForge generates responses</p>
+
+                <div class="docs-placeholder">
+                    <div class="docs-placeholder-icon"><i class="bi bi-file-text"></i></div>
+                    <h3>Content coming soon</h3>
+                    <p>Sections: Crawling, Content Processing, Chunking, Embeddings, Knowledge Retrieval, Response Generation, Accuracy Tips.</p>
+                </div>
+            </div>
+
+            <!-- ══ CHAPTER 11 ═════════════════════════════════ -->
+            <div class="docs-chapter-content" data-chapter="11" style="display:none;">
+                <div class="docs-chapter-eyebrow"><i class="bi bi-book"></i> Chapter 11</div>
+                <h1 class="docs-panel-title">Install Bot</h1>
+                <p class="docs-panel-sub">Add BotForge to your website</p>
+
+                <div class="docs-placeholder">
+                    <div class="docs-placeholder-icon"><i class="bi bi-file-text"></i></div>
+                    <h3>Content coming soon</h3>
+                    <p>Sections: Installation Script, HTML Websites, WordPress, React, Next.js, Shopify, Verifying Installation, Widget Loading.</p>
+                </div>
+            </div>
+
+            <!-- ══ CHAPTER 12 ═════════════════════════════════ -->
+            <div class="docs-chapter-content" data-chapter="12" style="display:none;">
+                <div class="docs-chapter-eyebrow"><i class="bi bi-book"></i> Chapter 12</div>
+                <h1 class="docs-panel-title">Widget Customization</h1>
+                <p class="docs-panel-sub">Customize the chat widget</p>
+
+                <div class="docs-placeholder">
+                    <div class="docs-placeholder-icon"><i class="bi bi-file-text"></i></div>
+                    <h3>Content coming soon</h3>
+                    <p>Sections: Widget Position, Brand Color, Welcome Message, Company Branding, Widget Appearance, User Experience Tips.</p>
+                </div>
+            </div>
+
+            <!-- ══ CHAPTER 13 ═════════════════════════════════ -->
+            <div class="docs-chapter-content" data-chapter="13" style="display:none;">
+                <div class="docs-chapter-eyebrow"><i class="bi bi-book"></i> Chapter 13</div>
+                <h1 class="docs-panel-title">Chat Logs</h1>
+                <p class="docs-panel-sub">Review customer conversations</p>
+
+                <div class="docs-placeholder">
+                    <div class="docs-placeholder-icon"><i class="bi bi-file-text"></i></div>
+                    <h3>Content coming soon</h3>
+                    <p>Sections: Viewing Conversations, Reading Messages, Understanding Visitor Queries, Monitoring Bot Performance, Conversation History.</p>
+                </div>
+            </div>
+
+            <!-- ══ CHAPTER 14 ═════════════════════════════════ -->
+            <div class="docs-chapter-content" data-chapter="14" style="display:none;">
+                <div class="docs-chapter-eyebrow"><i class="bi bi-book"></i> Chapter 14</div>
+                <h1 class="docs-panel-title">Billing Dashboard</h1>
+                <p class="docs-panel-sub">Manage your subscription</p>
+
+                <div class="docs-placeholder">
+                    <div class="docs-placeholder-icon"><i class="bi bi-file-text"></i></div>
+                    <h3>Content coming soon</h3>
+                    <p>Sections: Current Plan, Usage Overview, Bots Used, Pages Crawled, Messages Used, Plan Limits, Upgrade Plan.</p>
+                </div>
+            </div>
+
+            <!-- ══ CHAPTER 15 ═════════════════════════════════ -->
+            <div class="docs-chapter-content" data-chapter="15" style="display:none;">
+                <div class="docs-chapter-eyebrow"><i class="bi bi-book"></i> Chapter 15</div>
+                <h1 class="docs-panel-title">Support</h1>
+                <p class="docs-panel-sub">Need help?</p>
+
+                <div class="docs-placeholder">
+                    <div class="docs-placeholder-icon"><i class="bi bi-file-text"></i></div>
+                    <h3>Content coming soon</h3>
+                    <p>Sections: Contact Support, Report an Issue, Feature Requests, Documentation Updates, Getting Assistance.</p>
+                </div>
+            </div>
+
+            <!-- ══ PAGINATION (updates via JS) ════════════════ -->
+            <div class="docs-pagination">
+                <button class="docs-nav-btn" id="docsPrevBtn">
+                    <i class="bi bi-arrow-left"></i>
+                    <span class="docs-nav-label">
+                        <small>Previous</small>
+                        <span id="docsPrevLabel">—</span>
+                    </span>
+                </button>
+                <button class="docs-nav-btn" id="docsNextBtn" style="justify-content:flex-end; text-align:right;">
+                    <span class="docs-nav-label" style="align-items:flex-end;">
+                        <small>Next</small>
+                        <span id="docsNextLabel">—</span>
+                    </span>
+                    <i class="bi bi-arrow-right"></i>
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+</div>
+{% endblock %}
+
+{% block internal_js %}
+<script>
+(function(){
+    const chapters = [
+        {id:1,  title:"Introduction"},
+        {id:2,  title:"Getting Started"},
+        {id:3,  title:"Company Setup"},
+        {id:4,  title:"Subscription Plans"},
+        {id:5,  title:"Dashboard Overview"},
+        {id:6,  title:"Creating Your First Bot"},
+        {id:7,  title:"Bot Workspace"},
+        {id:8,  title:"Knowledge Base"},
+        {id:9,  title:"Website Crawling"},
+        {id:10, title:"AI Training Process"},
+        {id:11, title:"Install Bot"},
+        {id:12, title:"Widget Customization"},
+        {id:13, title:"Chat Logs"},
+        {id:14, title:"Billing Dashboard"},
+        {id:15, title:"Support"}
+    ];
+
+    const links = document.querySelectorAll(".docs-chapter-link");
+    const contents = document.querySelectorAll(".docs-chapter-content");
+    const prevBtn = document.getElementById("docsPrevBtn");
+    const nextBtn = document.getElementById("docsNextBtn");
+    const prevLabel = document.getElementById("docsPrevLabel");
+    const nextLabel = document.getElementById("docsNextLabel");
+    const panel = document.getElementById("docsPanel");
+
+    function showChapter(num){
+        links.forEach(l => l.classList.toggle("active", l.dataset.chapter === String(num)));
+        contents.forEach(c => c.style.display = (c.dataset.chapter === String(num)) ? "block" : "none");
+
+        const idx = chapters.findIndex(c => c.id === Number(num));
+        const prev = chapters[idx - 1];
+        const next = chapters[idx + 1];
+
+        if(prev){
+            prevBtn.classList.remove("disabled");
+            prevLabel.textContent = prev.title;
+            prevBtn.dataset.target = prev.id;
+        } else {
+            prevBtn.classList.add("disabled");
+            prevLabel.textContent = "—";
+        }
+
+        if(next){
+            nextBtn.classList.remove("disabled");
+            nextLabel.textContent = next.title;
+            nextBtn.dataset.target = next.id;
+        } else {
+            nextBtn.classList.add("disabled");
+            nextLabel.textContent = "—";
+        }
+
+        panel.scrollTop = 0;
+        window.scrollTo({top: 0, behavior: "smooth"});
+    }
+
+    links.forEach(link => {
+        link.addEventListener("click", function(){
+            showChapter(this.dataset.chapter);
+        });
+    });
+
+    prevBtn.addEventListener("click", function(){
+        if(this.dataset.target) showChapter(this.dataset.target);
+    });
+    nextBtn.addEventListener("click", function(){
+        if(this.dataset.target) showChapter(this.dataset.target);
+    });
+
+    // Search filter
+    document.getElementById("docsSearch").addEventListener("input", function(){
+        const q = this.value.trim().toLowerCase();
+        document.querySelectorAll(".docs-chapter-item").forEach(item => {
+            const text = item.textContent.toLowerCase();
+            item.style.display = text.includes(q) ? "" : "none";
+        });
+    });
+
+    // init
+    showChapter(1);
+})();
+</script>
+{% endblock %}

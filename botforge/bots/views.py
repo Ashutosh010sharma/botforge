@@ -898,3 +898,7 @@ def delete_chatbot(request,bot_id):
         "message":"Chatbot moved to trash."
 
     })
+    
+def documention(request):
+    return render(request, "bots/documentation.html")
+    
