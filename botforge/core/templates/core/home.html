@@ -992,7 +992,7 @@ BotForge - Build AI Assistants Trained On Your Business Knowledge
                 <h2 class="cta-title">Ready To Build Your First AI Assistant?</h2>
                 <p class="cta-sub">Create your account and launch a contextual assistant widget in minutes — no credit card required.</p>
                 <div class="d-flex flex-column flex-sm-row justify-content-center gap-3">
-                    <a href="{% url 'register' %}" class="btn-mint">
+                    <a href="{% if user.is_authenticated %}{% url 'dashboard' %}{% else %}{% url 'register' %}{% endif %}" class="btn-mint">
                         Get Started Free
                         <i class="bi bi-arrow-right-short" style="font-size:1.3rem;"></i>
                     </a>
