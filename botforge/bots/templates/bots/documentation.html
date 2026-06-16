@@ -2983,11 +2983,357 @@ Documentation | BotForge
                 <h1 class="docs-panel-title">Knowledge Base</h1>
                 <p class="docs-panel-sub">Train your bot using your website</p>
 
-                <div class="docs-placeholder">
-                    <div class="docs-placeholder-icon"><i class="bi bi-file-text"></i></div>
-                    <h3>Content coming soon</h3>
-                    <p>Sections: Website Training, Adding Website URL, Website Crawling, Updating Knowledge, Removing Knowledge, Training Best Practices.</p>
+                <p class="docs-lead">
+                    The Knowledge Base is the intelligence behind your chatbot. When a visitor asks a
+                    question, BotForge searches the knowledge base to find the most relevant information
+                    collected from your website before generating a response. A well-trained knowledge
+                    base leads to more accurate, reliable, and context-aware conversations.
+                </p>
+
+                <hr class="docs-divider">
+
+                <!-- What is KB -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-database-fill"></i></span>
+                    What is the Knowledge Base?
+                </h2>
+                <p class="docs-body-text">
+                    The Knowledge Base is a structured collection of information extracted from your website.
+                    During website training, BotForge processes your content and converts it into
+                    AI-searchable knowledge — allowing your chatbot to answer questions using your own
+                    business information instead of generic responses.
+                </p>
+                <div class="docs-feature-grid">
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon"><i class="bi bi-spider"></i></div>
+                        <h4 class="docs-feature-title">Crawls Website</h4>
+                        <p class="docs-feature-desc">Automatically discovers and visits all publicly accessible internal pages.</p>
+                    </div>
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon"><i class="bi bi-file-earmark-text"></i></div>
+                        <h4 class="docs-feature-title">Extracts Content</h4>
+                        <p class="docs-feature-desc">Pulls meaningful text — headings, paragraphs, lists, product info, FAQs.</p>
+                    </div>
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon"><i class="bi bi-funnel"></i></div>
+                        <h4 class="docs-feature-title">Cleans & Organizes</h4>
+                        <p class="docs-feature-desc">Removes navigation, scripts, CSS, and decorative elements — keeping only useful content.</p>
+                    </div>
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon"><i class="bi bi-search"></i></div>
+                        <h4 class="docs-feature-title">Builds AI Index</h4>
+                        <p class="docs-feature-desc">Converts cleaned content into a searchable knowledge index your chatbot queries in real time.</p>
+                    </div>
                 </div>
+
+                <hr class="docs-divider">
+
+                <!-- Why Important -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-question-circle"></i></span>
+                    Why is the Knowledge Base Important?
+                </h2>
+                <p class="docs-body-text">
+                    Without knowledge, your chatbot cannot answer business-specific questions. Visitors
+                    regularly ask things like:
+                </p>
+                <ul class="docs-list">
+                    <li><span class="li-dot"><i class="bi bi-chat-right"></i></span>What services do you provide?</li>
+                    <li><span class="li-dot"><i class="bi bi-chat-right"></i></span>What are your pricing plans?</li>
+                    <li><span class="li-dot"><i class="bi bi-chat-right"></i></span>Where is your office located?</li>
+                    <li><span class="li-dot"><i class="bi bi-chat-right"></i></span>How do I contact support?</li>
+                    <li><span class="li-dot"><i class="bi bi-chat-right"></i></span>What are your business hours?</li>
+                </ul>
+                <div class="docs-callout">
+                    <div class="docs-callout-icon"><i class="bi bi-lightbulb"></i></div>
+                    <div class="docs-callout-text">
+                        These answers come directly from your website content. The more complete and accurate your website, the better your chatbot performs.
+                    </div>
+                </div>
+
+                <hr class="docs-divider">
+
+                <!-- Opening KB -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-folder2-open"></i></span>
+                    Opening the Knowledge Base
+                </h2>
+                <div>
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge">1</span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Open Bot Workspace</h4>
+                            <p class="docs-step-desc">Navigate to Bots and click <strong>Workspace</strong> on the chatbot you want to train.</p>
+                        </div>
+                    </div>
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge">2</span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Click Knowledge Base Tab</h4>
+                            <p class="docs-step-desc">Select the <strong>Knowledge Base</strong> tab from the workspace navigation.</p>
+                        </div>
+                    </div>
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge">3</span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Knowledge Base Dashboard Opens</h4>
+                            <p class="docs-step-desc">From here you can start training, view crawling status, and manage your chatbot's knowledge.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="docs-divider">
+
+                <!-- Training Pipeline -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-diagram-2"></i></span>
+                    Website Training Pipeline
+                </h2>
+                <p class="docs-body-text">
+                    Website training is the process of teaching your chatbot using your website content.
+                    The entire pipeline runs automatically — you simply provide the website URL.
+                </p>
+
+                <div class="docs-workflow">
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">1</span>
+                        <span class="docs-workflow-label">Website URL</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">2</span>
+                        <span class="docs-workflow-label">Website Crawling</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">3</span>
+                        <span class="docs-workflow-label">Content Extraction</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">4</span>
+                        <span class="docs-workflow-label">Content Cleaning</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">5</span>
+                        <span class="docs-workflow-label">Knowledge Processing</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">6</span>
+                        <span class="docs-workflow-label">AI Search Index Built</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">7</span>
+                        <span class="docs-workflow-label">Chatbot Ready</span>
+                    </div>
+                </div>
+
+                <hr class="docs-divider">
+
+                <!-- What is Collected -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-collection"></i></span>
+                    What Content is Collected?
+                </h2>
+                <p class="docs-body-text">BotForge focuses on meaningful content that helps answer visitor questions.</p>
+
+                <div class="docs-feature-grid">
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon" style="background:rgba(45,106,79,0.09); color:var(--emerald);"><i class="bi bi-check-circle"></i></div>
+                        <h4 class="docs-feature-title">Collected</h4>
+                        <p class="docs-feature-desc">Page titles · Headings · Paragraphs · Lists · Tables · Product & service descriptions · FAQs · Contact information</p>
+                    </div>
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon" style="background:rgba(185,28,28,0.08); color:#b91c1c;"><i class="bi bi-x-circle"></i></div>
+                        <h4 class="docs-feature-title">Ignored</h4>
+                        <p class="docs-feature-desc">Navigation menus · Scripts · CSS · Hidden content · Forms · Buttons · Page decorations</p>
+                    </div>
+                </div>
+
+                <hr class="docs-divider">
+
+                <!-- Internal Link Discovery -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-diagram-3"></i></span>
+                    Internal Link Discovery
+                </h2>
+                <p class="docs-body-text">
+                    BotForge automatically follows internal website links — discovering every page of your
+                    site and adding each one to the knowledge base.
+                </p>
+
+                <div class="docs-workflow">
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num"><i class="bi bi-house" style="font-size:0.85rem;"></i></span>
+                        <span class="docs-workflow-label">Home</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num"><i class="bi bi-file" style="font-size:0.85rem;"></i></span>
+                        <span class="docs-workflow-label">About Us</span>
+                    </div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num"><i class="bi bi-file" style="font-size:0.85rem;"></i></span>
+                        <span class="docs-workflow-label">Services</span>
+                    </div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num"><i class="bi bi-file" style="font-size:0.85rem;"></i></span>
+                        <span class="docs-workflow-label">Products</span>
+                    </div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num"><i class="bi bi-file" style="font-size:0.85rem;"></i></span>
+                        <span class="docs-workflow-label">Pricing</span>
+                    </div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num"><i class="bi bi-file" style="font-size:0.85rem;"></i></span>
+                        <span class="docs-workflow-label">Contact</span>
+                    </div>
+                </div>
+                <p class="docs-body-text">Each discovered page is analyzed and added to the chatbot's knowledge base, enabling it to understand information spread across your entire website.</p>
+
+                <hr class="docs-divider">
+
+                <!-- Refreshing Knowledge -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-arrow-clockwise"></i></span>
+                    Refreshing Website Knowledge
+                </h2>
+                <p class="docs-body-text">Websites change over time. Whenever your content changes, refresh your chatbot's knowledge to keep responses up to date.</p>
+                <div class="docs-tag-grid">
+                    <span class="docs-tag"><i class="bi bi-plus-circle"></i>New services added</span>
+                    <span class="docs-tag"><i class="bi bi-tag"></i>Updated pricing</span>
+                    <span class="docs-tag"><i class="bi bi-file-earmark-post"></i>New blog articles</span>
+                    <span class="docs-tag"><i class="bi bi-telephone"></i>Changed contact info</span>
+                    <span class="docs-tag"><i class="bi bi-box-seam"></i>New products launched</span>
+                </div>
+
+                <div class="docs-callout amber" style="margin-top:16px;">
+                    <div class="docs-callout-icon"><i class="bi bi-exclamation-triangle"></i></div>
+                    <div class="docs-callout-text">
+                        <strong>Note:</strong> After adding new pages to your website, you must manually refresh the website training. The chatbot does not automatically pick up new content.
+                    </div>
+                </div>
+
+                <hr class="docs-divider">
+
+                <!-- Best Practices -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-stars"></i></span>
+                    Best Practices for Training
+                </h2>
+
+                <div>
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge"><i class="bi bi-pencil-square" style="font-size:1rem;"></i></span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Write Clear, Specific Content</h4>
+                            <p class="docs-step-desc">Avoid vague descriptions. Specific content produces better chatbot responses.</p>
+                            <div class="docs-callout amber" style="margin-top:10px; margin-bottom:0;">
+                                <div class="docs-callout-icon"><i class="bi bi-x-circle"></i></div>
+                                <div class="docs-callout-text" style="font-style:italic;">"We provide many solutions."</div>
+                            </div>
+                            <div class="docs-callout" style="margin-top:8px; margin-bottom:0;">
+                                <div class="docs-callout-icon"><i class="bi bi-check-circle"></i></div>
+                                <div class="docs-callout-text" style="font-style:italic;">"We provide custom web development, mobile applications, cloud consulting, and AI automation services."</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge"><i class="bi bi-layout-text-window" style="font-size:1rem;"></i></span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Organize Your Website</h4>
+                            <p class="docs-step-desc">Use proper headings and structured content. Well-organized pages are easier for the crawler to understand.</p>
+                        </div>
+                    </div>
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge"><i class="bi bi-question-circle" style="font-size:1rem;"></i></span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Include FAQ Sections</h4>
+                            <p class="docs-step-desc">FAQ sections greatly improve chatbot performance because they already contain question-and-answer style content the AI can directly leverage.</p>
+                        </div>
+                    </div>
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge"><i class="bi bi-arrow-repeat" style="font-size:1rem;"></i></span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Keep Website Updated</h4>
+                            <p class="docs-step-desc">Your chatbot only knows what exists on your website. Always keep important business information current and retrain when content changes.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="docs-divider">
+
+                <!-- What KB Does Not Include -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-shield-lock"></i></span>
+                    What the Knowledge Base Does Not Include
+                </h2>
+                <p class="docs-body-text">BotForge only processes publicly accessible website content. It does not collect:</p>
+                <ul class="docs-list">
+                    <li><span class="li-dot"><i class="bi bi-x"></i></span>Password-protected pages</li>
+                    <li><span class="li-dot"><i class="bi bi-x"></i></span>Private dashboards</li>
+                    <li><span class="li-dot"><i class="bi bi-x"></i></span>User account areas</li>
+                    <li><span class="li-dot"><i class="bi bi-x"></i></span>Hidden admin pages</li>
+                    <li><span class="li-dot"><i class="bi bi-x"></i></span>Internal databases</li>
+                </ul>
+                <div class="docs-callout">
+                    <div class="docs-callout-icon"><i class="bi bi-shield-check"></i></div>
+                    <div class="docs-callout-text">
+                        This ensures security and privacy are maintained while training your chatbot on your business content.
+                    </div>
+                </div>
+
+                <hr class="docs-divider">
+
+                <!-- FAQ -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-patch-question"></i></span>
+                    Common Questions
+                </h2>
+
+                <div class="docs-callout" style="margin-bottom:10px;">
+                    <div class="docs-callout-icon"><i class="bi bi-question"></i></div>
+                    <div class="docs-callout-text">
+                        <strong>Does BotForge crawl my entire website?</strong><br>
+                        BotForge discovers and crawls all publicly accessible internal pages within the limits of your subscription plan.
+                    </div>
+                </div>
+                <div class="docs-callout" style="margin-bottom:10px;">
+                    <div class="docs-callout-icon"><i class="bi bi-question"></i></div>
+                    <div class="docs-callout-text">
+                        <strong>Can I retrain my chatbot?</strong><br>
+                        Yes. You can refresh the knowledge base at any time whenever your website content changes.
+                    </div>
+                </div>
+                <div class="docs-callout" style="margin-bottom:10px;">
+                    <div class="docs-callout-icon"><i class="bi bi-question"></i></div>
+                    <div class="docs-callout-text">
+                        <strong>Does the chatbot automatically learn new pages?</strong><br>
+                        No. After adding new pages to your website, you must manually refresh the website training to include the latest content.
+                    </div>
+                </div>
+                <div class="docs-callout" style="margin-bottom:24px;">
+                    <div class="docs-callout-icon"><i class="bi bi-question"></i></div>
+                    <div class="docs-callout-text">
+                        <strong>What happens if my website is unavailable?</strong><br>
+                        If your website cannot be reached during training, BotForge will pause the crawling process until the website becomes accessible again.
+                    </div>
+                </div>
+
+                <!-- What's Next -->
+                <div class="docs-next-card">
+                    <div>
+                        <div class="docs-next-eyebrow">What's Next?</div>
+                        <h4 class="docs-next-title">Chapter 9 &mdash; Website Crawling</h4>
+                    </div>
+                    <button class="docs-next-btn" onclick="document.querySelector('.docs-chapter-link[data-chapter=\'9\']').click();">
+                        Continue <i class="bi bi-arrow-right"></i>
+                    </button>
+                </div>
+
             </div>
 
             <!-- ══ CHAPTER 9 ══════════════════════════════════ -->
