@@ -2331,30 +2331,650 @@ Documentation | BotForge
 
             </div>
 
-            <!-- ══ CHAPTER 6 ══════════════════════════════════ -->
+           <!-- ══ CHAPTER 6 ══════════════════════════════════ -->
             <div class="docs-chapter-content" data-chapter="6" style="display:none;">
                 <div class="docs-chapter-eyebrow"><i class="bi bi-book"></i> Chapter 06</div>
                 <h1 class="docs-panel-title">Creating Your First Bot</h1>
                 <p class="docs-panel-sub">Build your first AI assistant</p>
 
-                <div class="docs-placeholder">
-                    <div class="docs-placeholder-icon"><i class="bi bi-file-text"></i></div>
-                    <h3>Content coming soon</h3>
-                    <p>Sections: Create Bot, Bot Name, Website URL, Welcome Message, Description, Bot Type, Saving the Bot.</p>
+                <p class="docs-lead">
+                    With your company workspace configured and an active subscription in place, you are now
+                    ready to create your first AI chatbot. A chatbot is the core component of BotForge —
+                    the AI assistant that visitors interact with on your website.
+                </p>
+
+                <hr class="docs-divider">
+
+                <!-- What is a Chatbot -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-robot"></i></span>
+                    What is a Chatbot?
+                </h2>
+                <p class="docs-body-text">
+                    A chatbot is an AI-powered virtual assistant trained using your business information.
+                    Once deployed, it answers visitor questions based on the knowledge collected from your
+                    website. Each chatbot operates independently and belongs to your company workspace.
+                </p>
+                <p class="docs-body-text">Your chatbot can assist visitors by answering questions about:</p>
+                <div class="docs-tag-grid">
+                    <span class="docs-tag"><i class="bi bi-building"></i>Your company</span>
+                    <span class="docs-tag"><i class="bi bi-box-seam"></i>Products</span>
+                    <span class="docs-tag"><i class="bi bi-tools"></i>Services</span>
+                    <span class="docs-tag"><i class="bi bi-currency-rupee"></i>Pricing</span>
+                    <span class="docs-tag"><i class="bi bi-telephone"></i>Contact info</span>
+                    <span class="docs-tag"><i class="bi bi-clock"></i>Business hours</span>
+                    <span class="docs-tag"><i class="bi bi-question-circle"></i>FAQs</span>
+                    <span class="docs-tag"><i class="bi bi-globe2"></i>Website content</span>
                 </div>
+
+                <hr class="docs-divider">
+
+                <!-- Requirements -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-clipboard-check"></i></span>
+                    Before Creating a Bot
+                </h2>
+                <p class="docs-body-text">Ensure the following requirements have been completed before attempting to create a chatbot:</p>
+
+                <div class="docs-callout" style="margin-bottom:10px;">
+                    <div class="docs-callout-icon"><i class="bi bi-check-circle-fill"></i></div>
+                    <div class="docs-callout-text"><strong>Company Workspace Created</strong> — your company profile must be set up before a bot can be assigned to it.</div>
+                </div>
+                <div class="docs-callout" style="margin-bottom:10px;">
+                    <div class="docs-callout-icon"><i class="bi bi-check-circle-fill"></i></div>
+                    <div class="docs-callout-text"><strong>Active Subscription Plan</strong> — an active plan must be in place to unlock chatbot creation.</div>
+                </div>
+                <div class="docs-callout" style="margin-bottom:24px;">
+                    <div class="docs-callout-icon"><i class="bi bi-check-circle-fill"></i></div>
+                    <div class="docs-callout-text"><strong>Bot Limit Available</strong> — your current subscription must have remaining chatbot capacity.</div>
+                </div>
+
+                <div class="docs-callout amber">
+                    <div class="docs-callout-icon"><i class="bi bi-exclamation-triangle"></i></div>
+                    <div class="docs-callout-text">
+                        If any of these requirements are missing, BotForge will display a message and redirect you to the appropriate setup page automatically.
+                    </div>
+                </div>
+
+                <hr class="docs-divider">
+
+                <!-- Accessing -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-box-arrow-in-right"></i></span>
+                    Accessing the Bot Creation Page
+                </h2>
+                <div>
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge">1</span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Open Dashboard</h4>
+                            <p class="docs-step-desc">Log in and navigate to your BotForge Dashboard.</p>
+                        </div>
+                    </div>
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge">2</span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Click Create Bot</h4>
+                            <p class="docs-step-desc">Click the <strong>Create Bot</strong> button in the dashboard or the Bots section navigation.</p>
+                        </div>
+                    </div>
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge">3</span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Bot Creation Page Opens</h4>
+                            <p class="docs-step-desc">If your account is fully configured, the creation form will open immediately. If not, BotForge will redirect you to complete setup first.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="docs-divider">
+
+                <!-- Bot Form Fields -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-card-list"></i></span>
+                    Bot Information Fields
+                </h2>
+                <p class="docs-body-text">Creating a chatbot requires only a few pieces of information. Each field is explained below.</p>
+
+                <div>
+                    <!-- Bot Name -->
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge"><i class="bi bi-tag" style="font-size:1rem;"></i></span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Bot Name</h4>
+                            <p class="docs-step-desc">Identifies your chatbot inside the BotForge dashboard. Choose a name that clearly represents its purpose — used only within your workspace.</p>
+                            <div class="docs-tag-grid" style="margin-top:8px; margin-bottom:0;">
+                                <span class="docs-tag">Customer Support</span>
+                                <span class="docs-tag">Sales Assistant</span>
+                                <span class="docs-tag">Product Guide</span>
+                                <span class="docs-tag">Help Center</span>
+                                <span class="docs-tag">Website Assistant</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Website URL -->
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge"><i class="bi bi-globe2" style="font-size:1rem;"></i></span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Website URL</h4>
+                            <p class="docs-step-desc">The website BotForge will crawl to build the chatbot's knowledge base.</p>
+                            <div class="docs-callout" style="margin-top:10px; margin-bottom:0;">
+                                <div class="docs-callout-icon"><i class="bi bi-info-circle"></i></div>
+                                <div class="docs-callout-text">
+                                    Use your primary website, ensure it is publicly accessible, and include the full URL starting with <strong>https://</strong>.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bot Type -->
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge"><i class="bi bi-grid" style="font-size:1rem;"></i></span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Bot Type</h4>
+                            <p class="docs-step-desc">Categorizes your chatbot to help organize multiple bots within your workspace.</p>
+                            <div class="docs-tag-grid" style="margin-top:8px; margin-bottom:0;">
+                                <span class="docs-tag">Customer Support</span>
+                                <span class="docs-tag">Sales</span>
+                                <span class="docs-tag">Marketing</span>
+                                <span class="docs-tag">Information Assistant</span>
+                                <span class="docs-tag">General Purpose</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Description -->
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge"><i class="bi bi-text-left" style="font-size:1rem;"></i></span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Description <span style="font-size:0.72rem; font-weight:500; color:var(--muted);">(optional)</span></h4>
+                            <p class="docs-step-desc">Describes the chatbot's purpose. Although optional, adding a meaningful description improves workspace organization.</p>
+                            <div class="docs-callout" style="margin-top:10px; margin-bottom:0;">
+                                <div class="docs-callout-icon"><i class="bi bi-quote"></i></div>
+                                <div class="docs-callout-text" style="font-style:italic; color:var(--muted);">
+                                    "AI assistant trained to answer customer questions about our products, services, pricing, and company information."
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Welcome Message -->
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge"><i class="bi bi-chat-quote" style="font-size:1rem;"></i></span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Welcome Message</h4>
+                            <p class="docs-step-desc">The first message visitors see when they open the chatbot. Keep it short, welcoming, and professional to encourage visitors to start a conversation.</p>
+                            <div class="docs-callout" style="margin-top:10px; margin-bottom:0;">
+                                <div class="docs-callout-icon"><i class="bi bi-quote"></i></div>
+                                <div class="docs-callout-text" style="font-style:italic; color:var(--muted);">
+                                    "Hello! 👋 Welcome to our website. How can I assist you today?"
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="docs-divider">
+
+                <!-- Saving -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-floppy2"></i></span>
+                    Saving the Chatbot
+                </h2>
+                <div>
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge">1</span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Review the Information</h4>
+                            <p class="docs-step-desc">Double-check all fields — especially the website URL and bot name — before submitting.</p>
+                        </div>
+                    </div>
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge">2</span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Click Create Bot</h4>
+                            <p class="docs-step-desc">Submit the form and wait for BotForge to process your request.</p>
+                        </div>
+                    </div>
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge">3</span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Bot Added to Workspace</h4>
+                            <p class="docs-step-desc">A confirmation message appears. Your chatbot is now visible in your bot list and ready for training.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="docs-divider">
+
+                <!-- What Happens After -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-arrow-right-circle"></i></span>
+                    What Happens After Creation?
+                </h2>
+                <p class="docs-body-text">
+                    Creating a chatbot does not immediately make it intelligent. Initially, the chatbot contains
+                    no knowledge. <strong>Training must be completed separately</strong> through the Knowledge Base section.
+                </p>
+
+                <div class="docs-workflow">
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">1</span>
+                        <span class="docs-workflow-label">Create Bot</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">2</span>
+                        <span class="docs-workflow-label">Knowledge Base</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">3</span>
+                        <span class="docs-workflow-label">Website Training</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">4</span>
+                        <span class="docs-workflow-label">AI Processing</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">5</span>
+                        <span class="docs-workflow-label">Install Widget</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">6</span>
+                        <span class="docs-workflow-label">Visitors Start Chatting</span>
+                    </div>
+                </div>
+
+                <hr class="docs-divider">
+
+                <!-- Multiple Bots -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-diagram-3"></i></span>
+                    Managing Multiple Bots
+                </h2>
+                <p class="docs-body-text">
+                    Your subscription determines how many chatbots you can create. Each chatbot has its own
+                    Knowledge Base, Website URL, Chat Logs, Widget Configuration, and AI Training Data —
+                    allowing different bots to serve different purposes.
+                </p>
+
+                <div class="docs-workflow">
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num"><i class="bi bi-building" style="font-size:0.85rem;"></i></span>
+                        <span class="docs-workflow-label">Company Workspace</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num"><i class="bi bi-robot" style="font-size:0.85rem;"></i></span>
+                        <span class="docs-workflow-label">Sales Assistant</span>
+                    </div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num"><i class="bi bi-robot" style="font-size:0.85rem;"></i></span>
+                        <span class="docs-workflow-label">Customer Support</span>
+                    </div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num"><i class="bi bi-robot" style="font-size:0.85rem;"></i></span>
+                        <span class="docs-workflow-label">Documentation Bot</span>
+                    </div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num"><i class="bi bi-robot" style="font-size:0.85rem;"></i></span>
+                        <span class="docs-workflow-label">Product Advisor</span>
+                    </div>
+                </div>
+
+                <hr class="docs-divider">
+
+                <!-- Best Practices -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-stars"></i></span>
+                    Best Practices
+                </h2>
+                <ul class="docs-list">
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Use meaningful, descriptive bot names.</li>
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Connect the correct website URL for each bot.</li>
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Write a clear, welcoming welcome message.</li>
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Keep descriptions concise and relevant.</li>
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Create separate bots for different business functions.</li>
+                </ul>
+
+                <hr class="docs-divider">
+
+                <!-- FAQ -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-patch-question"></i></span>
+                    Common Questions
+                </h2>
+
+                <div class="docs-callout" style="margin-bottom:10px;">
+                    <div class="docs-callout-icon"><i class="bi bi-question"></i></div>
+                    <div class="docs-callout-text">
+                        <strong>Can I create multiple chatbots?</strong><br>
+                        Yes. The number of chatbots depends on your active subscription plan.
+                    </div>
+                </div>
+                <div class="docs-callout" style="margin-bottom:10px;">
+                    <div class="docs-callout-icon"><i class="bi bi-question"></i></div>
+                    <div class="docs-callout-text">
+                        <strong>Can I change the bot name later?</strong><br>
+                        Yes. Bot information including name, URL, description, and welcome message can all be updated after creation.
+                    </div>
+                </div>
+                <div class="docs-callout" style="margin-bottom:10px;">
+                    <div class="docs-callout-icon"><i class="bi bi-question"></i></div>
+                    <div class="docs-callout-text">
+                        <strong>Does creating a chatbot automatically train it?</strong><br>
+                        No. Creating a bot only sets up the workspace. Website training must be completed separately through the Knowledge Base section.
+                    </div>
+                </div>
+                <div class="docs-callout" style="margin-bottom:24px;">
+                    <div class="docs-callout-icon"><i class="bi bi-question"></i></div>
+                    <div class="docs-callout-text">
+                        <strong>Can I delete a chatbot?</strong><br>
+                        Yes. Chatbots can be removed from your workspace at any time. Deleting a bot removes its knowledge, chat history, widget configuration, and training data permanently.
+                    </div>
+                </div>
+
+                <!-- What's Next -->
+                <div class="docs-next-card">
+                    <div>
+                        <div class="docs-next-eyebrow">What's Next?</div>
+                        <h4 class="docs-next-title">Chapter 7 &mdash; Bot Workspace</h4>
+                    </div>
+                    <button class="docs-next-btn" onclick="document.querySelector('.docs-chapter-link[data-chapter=\'7\']').click();">
+                        Continue <i class="bi bi-arrow-right"></i>
+                    </button>
+                </div>
+
             </div>
 
-            <!-- ══ CHAPTER 7 ══════════════════════════════════ -->
+           <!-- ══ CHAPTER 7 ══════════════════════════════════ -->
             <div class="docs-chapter-content" data-chapter="7" style="display:none;">
                 <div class="docs-chapter-eyebrow"><i class="bi bi-book"></i> Chapter 07</div>
                 <h1 class="docs-panel-title">Bot Workspace</h1>
                 <p class="docs-panel-sub">Manage your chatbot</p>
 
-                <div class="docs-placeholder">
-                    <div class="docs-placeholder-icon"><i class="bi bi-file-text"></i></div>
-                    <h3>Content coming soon</h3>
-                    <p>Sections: Workspace Overview, Dashboard Tab, Knowledge Base Tab, Install Bot Tab, Chat Logs Tab, Danger Zone, Managing Your Bot.</p>
+                <p class="docs-lead">
+                    Once your chatbot has been created, BotForge provides a dedicated workspace where you can
+                    manage every aspect of your AI assistant — training, installation, conversations, and
+                    lifecycle management. Every chatbot has its own independent workspace.
+                </p>
+
+                <hr class="docs-divider">
+
+                <!-- Accessing -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-box-arrow-in-right"></i></span>
+                    Accessing the Bot Workspace
+                </h2>
+                <div>
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge">1</span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Log In</h4>
+                            <p class="docs-step-desc">Sign in to your BotForge account.</p>
+                        </div>
+                    </div>
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge">2</span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Navigate to Bots</h4>
+                            <p class="docs-step-desc">Click <strong>Bots</strong> in the main navigation menu to see your list of chatbots.</p>
+                        </div>
+                    </div>
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge">3</span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Select a Chatbot</h4>
+                            <p class="docs-step-desc">Choose the chatbot you want to manage from the list.</p>
+                        </div>
+                    </div>
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge">4</span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Click Workspace</h4>
+                            <p class="docs-step-desc">Click the <strong>Workspace</strong> button to open the full chatbot management area.</p>
+                        </div>
+                    </div>
                 </div>
+
+                <hr class="docs-divider">
+
+                <!-- Workspace Tabs -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-layout-tabs"></i></span>
+                    Workspace Tabs
+                </h2>
+                <p class="docs-body-text">
+                    The workspace is divided into multiple tabs, each focused on a specific part of
+                    chatbot management. Together they provide everything needed to take a bot from
+                    creation through to active deployment.
+                </p>
+
+                <div class="docs-feature-grid">
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon"><i class="bi bi-speedometer2"></i></div>
+                        <h4 class="docs-feature-title">Dashboard</h4>
+                        <p class="docs-feature-desc">A quick overview of your chatbot — name, URL, type, description, and welcome message. The home page of the workspace.</p>
+                    </div>
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon"><i class="bi bi-database-fill-gear"></i></div>
+                        <h4 class="docs-feature-title">Knowledge Base</h4>
+                        <p class="docs-feature-desc">Where your chatbot learns. Start website training, view crawling progress, refresh knowledge, and monitor training status.</p>
+                    </div>
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon"><i class="bi bi-cloud-arrow-up"></i></div>
+                        <h4 class="docs-feature-title">Install Bot</h4>
+                        <p class="docs-feature-desc">Provides the JavaScript installation script and step-by-step instructions to deploy your chatbot on any website.</p>
+                    </div>
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon"><i class="bi bi-receipt-cutoff"></i></div>
+                        <h4 class="docs-feature-title">Chat Logs</h4>
+                        <p class="docs-feature-desc">Every visitor conversation stored in full — messages, AI responses, timestamps, and conversation history.</p>
+                    </div>
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon" style="background:rgba(185,28,28,0.08); color:#b91c1c;"><i class="bi bi-exclamation-triangle"></i></div>
+                        <h4 class="docs-feature-title">Danger Zone</h4>
+                        <p class="docs-feature-desc">Contains irreversible actions — delete chatbot, remove knowledge base, reset data. Always requires confirmation.</p>
+                    </div>
+                </div>
+
+                <div class="docs-callout amber">
+                    <div class="docs-callout-icon"><i class="bi bi-exclamation-triangle"></i></div>
+                    <div class="docs-callout-text">
+                        <strong>Danger Zone actions are permanent.</strong> Deleting a chatbot or removing its knowledge base cannot be undone. BotForge will always ask for confirmation before executing these actions.
+                    </div>
+                </div>
+
+                <hr class="docs-divider">
+
+                <!-- Chatbot Lifecycle -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-arrow-repeat"></i></span>
+                    Chatbot Lifecycle
+                </h2>
+                <p class="docs-body-text">
+                    Every chatbot follows the same continuous management cycle. The workspace is your tool
+                    for each stage of this process.
+                </p>
+
+                <div class="docs-workflow">
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">1</span>
+                        <span class="docs-workflow-label">Create Bot</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">2</span>
+                        <span class="docs-workflow-label">Open Workspace</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">3</span>
+                        <span class="docs-workflow-label">Train Knowledge</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">4</span>
+                        <span class="docs-workflow-label">Install Widget</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">5</span>
+                        <span class="docs-workflow-label">Receive Conversations</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">6</span>
+                        <span class="docs-workflow-label">Review Chat Logs</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">7</span>
+                        <span class="docs-workflow-label">Improve Knowledge</span>
+                    </div>
+                </div>
+                <p class="docs-body-text">This continuous cycle keeps your chatbot accurate and up to date.</p>
+
+                <hr class="docs-divider">
+
+                <!-- Workspace Status -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-activity"></i></span>
+                    Workspace Status
+                </h2>
+                <p class="docs-body-text">Your chatbot workspace reflects the current state of your AI assistant.</p>
+
+                <div>
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge"><i class="bi bi-plus-circle" style="font-size:1rem;"></i></span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Newly Created</h4>
+                            <p class="docs-step-desc">The chatbot exists in your workspace but has not yet been trained. It has no knowledge.</p>
+                        </div>
+                    </div>
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge"><i class="bi bi-exclamation-circle" style="font-size:1rem; color:#d97706;"></i></span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Training Required</h4>
+                            <p class="docs-step-desc">The chatbot needs website knowledge before it can provide meaningful responses to visitors.</p>
+                        </div>
+                    </div>
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge"><i class="bi bi-check-circle" style="font-size:1rem; color:var(--emerald);"></i></span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Ready for Deployment</h4>
+                            <p class="docs-step-desc">Training has completed successfully. The chatbot is ready to be installed on your website.</p>
+                        </div>
+                    </div>
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge"><i class="bi bi-broadcast" style="font-size:1rem; color:var(--mint);"></i></span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Active</h4>
+                            <p class="docs-step-desc">The chatbot has been installed and is live — available for visitors to interact with on your website.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="docs-divider">
+
+                <!-- Multiple Bots Structure -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-diagram-3"></i></span>
+                    Multiple Chatbot Workspaces
+                </h2>
+                <p class="docs-body-text">
+                    If your subscription allows multiple chatbots, each one has its own fully independent workspace.
+                    Changes made to one chatbot never affect another.
+                </p>
+
+                <div class="docs-workflow">
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num"><i class="bi bi-building" style="font-size:0.85rem;"></i></span>
+                        <span class="docs-workflow-label">Company Workspace</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num"><i class="bi bi-robot" style="font-size:0.85rem;"></i></span>
+                        <span class="docs-workflow-label">Customer Support → Knowledge · Install · Logs</span>
+                    </div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num"><i class="bi bi-robot" style="font-size:0.85rem;"></i></span>
+                        <span class="docs-workflow-label">Sales Assistant → Knowledge · Install · Logs</span>
+                    </div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num"><i class="bi bi-robot" style="font-size:0.85rem;"></i></span>
+                        <span class="docs-workflow-label">Product Guide → Knowledge · Install · Logs</span>
+                    </div>
+                </div>
+
+                <hr class="docs-divider">
+
+                <!-- Navigation Tips -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-lightbulb"></i></span>
+                    Workspace Navigation Tips
+                </h2>
+                <ul class="docs-list">
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Visit the <strong>Dashboard</strong> tab for a quick chatbot overview.</li>
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Use <strong>Knowledge Base</strong> to train or refresh website content.</li>
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Open <strong>Install Bot</strong> only after training is complete.</li>
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Review <strong>Chat Logs</strong> regularly to understand visitor behavior.</li>
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Use the <strong>Danger Zone</strong> only when you are certain the chatbot is no longer needed.</li>
+                </ul>
+
+                <hr class="docs-divider">
+
+                <!-- FAQ -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-patch-question"></i></span>
+                    Common Questions
+                </h2>
+
+                <div class="docs-callout" style="margin-bottom:10px;">
+                    <div class="docs-callout-icon"><i class="bi bi-question"></i></div>
+                    <div class="docs-callout-text">
+                        <strong>Can each chatbot have a different website?</strong><br>
+                        Yes. Each chatbot maintains its own website URL and independent knowledge base.
+                    </div>
+                </div>
+                <div class="docs-callout" style="margin-bottom:10px;">
+                    <div class="docs-callout-icon"><i class="bi bi-question"></i></div>
+                    <div class="docs-callout-text">
+                        <strong>Can I retrain a chatbot?</strong><br>
+                        Yes. You can refresh your chatbot's knowledge at any time whenever your website content changes.
+                    </div>
+                </div>
+                <div class="docs-callout" style="margin-bottom:10px;">
+                    <div class="docs-callout-icon"><i class="bi bi-question"></i></div>
+                    <div class="docs-callout-text">
+                        <strong>Does deleting one chatbot affect others?</strong><br>
+                        No. Each chatbot is completely independent. Deleting one has no impact on any other chatbot in your workspace.
+                    </div>
+                </div>
+                <div class="docs-callout" style="margin-bottom:24px;">
+                    <div class="docs-callout-icon"><i class="bi bi-question"></i></div>
+                    <div class="docs-callout-text">
+                        <strong>Can I install the same chatbot on multiple pages?</strong><br>
+                        Yes. Once deployed, the installation script can be added to any page of your website where you want the chatbot to appear.
+                    </div>
+                </div>
+
+                <!-- What's Next -->
+                <div class="docs-next-card">
+                    <div>
+                        <div class="docs-next-eyebrow">What's Next?</div>
+                        <h4 class="docs-next-title">Chapter 8 &mdash; Knowledge Base</h4>
+                    </div>
+                    <button class="docs-next-btn" onclick="document.querySelector('.docs-chapter-link[data-chapter=\'8\']').click();">
+                        Continue <i class="bi bi-arrow-right"></i>
+                    </button>
+                </div>
+
             </div>
 
             <!-- ══ CHAPTER 8 ══════════════════════════════════ -->
