@@ -3711,8 +3711,11 @@ Documentation | BotForge
             </div>
 
            <!-- ══ CHAPTER 10 ═════════════════════════════════ -->
-            <div class="docs-chapter-content" data-chapter="10" style="display:none;">
-                <div class="docs-chapter-eyebrow"><i class="bi bi-book"></i> Chapter 10</div>
+           
+
+            <!-- ══ CHAPTER 11 ════════════════════════════════= -->
+             <div class="docs-chapter-content" data-chapter="11" style="display:none;">
+                <div class="docs-chapter-eyebrow"><i class="bi bi-book"></i> Chapter 11</div>
                 <h1 class="docs-panel-title">Installing Your Chatbot</h1>
                 <p class="docs-panel-sub">Add BotForge to your website</p>
 
@@ -4034,19 +4037,6 @@ Documentation | BotForge
 
             </div>
 
-            <!-- ══ CHAPTER 11 ═════════════════════════════════ -->
-            <div class="docs-chapter-content" data-chapter="11" style="display:none;">
-                <div class="docs-chapter-eyebrow"><i class="bi bi-book"></i> Chapter 11</div>
-                <h1 class="docs-panel-title">Install Bot</h1>
-                <p class="docs-panel-sub">Add BotForge to your website</p>
-
-                <div class="docs-placeholder">
-                    <div class="docs-placeholder-icon"><i class="bi bi-file-text"></i></div>
-                    <h3>Content coming soon</h3>
-                    <p>Sections: Installation Script, HTML Websites, WordPress, React, Next.js, Shopify, Verifying Installation, Widget Loading.</p>
-                </div>
-            </div>
-
             <!-- ══ CHAPTER 12 ═════════════════════════════════ -->
             <div class="docs-chapter-content" data-chapter="12" style="display:none;">
                 <div class="docs-chapter-eyebrow"><i class="bi bi-book"></i> Chapter 12</div>
@@ -4061,29 +4051,642 @@ Documentation | BotForge
             </div>
 
             <!-- ══ CHAPTER 13 ═════════════════════════════════ -->
-            <div class="docs-chapter-content" data-chapter="13" style="display:none;">
+             <div class="docs-chapter-content" data-chapter="13" style="display:none;">
                 <div class="docs-chapter-eyebrow"><i class="bi bi-book"></i> Chapter 13</div>
                 <h1 class="docs-panel-title">Chat Logs</h1>
                 <p class="docs-panel-sub">Review customer conversations</p>
 
-                <div class="docs-placeholder">
-                    <div class="docs-placeholder-icon"><i class="bi bi-file-text"></i></div>
-                    <h3>Content coming soon</h3>
-                    <p>Sections: Viewing Conversations, Reading Messages, Understanding Visitor Queries, Monitoring Bot Performance, Conversation History.</p>
+                <p class="docs-lead">
+                    Every conversation between your visitors and your AI chatbot is stored in the Chat Logs
+                    section. By reviewing these conversations, you can continuously improve your chatbot's
+                    knowledge and provide a better experience for your visitors.
+                </p>
+
+                <hr class="docs-divider">
+
+                <!-- What are Chat Logs -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-receipt-cutoff"></i></span>
+                    What are Chat Logs?
+                </h2>
+                <p class="docs-body-text">
+                    Chat Logs are records of every conversation handled by your chatbot. Each log helps
+                    you understand real-world usage and identify opportunities for improvement.
+                </p>
+                <div class="docs-feature-grid">
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon"><i class="bi bi-chat-left-text"></i></div>
+                        <h4 class="docs-feature-title">Visitor Messages</h4>
+                        <p class="docs-feature-desc">Every question and message sent by visitors during the conversation.</p>
+                    </div>
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon"><i class="bi bi-robot"></i></div>
+                        <h4 class="docs-feature-title">AI Responses</h4>
+                        <p class="docs-feature-desc">The chatbot's replies, allowing you to review accuracy and relevance.</p>
+                    </div>
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon"><i class="bi bi-calendar3"></i></div>
+                        <h4 class="docs-feature-title">Timestamps</h4>
+                        <p class="docs-feature-desc">Date and time of each conversation for monitoring and reporting.</p>
+                    </div>
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon"><i class="bi bi-hash"></i></div>
+                        <h4 class="docs-feature-title">Session Info</h4>
+                        <p class="docs-feature-desc">Total messages per session and conversation status details.</p>
+                    </div>
                 </div>
+
+                <hr class="docs-divider">
+
+                <!-- Accessing -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-box-arrow-in-right"></i></span>
+                    Accessing Chat Logs
+                </h2>
+                <div>
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge">1</span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Open Bot Workspace</h4>
+                            <p class="docs-step-desc">Navigate to Bots and click <strong>Workspace</strong> on the chatbot you want to review.</p>
+                        </div>
+                    </div>
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge">2</span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Click Chat Logs Tab</h4>
+                            <p class="docs-step-desc">Select the <strong>Chat Logs</strong> tab from the workspace navigation.</p>
+                        </div>
+                    </div>
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge">3</span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Browse Conversations</h4>
+                            <p class="docs-step-desc">The complete conversation history for this chatbot is displayed. Each chatbot maintains its own independent chat history.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="docs-divider">
+
+                <!-- Conversation Flow -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-chat-square-dots"></i></span>
+                    Conversation Overview
+                </h2>
+                <p class="docs-body-text">Each chat session represents one complete visitor interaction, stored in full chronological order.</p>
+
+                <div class="docs-workflow">
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num"><i class="bi bi-person" style="font-size:0.85rem;"></i></span>
+                        <span class="docs-workflow-label">Visitor Opens Chat</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num"><i class="bi bi-chat-right" style="font-size:0.85rem;"></i></span>
+                        <span class="docs-workflow-label">Visitor Asks a Question</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num"><i class="bi bi-robot" style="font-size:0.85rem;"></i></span>
+                        <span class="docs-workflow-label">AI Responds</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num"><i class="bi bi-arrow-repeat" style="font-size:0.85rem;"></i></span>
+                        <span class="docs-workflow-label">Follow-up Questions Continue</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num"><i class="bi bi-check-circle" style="font-size:0.85rem;"></i></span>
+                        <span class="docs-workflow-label">Conversation Ends &amp; Saved</span>
+                    </div>
+                </div>
+
+                <hr class="docs-divider">
+
+                <!-- Why Chat Logs Matter -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-graph-up-arrow"></i></span>
+                    Why Chat Logs Matter
+                </h2>
+                <p class="docs-body-text">Chat Logs help answer important questions about your chatbot's real-world performance:</p>
+                <ul class="docs-list">
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>What are visitors asking most often?</li>
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Which pages generate the most questions?</li>
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Are visitors receiving accurate answers?</li>
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Are there topics missing from the website?</li>
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Which questions does the chatbot struggle with?</li>
+                </ul>
+
+                <hr class="docs-divider">
+
+                <!-- Identifying Knowledge Gaps -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-search"></i></span>
+                    Identifying Knowledge Gaps
+                </h2>
+                <p class="docs-body-text">
+                    Sometimes visitors ask questions that are not covered by your website. When these questions
+                    appear repeatedly in Chat Logs, it's a clear signal that your website needs additional content.
+                </p>
+                <div class="docs-tag-grid">
+                    <span class="docs-tag"><i class="bi bi-arrow-counterclockwise"></i>Refund policy</span>
+                    <span class="docs-tag"><i class="bi bi-truck"></i>Delivery information</span>
+                    <span class="docs-tag"><i class="bi bi-tag"></i>Pricing details</span>
+                    <span class="docs-tag"><i class="bi bi-geo-alt"></i>Office locations</span>
+                    <span class="docs-tag"><i class="bi bi-box-seam"></i>Product specifications</span>
+                </div>
+                <div class="docs-callout" style="margin-top:14px;">
+                    <div class="docs-callout-icon"><i class="bi bi-lightbulb"></i></div>
+                    <div class="docs-callout-text">
+                        Repeatedly unanswered questions in your Chat Logs indicate exactly what content your website is missing. Use this directly to guide your content strategy.
+                    </div>
+                </div>
+
+                <hr class="docs-divider">
+
+                <!-- Improvement Cycle -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-arrow-repeat"></i></span>
+                    Chat Improvement Cycle
+                </h2>
+                <p class="docs-body-text">
+                    Successful AI chatbots are continuously improved. Following this cycle helps your chatbot
+                    become smarter over time without requiring manual AI training.
+                </p>
+
+                <div class="docs-workflow">
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">1</span>
+                        <span class="docs-workflow-label">Visitor Conversation</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">2</span>
+                        <span class="docs-workflow-label">Review Chat Logs</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">3</span>
+                        <span class="docs-workflow-label">Identify Missing Information</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">4</span>
+                        <span class="docs-workflow-label">Update Website Content</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">5</span>
+                        <span class="docs-workflow-label">Refresh Knowledge Base</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">6</span>
+                        <span class="docs-workflow-label">Better AI Responses</span>
+                    </div>
+                </div>
+
+                <hr class="docs-divider">
+
+                <!-- Monitoring Interest & Response Quality -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-binoculars"></i></span>
+                    What to Monitor
+                </h2>
+                <p class="docs-body-text">When reviewing Chat Logs, focus on these areas:</p>
+
+                <div class="docs-feature-grid">
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon"><i class="bi bi-question-circle"></i></div>
+                        <h4 class="docs-feature-title">Frequent Questions</h4>
+                        <p class="docs-feature-desc">Questions asked repeatedly reveal what visitors care about most. Add these to your website FAQ.</p>
+                    </div>
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon"><i class="bi bi-x-circle"></i></div>
+                        <h4 class="docs-feature-title">Unanswered Questions</h4>
+                        <p class="docs-feature-desc">Questions the chatbot couldn't answer indicate missing website content that should be added.</p>
+                    </div>
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon"><i class="bi bi-check2-circle"></i></div>
+                        <h4 class="docs-feature-title">Response Quality</h4>
+                        <p class="docs-feature-desc">Review AI responses for accuracy, professionalism, and relevance. Poor responses suggest website content needs improvement.</p>
+                    </div>
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon"><i class="bi bi-heart"></i></div>
+                        <h4 class="docs-feature-title">Visitor Interests</h4>
+                        <p class="docs-feature-desc">Topics that appear frequently (pricing, careers, services) reveal which areas of your business attract most attention.</p>
+                    </div>
+                </div>
+
+                <div class="docs-callout amber">
+                    <div class="docs-callout-icon"><i class="bi bi-exclamation-triangle"></i></div>
+                    <div class="docs-callout-text">
+                        <strong>Remember:</strong> The chatbot learns from your website. If responses are unsatisfactory, improve the website content and refresh the Knowledge Base — do not attempt to modify the AI directly.
+                    </div>
+                </div>
+
+                <hr class="docs-divider">
+
+                <!-- Best Practices -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-stars"></i></span>
+                    Best Practices
+                </h2>
+                <ul class="docs-list">
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Review Chat Logs regularly — not just after deployment.</li>
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Look for repeated unanswered questions and missing topics.</li>
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Add frequent visitor questions to your website's FAQ section.</li>
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Use insights from logs to improve both chatbot and website quality.</li>
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Refresh the Knowledge Base after making website updates.</li>
+                </ul>
+
+                <hr class="docs-divider">
+
+                <!-- FAQ -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-patch-question"></i></span>
+                    Common Questions
+                </h2>
+
+                <div class="docs-callout" style="margin-bottom:10px;">
+                    <div class="docs-callout-icon"><i class="bi bi-question"></i></div>
+                    <div class="docs-callout-text">
+                        <strong>Can I delete chat logs?</strong><br>
+                        Depending on your workspace permissions, conversations may be removed when no longer required from the Danger Zone settings.
+                    </div>
+                </div>
+                <div class="docs-callout" style="margin-bottom:10px;">
+                    <div class="docs-callout-icon"><i class="bi bi-question"></i></div>
+                    <div class="docs-callout-text">
+                        <strong>Do chat logs affect chatbot performance?</strong><br>
+                        No. Chat Logs are stored for analysis only. To improve responses, update your website and refresh the Knowledge Base.
+                    </div>
+                </div>
+                <div class="docs-callout" style="margin-bottom:10px;">
+                    <div class="docs-callout-icon"><i class="bi bi-question"></i></div>
+                    <div class="docs-callout-text">
+                        <strong>Can I export conversations?</strong><br>
+                        Future versions of BotForge may include conversation export capabilities for reporting and analysis.
+                    </div>
+                </div>
+                <div class="docs-callout" style="margin-bottom:24px;">
+                    <div class="docs-callout-icon"><i class="bi bi-question"></i></div>
+                    <div class="docs-callout-text">
+                        <strong>Why is a question unanswered?</strong><br>
+                        The required information is likely missing from the website or not yet included in the knowledge base. Refresh your website training after updating your content to resolve this.
+                    </div>
+                </div>
+
+                <!-- What's Next -->
+                <div class="docs-next-card">
+                    <div>
+                        <div class="docs-next-eyebrow">What's Next?</div>
+                        <h4 class="docs-next-title">Chapter 12 &mdash; Billing Dashboard</h4>
+                    </div>
+                    <button class="docs-next-btn" onclick="document.querySelector('.docs-chapter-link[data-chapter=\'12\']').click();">
+                        Continue <i class="bi bi-arrow-right"></i>
+                    </button>
+                </div>
+
             </div>
 
-            <!-- ══ CHAPTER 14 ═════════════════════════════════ -->
+            <!-- ══ CHAPTER 14 ════════════════════════════════= -->
             <div class="docs-chapter-content" data-chapter="14" style="display:none;">
                 <div class="docs-chapter-eyebrow"><i class="bi bi-book"></i> Chapter 14</div>
                 <h1 class="docs-panel-title">Billing Dashboard</h1>
                 <p class="docs-panel-sub">Manage your subscription</p>
 
-                <div class="docs-placeholder">
-                    <div class="docs-placeholder-icon"><i class="bi bi-file-text"></i></div>
-                    <h3>Content coming soon</h3>
-                    <p>Sections: Current Plan, Usage Overview, Bots Used, Pages Crawled, Messages Used, Plan Limits, Upgrade Plan.</p>
+                <p class="docs-lead">
+                    The Billing Dashboard gives you complete visibility into your BotForge subscription,
+                    resource usage, and plan limits. Instead of guessing how many resources are available,
+                    the dashboard provides real-time statistics about your account — helping you manage your
+                    AI chatbots efficiently.
+                </p>
+
+                <hr class="docs-divider">
+
+                <!-- What is it -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-speedometer2"></i></span>
+                    What is the Billing Dashboard?
+                </h2>
+                <p class="docs-body-text">The Billing Dashboard is your subscription management center. It allows you to:</p>
+                <ul class="docs-list">
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>View your current subscription and status.</li>
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Monitor chatbot usage against plan limits.</li>
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Track website page and AI message consumption.</li>
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Upgrade your subscription when needed.</li>
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Review plan utilization in real time.</li>
+                </ul>
+
+                <hr class="docs-divider">
+
+                <!-- Accessing -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-box-arrow-in-right"></i></span>
+                    Accessing the Billing Dashboard
+                </h2>
+                <div>
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge">1</span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Log In</h4>
+                            <p class="docs-step-desc">Sign in to your BotForge account.</p>
+                        </div>
+                    </div>
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge">2</span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Open Dashboard</h4>
+                            <p class="docs-step-desc">Navigate to your main BotForge Dashboard.</p>
+                        </div>
+                    </div>
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge">3</span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Click Billing Dashboard</h4>
+                            <p class="docs-step-desc">Open the Billing section from the navigation menu or directly from the Dashboard quick actions.</p>
+                        </div>
+                    </div>
                 </div>
+
+                <hr class="docs-divider">
+
+                <!-- Current Subscription -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-receipt"></i></span>
+                    Current Subscription
+                </h2>
+                <p class="docs-body-text">The first section displays your active plan information, confirming which subscription is currently powering your workspace.</p>
+
+                <div class="docs-feature-grid">
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon"><i class="bi bi-tag"></i></div>
+                        <h4 class="docs-feature-title">Plan Name</h4>
+                        <p class="docs-feature-desc">The name of your currently active subscription tier.</p>
+                    </div>
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon"><i class="bi bi-currency-rupee"></i></div>
+                        <h4 class="docs-feature-title">Monthly Price</h4>
+                        <p class="docs-feature-desc">The cost of your active plan per billing cycle.</p>
+                    </div>
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon"><i class="bi bi-activity"></i></div>
+                        <h4 class="docs-feature-title">Subscription Status</h4>
+                        <p class="docs-feature-desc">Confirms whether your subscription is currently active.</p>
+                    </div>
+                </div>
+
+                <div class="docs-callout">
+                    <div class="docs-callout-icon"><i class="bi bi-terminal"></i></div>
+                    <div class="docs-callout-text" style="font-family:monospace; font-size:0.82rem; line-height:1.7;">
+                        Current Plan: <strong>Professional</strong><br>
+                        Price: <strong>₹999 / Month</strong><br>
+                        Status: <strong style="color:var(--emerald);">Active</strong>
+                    </div>
+                </div>
+
+                <hr class="docs-divider">
+
+                <!-- Resource Usage -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-bar-chart-line"></i></span>
+                    Resource Usage
+                </h2>
+                <p class="docs-body-text">BotForge monitors three primary resource metrics in real time, each with a visual progress indicator.</p>
+
+                <div>
+                    <!-- Bots -->
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge"><i class="bi bi-robot" style="font-size:1rem;"></i></span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Active Chatbots</h4>
+                            <p class="docs-step-desc">
+                                Shows how many chatbots you have created vs your subscription limit.
+                                If you reach your limit, BotForge prevents additional chatbot creation until you upgrade.
+                            </p>
+                            <div class="docs-callout" style="margin-top:10px; margin-bottom:0;">
+                                <div class="docs-callout-icon"><i class="bi bi-terminal"></i></div>
+                                <div class="docs-callout-text" style="font-family:monospace; font-size:0.82rem;">
+                                    Bots &nbsp;→&nbsp; <strong>2 / 5 Used</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pages -->
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge"><i class="bi bi-file-earmark-text" style="font-size:1rem;"></i></span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Website Pages</h4>
+                            <p class="docs-step-desc">
+                                Displays the total number of website pages processed across all of your chatbot's knowledge bases.
+                            </p>
+                            <div class="docs-callout" style="margin-top:10px; margin-bottom:0;">
+                                <div class="docs-callout-icon"><i class="bi bi-terminal"></i></div>
+                                <div class="docs-callout-text" style="font-family:monospace; font-size:0.82rem;">
+                                    Website Pages &nbsp;→&nbsp; <strong>145 / 500 Used</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Messages -->
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge"><i class="bi bi-chat-left-dots" style="font-size:1rem;"></i></span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">AI Messages</h4>
+                            <p class="docs-step-desc">
+                                Tracks monthly AI message usage. This counter increases as visitors interact with your chatbot and resets each billing cycle.
+                            </p>
+                            <div class="docs-callout" style="margin-top:10px; margin-bottom:0;">
+                                <div class="docs-callout-icon"><i class="bi bi-terminal"></i></div>
+                                <div class="docs-callout-text" style="font-family:monospace; font-size:0.82rem;">
+                                    AI Messages &nbsp;→&nbsp; <strong>3,240 / 20,000 Used</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="docs-divider">
+
+                <!-- Resource Consumption Map -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-diagram-2"></i></span>
+                    Understanding Resource Consumption
+                </h2>
+                <p class="docs-body-text">Each activity inside BotForge affects a different resource counter.</p>
+
+                <div class="docs-workflow">
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num"><i class="bi bi-plus-circle" style="font-size:0.85rem;"></i></span>
+                        <span class="docs-workflow-label">Create Bot → Bot Count Increases</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num"><i class="bi bi-globe2" style="font-size:0.85rem;"></i></span>
+                        <span class="docs-workflow-label">Train Website → Website Pages Increase</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num"><i class="bi bi-chat-dots" style="font-size:0.85rem;"></i></span>
+                        <span class="docs-workflow-label">Visitor Chats → AI Messages Increase</span>
+                    </div>
+                </div>
+
+                <hr class="docs-divider">
+
+                <!-- Usage Alerts -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-bell"></i></span>
+                    Usage Alerts
+                </h2>
+                <p class="docs-body-text">BotForge automatically warns you when resource usage becomes high, helping prevent unexpected interruptions.</p>
+
+                <div class="docs-callout amber" style="margin-bottom:10px;">
+                    <div class="docs-callout-icon"><i class="bi bi-robot"></i></div>
+                    <div class="docs-callout-text">
+                        <strong>Bot Limit Warning</strong><br>
+                        You have used 80% of your chatbot allocation.
+                    </div>
+                </div>
+                <div class="docs-callout amber" style="margin-bottom:10px;">
+                    <div class="docs-callout-icon"><i class="bi bi-file-earmark"></i></div>
+                    <div class="docs-callout-text">
+                        <strong>Website Page Warning</strong><br>
+                        Your website page usage is approaching the plan limit.
+                    </div>
+                </div>
+                <div class="docs-callout amber" style="margin-bottom:24px;">
+                    <div class="docs-callout-icon"><i class="bi bi-chat-left"></i></div>
+                    <div class="docs-callout-text">
+                        <strong>AI Message Warning</strong><br>
+                        Monthly AI message usage has reached 90%.
+                    </div>
+                </div>
+
+                <hr class="docs-divider">
+
+                <!-- When to Upgrade -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-arrow-up-circle"></i></span>
+                    When Should You Upgrade?
+                </h2>
+                <p class="docs-body-text">Consider upgrading your subscription when any of the following apply:</p>
+                <ul class="docs-list">
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>You have reached your chatbot limit.</li>
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Your website exceeds the current page allowance.</li>
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Monthly AI messages consistently approach the maximum.</li>
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Your business requires additional AI assistants.</li>
+                </ul>
+                <div class="docs-callout">
+                    <div class="docs-callout-icon"><i class="bi bi-lightbulb"></i></div>
+                    <div class="docs-callout-text">
+                        Upgrading increases your available resources immediately without affecting existing chatbots or their knowledge. The <strong>Upgrade Plan</strong> button is always available directly from the Billing Dashboard.
+                    </div>
+                </div>
+
+                <hr class="docs-divider">
+
+                <!-- Dashboard Workflow -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-diagram-2"></i></span>
+                    Billing Dashboard Workflow
+                </h2>
+
+                <div class="docs-workflow">
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">1</span>
+                        <span class="docs-workflow-label">Open Billing Dashboard</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">2</span>
+                        <span class="docs-workflow-label">Review Current Plan</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">3</span>
+                        <span class="docs-workflow-label">Monitor Resource Usage</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">4</span>
+                        <span class="docs-workflow-label">Receive Usage Alerts</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">5</span>
+                        <span class="docs-workflow-label">Upgrade When Required</span>
+                    </div>
+                </div>
+
+                <hr class="docs-divider">
+
+                <!-- Best Practices -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-stars"></i></span>
+                    Billing Best Practices
+                </h2>
+                <ul class="docs-list">
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Monitor usage regularly — not just when you hit limits.</li>
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Delete unused chatbots to free bot slots.</li>
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Refresh only active websites to keep page usage efficient.</li>
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Review AI message trends to plan upgrades in advance.</li>
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Upgrade before reaching limits — not after interruptions occur.</li>
+                </ul>
+
+                <hr class="docs-divider">
+
+                <!-- FAQ -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-patch-question"></i></span>
+                    Common Questions
+                </h2>
+
+                <div class="docs-callout" style="margin-bottom:10px;">
+                    <div class="docs-callout-icon"><i class="bi bi-question"></i></div>
+                    <div class="docs-callout-text">
+                        <strong>Does deleting a chatbot free a bot slot?</strong><br>
+                        Yes. Removing an unused chatbot makes that slot available for creating another chatbot within your subscription limit.
+                    </div>
+                </div>
+                <div class="docs-callout" style="margin-bottom:10px;">
+                    <div class="docs-callout-icon"><i class="bi bi-question"></i></div>
+                    <div class="docs-callout-text">
+                        <strong>Does retraining increase my chatbot count?</strong><br>
+                        No. Retraining only updates the chatbot's knowledge and does not affect your chatbot allocation.
+                    </div>
+                </div>
+                <div class="docs-callout" style="margin-bottom:10px;">
+                    <div class="docs-callout-icon"><i class="bi bi-question"></i></div>
+                    <div class="docs-callout-text">
+                        <strong>When do AI message counts reset?</strong><br>
+                        AI message usage resets according to your subscription billing cycle.
+                    </div>
+                </div>
+                <div class="docs-callout" style="margin-bottom:24px;">
+                    <div class="docs-callout-icon"><i class="bi bi-question"></i></div>
+                    <div class="docs-callout-text">
+                        <strong>Can I upgrade at any time?</strong><br>
+                        Yes. You can upgrade your subscription whenever additional resources are needed.
+                    </div>
+                </div>
+
+                <!-- What's Next -->
+                <div class="docs-next-card">
+                    <div>
+                        <div class="docs-next-eyebrow">What's Next?</div>
+                        <h4 class="docs-next-title">Chapter 15 &mdash; Support</h4>
+                    </div>
+                    <button class="docs-next-btn" onclick="document.querySelector('.docs-chapter-link[data-chapter=\'15\']').click();">
+                        Continue <i class="bi bi-arrow-right"></i>
+                    </button>
+                </div>
+
             </div>
 
             <!-- ══ CHAPTER 15 ═════════════════════════════════ -->
