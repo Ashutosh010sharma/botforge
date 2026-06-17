@@ -3336,30 +3336,702 @@ Documentation | BotForge
 
             </div>
 
-            <!-- ══ CHAPTER 9 ══════════════════════════════════ -->
+          <!-- ══ CHAPTER 9 ══════════════════════════════════ -->
             <div class="docs-chapter-content" data-chapter="9" style="display:none;">
                 <div class="docs-chapter-eyebrow"><i class="bi bi-book"></i> Chapter 09</div>
                 <h1 class="docs-panel-title">Website Crawling</h1>
                 <p class="docs-panel-sub">How BotForge learns from your website</p>
 
-                <div class="docs-placeholder">
-                    <div class="docs-placeholder-icon"><i class="bi bi-file-text"></i></div>
-                    <h3>Content coming soon</h3>
-                    <p>Sections: Recursive Crawling, Sitemap Detection, Internal Link Discovery, Supported Websites, Crawl Limits, Content Extraction, Training Pipeline, Content Cleaning.</p>
+                <p class="docs-lead">
+                    Website Crawling is the first and most important step in training your AI chatbot.
+                    BotForge automatically explores your website, discovers relevant pages, extracts
+                    meaningful content, and converts that information into an AI-ready knowledge base —
+                    all without manual data entry.
+                </p>
+
+                <hr class="docs-divider">
+
+                <!-- What is Crawling -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-globe2"></i></span>
+                    What is Website Crawling?
+                </h2>
+                <p class="docs-body-text">
+                    Website crawling is the automated process of visiting your website and discovering
+                    publicly available pages. The crawler starts from your website's homepage and follows
+                    internal links to discover additional pages — collecting all the content your chatbot
+                    needs to answer visitor questions.
+                </p>
+
+                <hr class="docs-divider">
+
+                <!-- How It Works -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-diagram-2"></i></span>
+                    How Website Crawling Works
+                </h2>
+                <p class="docs-body-text">The complete crawling process follows a structured automated workflow.</p>
+
+                <div class="docs-workflow">
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">1</span>
+                        <span class="docs-workflow-label">Website URL</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">2</span>
+                        <span class="docs-workflow-label">Download Homepage</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">3</span>
+                        <span class="docs-workflow-label">Find Internal Links</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">4</span>
+                        <span class="docs-workflow-label">Visit Each Page</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">5</span>
+                        <span class="docs-workflow-label">Extract Useful Content</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">6</span>
+                        <span class="docs-workflow-label">Remove Unnecessary Elements</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">7</span>
+                        <span class="docs-workflow-label">Create Knowledge Base</span>
+                    </div>
                 </div>
+
+                <hr class="docs-divider">
+
+                <!-- Discovering Pages -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-diagram-3"></i></span>
+                    Discovering Internal Pages
+                </h2>
+                <p class="docs-body-text">
+                    The crawler automatically follows links that belong to the same website.
+                    External websites are always ignored. Each internal page is visited individually and analyzed.
+                </p>
+
+                <div class="docs-workflow">
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num"><i class="bi bi-house" style="font-size:0.85rem;"></i></span>
+                        <span class="docs-workflow-label">Homepage (Starting Point)</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num"><i class="bi bi-file" style="font-size:0.85rem;"></i></span>
+                        <span class="docs-workflow-label">About Us</span>
+                    </div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num"><i class="bi bi-file" style="font-size:0.85rem;"></i></span>
+                        <span class="docs-workflow-label">Services</span>
+                    </div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num"><i class="bi bi-file" style="font-size:0.85rem;"></i></span>
+                        <span class="docs-workflow-label">Products</span>
+                    </div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num"><i class="bi bi-file" style="font-size:0.85rem;"></i></span>
+                        <span class="docs-workflow-label">Pricing</span>
+                    </div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num"><i class="bi bi-file" style="font-size:0.85rem;"></i></span>
+                        <span class="docs-workflow-label">Blog</span>
+                    </div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num"><i class="bi bi-file" style="font-size:0.85rem;"></i></span>
+                        <span class="docs-workflow-label">Contact</span>
+                    </div>
+                </div>
+
+                <hr class="docs-divider">
+
+                <!-- Content Collected vs Ignored -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-funnel"></i></span>
+                    Content Extraction &amp; Cleaning
+                </h2>
+                <p class="docs-body-text">
+                    Once a page is downloaded, BotForge extracts only meaningful information and
+                    automatically removes elements that do not help the chatbot answer visitor questions.
+                </p>
+
+                <div class="docs-feature-grid">
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon" style="background:rgba(45,106,79,0.09); color:var(--emerald);"><i class="bi bi-check-circle-fill"></i></div>
+                        <h4 class="docs-feature-title">Extracted</h4>
+                        <p class="docs-feature-desc">Page titles · Headings · Paragraphs · Lists · Tables · Product info · Service descriptions · Contact details</p>
+                    </div>
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon" style="background:rgba(185,28,28,0.08); color:#b91c1c;"><i class="bi bi-x-circle-fill"></i></div>
+                        <h4 class="docs-feature-title">Removed</h4>
+                        <p class="docs-feature-desc">Navigation menus · Headers · Footers · JavaScript · CSS · Buttons · Forms · Ads · Hidden elements</p>
+                    </div>
+                </div>
+
+                <hr class="docs-divider">
+
+                <!-- Intelligent Filtering -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-shield-check"></i></span>
+                    Intelligent Link Filtering
+                </h2>
+                <p class="docs-body-text">
+                    Not every page should become part of the chatbot's knowledge. BotForge automatically
+                    skips pages that are not useful for visitors, keeping the knowledge base focused on
+                    customer-facing business information.
+                </p>
+
+                <div class="docs-feature-grid">
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon" style="background:rgba(45,106,79,0.09); color:var(--emerald);"><i class="bi bi-check2-circle"></i></div>
+                        <h4 class="docs-feature-title">Pages Included</h4>
+                        <p class="docs-feature-desc">Home · About Us · Services · Products · Pricing · FAQ · Help Center · Documentation · Blog Articles</p>
+                    </div>
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon" style="background:rgba(185,28,28,0.08); color:#b91c1c;"><i class="bi bi-slash-circle"></i></div>
+                        <h4 class="docs-feature-title">Pages Skipped</h4>
+                        <p class="docs-feature-desc">Login · Registration · Cart · Checkout · Privacy Policy · Terms &amp; Conditions · Account pages · Admin panels</p>
+                    </div>
+                </div>
+
+                <hr class="docs-divider">
+
+                <!-- Duplicate Detection + Limits -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-layers"></i></span>
+                    Duplicate Detection &amp; Crawl Limits
+                </h2>
+                <div>
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge"><i class="bi bi-copy" style="font-size:1rem;"></i></span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Duplicate Detection</h4>
+                            <p class="docs-step-desc">
+                                Many websites repeat the same content across multiple pages. BotForge automatically
+                                detects and skips duplicates — resulting in faster training, a smaller knowledge base,
+                                and better response quality.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge"><i class="bi bi-bar-chart" style="font-size:1rem;"></i></span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Subscription Page Limits</h4>
+                            <p class="docs-step-desc">
+                                Every subscription plan includes a maximum number of website pages that can be crawled.
+                                BotForge stops crawling once the limit is reached. Upgrading your subscription increases
+                                the available page limit.
+                            </p>
+                            <div class="docs-callout" style="margin-top:10px; margin-bottom:0;">
+                                <div class="docs-callout-icon"><i class="bi bi-terminal"></i></div>
+                                <div class="docs-callout-text" style="font-family:monospace; font-size:0.82rem;">
+                                    Starter Plan &nbsp;→&nbsp; <strong>Maximum Website Pages: 250</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="docs-divider">
+
+                <!-- Best Practices -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-stars"></i></span>
+                    Best Practices for Crawling
+                </h2>
+
+                <div>
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge"><i class="bi bi-signpost-2" style="font-size:1rem;"></i></span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Use Clear Navigation</h4>
+                            <p class="docs-step-desc">A well-structured website with clear menus helps the crawler discover all important pages without missing any.</p>
+                        </div>
+                    </div>
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge"><i class="bi bi-link-45deg" style="font-size:1rem;"></i></span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Avoid Broken Links</h4>
+                            <p class="docs-step-desc">Broken internal links prevent pages from being discovered. Regularly check and fix any broken links on your website.</p>
+                        </div>
+                    </div>
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge"><i class="bi bi-type-h1" style="font-size:1rem;"></i></span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Use Proper Headings</h4>
+                            <p class="docs-step-desc">Organized headings (H1, H2, H3) help BotForge understand the structure and hierarchy of each page's content.</p>
+                        </div>
+                    </div>
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge"><i class="bi bi-pencil-square" style="font-size:1rem;"></i></span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Write Meaningful Content</h4>
+                            <p class="docs-step-desc">Instead of short marketing phrases, explain your products and services in detail. More detailed information produces better chatbot responses.</p>
+                        </div>
+                    </div>
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge"><i class="bi bi-arrow-clockwise" style="font-size:1rem;"></i></span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Keep Content Updated</h4>
+                            <p class="docs-step-desc">Outdated information produces outdated chatbot responses. Refresh your crawl whenever your website content changes.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="docs-divider">
+
+                <!-- What BotForge Does Not Crawl -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-shield-lock"></i></span>
+                    What BotForge Does Not Crawl
+                </h2>
+                <p class="docs-body-text">For security and privacy, BotForge does not process:</p>
+                <ul class="docs-list">
+                    <li><span class="li-dot"><i class="bi bi-x"></i></span>Password-protected pages</li>
+                    <li><span class="li-dot"><i class="bi bi-x"></i></span>Private dashboards and admin panels</li>
+                    <li><span class="li-dot"><i class="bi bi-x"></i></span>Customer portals and account areas</li>
+                    <li><span class="li-dot"><i class="bi bi-x"></i></span>Session-based and authentication pages</li>
+                </ul>
+                <div class="docs-callout">
+                    <div class="docs-callout-icon"><i class="bi bi-lock"></i></div>
+                    <div class="docs-callout-text">
+                        Only publicly accessible content becomes part of the chatbot's knowledge base, ensuring your private data stays secure.
+                    </div>
+                </div>
+
+                <hr class="docs-divider">
+
+                <!-- Full Crawl Summary -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-list-ol"></i></span>
+                    Complete Crawl Summary
+                </h2>
+                <p class="docs-body-text">Every website crawl follows these steps end-to-end:</p>
+
+                <div class="docs-workflow">
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">1</span>
+                        <span class="docs-workflow-label">Website</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">2</span>
+                        <span class="docs-workflow-label">Discover Pages</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">3</span>
+                        <span class="docs-workflow-label">Visit Pages</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">4</span>
+                        <span class="docs-workflow-label">Extract Content</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">5</span>
+                        <span class="docs-workflow-label">Clean Content</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">6</span>
+                        <span class="docs-workflow-label">Remove Duplicates</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">7</span>
+                        <span class="docs-workflow-label">Generate Knowledge</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">8</span>
+                        <span class="docs-workflow-label">Train Chatbot</span>
+                    </div>
+                </div>
+
+                <hr class="docs-divider">
+
+                <!-- FAQ -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-patch-question"></i></span>
+                    Common Questions
+                </h2>
+
+                <div class="docs-callout" style="margin-bottom:10px;">
+                    <div class="docs-callout-icon"><i class="bi bi-question"></i></div>
+                    <div class="docs-callout-text">
+                        <strong>Does BotForge crawl external websites?</strong><br>
+                        No. Only pages belonging to your own website domain are processed.
+                    </div>
+                </div>
+                <div class="docs-callout" style="margin-bottom:10px;">
+                    <div class="docs-callout-icon"><i class="bi bi-question"></i></div>
+                    <div class="docs-callout-text">
+                        <strong>Can I crawl my website multiple times?</strong><br>
+                        Yes. You can refresh your website knowledge at any time whenever your content changes.
+                    </div>
+                </div>
+                <div class="docs-callout" style="margin-bottom:10px;">
+                    <div class="docs-callout-icon"><i class="bi bi-question"></i></div>
+                    <div class="docs-callout-text">
+                        <strong>Will every page be crawled?</strong><br>
+                        BotForge crawls all publicly accessible pages until your subscription's page limit is reached.
+                    </div>
+                </div>
+                <div class="docs-callout" style="margin-bottom:24px;">
+                    <div class="docs-callout-icon"><i class="bi bi-question"></i></div>
+                    <div class="docs-callout-text">
+                        <strong>Can I stop a crawl?</strong><br>
+                        Depending on your implementation, ongoing crawl operations may be stopped before completion. Pages already crawled remain available in the knowledge base.
+                    </div>
+                </div>
+
+                <!-- What's Next -->
+                <div class="docs-next-card">
+                    <div>
+                        <div class="docs-next-eyebrow">What's Next?</div>
+                        <h4 class="docs-next-title">Chapter 10 &mdash; AI Training Process</h4>
+                    </div>
+                    <button class="docs-next-btn" onclick="document.querySelector('.docs-chapter-link[data-chapter=\'10\']').click();">
+                        Continue <i class="bi bi-arrow-right"></i>
+                    </button>
+                </div>
+
             </div>
 
-            <!-- ══ CHAPTER 10 ═════════════════════════════════ -->
+           <!-- ══ CHAPTER 10 ═════════════════════════════════ -->
             <div class="docs-chapter-content" data-chapter="10" style="display:none;">
                 <div class="docs-chapter-eyebrow"><i class="bi bi-book"></i> Chapter 10</div>
-                <h1 class="docs-panel-title">AI Training Process</h1>
-                <p class="docs-panel-sub">How BotForge generates responses</p>
+                <h1 class="docs-panel-title">Installing Your Chatbot</h1>
+                <p class="docs-panel-sub">Add BotForge to your website</p>
 
-                <div class="docs-placeholder">
-                    <div class="docs-placeholder-icon"><i class="bi bi-file-text"></i></div>
-                    <h3>Content coming soon</h3>
-                    <p>Sections: Crawling, Content Processing, Chunking, Embeddings, Knowledge Retrieval, Response Generation, Accuracy Tips.</p>
+                <p class="docs-lead">
+                    Congratulations! Your chatbot has been trained and is ready to interact with visitors.
+                    The final step is installing the BotForge chat widget on your website. Once installed,
+                    your AI assistant becomes available on every page where the widget script is included.
+                </p>
+
+                <hr class="docs-divider">
+
+                <!-- What is the widget -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-window"></i></span>
+                    What is the Chat Widget?
+                </h2>
+                <p class="docs-body-text">
+                    The BotForge Chat Widget is a lightweight JavaScript component that displays your AI
+                    chatbot on your website. Once installed, visitors can open the chatbot, ask questions,
+                    receive AI-powered responses, and continue conversations naturally — without any
+                    additional plugins or software.
+                </p>
+                <div class="docs-feature-grid">
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon"><i class="bi bi-chat-dots-fill"></i></div>
+                        <h4 class="docs-feature-title">Floating Chat Button</h4>
+                        <p class="docs-feature-desc">A persistent button that opens the chatbot window without navigating away from the current page.</p>
+                    </div>
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon"><i class="bi bi-phone"></i></div>
+                        <h4 class="docs-feature-title">Responsive Design</h4>
+                        <p class="docs-feature-desc">Automatically adapts to desktops, laptops, tablets, and mobile phones with no extra configuration.</p>
+                    </div>
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon"><i class="bi bi-lightning-charge"></i></div>
+                        <h4 class="docs-feature-title">Lightweight & Fast</h4>
+                        <p class="docs-feature-desc">Loads asynchronously to minimize any impact on your website's page performance.</p>
+                    </div>
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon"><i class="bi bi-arrow-repeat"></i></div>
+                        <h4 class="docs-feature-title">Auto-Updates</h4>
+                        <p class="docs-feature-desc">Widget improvements are reflected automatically — no reinstallation required after updates.</p>
+                    </div>
                 </div>
+
+                <hr class="docs-divider">
+
+                <!-- Accessing Install Page -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-box-arrow-in-right"></i></span>
+                    Accessing the Installation Page
+                </h2>
+                <div>
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge">1</span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Open Bot Workspace</h4>
+                            <p class="docs-step-desc">Navigate to Bots and click <strong>Workspace</strong> on the chatbot you want to deploy.</p>
+                        </div>
+                    </div>
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge">2</span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Click the Install Bot Tab</h4>
+                            <p class="docs-step-desc">Select <strong>Install Bot</strong> from the workspace navigation tabs.</p>
+                        </div>
+                    </div>
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge">3</span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Copy Your Installation Code</h4>
+                            <p class="docs-step-desc">Your unique installation script is displayed and ready to copy. Each chatbot has its own unique script.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="docs-divider">
+
+                <!-- Installation Code -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-code-slash"></i></span>
+                    Installation Code
+                </h2>
+                <p class="docs-body-text">
+                    Each chatbot has its own unique installation script. The chatbot ID uniquely identifies
+                    your chatbot and connects your website to your BotForge workspace. Place the script just
+                    before the closing <code style="background:rgba(45,106,79,0.08); padding:2px 6px; border-radius:5px; font-size:0.85rem; color:var(--emerald);">&lt;/body&gt;</code> tag of your website for best results.
+                </p>
+                <div class="docs-callout">
+                    <div class="docs-callout-icon"><i class="bi bi-info-circle"></i></div>
+                    <div class="docs-callout-text">
+                        This ensures the chatbot loads <strong>after</strong> the rest of your webpage, preventing any delay to the main page content.
+                    </div>
+                </div>
+
+                <hr class="docs-divider">
+
+                <!-- Widget Loading Flow -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-diagram-2"></i></span>
+                    How the Widget Loads
+                </h2>
+                <p class="docs-body-text">When a visitor opens your website, the widget loads automatically in the background.</p>
+
+                <div class="docs-workflow">
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">1</span>
+                        <span class="docs-workflow-label">Visitor Opens Website</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">2</span>
+                        <span class="docs-workflow-label">Widget Script Loads</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">3</span>
+                        <span class="docs-workflow-label">Widget Connects to BotForge</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">4</span>
+                        <span class="docs-workflow-label">Chat Button Appears</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">5</span>
+                        <span class="docs-workflow-label">Visitor Starts Conversation</span>
+                    </div>
+                </div>
+
+                <hr class="docs-divider">
+
+                <!-- Supported Websites -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-code-square"></i></span>
+                    Supported Websites
+                </h2>
+                <p class="docs-body-text">The BotForge widget works with virtually any website that supports JavaScript.</p>
+                <div class="docs-tag-grid">
+                    <span class="docs-tag"><i class="bi bi-filetype-html"></i>HTML Websites</span>
+                    <span class="docs-tag"><i class="bi bi-filetype-php"></i>PHP Websites</span>
+                    <span class="docs-tag"><i class="bi bi-server"></i>Django</span>
+                    <span class="docs-tag"><i class="bi bi-server"></i>Laravel</span>
+                    <span class="docs-tag"><i class="bi bi-server"></i>CodeIgniter</span>
+                    <span class="docs-tag"><i class="bi bi-wordpress"></i>WordPress</span>
+                    <span class="docs-tag"><i class="bi bi-filetype-jsx"></i>React</span>
+                    <span class="docs-tag"><i class="bi bi-filetype-tsx"></i>Vue</span>
+                    <span class="docs-tag"><i class="bi bi-filetype-tsx"></i>Angular</span>
+                    <span class="docs-tag"><i class="bi bi-lightning"></i>Next.js</span>
+                </div>
+
+                <hr class="docs-divider">
+
+                <!-- Multiple Page Installation -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-files"></i></span>
+                    Multiple Page Installation
+                </h2>
+                <p class="docs-body-text">
+                    The same installation code can be added to every page of your website. Installing the
+                    widget globally ensures visitors always have access to your AI assistant wherever they are.
+                </p>
+                <div class="docs-tag-grid">
+                    <span class="docs-tag"><i class="bi bi-house"></i>Homepage</span>
+                    <span class="docs-tag"><i class="bi bi-telephone"></i>Contact Page</span>
+                    <span class="docs-tag"><i class="bi bi-tag"></i>Pricing Page</span>
+                    <span class="docs-tag"><i class="bi bi-box-seam"></i>Product Pages</span>
+                    <span class="docs-tag"><i class="bi bi-book"></i>Documentation</span>
+                    <span class="docs-tag"><i class="bi bi-newspaper"></i>Blog</span>
+                </div>
+
+                <hr class="docs-divider">
+
+                <!-- Verifying Installation -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-patch-check"></i></span>
+                    Verifying Installation
+                </h2>
+                <p class="docs-body-text">After adding the script, confirm everything is working correctly.</p>
+                <div>
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge">1</span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Refresh Your Website</h4>
+                            <p class="docs-step-desc">Hard refresh the page after adding the script to ensure the latest version loads.</p>
+                        </div>
+                    </div>
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge">2</span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Confirm the Chat Button Appears</h4>
+                            <p class="docs-step-desc">The floating chat button should be visible in the corner of your page.</p>
+                        </div>
+                    </div>
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge">3</span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Open the Chatbot</h4>
+                            <p class="docs-step-desc">Click the chat button and confirm the widget opens with your welcome message.</p>
+                        </div>
+                    </div>
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge">4</span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Send a Test Message</h4>
+                            <p class="docs-step-desc">Type a question and verify the chatbot responds correctly using your website knowledge.</p>
+                        </div>
+                    </div>
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge">5</span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Test on Mobile</h4>
+                            <p class="docs-step-desc">Open your website on a mobile device and confirm the widget is responsive and usable.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="docs-divider">
+
+                <!-- Deployment Checklist -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-clipboard2-check"></i></span>
+                    Deployment Checklist
+                </h2>
+                <p class="docs-body-text">Before making your chatbot available to visitors, confirm all of the following:</p>
+
+                <div class="docs-callout" style="margin-bottom:10px;">
+                    <div class="docs-callout-icon"><i class="bi bi-check-circle-fill"></i></div>
+                    <div class="docs-callout-text"><strong>Company workspace is configured.</strong></div>
+                </div>
+                <div class="docs-callout" style="margin-bottom:10px;">
+                    <div class="docs-callout-icon"><i class="bi bi-check-circle-fill"></i></div>
+                    <div class="docs-callout-text"><strong>Active subscription is available.</strong></div>
+                </div>
+                <div class="docs-callout" style="margin-bottom:10px;">
+                    <div class="docs-callout-icon"><i class="bi bi-check-circle-fill"></i></div>
+                    <div class="docs-callout-text"><strong>Chatbot has been created.</strong></div>
+                </div>
+                <div class="docs-callout" style="margin-bottom:10px;">
+                    <div class="docs-callout-icon"><i class="bi bi-check-circle-fill"></i></div>
+                    <div class="docs-callout-text"><strong>Website training has completed successfully.</strong></div>
+                </div>
+                <div class="docs-callout" style="margin-bottom:10px;">
+                    <div class="docs-callout-icon"><i class="bi bi-check-circle-fill"></i></div>
+                    <div class="docs-callout-text"><strong>Installation script has been added to your website.</strong></div>
+                </div>
+                <div class="docs-callout" style="margin-bottom:10px;">
+                    <div class="docs-callout-icon"><i class="bi bi-check-circle-fill"></i></div>
+                    <div class="docs-callout-text"><strong>The widget is visible on your website.</strong></div>
+                </div>
+                <div class="docs-callout" style="margin-bottom:24px;">
+                    <div class="docs-callout-icon"><i class="bi bi-check-circle-fill"></i></div>
+                    <div class="docs-callout-text"><strong>Test conversations are working correctly.</strong></div>
+                </div>
+
+                <hr class="docs-divider">
+
+                <!-- Best Practices -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-stars"></i></span>
+                    Installation Best Practices
+                </h2>
+                <ul class="docs-list">
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Install the widget on all public pages for maximum reach.</li>
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Place the script just before the closing <code style="font-size:0.85rem;">&lt;/body&gt;</code> tag.</li>
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Verify the chatbot after every deployment.</li>
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Keep your chatbot's knowledge base updated regularly.</li>
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Test the widget on both desktop and mobile devices.</li>
+                </ul>
+
+                <hr class="docs-divider">
+
+                <!-- FAQ -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-patch-question"></i></span>
+                    Common Questions
+                </h2>
+
+                <div class="docs-callout" style="margin-bottom:10px;">
+                    <div class="docs-callout-icon"><i class="bi bi-question"></i></div>
+                    <div class="docs-callout-text">
+                        <strong>Can I install the chatbot on multiple pages?</strong><br>
+                        Yes. Use the same installation script across all pages of the same website.
+                    </div>
+                </div>
+                <div class="docs-callout" style="margin-bottom:10px;">
+                    <div class="docs-callout-icon"><i class="bi bi-question"></i></div>
+                    <div class="docs-callout-text">
+                        <strong>Does the widget affect website performance?</strong><br>
+                        No. The widget is lightweight and loads asynchronously to minimize impact on page performance.
+                    </div>
+                </div>
+                <div class="docs-callout" style="margin-bottom:10px;">
+                    <div class="docs-callout-icon"><i class="bi bi-question"></i></div>
+                    <div class="docs-callout-text">
+                        <strong>Can I remove the widget later?</strong><br>
+                        Yes. Simply remove the installation script from your website. Your chatbot and knowledge remain inside BotForge unless you delete them.
+                    </div>
+                </div>
+                <div class="docs-callout" style="margin-bottom:24px;">
+                    <div class="docs-callout-icon"><i class="bi bi-question"></i></div>
+                    <div class="docs-callout-text">
+                        <strong>Do I need to reinstall after updating my chatbot?</strong><br>
+                        No. Changes such as retraining or updating the welcome message are reflected automatically. The installation code stays the same.
+                    </div>
+                </div>
+
+                <!-- What's Next -->
+                <div class="docs-next-card">
+                    <div>
+                        <div class="docs-next-eyebrow">What's Next?</div>
+                        <h4 class="docs-next-title">Chapter 11 &mdash; Chat Logs</h4>
+                    </div>
+                    <button class="docs-next-btn" onclick="document.querySelector('.docs-chapter-link[data-chapter=\'11\']').click();">
+                        Continue <i class="bi bi-arrow-right"></i>
+                    </button>
+                </div>
+
             </div>
 
             <!-- ══ CHAPTER 11 ═════════════════════════════════ -->
