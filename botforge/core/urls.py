@@ -1,7 +1,9 @@
 from django.urls import path
-from .views import home
+from . import views
 
 
 urlpatterns=[
-    path('',home, name='home')
+    path('',views.home, name='home'),
+    path('privacy-policy',views.privacy_policy, name='privacy_policy'),
+    path('terms-and-conditions',views.terms_and_conditions, name='terms_and_conditions')
 ]
