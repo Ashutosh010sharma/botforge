@@ -3710,8 +3710,377 @@ Documentation | BotForge
 
             </div>
 
-           <!-- ══ CHAPTER 10 ═════════════════════════════════ -->
-           
+           <!-- ══ CHAPTER 10 (AI Training) ══════════════════= -->
+            <div class="docs-chapter-content" data-chapter="10" style="display:none;">
+                <div class="docs-chapter-eyebrow"><i class="bi bi-book"></i> Chapter 10</div>
+                <h1 class="docs-panel-title">AI Training &amp; Response Engine</h1>
+                <p class="docs-panel-sub">How BotForge generates responses</p>
+
+                <p class="docs-lead">
+                    Behind every conversation is an intelligent AI pipeline that transforms your website into
+                    searchable business knowledge and generates accurate, context-aware responses. This chapter
+                    explains how BotForge trains your chatbot, processes content, retrieves knowledge, and
+                    generates responses using artificial intelligence.
+                </p>
+
+                <hr class="docs-divider">
+
+                <!-- Full Pipeline Overview -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-diagram-2"></i></span>
+                    Complete AI Pipeline
+                </h2>
+                <p class="docs-body-text">When a chatbot is trained, BotForge performs several automated processes that convert ordinary website content into structured AI knowledge.</p>
+
+                <div class="docs-workflow">
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">1</span>
+                        <span class="docs-workflow-label">Website URL</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">2</span>
+                        <span class="docs-workflow-label">Website Crawling</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">3</span>
+                        <span class="docs-workflow-label">Content Extraction</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">4</span>
+                        <span class="docs-workflow-label">Content Cleaning</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">5</span>
+                        <span class="docs-workflow-label">Text Chunking</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">6</span>
+                        <span class="docs-workflow-label">Embedding Generation</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">7</span>
+                        <span class="docs-workflow-label">Vector Knowledge Index</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">8</span>
+                        <span class="docs-workflow-label">Visitor Question</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">9</span>
+                        <span class="docs-workflow-label">Similarity Search</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">10</span>
+                        <span class="docs-workflow-label">Relevant Context Retrieved</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">11</span>
+                        <span class="docs-workflow-label">AI Response Generated</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">12</span>
+                        <span class="docs-workflow-label">Chat Log Saved</span>
+                    </div>
+                </div>
+
+                <hr class="docs-divider">
+
+                <!-- Training Steps 1–6 -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-cpu"></i></span>
+                    Training Pipeline — Step by Step
+                </h2>
+                <p class="docs-body-text">These steps happen automatically when you train your chatbot. You do not need to manage any of them manually.</p>
+
+                <div>
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge">1</span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Website Crawling</h4>
+                            <p class="docs-step-desc">
+                                BotForge visits your website and discovers internal pages — collecting company info,
+                                products, services, pricing, FAQs, contact details, and documentation. Only publicly
+                                accessible pages are processed.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge">2</span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Content Extraction</h4>
+                            <p class="docs-step-desc">
+                                After downloading a page, BotForge extracts only meaningful business information —
+                                titles, headings, paragraphs, lists, and tables. Navigation menus, scripts, forms,
+                                and buttons are ignored entirely.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge">3</span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Content Cleaning</h4>
+                            <p class="docs-step-desc">
+                                Raw website content is automatically cleaned — duplicate spaces, HTML tags, navigation
+                                elements, JavaScript, CSS, and hidden content are all removed. The result is clean,
+                                readable text suitable for AI processing.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge">4</span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Text Chunking</h4>
+                            <p class="docs-step-desc">
+                                Large pages are divided into smaller sections called <strong>chunks</strong>. Each chunk
+                                contains a small amount of related information. This makes searching significantly faster
+                                and more accurate than processing entire pages at once.
+                            </p>
+                            <div class="docs-callout" style="margin-top:10px; margin-bottom:0;">
+                                <div class="docs-callout-icon"><i class="bi bi-lightbulb"></i></div>
+                                <div class="docs-callout-text">
+                                    If your Services page contains Web Development, Mobile Apps, AI Automation, and Cloud
+                                    Consulting — BotForge searches only the chunk relevant to the visitor's question,
+                                    not the entire page.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge">5</span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Embedding Generation</h4>
+                            <p class="docs-step-desc">
+                                Each chunk is converted into a mathematical representation called an <strong>embedding</strong>
+                                — capturing the <em>meaning</em> of the text rather than just matching keywords.
+                            </p>
+                            <div class="docs-callout" style="margin-top:10px; margin-bottom:0;">
+                                <div class="docs-callout-icon"><i class="bi bi-info-circle"></i></div>
+                                <div class="docs-callout-text">
+                                    "Artificial Intelligence" and "AI Solutions" produce very similar embeddings because they
+                                    represent the same concept — even though the words are different. This enables
+                                    <strong>semantic search</strong> instead of simple keyword matching.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge">6</span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Vector Knowledge Index</h4>
+                            <p class="docs-step-desc">All embeddings are stored in a searchable knowledge index. During conversations, BotForge searches this index — not your live website.</p>
+                            <div class="docs-tag-grid" style="margin-top:8px; margin-bottom:0;">
+                                <span class="docs-tag"><i class="bi bi-lightning-charge"></i>Faster responses</span>
+                                <span class="docs-tag"><i class="bi bi-bullseye"></i>Better accuracy</span>
+                                <span class="docs-tag"><i class="bi bi-cpu"></i>Lower AI processing time</span>
+                                <span class="docs-tag"><i class="bi bi-globe2"></i>Fewer website requests</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="docs-divider">
+
+                <!-- Response Pipeline -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-chat-square-dots"></i></span>
+                    Response Pipeline — How a Question Gets Answered
+                </h2>
+                <p class="docs-body-text">Once a visitor sends a message, the response pipeline kicks in — typically completing in just a few seconds.</p>
+
+                <div>
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge">7</span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Visitor Sends a Question</h4>
+                            <p class="docs-step-desc">BotForge analyzes the meaning of the incoming message rather than treating it as a simple keyword search.</p>
+                            <div class="docs-callout" style="margin-top:10px; margin-bottom:0;">
+                                <div class="docs-callout-icon"><i class="bi bi-quote"></i></div>
+                                <div class="docs-callout-text" style="font-style:italic; color:var(--muted);">"What services do you provide?"</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge">8</span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Similarity Search</h4>
+                            <p class="docs-step-desc">
+                                BotForge performs a semantic similarity search to find the most relevant chunks from the knowledge index.
+                                Even if the visitor's exact words don't appear in the content, the AI still finds related information.
+                            </p>
+                            <div class="docs-callout" style="margin-top:10px; margin-bottom:0;">
+                                <div class="docs-callout-icon"><i class="bi bi-info-circle"></i></div>
+                                <div class="docs-callout-text">
+                                    Visitor asks <em>"Do you build websites?"</em> — BotForge retrieves content about
+                                    Web Development, Website Design, and Custom Applications even if "build websites" is
+                                    not the exact phrase used on your site.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge">9</span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Context Retrieval</h4>
+                            <p class="docs-step-desc">
+                                Only the most relevant chunks are selected as context. Unrelated content is excluded,
+                                preventing it from influencing the response.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge">10</span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">AI Response Generation</h4>
+                            <p class="docs-step-desc">
+                                The retrieved context is combined with the visitor's question. The AI model generates a
+                                natural, conversational response using your business information — not generic knowledge.
+                            </p>
+                            <div class="docs-callout" style="margin-top:10px; margin-bottom:0;">
+                                <div class="docs-callout-icon"><i class="bi bi-chat-right-dots"></i></div>
+                                <div class="docs-callout-text">
+                                    <strong>Visitor:</strong> "Do you create mobile apps?"<br>
+                                    <strong>AI:</strong> "Yes. We provide custom mobile application development for
+                                    Android and iOS platforms, along with web development and AI automation services."
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="docs-divider">
+
+                <!-- Why responses improve -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-graph-up-arrow"></i></span>
+                    Why Responses Improve Over Time
+                </h2>
+                <p class="docs-body-text">
+                    The chatbot becomes more helpful as your website improves. After making any of the following
+                    updates, simply refresh your Knowledge Base — the chatbot immediately benefits.
+                </p>
+                <div class="docs-tag-grid">
+                    <span class="docs-tag"><i class="bi bi-plus-circle"></i>New services added</span>
+                    <span class="docs-tag"><i class="bi bi-file-text"></i>Documentation published</span>
+                    <span class="docs-tag"><i class="bi bi-tag"></i>Pricing updated</span>
+                    <span class="docs-tag"><i class="bi bi-question-circle"></i>FAQs expanded</span>
+                    <span class="docs-tag"><i class="bi bi-pencil-square"></i>Content quality improved</span>
+                </div>
+
+                <hr class="docs-divider">
+
+                <!-- Accuracy & Limitations -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-shield-check"></i></span>
+                    Response Accuracy &amp; Limitations
+                </h2>
+
+                <div class="docs-feature-grid">
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon" style="background:rgba(45,106,79,0.09); color:var(--emerald);"><i class="bi bi-check-circle"></i></div>
+                        <h4 class="docs-feature-title">Reduces Hallucinations</h4>
+                        <p class="docs-feature-desc">Using retrieved website knowledge keeps responses grounded in real business facts.</p>
+                    </div>
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon" style="background:rgba(45,106,79,0.09); color:var(--emerald);"><i class="bi bi-bullseye"></i></div>
+                        <h4 class="docs-feature-title">Factually Accurate</h4>
+                        <p class="docs-feature-desc">Responses are generated from your own content, not generic AI knowledge.</p>
+                    </div>
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon" style="background:rgba(185,28,28,0.08); color:#b91c1c;"><i class="bi bi-exclamation-circle"></i></div>
+                        <h4 class="docs-feature-title">Knowledge-Bound</h4>
+                        <p class="docs-feature-desc">If information doesn't exist in the knowledge base, the chatbot may not answer completely.</p>
+                    </div>
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon" style="background:rgba(185,28,28,0.08); color:#b91c1c;"><i class="bi bi-arrow-clockwise"></i></div>
+                        <h4 class="docs-feature-title">Requires Manual Refresh</h4>
+                        <p class="docs-feature-desc">Website updates do not automatically update the chatbot — a Knowledge Base refresh is required.</p>
+                    </div>
+                </div>
+
+                <hr class="docs-divider">
+
+                <!-- Best Practices -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-stars"></i></span>
+                    Best Practices for AI Accuracy
+                </h2>
+                <ul class="docs-list">
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Provide detailed, specific website content.</li>
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Use descriptive headings and structured page layouts.</li>
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Keep FAQs updated with real visitor questions.</li>
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Remove outdated or incorrect information from your site.</li>
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Refresh the Knowledge Base after every significant website update.</li>
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Review Chat Logs regularly to identify missing information.</li>
+                </ul>
+
+                <hr class="docs-divider">
+
+                <!-- FAQ -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-patch-question"></i></span>
+                    Common Questions
+                </h2>
+
+                <div class="docs-callout" style="margin-bottom:10px;">
+                    <div class="docs-callout-icon"><i class="bi bi-question"></i></div>
+                    <div class="docs-callout-text">
+                        <strong>Does the AI search my website every time?</strong><br>
+                        No. Your website is processed during training. During conversations, BotForge searches the optimized knowledge index — making responses much faster.
+                    </div>
+                </div>
+                <div class="docs-callout" style="margin-bottom:10px;">
+                    <div class="docs-callout-icon"><i class="bi bi-question"></i></div>
+                    <div class="docs-callout-text">
+                        <strong>Does the chatbot understand meaning or only keywords?</strong><br>
+                        BotForge uses semantic embeddings, allowing it to understand the meaning behind questions rather than relying on exact keyword matches.
+                    </div>
+                </div>
+                <div class="docs-callout" style="margin-bottom:10px;">
+                    <div class="docs-callout-icon"><i class="bi bi-question"></i></div>
+                    <div class="docs-callout-text">
+                        <strong>Do I need to retrain after updating my website?</strong><br>
+                        Yes. Whenever your website content changes, refresh the Knowledge Base so the latest information becomes available to your chatbot.
+                    </div>
+                </div>
+                <div class="docs-callout" style="margin-bottom:24px;">
+                    <div class="docs-callout-icon"><i class="bi bi-question"></i></div>
+                    <div class="docs-callout-text">
+                        <strong>Is my business information shared with other chatbots?</strong><br>
+                        No. Each chatbot has its own isolated knowledge base. Your data is only used to answer questions for your own chatbot.
+                    </div>
+                </div>
+
+                <!-- What's Next -->
+                <div class="docs-next-card">
+                    <div>
+                        <div class="docs-next-eyebrow">What's Next?</div>
+                        <h4 class="docs-next-title">Chapter 11 &mdash; Install Bot</h4>
+                    </div>
+                    <button class="docs-next-btn" onclick="document.querySelector('.docs-chapter-link[data-chapter=\'11\']').click();">
+                        Continue <i class="bi bi-arrow-right"></i>
+                    </button>
+                </div>
+
+            </div>
 
             <!-- ══ CHAPTER 11 ════════════════════════════════= -->
              <div class="docs-chapter-content" data-chapter="11" style="display:none;">
@@ -4028,26 +4397,322 @@ Documentation | BotForge
                 <div class="docs-next-card">
                     <div>
                         <div class="docs-next-eyebrow">What's Next?</div>
-                        <h4 class="docs-next-title">Chapter 11 &mdash; Chat Logs</h4>
+                        <h4 class="docs-next-title">Chapter 12 &mdash; Widget Customization</h4>
                     </div>
-                    <button class="docs-next-btn" onclick="document.querySelector('.docs-chapter-link[data-chapter=\'11\']').click();">
+                    <button class="docs-next-btn" onclick="document.querySelector('.docs-chapter-link[data-chapter=\'12\']').click();">
                         Continue <i class="bi bi-arrow-right"></i>
                     </button>
                 </div>
 
             </div>
 
-            <!-- ══ CHAPTER 12 ═════════════════════════════════ -->
+            <!-- ══ CHAPTER 12 ════════════════════════════════= -->
             <div class="docs-chapter-content" data-chapter="12" style="display:none;">
                 <div class="docs-chapter-eyebrow"><i class="bi bi-book"></i> Chapter 12</div>
-                <h1 class="docs-panel-title">Widget Customization</h1>
+                <h1 class="docs-panel-title">Widget Configuration &amp; Customization</h1>
                 <p class="docs-panel-sub">Customize the chat widget</p>
 
-                <div class="docs-placeholder">
-                    <div class="docs-placeholder-icon"><i class="bi bi-file-text"></i></div>
-                    <h3>Content coming soon</h3>
-                    <p>Sections: Widget Position, Brand Color, Welcome Message, Company Branding, Widget Appearance, User Experience Tips.</p>
+                <p class="docs-lead">
+                    The BotForge Chat Widget is the public face of your AI assistant — the interface your
+                    visitors interact with when asking questions, exploring services, or requesting support.
+                    This chapter explains the widget's components, customization options, and best practices
+                    for delivering an excellent visitor experience.
+                </p>
+
+                <hr class="docs-divider">
+
+                <!-- Overview -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-window"></i></span>
+                    Widget Overview
+                </h2>
+                <p class="docs-body-text">
+                    The BotForge widget is a lightweight JavaScript component that appears as a floating chat
+                    button on your website. Once opened, it displays a modern chat window where visitors can
+                    communicate with your AI assistant in real time.
+                </p>
+                <div class="docs-feature-grid">
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon"><i class="bi bi-lightning-charge"></i></div>
+                        <h4 class="docs-feature-title">Loads Quickly</h4>
+                        <p class="docs-feature-desc">Asynchronous loading ensures minimal impact on your website's performance.</p>
+                    </div>
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon"><i class="bi bi-phone"></i></div>
+                        <h4 class="docs-feature-title">Fully Responsive</h4>
+                        <p class="docs-feature-desc">Automatically adapts to desktops, laptops, tablets, and mobile phones.</p>
+                    </div>
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon"><i class="bi bi-palette"></i></div>
+                        <h4 class="docs-feature-title">Brandable</h4>
+                        <p class="docs-feature-desc">Matches your company's colors and identity for a seamless website experience.</p>
+                    </div>
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon"><i class="bi bi-shield-lock"></i></div>
+                        <h4 class="docs-feature-title">Secure</h4>
+                        <p class="docs-feature-desc">HTTPS communication, protected chatbot identification, and isolated workspaces.</p>
+                    </div>
                 </div>
+
+                <hr class="docs-divider">
+
+                <!-- Widget Structure -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-layers"></i></span>
+                    Widget Structure
+                </h2>
+                <p class="docs-body-text">The widget is divided into distinct sections, each playing a role in the visitor experience.</p>
+
+                <div>
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge"><i class="bi bi-chat-dots-fill" style="font-size:1rem;"></i></span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Floating Chat Button</h4>
+                            <p class="docs-step-desc">A persistent button fixed to the corner of the page. Uses your brand color and a gentle floating animation while at rest. Clicking it opens the chat window.</p>
+                        </div>
+                    </div>
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge"><i class="bi bi-layout-text-window-reverse" style="font-size:1rem;"></i></span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Header</h4>
+                            <p class="docs-step-desc">Displayed at the top of the chat window — shows the bot name, online status, and a close button. Builds visitor confidence that they're talking to your company.</p>
+                        </div>
+                    </div>
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge"><i class="bi bi-chat-square-text" style="font-size:1rem;"></i></span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Chat Messages Area</h4>
+                            <p class="docs-step-desc">A scrollable conversation history showing visitor messages and AI responses in clearly differentiated bubbles.</p>
+                        </div>
+                    </div>
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge"><i class="bi bi-input-cursor-text" style="font-size:1rem;"></i></span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Message Input &amp; Send Button</h4>
+                            <p class="docs-step-desc">A clean text input where visitors type their question, paired with a send button. Pressing Enter also submits the message.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="docs-divider">
+
+                <!-- Customization Options -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-sliders"></i></span>
+                    Customization Options
+                </h2>
+                <p class="docs-body-text">BotForge provides several customization settings to make the widget reflect your company identity.</p>
+
+                <div>
+                    <!-- Brand Color -->
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge"><i class="bi bi-palette" style="font-size:1rem;"></i></span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Primary Color</h4>
+                            <p class="docs-step-desc">
+                                Your brand color is applied to the floating button, header background, action buttons,
+                                and interactive elements. Using your company colors creates a consistent visual identity
+                                across your website.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Widget Position -->
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge"><i class="bi bi-layout-sidebar-reverse" style="font-size:1rem;"></i></span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Widget Position</h4>
+                            <p class="docs-step-desc">
+                                By default the widget appears in the bottom-right corner — a location widely recognized
+                                by users that remains visible without interfering with page content. Position can be
+                                changed to bottom-left from your widget settings.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Bot Name -->
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge"><i class="bi bi-tag" style="font-size:1rem;"></i></span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Bot Name &amp; Company Name</h4>
+                            <p class="docs-step-desc">
+                                The bot name and your company name appear in the widget header, making the chatbot feel
+                                like a natural, branded part of your website.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Welcome Message -->
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge"><i class="bi bi-chat-quote" style="font-size:1rem;"></i></span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Welcome Message</h4>
+                            <p class="docs-step-desc">The first message visitors see when they open the chat. A good welcome message encourages visitors to start a conversation.</p>
+                            <div class="docs-callout" style="margin-top:10px; margin-bottom:0;">
+                                <div class="docs-callout-icon"><i class="bi bi-quote"></i></div>
+                                <div class="docs-callout-text" style="font-style:italic; color:var(--muted);">
+                                    "👋 Hello! Welcome to BotForge. I'm here to help answer your questions about our products and services."
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="docs-callout">
+                    <div class="docs-callout-icon"><i class="bi bi-lightbulb"></i></div>
+                    <div class="docs-callout-text">
+                        Good welcome messages are <strong>friendly, short, professional, and helpful</strong>.
+                        They set the tone for the entire conversation.
+                    </div>
+                </div>
+
+                <hr class="docs-divider">
+
+                <!-- Message Bubbles & UX -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-chat-left-right"></i></span>
+                    Message Bubbles &amp; Typing Indicator
+                </h2>
+                <p class="docs-body-text">BotForge visually separates visitor messages and AI responses, making conversations easy to follow at a glance.</p>
+
+                <div class="docs-feature-grid">
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon"><i class="bi bi-person-fill"></i></div>
+                        <h4 class="docs-feature-title">Visitor Bubbles</h4>
+                        <p class="docs-feature-desc">Right-aligned with your brand color — clearly distinguishing the visitor's messages.</p>
+                    </div>
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon"><i class="bi bi-robot"></i></div>
+                        <h4 class="docs-feature-title">AI Bubbles</h4>
+                        <p class="docs-feature-desc">Left-aligned with a clean white background — easy to read and visually distinct from visitor messages.</p>
+                    </div>
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon"><i class="bi bi-three-dots"></i></div>
+                        <h4 class="docs-feature-title">Typing Indicator</h4>
+                        <p class="docs-feature-desc">A subtle animated indicator appears while the AI prepares its response — letting visitors know their question is being processed.</p>
+                    </div>
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon"><i class="bi bi-magic"></i></div>
+                        <h4 class="docs-feature-title">Smooth Animations</h4>
+                        <p class="docs-feature-desc">Widget open/close, message appearance, and scroll animations make the experience feel modern and polished.</p>
+                    </div>
+                </div>
+
+                <hr class="docs-divider">
+
+                <!-- Widget Lifecycle -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-arrow-repeat"></i></span>
+                    Widget Visitor Lifecycle
+                </h2>
+                <p class="docs-body-text">Every visitor interaction follows the same seamless flow.</p>
+
+                <div class="docs-workflow">
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">1</span>
+                        <span class="docs-workflow-label">Visitor Opens Website</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">2</span>
+                        <span class="docs-workflow-label">Widget Loads</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">3</span>
+                        <span class="docs-workflow-label">Floating Button Appears</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">4</span>
+                        <span class="docs-workflow-label">Visitor Opens Chat</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">5</span>
+                        <span class="docs-workflow-label">Welcome Message Shown</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">6</span>
+                        <span class="docs-workflow-label">Visitor Sends Question</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">7</span>
+                        <span class="docs-workflow-label">AI Generates Response</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">8</span>
+                        <span class="docs-workflow-label">Conversation Continues</span>
+                    </div>
+                </div>
+
+                <hr class="docs-divider">
+
+                <!-- Best Practices -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-stars"></i></span>
+                    Best Practices
+                </h2>
+                <ul class="docs-list">
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Use your company brand color for a consistent visual identity.</li>
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Write a friendly, concise welcome message that sets a helpful tone.</li>
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Keep your website knowledge base updated for accurate responses.</li>
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Test the widget on both desktop and mobile devices before going live.</li>
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Review chat logs regularly to improve response quality over time.</li>
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Ensure the widget remains visible across all key pages of your website.</li>
+                </ul>
+
+                <hr class="docs-divider">
+
+                <!-- FAQ -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-patch-question"></i></span>
+                    Common Questions
+                </h2>
+
+                <div class="docs-callout" style="margin-bottom:10px;">
+                    <div class="docs-callout-icon"><i class="bi bi-question"></i></div>
+                    <div class="docs-callout-text">
+                        <strong>Can I change the welcome message?</strong><br>
+                        Yes. The welcome message can be customized from your chatbot settings inside the Bot Workspace.
+                    </div>
+                </div>
+                <div class="docs-callout" style="margin-bottom:10px;">
+                    <div class="docs-callout-icon"><i class="bi bi-question"></i></div>
+                    <div class="docs-callout-text">
+                        <strong>Does the widget work on mobile devices?</strong><br>
+                        Yes. The widget is fully responsive and works across modern smartphones and tablets without any additional configuration.
+                    </div>
+                </div>
+                <div class="docs-callout" style="margin-bottom:10px;">
+                    <div class="docs-callout-icon"><i class="bi bi-question"></i></div>
+                    <div class="docs-callout-text">
+                        <strong>Will the widget slow down my website?</strong><br>
+                        No. BotForge loads asynchronously with minimal impact on page performance.
+                    </div>
+                </div>
+                <div class="docs-callout" style="margin-bottom:24px;">
+                    <div class="docs-callout-icon"><i class="bi bi-question"></i></div>
+                    <div class="docs-callout-text">
+                        <strong>Can I use multiple widgets?</strong><br>
+                        Each chatbot has its own installation script. If your subscription supports multiple chatbots, each can be deployed independently on different pages or websites.
+                    </div>
+                </div>
+
+                <!-- What's Next -->
+                <div class="docs-next-card">
+                    <div>
+                        <div class="docs-next-eyebrow">What's Next?</div>
+                        <h4 class="docs-next-title">Chapter 13 &mdash; Chat Logs</h4>
+                    </div>
+                    <button class="docs-next-btn" onclick="document.querySelector('.docs-chapter-link[data-chapter=\'13\']').click();">
+                        Continue <i class="bi bi-arrow-right"></i>
+                    </button>
+                </div>
+
             </div>
 
             <!-- ══ CHAPTER 13 ═════════════════════════════════ -->
@@ -4343,9 +5008,9 @@ Documentation | BotForge
                 <div class="docs-next-card">
                     <div>
                         <div class="docs-next-eyebrow">What's Next?</div>
-                        <h4 class="docs-next-title">Chapter 12 &mdash; Billing Dashboard</h4>
+                        <h4 class="docs-next-title">Chapter 14 &mdash; Billing Dashboard</h4>
                     </div>
-                    <button class="docs-next-btn" onclick="document.querySelector('.docs-chapter-link[data-chapter=\'12\']').click();">
+                    <button class="docs-next-btn" onclick="document.querySelector('.docs-chapter-link[data-chapter=\'14\']').click();">
                         Continue <i class="bi bi-arrow-right"></i>
                     </button>
                 </div>
@@ -4689,17 +5354,281 @@ Documentation | BotForge
 
             </div>
 
-            <!-- ══ CHAPTER 15 ═════════════════════════════════ -->
+            <!-- ══ CHAPTER 15 ════════════════════════════════= -->
             <div class="docs-chapter-content" data-chapter="15" style="display:none;">
                 <div class="docs-chapter-eyebrow"><i class="bi bi-book"></i> Chapter 15</div>
-                <h1 class="docs-panel-title">Support</h1>
-                <p class="docs-panel-sub">Need help?</p>
+                <h1 class="docs-panel-title">Support &amp; Resources</h1>
+                <p class="docs-panel-sub">Need help? We're here for you.</p>
 
-                <div class="docs-placeholder">
-                    <div class="docs-placeholder-icon"><i class="bi bi-file-text"></i></div>
-                    <h3>Content coming soon</h3>
-                    <p>Sections: Contact Support, Report an Issue, Feature Requests, Documentation Updates, Getting Assistance.</p>
+                <p class="docs-lead">
+                    You have reached the final chapter of the BotForge Documentation. This chapter provides
+                    information about support resources, reporting issues, requesting features, troubleshooting
+                    common problems, and getting the most out of the platform.
+                </p>
+
+                <hr class="docs-divider">
+
+                <!-- Documentation -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-book-half"></i></span>
+                    Documentation
+                </h2>
+                <p class="docs-body-text">
+                    The BotForge Documentation is your first point of reference for any question. It covers
+                    every stage of your chatbot journey — and new chapters and guides will be added as the
+                    platform evolves.
+                </p>
+                <div class="docs-tag-grid">
+                    <span class="docs-tag"><i class="bi bi-building"></i>Platform Overview</span>
+                    <span class="docs-tag"><i class="bi bi-briefcase"></i>Company Setup</span>
+                    <span class="docs-tag"><i class="bi bi-receipt"></i>Subscription Management</span>
+                    <span class="docs-tag"><i class="bi bi-robot"></i>Chatbot Creation</span>
+                    <span class="docs-tag"><i class="bi bi-globe2"></i>Website Training</span>
+                    <span class="docs-tag"><i class="bi bi-cpu"></i>AI Knowledge Processing</span>
+                    <span class="docs-tag"><i class="bi bi-code-slash"></i>Widget Installation</span>
+                    <span class="docs-tag"><i class="bi bi-palette"></i>Widget Configuration</span>
+                    <span class="docs-tag"><i class="bi bi-receipt-cutoff"></i>Chat Logs</span>
+                    <span class="docs-tag"><i class="bi bi-credit-card"></i>Billing Dashboard</span>
                 </div>
+
+                <hr class="docs-divider">
+
+                <!-- Contact Support -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-headset"></i></span>
+                    Contact Support
+                </h2>
+                <p class="docs-body-text">
+                    If you require assistance beyond the documentation, the BotForge support team is available
+                    to help. Providing detailed information helps reduce resolution time.
+                </p>
+
+                <div class="docs-feature-grid">
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon"><i class="bi bi-person-circle"></i></div>
+                        <h4 class="docs-feature-title">Account Questions</h4>
+                        <p class="docs-feature-desc">Help with login, account access, and profile configuration.</p>
+                    </div>
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon"><i class="bi bi-receipt"></i></div>
+                        <h4 class="docs-feature-title">Subscription Issues</h4>
+                        <p class="docs-feature-desc">Assistance with plan selection, billing, and upgrades.</p>
+                    </div>
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon"><i class="bi bi-code-slash"></i></div>
+                        <h4 class="docs-feature-title">Installation Guidance</h4>
+                        <p class="docs-feature-desc">Help embedding the widget on any website or platform.</p>
+                    </div>
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon"><i class="bi bi-bug"></i></div>
+                        <h4 class="docs-feature-title">Technical Problems</h4>
+                        <p class="docs-feature-desc">Diagnosing platform behavior, errors, and unexpected issues.</p>
+                    </div>
+                </div>
+
+                <div class="docs-callout">
+                    <div class="docs-callout-icon"><i class="bi bi-info-circle"></i></div>
+                    <div class="docs-callout-text">
+                        When contacting support, include: <strong>Company Name, Chatbot Name, Website URL, Error Message, Steps to reproduce, and Screenshots</strong> where applicable. This helps us resolve your issue as quickly as possible.
+                    </div>
+                </div>
+
+                <hr class="docs-divider">
+
+                <!-- Report an Issue -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-flag"></i></span>
+                    Report an Issue
+                </h2>
+                <p class="docs-body-text">
+                    If you discover unexpected platform behavior or believe you have found a bug, please report
+                    it. Clear reports help improve BotForge for everyone.
+                </p>
+                <p class="docs-body-text">A good issue report includes:</p>
+                <ul class="docs-list">
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>What happened and what you expected to happen.</li>
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Steps to reproduce the issue.</li>
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Browser and device information.</li>
+                    <li><span class="li-dot"><i class="bi bi-check"></i></span>Relevant screenshots or screen recordings.</li>
+                </ul>
+
+                <hr class="docs-divider">
+
+                <!-- Feature Requests -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-stars"></i></span>
+                    Feature Requests
+                </h2>
+                <p class="docs-body-text">
+                    We continuously improve BotForge based on user feedback. If you have ideas that could
+                    improve the platform, we encourage you to submit feature requests. Every suggestion is
+                    reviewed as part of our product planning process.
+                </p>
+                <div class="docs-tag-grid">
+                    <span class="docs-tag"><i class="bi bi-cpu"></i>New AI capabilities</span>
+                    <span class="docs-tag"><i class="bi bi-window"></i>Widget enhancements</span>
+                    <span class="docs-tag"><i class="bi bi-speedometer2"></i>Dashboard improvements</span>
+                    <span class="docs-tag"><i class="bi bi-plug"></i>Additional integrations</span>
+                    <span class="docs-tag"><i class="bi bi-bar-chart"></i>Reporting features</span>
+                    <span class="docs-tag"><i class="bi bi-database-fill-gear"></i>Knowledge Base improvements</span>
+                </div>
+
+                <hr class="docs-divider">
+
+                <!-- Getting Help Workflow -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-signpost-split"></i></span>
+                    Getting Help — Recommended Order
+                </h2>
+                <p class="docs-body-text">Most common issues can be resolved before contacting support. Follow this order:</p>
+
+                <div class="docs-workflow">
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">1</span>
+                        <span class="docs-workflow-label">Read the Documentation</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">2</span>
+                        <span class="docs-workflow-label">Check Your Settings</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">3</span>
+                        <span class="docs-workflow-label">Review Chat Logs</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">4</span>
+                        <span class="docs-workflow-label">Refresh Knowledge Base</span>
+                    </div>
+                    <div class="docs-workflow-arrow"><i class="bi bi-arrow-down"></i></div>
+                    <div class="docs-workflow-step">
+                        <span class="docs-workflow-num">5</span>
+                        <span class="docs-workflow-label">Contact Support</span>
+                    </div>
+                </div>
+
+                <hr class="docs-divider">
+
+                <!-- Troubleshooting -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-tools"></i></span>
+                    Troubleshooting
+                </h2>
+                <p class="docs-body-text">Below are common issues and their recommended solutions.</p>
+
+                <div>
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge"><i class="bi bi-robot" style="font-size:1rem; color:#b91c1c;"></i></span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Chatbot Is Not Responding</h4>
+                            <p class="docs-step-desc"><strong>Possible causes:</strong> Website not trained · Knowledge Base empty · Installation script missing · Network issue.</p>
+                            <div class="docs-callout" style="margin-top:8px; margin-bottom:0;">
+                                <div class="docs-callout-icon"><i class="bi bi-check-circle"></i></div>
+                                <div class="docs-callout-text">Verify the chatbot has been trained, confirm the widget is installed correctly, refresh the page, and check your internet connection.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge"><i class="bi bi-file-earmark-x" style="font-size:1rem; color:#b91c1c;"></i></span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Website Content Is Missing</h4>
+                            <p class="docs-step-desc"><strong>Possible causes:</strong> Training not completed · New pages added after training · Page limit reached.</p>
+                            <div class="docs-callout" style="margin-top:8px; margin-bottom:0;">
+                                <div class="docs-callout-icon"><i class="bi bi-check-circle"></i></div>
+                                <div class="docs-callout-text">Refresh the Knowledge Base, review your website content, and upgrade your plan if the page limit has been reached.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge"><i class="bi bi-window-x" style="font-size:1rem; color:#b91c1c;"></i></span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">Widget Does Not Appear</h4>
+                            <p class="docs-step-desc"><strong>Possible causes:</strong> Installation script missing · Incorrect chatbot ID · JavaScript loading issue.</p>
+                            <div class="docs-callout" style="margin-top:8px; margin-bottom:0;">
+                                <div class="docs-callout-icon"><i class="bi bi-check-circle"></i></div>
+                                <div class="docs-callout-text">Verify the installation script, confirm the chatbot ID, and check your browser's developer console for JavaScript errors.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="docs-step-card">
+                        <span class="docs-step-badge"><i class="bi bi-chat" style="font-size:1rem; color:#b91c1c;"></i></span>
+                        <div class="docs-step-content">
+                            <h4 class="docs-step-title">AI Response Is Incorrect</h4>
+                            <p class="docs-step-desc"><strong>Possible causes:</strong> Information missing from website · Outdated content · Knowledge Base not refreshed.</p>
+                            <div class="docs-callout" style="margin-top:8px; margin-bottom:0;">
+                                <div class="docs-callout-icon"><i class="bi bi-check-circle"></i></div>
+                                <div class="docs-callout-text">Update your website, retrain your chatbot, and review the Chat Logs for context about which questions are failing.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="docs-divider">
+
+                <!-- Best Practices -->
+                <h2 class="docs-section-title">
+                    <span class="docs-section-icon"><i class="bi bi-clipboard-check"></i></span>
+                    Ongoing Best Practices
+                </h2>
+
+                <div class="docs-feature-grid">
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon"><i class="bi bi-pencil-square"></i></div>
+                        <h4 class="docs-feature-title">Keep Website Updated</h4>
+                        <p class="docs-feature-desc">Your chatbot can only answer using available information. Regularly update your website with accurate and detailed content.</p>
+                    </div>
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon"><i class="bi bi-arrow-clockwise"></i></div>
+                        <h4 class="docs-feature-title">Refresh Knowledge Base</h4>
+                        <p class="docs-feature-desc">After any website update — new services, pricing, FAQs — refresh the Knowledge Base to keep responses accurate.</p>
+                    </div>
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon"><i class="bi bi-receipt-cutoff"></i></div>
+                        <h4 class="docs-feature-title">Review Chat Logs</h4>
+                        <p class="docs-feature-desc">Identify frequently asked questions, missing information, and customer interests to continuously improve your chatbot.</p>
+                    </div>
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon"><i class="bi bi-bar-chart"></i></div>
+                        <h4 class="docs-feature-title">Monitor Usage</h4>
+                        <p class="docs-feature-desc">Check the Billing Dashboard periodically to ensure bot limits, page limits, and message usage remain within your plan.</p>
+                    </div>
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon"><i class="bi bi-shield-lock"></i></div>
+                        <h4 class="docs-feature-title">Security</h4>
+                        <p class="docs-feature-desc">Use strong passwords, protect your credentials, and keep company information accurate. Review chatbot settings periodically.</p>
+                    </div>
+                    <div class="docs-feature-card">
+                        <div class="docs-feature-icon"><i class="bi bi-phone"></i></div>
+                        <h4 class="docs-feature-title">Test Regularly</h4>
+                        <p class="docs-feature-desc">After changes to your website or chatbot configuration, perform a few test conversations to verify everything works correctly.</p>
+                    </div>
+                </div>
+
+                <hr class="docs-divider">
+
+                <!-- Final Thank You Card -->
+                <div style="background: var(--forest); border-radius: 20px; padding: 36px 32px; text-align:center; position:relative; overflow:hidden;">
+                    <div style="position:absolute; inset:0; background-image:radial-gradient(rgba(82,183,136,0.07) 1px, transparent 1px); background-size:18px 18px; pointer-events:none;"></div>
+                    <div style="position:relative; z-index:1;">
+                        <div class="d-flex justify-content-center align-items-center mb-3"><div style="width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.12);"><i class="bi bi-robot docs-logo-icon" style="font-size:42px;color:#fff;"></i></div></div>
+                        <h3 style="font-family:'Sora',sans-serif; font-weight:800; font-size:1.35rem; color:#fff; letter-spacing:-0.035em; margin-bottom:10px;">
+                            Thank You for Choosing BotForge
+                        </h3>
+                        <p style="font-size:0.9rem; color:rgba(255,255,255,0.55); line-height:1.7; max-width:520px; margin: 0 auto 22px;">
+                            Whether you're creating your first AI assistant or managing multiple chatbots across different
+                            projects, BotForge is built to help you deliver exceptional customer experiences through intelligent automation.
+                        </p>
+                        <p style="font-size:0.92rem; font-weight:700; color:var(--mint); font-family:'Sora',sans-serif; margin:0;">
+                            Happy Building with BotForge! 🎉
+                        </p>
+                    </div>
+                </div>
+
             </div>
 
             <!-- ══ PAGINATION (updates via JS) ════════════════ -->
