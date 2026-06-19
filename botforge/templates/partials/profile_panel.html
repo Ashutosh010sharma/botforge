@@ -1,0 +1,142 @@
+<!-- ── Overlay + Slide Panel ───────────────────────────────── -->
+<div id="profileOverlay" class="profile-overlay"></div>
+
+<aside id="profilePanel" class="profile-panel" aria-hidden="true">
+
+    <button id="profileClose" class="profile-close" type="button" aria-label="Close profile">
+       <i class="bi bi-chevron-right"></i>
+    </button>
+
+    <div class="profile-inner">
+
+        <!-- ══ HEADER ══════════════════════════════════════ -->
+        <div class="profile-header">
+            <div class="profile-header-bg"></div>
+            <div class="profile-header-row">
+                <div class="profile-avatar-ring">
+                    <div class="profile-avatar" id="profileAvatar">A</div>
+                    <span class="profile-avatar-dot"></span>
+                </div>
+                <div class="profile-header-text">
+                   <h3 class="profile-name" id="profileName"></h3>
+                    <p class="profile-username" id="profileUsername"></p>
+                    <div class="profile-member-pill">
+                        <i class="bi bi-calendar3"></i> Member since <span id="profileMemberSince"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="profile-body">
+
+            <!-- Left column -->
+            <div class="profile-col">
+
+                <!-- ══ PERSONAL INFORMATION ═══════════════ -->
+                <div class="profile-section">
+                    <h4 class="profile-section-title">
+                        <span class="profile-section-icon"><i class="bi bi-person"></i></span>
+                        Personal Information
+                    </h4>
+                    <div class="profile-card">
+                        <div class="profile-field">
+                            <span class="profile-field-label">Full Name</span>
+                            <span class="profile-field-value" id="profileFullName"></span>
+                        </div>
+                        <div class="profile-field">
+                            <span class="profile-field-label">Username</span>
+                            <span class="profile-field-value" id="profileUserName"></span>
+                        </div>
+                        <div class="profile-field">
+                            <span class="profile-field-label">Email</span>
+                           <span class="profile-field-value" id="profileEmailAddress"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ══ ACCOUNT STATUS ══════════════════════ -->
+                <div class="profile-section">
+                    <h4 class="profile-section-title">
+                        <span class="profile-section-icon"><i class="bi bi-shield-check"></i></span>
+                        Account Status
+                    </h4>
+                    <div class="profile-status-grid">
+                        <div class="profile-status-card">
+                            <div class="profile-status-icon good"><i class="bi bi-patch-check-fill"></i></div>
+                            <span class="profile-status-label">Email Status</span>
+                            <span class="profile-status-value good" id="profileEmailStatus"></span>
+                        </div>
+                        <div class="profile-status-card">
+                            <div class="profile-status-icon good"><i class="bi bi-activity"></i></div>
+                            <span class="profile-status-label">Account Status</span>
+                            <span class="profile-status-value good" id="profileAccountStatus"></span>
+                        </div>
+                        <div class="profile-status-card">
+                            <div class="profile-status-icon"><i class="bi bi-calendar-event"></i></div>
+                            <span class="profile-status-label">Joined</span>
+                            <span class="profile-status-value" id="profileJoined"></span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Right column -->
+            <div class="profile-col">
+
+                <!-- ══ QUICK ACTIONS ═══════════════════════ -->
+                <div class="profile-section">
+                    <h4 class="profile-section-title">
+                        <span class="profile-section-icon"><i class="bi bi-lightning-charge"></i></span>
+                        Quick Actions
+                    </h4>
+                    <div class="profile-actions-grid">
+                        <a href="#" class="profile-action-tile">
+                            <span class="profile-action-icon" style="background:rgba(67,56,202,0.09); color:#4338ca;"><i class="bi bi-pencil-square"></i></span>
+                            <span class="profile-action-text">Edit Profile</span>
+                            <i class="bi bi-chevron-right profile-action-arrow"></i>
+                        </a>
+                        <a href="#" class="profile-action-tile">
+                            <span class="profile-action-icon" style="background:rgba(185,28,28,0.08); color:#b91c1c;"><i class="bi bi-key"></i></span>
+                            <span class="profile-action-text">Change Password</span>
+                            <i class="bi bi-chevron-right profile-action-arrow"></i>
+                        </a>
+                        <a href="#" class="profile-action-tile">
+                            <span class="profile-action-icon" style="background:rgba(45,106,79,0.09); color:#2d6a4f;"><i class="bi bi-building"></i></span>
+                            <span class="profile-action-text">Company Settings</span>
+                            <i class="bi bi-chevron-right profile-action-arrow"></i>
+                        </a>
+                        <a href="{% url 'billing_dashboard' %}" class="profile-action-tile">
+                            <span class="profile-action-icon" style="background:rgba(217,119,6,0.1); color:#d97706;"><i class="bi bi-credit-card"></i></span>
+                            <span class="profile-action-text">Billing Dashboard</span>
+                            <i class="bi bi-chevron-right profile-action-arrow"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- ══ WORKSPACE SNAPSHOT ═══════════════════ -->
+                <div class="profile-mini-card">
+                    <div class="profile-mini-row">
+                        <span class="profile-mini-label"><i class="bi bi-gem"></i> Current Plan</span>
+                        <span class="profile-mini-value plan" id="profilePlan"></span>
+                    </div>
+                    <div class="profile-mini-row">
+                        <span class="profile-mini-label"><i class="bi bi-grid-1x2"></i> Workspace</span>
+                        <span class="profile-mini-value" id="profileWorkspace"></span>
+                    </div>
+                    <div class="profile-mini-row">
+                        <span class="profile-mini-label"><i class="bi bi-clock-history"></i> Last Login</span>
+                        <span class="profile-mini-value" id="profileLastLogin"></span>
+                    </div>
+                </div>
+
+                <!-- ══ LOGOUT ═══════════════════════════════ -->
+                <a href="{% url 'logout' %}" class="profile-logout-row">
+                    <i class="bi bi-box-arrow-right"></i> Log Out
+                </a>
+
+            </div>
+
+        </div>
+    </div>
+</aside>

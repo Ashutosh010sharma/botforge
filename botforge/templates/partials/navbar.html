@@ -56,10 +56,12 @@
 
                     {% if user.is_authenticated %}
 
-                        <span class="bf-username">
-                            <i class="bi bi-person-circle"></i>
-                            {{ user.username }}
-                        </span>
+                       <span class="bf-username profile-trigger" id="profileTrigger">
+                        <i class="bi bi-person-circle"></i>
+                        {{ user.username }}
+                        <i class="bi bi-chevron-left profile-trigger-chevron"></i>
+                    </span>
+                       
 
                         <a href="{% url 'dashboard' %}"
                            class="bf-btn-ghost">

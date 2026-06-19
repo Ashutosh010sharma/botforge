@@ -12,6 +12,7 @@ from billing.models import (
     Plan,
     Subscription
 )
+from django.utils.timezone import localtime
 
 
 def register_view(request):
@@ -350,3 +351,46 @@ def company_setup(request):
             "message": str(e)
 
         })
+        
+@login_required
+def get_profile_details(request):
+
+    user = request.user
+
+    company = Company.objects.filter(user=user).first()
+
+    subscription = Subscription.objects.filter(
+        company=company,
+        is_active=True
+    ).select_related("plan").first() if company else None
+
+    data = {
+
+        "full_name": user.get_full_name() or user.username,
+
+        "username": user.username,
+
+        "email": user.email,
+
+        "avatar": user.first_name[:1].upper() if user.first_name else user.username[:1].upper(),
+
+        "member_since": user.date_joined.strftime("%d %B %Y"),
+
+        "email_verified": True,      # replace with your verification field
+
+        "account_status": "Active" if user.is_active else "Inactive",
+
+        "current_plan": subscription.plan.name if subscription else "No Active Plan",
+
+        "workspace": company.company_name if company else "Not Configured",
+
+        "last_login": (
+            localtime(user.last_login).strftime("%d %b %Y %I:%M %p")
+            if user.last_login else "Never"
+        )
+    }
+
+    return JsonResponse({
+        "status": True,
+        "data": data
+    })

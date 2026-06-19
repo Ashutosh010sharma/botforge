@@ -93,6 +93,7 @@
     </div>
 
     {% include 'partials/footer.html' %}
+    {% include 'partials/profile_panel.html' %}
 
 
     <script
@@ -101,7 +102,9 @@
 
 
     <!-- Global JS -->
-
+<script>
+    const PROFILE_DETAILS_URL = "{% url 'get_profile_details' %}";
+</script>
     <script
     src="{% static 'js/main.js' %}"
     ></script>

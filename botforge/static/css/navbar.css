@@ -259,7 +259,14 @@
             padding-top: 10px;
             gap: 6px;
         }
-        .bf-username { width: 100%; }
+        .bf-username{
+        width:auto;
+        max-width:100%;
+        align-self:center;
+        justify-content:center;
+       
+        padding:6px 8px;
+    }
         .bf-btn-ghost,
         .bf-btn-primary,
         .bf-btn-danger { flex: 1; justify-content: center; }
