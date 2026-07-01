@@ -16,6 +16,7 @@ from django.utils import timezone
 import json
 from accounts.models import Company
 from billing.models import Subscription
+from pprint import pprint
 
 
 # Create your views here.
@@ -296,6 +297,8 @@ def bot_workspace(request,bot_id):
         ),
 
     }
+  
+   
 
     return render(
 
