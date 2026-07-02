@@ -397,6 +397,7 @@ Pricing Plans - BotForge
 {% endblock %}
 
 {% block internal_js %}
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
 // Cursor radial glow
 document.querySelectorAll('.pricing-card').forEach(card => {
@@ -424,28 +425,208 @@ $(document).on("click",".choosePlanBtn",function(){
         if(!result.isConfirmed){return;}
 
         $.ajax({
-            url:"{% url 'select_plan' %}",
-            type:"POST",
-            headers:{"X-CSRFToken":"{{ csrf_token }}"},
-            data:{plan_id:planId},
-            success:function(response){
-                if(response.status){
-                    Swal.fire({icon:"success",title:"Success",text:response.message}).then(()=>{location.reload();});
-                    return;
-                }
-                let redirectUrl="";
-                if(response.code==="COMPANY_REQUIRED"){redirectUrl="{% url 'company_setup' %}";}
-                Swal.fire({
-                    icon:"warning",title:"Action Required",text:response.message,
-                    showCancelButton:!!redirectUrl,
-                    confirmButtonText:redirectUrl?"Continue":"OK"
-                }).then((result)=>{
-                    if(result.isConfirmed&&redirectUrl){window.location.href=redirectUrl;}
-                });
+            url: "{% url 'create_payment_order' %}",
+            type: "POST",
+             headers: {
+                "X-CSRFToken": "{{ csrf_token }}"
             },
-            error:function(){Swal.fire({icon:"error",title:"Error",text:"Something went wrong."});}
+
+            data: {
+
+                plan_id: planId,
+
+                billing_cycle: "monthly" // change dynamically later
+
+            },
+
+            success: function (response) {
+
+                if (!response.status) {
+
+                    let redirectUrl = "";
+
+                    if (response.code === "COMPANY_REQUIRED") {
+
+                        redirectUrl = "{% url 'company_setup' %}";
+
+                    }
+
+                    Swal.fire({
+
+                        icon: "warning",
+
+                        title: "Action Required",
+
+                        text: response.message,
+
+                        showCancelButton: !!redirectUrl,
+
+                        confirmButtonText: redirectUrl ? "Continue" : "OK"
+
+                    }).then((result) => {
+
+                        if (result.isConfirmed && redirectUrl) {
+
+                            window.location.href = redirectUrl;
+
+                        }
+
+                    });
+
+                    return;
+
+                }
+
+                var options = {
+
+                    key: response.key,
+
+                    amount: response.amount,
+
+                    currency: response.currency,
+
+                    name: "BotForge",
+
+                    description: response.plan + " Subscription",
+
+                    order_id: response.order_id,
+
+                    handler: function (paymentResponse) {
+
+                        verifyPayment(paymentResponse);
+
+                    },
+
+                    modal: {
+
+                        ondismiss: function () {
+
+                            Swal.fire({
+
+                                icon: "info",
+
+                                title: "Payment Cancelled",
+
+                                text: "You cancelled the payment."
+
+                            });
+
+                        }
+
+                    },
+
+                    theme: {
+
+                        color: "#2d6a4f"
+
+                    }
+
+                };
+
+                var rzp = new Razorpay(options);
+
+                rzp.open();
+
+            },
+
+            error: function () {
+
+                Swal.fire({
+
+                    icon: "error",
+
+                    title: "Error",
+
+                    text: "Unable to create payment order."
+
+                });
+
+            }
+
         });
     });
 });
+</script>
+
+<script>
+function verifyPayment(paymentResponse){
+
+    $.ajax({
+
+        url: "{% url 'verify_payment' %}",
+
+        type: "POST",
+
+        headers:{
+
+            "X-CSRFToken":"{{ csrf_token }}"
+
+        },
+
+        contentType:"application/json",
+
+        data:JSON.stringify({
+
+            razorpay_order_id:paymentResponse.razorpay_order_id,
+
+            razorpay_payment_id:paymentResponse.razorpay_payment_id,
+
+            razorpay_signature:paymentResponse.razorpay_signature
+
+        }),
+
+        success:function(response){
+
+            if(response.status){
+
+                Swal.fire({
+
+                    icon:"success",
+
+                    title:"Payment Successful",
+
+                    text:"Subscription activated."
+
+                }).then(()=>{
+
+                    location.reload();
+
+                });
+
+            }
+
+            else{
+
+                Swal.fire({
+
+                    icon:"error",
+
+                    title:"Verification Failed",
+
+                    text:response.message
+
+                });
+
+            }
+
+        },
+
+        error:function(){
+
+            Swal.fire({
+
+                icon:"error",
+
+                title:"Server Error",
+
+                text:"Unable to verify payment."
+
+            });
+
+        }
+
+    });
+
+}
 </script>
 {% endblock %}

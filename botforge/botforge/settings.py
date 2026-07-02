@@ -35,6 +35,7 @@ ALLOWED_HOSTS = config(
 )
 
 
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -163,3 +164,7 @@ load_dotenv()
 GEMINI_API_KEY = os.getenv(
     "GEMINI_API_KEY"
 )
+RAZORPAY_KEY_ID = config("RAZORPAY_KEY_ID")
+
+RAZORPAY_KEY_SECRET = config("RAZORPAY_KEY_SECRET")
+RAZORPAY_WEBHOOK_SECRET = config("RAZORPAY_WEBHOOK_SECRET")
