@@ -3,6 +3,7 @@ from demo.gemini_service import generate_response
 
 
 def ask_bot(chatbot,question):
+    #print(chatbot)
 
     active_knowledge=chatbot.knowledge_items.filter(
         is_deleted=False
@@ -11,13 +12,13 @@ def ask_bot(chatbot,question):
     active_pages=chatbot.pages.filter(
         is_deleted=False
     ).count()
-    print("Active Pages:", chatbot.pages.filter(
-    is_deleted=False
-    ).count())
+    # print("Active Pages:", chatbot.pages.filter(
+    # is_deleted=False
+    # ).count())
 
-    print("Active Knowledge:", chatbot.knowledge_items.filter(
-        is_deleted=False
-    ).count())
+    # print("Active Knowledge:", chatbot.knowledge_items.filter(
+    #     is_deleted=False
+    # ).count())
 
     total_knowledge=chatbot.knowledge_items.count()
 
@@ -60,7 +61,8 @@ def ask_bot(chatbot,question):
 
     response=generate_response(
         question,
-        context
+        context,
+        chatbot
     )
 
     return response

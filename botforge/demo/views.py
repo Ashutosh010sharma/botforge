@@ -44,6 +44,7 @@ def chatbot_api(request,bot_type):
 
             bot_type
         )
+        #print(bot_type)
 
 
         if not chunk_model:
@@ -79,7 +80,8 @@ def chatbot_api(request,bot_type):
 
             message,
 
-            context
+            context,
+            bot_type
         )
 
 
