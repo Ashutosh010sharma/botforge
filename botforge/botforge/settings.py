@@ -106,7 +106,10 @@ WSGI_APPLICATION = 'botforge.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.parse(
-        config('DATABASE_URL')
+        config('DATABASE_URL'),
+        conn_max_age=600,
+        conn_health_checks=True,
+        ssl_require="neon.tech" in os.getenv("DATABASE_URL", "")
     )
 }
 
