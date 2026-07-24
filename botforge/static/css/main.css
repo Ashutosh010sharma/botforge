@@ -270,22 +270,32 @@ main {
     }
 
     /* ── Body — two-column layout, fills remaining height ─ */
-    .profile-body {
-        flex: 1;
-        min-height: 0;
-        padding: 28px 32px 32px;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 32px;
-        overflow: hidden;
-    }
-
-    .profile-col {
-        display: flex;
-        flex-direction: column;
-        gap: 22px;
-        min-height: 0;
-    }
+.profile-body {
+    flex: 1;
+    min-height: 0;
+    padding: 28px 32px 32px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    overflow: hidden; /* keep as-is for the outer grid */
+}
+.profile-col {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    min-height: 0;
+    overflow-y: auto;      /* NEW: let a column scroll internally if content is tall */
+    overflow-x: hidden;
+    padding-right: 4px;    /* NEW: avoid scrollbar overlapping content */
+}
+/* Optional: slim, subtle scrollbar so it doesn't look clunky */
+.profile-col::-webkit-scrollbar {
+    width: 5px;
+}
+.profile-col::-webkit-scrollbar-thumb {
+    background: rgba(45,106,79,0.2);
+    border-radius: 10px;
+}
 
     .profile-section { display: flex; flex-direction: column; gap: 11px; }
 

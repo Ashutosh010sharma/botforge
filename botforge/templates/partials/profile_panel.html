@@ -85,34 +85,19 @@
             <div class="profile-col">
 
                 <!-- ══ QUICK ACTIONS ═══════════════════════ -->
-                <div class="profile-section">
-                    <h4 class="profile-section-title">
-                        <span class="profile-section-icon"><i class="bi bi-lightning-charge"></i></span>
-                        Quick Actions
-                    </h4>
-                    <div class="profile-actions-grid">
-                        <a href="#" class="profile-action-tile">
-                            <span class="profile-action-icon" style="background:rgba(67,56,202,0.09); color:#4338ca;"><i class="bi bi-pencil-square"></i></span>
-                            <span class="profile-action-text">Edit Profile</span>
-                            <i class="bi bi-chevron-right profile-action-arrow"></i>
-                        </a>
-                        <a href="#" class="profile-action-tile">
-                            <span class="profile-action-icon" style="background:rgba(185,28,28,0.08); color:#b91c1c;"><i class="bi bi-key"></i></span>
-                            <span class="profile-action-text">Change Password</span>
-                            <i class="bi bi-chevron-right profile-action-arrow"></i>
-                        </a>
-                        <a href="#" class="profile-action-tile">
-                            <span class="profile-action-icon" style="background:rgba(45,106,79,0.09); color:#2d6a4f;"><i class="bi bi-building"></i></span>
-                            <span class="profile-action-text">Company Settings</span>
-                            <i class="bi bi-chevron-right profile-action-arrow"></i>
-                        </a>
-                        <a href="{% url 'billing_dashboard' %}" class="profile-action-tile">
-                            <span class="profile-action-icon" style="background:rgba(217,119,6,0.1); color:#d97706;"><i class="bi bi-credit-card"></i></span>
-                            <span class="profile-action-text">Billing Dashboard</span>
-                            <i class="bi bi-chevron-right profile-action-arrow"></i>
-                        </a>
-                    </div>
-                </div>
+              <div class="profile-section">
+    <h4 class="profile-section-title">
+        <span class="profile-section-icon"><i class="bi bi-lightning-charge"></i></span>
+        Quick Actions
+    </h4>
+    <div class="profile-actions-grid">
+        <a href="{% url 'billing_dashboard' %}" class="profile-action-tile">
+            <span class="profile-action-icon" style="background:rgba(217,119,6,0.1); color:#d97706;"><i class="bi bi-credit-card"></i></span>
+            <span class="profile-action-text">Billing Dashboard</span>
+            <i class="bi bi-chevron-right profile-action-arrow"></i>
+        </a>
+    </div>
+</div>
 
                 <!-- ══ WORKSPACE SNAPSHOT ═══════════════════ -->
                 <div class="profile-mini-card">
